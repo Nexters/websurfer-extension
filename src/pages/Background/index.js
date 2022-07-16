@@ -15,10 +15,14 @@ chrome.runtime.onInstalled.addListener(() => {
 class Background {
   tabs = {};
   activeTabId = 0;
-  interval;
+  interval = {};
 
   setTab(tabId, tab) {
     this.tabs = R.assoc(tabId, tab, this.tabs);
+  }
+
+  setTabs(tabs) {
+    this.tabs = tabs;
   }
 
   deleteTab(tabId) {
@@ -37,8 +41,12 @@ class Background {
     return this.tabs?.[tabId] ?? {};
   }
 
-  setInterval(interval) {
-    this.interval = interval;
+  setInterval(tabId, interval) {
+    this.interval = R.assoc(tabId, interval, this.interval);
+  }
+
+  getInterval(tabId) {
+    return this.interval[tabId];
   }
 }
 
@@ -49,7 +57,9 @@ const onCreatedCb = (tab) => {
 };
 
 const initInterval = (tabId) => {
+  console.log('init interval', tabId);
   instance.setInterval(
+    tabId,
     setInterval(() => {
       const curTab = instance.getTab(tabId);
       instance.setTab(
@@ -57,7 +67,7 @@ const initInterval = (tabId) => {
         R.assoc('duration', (curTab.duration || 0) + 1, curTab)
       );
 
-      console.log(instance.getTab(tabId).duration);
+      console.log(instance.getTab(tabId).duration, tabId);
     }, 1000)
   );
 };
@@ -65,11 +75,13 @@ const initInterval = (tabId) => {
 const onActivatedCb = ({ tabId }) => {
   console.log(tabId, 'onActivated');
 
-  instance.setActiveTabId(tabId);
-
-  if (instance.interval) {
-    clearInterval(instance.interval);
+  const interval = instance.getInterval(instance.activeTabId);
+  if (interval) {
+    console.log('clearInterval', instance.activeTabId);
+    clearInterval(interval);
   }
+
+  instance.setActiveTabId(tabId);
 
   const tab = instance.getTab(tabId);
 
@@ -98,8 +110,10 @@ const onUpdatedCb = (tabId, changeInfo, tab) => {
 const onRemovedCb = (tabId, removeInfo) => {
   console.log(tabId, removeInfo, 'onRemoved');
 
-  if (instance.interval) {
-    clearInterval(instance.interval);
+  const interval = instance.getInterval(tabId);
+  if (interval) {
+    console.log('clearInterval', tabId);
+    clearInterval(interval);
   }
 
   // call API
@@ -108,7 +122,11 @@ const onRemovedCb = (tabId, removeInfo) => {
   instance.deleteTab(tabId);
 };
 
-chrome.tabs.onCreated.addListener(onCreatedCb);
-chrome.tabs.onActivated.addListener(onActivatedCb);
-chrome.tabs.onUpdated.addListener(onUpdatedCb);
-chrome.tabs.onRemoved.addListener(onRemovedCb);
+chrome.tabs.query({}, (tabs) => {
+  instance.setTabs(tabs);
+
+  chrome.tabs.onCreated.addListener(onCreatedCb);
+  chrome.tabs.onActivated.addListener(onActivatedCb);
+  chrome.tabs.onUpdated.addListener(onUpdatedCb);
+  chrome.tabs.onRemoved.addListener(onRemovedCb);
+});
