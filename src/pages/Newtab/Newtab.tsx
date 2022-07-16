@@ -3,6 +3,10 @@ import React from 'react';
 // import tw, { styled } from 'twin.macro';
 import styled from '@emotion/styled';
 
+interface DivStyleProps {
+  color: string;
+}
+
 const Newtab = () => {
   // const Message = styled.div(({ color }) => [
   //   tw`
@@ -16,8 +20,8 @@ const Newtab = () => {
 
   // return <Message color="blue">New tab</Message>;
 
-  const DivStyle = styled.div`
-    background-color: hotpink;
+  const DivStyle = styled.div<DivStyleProps>`
+    background-color: ${(props) => props.color};
     font-size: 24px;
     border-radius: 4px;
     padding: 32px;
@@ -27,7 +31,7 @@ const Newtab = () => {
     }
   `;
 
-  return <DivStyle>샤카샤카!</DivStyle>;
+  return <DivStyle color="hotpink">샤카샤카!</DivStyle>;
 };
 
 export default Newtab;
