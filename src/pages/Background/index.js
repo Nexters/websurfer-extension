@@ -42,17 +42,12 @@ const instance = new Background();
 const onCreatedCb = (tab) => {
   console.log(tab, 'onCreated');
 };
-chrome.tabs.onCreated.addListener(onCreatedCb);
 
-const onRemovedCb = (tabId, removeInfo) => {
-  console.log(tabId, removeInfo, 'onRemoved');
+const onActivatedCb = ({ tabId }) => {
+  console.log(tabId, 'onActivated');
 
-  // call API
-  console.log('UPDATE HISTORY');
-
-  instance.deleteTab(tabId);
+  instance.setActiveTabId(tabId);
 };
-chrome.tabs.onRemoved.addListener(onRemovedCb);
 
 const onUpdatedCb = (tabId, changeInfo, tab) => {
   console.log(tabId, changeInfo, tab, 'onUpdated');
@@ -62,12 +57,17 @@ const onUpdatedCb = (tabId, changeInfo, tab) => {
     instance.setTab(tabId, tab);
   }
 };
-chrome.tabs.onUpdated.addListener(onUpdatedCb);
 
-const onActivatedCb = ({ tabId }) => {
-  console.log(tabId, 'onActivated');
+const onRemovedCb = (tabId, removeInfo) => {
+  console.log(tabId, removeInfo, 'onRemoved');
 
-  instance.setActiveTabId(tabId);
+  // call API
+  console.log('UPDATE HISTORY');
+
+  instance.deleteTab(tabId);
 };
 
+chrome.tabs.onCreated.addListener(onCreatedCb);
 chrome.tabs.onActivated.addListener(onActivatedCb);
+chrome.tabs.onUpdated.addListener(onUpdatedCb);
+chrome.tabs.onRemoved.addListener(onRemovedCb);
