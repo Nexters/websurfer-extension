@@ -13,20 +13,20 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 class Background {
-  tabs = {};
+  tabsMap = {};
   activeTabId = 0;
-  interval = {};
+  intervalMap = {};
 
   setTab(tabId, tab) {
-    this.tabs = R.assoc(tabId, tab, this.tabs);
+    this.tabsMap = R.assoc(tabId, tab, this.tabsMap);
   }
 
-  setTabs(tabs) {
-    this.tabs = tabs;
+  setTabsMap(tabsMap) {
+    this.tabsMap = tabsMap;
   }
 
   deleteTab(tabId) {
-    this.tabs = R.dissoc(tabId, this.tabs);
+    this.tabsMap = R.dissoc(tabId, this.tabsMap);
   }
 
   setActiveTabId(activeTabId) {
@@ -34,19 +34,23 @@ class Background {
   }
 
   getTabs() {
-    return this.tabs;
+    return this.tabsMap;
   }
 
   getTab(tabId) {
-    return this.tabs?.[tabId] ?? {};
+    return this.tabsMap?.[tabId] ?? {};
   }
 
   setInterval(tabId, interval) {
-    this.interval = R.assoc(tabId, interval, this.interval);
+    this.intervalMap = R.assoc(tabId, interval, this.interval);
+  }
+
+  setIntervalMap(intervalMap) {
+    this.intervalMap = intervalMap;
   }
 
   getInterval(tabId) {
-    return this.interval[tabId];
+    return this.intervalMap[tabId];
   }
 }
 
@@ -58,18 +62,18 @@ const onCreatedCb = (tab) => {
 
 const initInterval = (tabId) => {
   console.log('init interval', tabId);
-  instance.setInterval(
-    tabId,
-    setInterval(() => {
-      const curTab = instance.getTab(tabId);
-      instance.setTab(
-        tabId,
-        R.assoc('duration', (curTab.duration || 0) + 1, curTab)
-      );
 
-      console.log(instance.getTab(tabId).duration, tabId);
-    }, 1000)
-  );
+  const interval = setInterval(() => {
+    const curTab = instance.getTab(tabId);
+    instance.setTab(
+      tabId,
+      R.assoc('duration', (curTab.duration || 0) + 1, curTab)
+    );
+
+    console.log(instance.getTab(tabId).duration, tabId);
+  }, 1000);
+
+  instance.setInterval(tabId, interval);
 };
 
 const onActivatedCb = ({ tabId }) => {
@@ -77,7 +81,7 @@ const onActivatedCb = ({ tabId }) => {
 
   const interval = instance.getInterval(instance.activeTabId);
   if (interval) {
-    console.log('clearInterval', instance.activeTabId);
+    console.log('clearInterval', interval, instance.activeTabId);
     clearInterval(interval);
   }
 
@@ -97,6 +101,12 @@ const onUpdatedCb = (tabId, changeInfo, tab) => {
   if (status === 'complete') {
     instance.setTab(tabId, tab);
 
+    const interval = instance.getInterval(tabId);
+    if (interval) {
+      console.log('clearInterval', interval, instance.activeTabId);
+      clearInterval(interval);
+    }
+
     if (
       instance.activeTabId === tabId &&
       tab.url &&
@@ -112,7 +122,7 @@ const onRemovedCb = (tabId, removeInfo) => {
 
   const interval = instance.getInterval(tabId);
   if (interval) {
-    console.log('clearInterval', tabId);
+    console.log('clearInterval', interval, tabId);
     clearInterval(interval);
   }
 
@@ -122,11 +132,29 @@ const onRemovedCb = (tabId, removeInfo) => {
   instance.deleteTab(tabId);
 };
 
-chrome.tabs.query({}, (tabs) => {
-  instance.setTabs(tabs);
+const onFocusChangedCb = (windowId) => {
+  console.log(windowId, 'onFocused');
 
+  if (windowId < 0) {
+    const allClearedIntervalMap = R.map(clearInterval, instance.intervalMap);
+
+    instance.setIntervalMap(allClearedIntervalMap);
+  }
+};
+
+chrome.tabs.query({}, (tabs) => {
+  console.log(tabs, 'tabs query');
+
+  const tabsMap = R.indexBy(R.prop('id'), tabs);
+
+  instance.setTabsMap(tabsMap);
+
+  // tabs events
   chrome.tabs.onCreated.addListener(onCreatedCb);
   chrome.tabs.onActivated.addListener(onActivatedCb);
   chrome.tabs.onUpdated.addListener(onUpdatedCb);
   chrome.tabs.onRemoved.addListener(onRemovedCb);
+
+  // windows events
+  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
 });
