@@ -49,6 +49,7 @@
     "fs-extra": "^10.0.0",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
+    "node-polyfill-webpack-plugin": "^2.0.0",
     "postcss": "^8.4.14",
     "prettier": "^2.5.1",
     "sass-loader": "^12.4.0",

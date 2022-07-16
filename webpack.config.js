@@ -6,6 +6,7 @@ var webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   TerserPlugin = require('terser-webpack-plugin');
 var { CleanWebpackPlugin } = require('clean-webpack-plugin');
+var NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -86,7 +87,20 @@ var options = {
         loader: 'html-loader',
         exclude: /node_modules/,
       },
-      { test: /\.(ts|tsx)$/, loader: 'ts-loader', exclude: /node_modules/ },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react',
+              '@babel/preset-typescript',
+            ],
+          },
+        },
+      },
       {
         test: /\.(js|jsx)$/,
         use: [
@@ -109,6 +123,7 @@ var options = {
   },
   plugins: [
     new CleanWebpackPlugin({ verbose: false }),
+    new NodePolyfillPlugin(),
     new webpack.ProgressPlugin(),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(['NODE_ENV']),
