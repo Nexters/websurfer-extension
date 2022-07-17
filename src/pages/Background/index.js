@@ -59,17 +59,20 @@ const onUpdatedCb = (tabId, changeInfo, tab) => {
   const { status = '' } = changeInfo;
 
   if (status === 'complete') {
-    instance.setTab(tabId, tab);
-
     const interval = instance.getInterval(tabId);
     if (interval) {
       console.log('clearInterval', interval, instance.activeTabId);
       clearInterval(interval);
+
+      // call API
+      console.log('UPDATE HISTORY');
     }
+
+    instance.setTab(tabId, tab);
 
     if (
       instance.activeTabId === tabId &&
-      tab.url &&
+      tab?.url &&
       !tab?.url?.startsWith('chrome://')
     ) {
       initInterval(tabId);
