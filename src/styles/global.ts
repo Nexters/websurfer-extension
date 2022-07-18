@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import emotionNormalize from 'emotion-normalize';
+import { normalize } from 'polished';
 
 const global = css`
-  ${emotionNormalize}
+  ${normalize()}
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
   html,
