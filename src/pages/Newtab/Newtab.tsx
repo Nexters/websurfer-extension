@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
-// import styled from '@emotion/styled';
 
 interface DivStyleProps {
   color: string;
@@ -18,20 +17,11 @@ const Newtab = () => {
     `,
   ]);
 
-  return <Message color="blue">New tab</Message>;
-
-  // const DivStyle = styled.div<DivStyleProps>`
-  //   background-color: ${(props) => props.color};
-  //   font-size: 24px;
-  //   border-radius: 4px;
-  //   padding: 32px;
-  //   text-align: center;
-  //   &:hover {
-  //     color: white;
-  //   }
-  // `;
-
-  // return <DivStyle color="hotpink">샤카샤카!</DivStyle>;
+  return (
+    <>
+      <Message color="blue">New tab</Message>
+    </>
+  );
 };
 
 export default Newtab;
