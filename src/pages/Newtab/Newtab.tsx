@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { css } from '@emotion/react';
-import tw, { styled } from 'twin.macro';
 import { useDispatch, useSelector } from 'react-redux';
+import tw, { styled } from 'twin.macro';
 
-import counterSlice, {
-  increment,
-  incrementByAmount,
-} from '../../redux/counterSlice';
+import { increment } from '../../redux/counterSlice';
 import { RootState } from '../../redux/store';
 
 interface DivStyleProps {
