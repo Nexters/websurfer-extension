@@ -26,6 +26,7 @@ const fontSize = {
   '2xl': '32px',
   '3xl': '36px',
   '4xl': '40px',
+  '5xl': '48px',
 };
 
 const fontWeight = {

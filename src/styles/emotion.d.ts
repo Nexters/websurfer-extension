@@ -27,6 +27,7 @@ declare module '@emotion/react' {
       '2xl': string;
       '3xl': string;
       '4xl': string;
+      '5xl': string;
     };
     fontWeight: {
       bold: number;
