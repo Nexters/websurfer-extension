@@ -5,9 +5,14 @@ export type AlignType =
   | 'space-around'
   | 'space-evenly';
 
+export interface ContainerProps {
+  marginY?: string;
+}
+
 export interface RowProps {
   justify?: AlignType;
 }
 export interface ColProps {
   unit?: number;
+  margin?: string;
 }
