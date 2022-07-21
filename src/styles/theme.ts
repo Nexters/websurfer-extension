@@ -46,47 +46,10 @@ const lineHeight = {
 };
 
 const theme: Theme = {
-  color: {
-    primary: color.primary,
-    red: color.red,
-    yellow: color.yellow,
-    green: color.green,
-    black: color.black,
-    white: color.white,
-    'gray-08': color['gray-08'],
-    'gray-07': color['gray-07'],
-    'gray-06': color['gray-06'],
-    'gray-05': color['gray-05'],
-    'gray-04': color['gray-04'],
-    'gray-03': color['gray-03'],
-    'gray-02': color['gray-02'],
-    'gray-01': color['gray-01'],
-  },
-  fontSize: {
-    xs: fontSize.xs,
-    s: fontSize.s,
-    m: fontSize.m,
-    l: fontSize.l,
-    xl: fontSize.xl,
-    '2xl': fontSize['2xl'],
-    '3xl': fontSize['3xl'],
-    '4xl': fontSize['4xl'],
-  },
-  fontWeight: {
-    bold: fontWeight.bold,
-    regular: fontWeight.regular,
-  },
-  lineHeight: {
-    xs: lineHeight.xs,
-    s: lineHeight.s,
-    m: lineHeight.m,
-    l: lineHeight.l,
-    xl: lineHeight.xl,
-    '2xl': lineHeight['2xl'],
-    '3xl': lineHeight['3xl'],
-    '4xl': lineHeight['4xl'],
-    '5xl': lineHeight['5xl'],
-  },
+  color,
+  fontSize,
+  fontWeight,
+  lineHeight,
 };
 
 export default theme;
