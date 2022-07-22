@@ -6,6 +6,9 @@ export const Wrapper = styled.div(() => {
     tw`
       flex justify-between
       `,
+    css`
+      margin-bottom: 27px;
+    `,
   ];
 });
 
