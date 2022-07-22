@@ -14,5 +14,8 @@ export interface RowProps {
 }
 export interface ColProps {
   unit?: number;
+  paddingTop?: string;
+  paddingBottom?: string;
   margin?: string;
+  backgroundColor?: string;
 }
