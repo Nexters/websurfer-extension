@@ -4,19 +4,17 @@ import tw, { styled } from 'twin.macro';
 import { ColProps, ContainerProps, RowProps } from './Grid.styled.type';
 
 //grid
-const COLUMN = 12;
-const MARGIN = 15;
-const GUTTER = 30;
-const UNIT = 80;
-const MAX_WIDTH = 1320;
+export const COLUMN = 12;
+export const MARGIN = 20;
+export const GUTTER = 40;
+export const UNIT = 70;
+export const MAX_WIDTH = 1320;
 
 export const Container = styled.div<ContainerProps>((props) => [
   tw`
-    box-border w-full mx-auto py-0 min-h-full
+    w-full mx-auto py-0 z-10 fixed top-0 left-0 flex justify-center
     `,
   css`
-    max-width: ${MAX_WIDTH}px;
-    min-width: ${MAX_WIDTH}px;
     margin-top: ${props.marginY};
     margin-bottom: ${props.marginY};
   `,
@@ -28,6 +26,8 @@ export const Row = styled.div<RowProps>((props) => [
     `,
   css`
     justify-content: ${props.justify};
+    max-width: ${MAX_WIDTH}px;
+    min-width: ${MAX_WIDTH}px;
   `,
 ]);
 
@@ -51,6 +51,26 @@ export const Col = styled.div<ColProps>((props) => {
         ${GUTTER / 2}px;
       margin: ${props.margin};
       background-color: ${selectBackgroundColor()};
+    `,
+  ];
+});
+
+export const LayoutCol = styled(Col)<ColProps>((props) => {
+  return [
+    css`
+      :first-child {
+        width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT) +
+        GUTTER / 2}px;
+        padding-right: ${GUTTER}px;
+      }
+      & + & {
+        padding-left: 0;
+      }
+      :last-child {
+        width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT) -
+        GUTTER / 2}px;
+        padding-left: ${GUTTER}px;
+      }
     `,
   ];
 });
