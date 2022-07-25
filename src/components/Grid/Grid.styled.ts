@@ -59,6 +59,7 @@ export const Col = styled.div<ColProps>((props) => {
 export const LayoutCol = styled(Col)<ColProps>((props) => {
   return [
     css`
+      display: ${props.display};
       :first-child {
         width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT) +
         GUTTER / 2}px;

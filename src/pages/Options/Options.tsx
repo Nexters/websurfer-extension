@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import MainTitle from '../../components/Main/MainContent/MainTitle';
 import TotalTime from '../../components/Main/MainContent/TotalTime';
@@ -15,18 +15,23 @@ interface Props {
 }
 
 const Options: React.FC<Props> = ({ title }: Props) => {
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+
   return (
     <>
-      <S.backgroundContainer>
-        <S.backgroundItem />
-        <S.backgroundItem />
-      </S.backgroundContainer>
+      {!isFocus && (
+        <S.backgroundContainer>
+          <S.backgroundItem />
+          <S.backgroundItem />
+        </S.backgroundContainer>
+      )}
       <Grid.Container>
         <Grid.Row>
           <Grid.LayoutCol
+            unit={isFocus ? 0 : 8}
+            display={isFocus ? 'none' : 'block'}
             paddingTop="55px"
             paddingBottom="60px"
-            unit={8}
             backgroundColor="gray-02"
           >
             <>
@@ -39,8 +44,12 @@ const Options: React.FC<Props> = ({ title }: Props) => {
               </S.Justify>
             </>
           </Grid.LayoutCol>
-          <Grid.LayoutCol paddingTop="60px" paddingBottom="60px" unit={4}>
-            <MainHistory />
+          <Grid.LayoutCol
+            paddingTop="60px"
+            paddingBottom="60px"
+            unit={isFocus ? 12 : 4}
+          >
+            <MainHistory setIsFocus={setIsFocus} isFocus={isFocus} />
           </Grid.LayoutCol>
         </Grid.Row>
       </Grid.Container>

@@ -18,4 +18,5 @@ export interface ColProps {
   paddingBottom?: string;
   margin?: string;
   backgroundColor?: string;
+  display?: string;
 }

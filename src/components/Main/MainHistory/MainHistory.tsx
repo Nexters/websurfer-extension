@@ -1,12 +1,14 @@
 import React from 'react';
 
-type Props = {};
+type Props = {
+  setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
+  isFocus: boolean;
+};
 
 const MainHistory = (props: Props) => {
   return (
-    <div className="w-full flex justify-between">
-      <div className="a">a</div>
-      <div className="b">b</div>
+    <div>
+      <button onClick={() => props.setIsFocus(!props.isFocus)}>버튼</button>
     </div>
   );
 };
