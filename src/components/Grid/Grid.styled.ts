@@ -12,11 +12,12 @@ export const MAX_WIDTH = 1320;
 
 export const Container = styled.div<ContainerProps>((props) => [
   tw`
-    w-full mx-auto py-0 z-10 fixed top-0 left-0 flex justify-center
+    w-full mx-auto py-0 z-10 top-0 left-0 flex justify-center absolute
     `,
   css`
     margin-top: ${props.marginY};
     margin-bottom: ${props.marginY};
+    min-width: ${MAX_WIDTH}px;
   `,
 ]);
 
