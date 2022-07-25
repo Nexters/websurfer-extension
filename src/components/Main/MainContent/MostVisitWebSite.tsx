@@ -10,9 +10,18 @@ const MostVisitWebSite = (props: Props) => {
     <Card.Wrapper margin="0 0 40px 0" borderRadius="8px">
       <Card.Title>많이 방문한 웹사이트</Card.Title>
       <S.ItemCardWrapper>
-        <S.ItemCard backgroundColor="gray-02"></S.ItemCard>
-        <S.ItemCard backgroundColor="gray-02"></S.ItemCard>
-        <S.ItemCard backgroundColor="gray-02"></S.ItemCard>
+        <S.ItemCard primary>
+          <S.ItemCardTitle primary>Pinterest</S.ItemCardTitle>
+          <S.ItemCardCount primary>190회</S.ItemCardCount>
+        </S.ItemCard>
+        <S.ItemCard>
+          <S.ItemCardTitle>해쭈 [HAEJOO] - YouTube</S.ItemCardTitle>
+          <S.ItemCardCount>123회</S.ItemCardCount>
+        </S.ItemCard>
+        <S.ItemCard>
+          <S.ItemCardTitle>UX 북마크 #20. UX 방법론 A-Z</S.ItemCardTitle>
+          <S.ItemCardCount>86회</S.ItemCardCount>
+        </S.ItemCard>
       </S.ItemCardWrapper>
     </Card.Wrapper>
   );
