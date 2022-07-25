@@ -10,7 +10,7 @@ export const Justify = styled.div(() => {
 });
 
 export const backgroundContainer = styled.div(() => [
-  tw`flex z-0 w-full min-h-screen p-0 m-0 top-0 left-0 fixed`,
+  tw`flex z-0 w-full min-h-screen p-0 m-0 top-0 left-0`,
 ]);
 export const backgroundItem = styled.div(() => {
   const theme = useTheme();

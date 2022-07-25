@@ -22,28 +22,28 @@ const Options: React.FC<Props> = ({ title }: Props) => {
         <S.backgroundItem />
       </S.backgroundContainer>
       <Grid.Container>
-          <Grid.Row>
-            <Grid.LayoutCol
-              paddingTop="55px"
-              paddingBottom="60px"
-              unit={8}
-              backgroundColor="gray-02"
-            >
-              <>
-                <MainTopNav />
-                <MainTitle />
-                <MostVisitWebSite />
-                <S.Justify>
-                  <TotalTime />
-                  <SurffingTime />
-                </S.Justify>
-              </>
-            </Grid.LayoutCol>
-            <Grid.LayoutCol paddingTop="60px" paddingBottom="60px" unit={4}>
-              <MainHistory />
-            </Grid.LayoutCol>
-          </Grid.Row>
-        </Grid.Container>
+        <Grid.Row>
+          <Grid.LayoutCol
+            paddingTop="55px"
+            paddingBottom="60px"
+            unit={8}
+            backgroundColor="gray-02"
+          >
+            <>
+              <MainTopNav />
+              <MainTitle />
+              <MostVisitWebSite />
+              <S.Justify>
+                <TotalTime />
+                <SurffingTime />
+              </S.Justify>
+            </>
+          </Grid.LayoutCol>
+          <Grid.LayoutCol paddingTop="60px" paddingBottom="60px" unit={4}>
+            <MainHistory />
+          </Grid.LayoutCol>
+        </Grid.Row>
+      </Grid.Container>
     </>
   );
 };
