@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { RootState } from '../../redux/store';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import MainTitle from '../../components/Main/MainContent/MainTitle';
 import TotalTime from '../../components/Main/MainContent/TotalTime';
