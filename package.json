@@ -16,6 +16,8 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@hot-loader/react-dom": "^17.0.2",
+    "echarts": "^5.3.3",
+    "echarts-for-react": "^3.0.2",
     "polished": "^4.2.2",
     "@reduxjs/toolkit": "^1.8.3",
     "emotion-normalize": "^11.0.1",
