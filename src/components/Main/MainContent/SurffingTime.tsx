@@ -34,7 +34,12 @@ const SurffingTime = (props: Props) => {
           { value: 70, itemStyle: { color: theme.color['gray-05'] } },
           110,
         ],
+        itemStyle: {
+          color: theme.color['gray-02'],
+          barBorderRadius: [4, 4, 0, 0],
+        },
         type: 'bar',
+        silent: true,
       },
     ],
   };
