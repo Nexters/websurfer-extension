@@ -27,7 +27,7 @@ const Main: React.FC<Props> = (props: Props) => {
         </S.backgroundContainer>
       )}
       <Grid.Container>
-        <Grid.Row>
+        <Grid.Row minHeightScreen>
           <Grid.LayoutCol
             unit={isFocus ? 0 : 8}
             display={isFocus ? 'none' : 'block'}

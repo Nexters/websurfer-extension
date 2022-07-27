@@ -23,12 +23,14 @@ export const Container = styled.div<ContainerProps>((props) => [
 
 export const Row = styled.div<RowProps>((props) => [
   tw`
-    flex flex-wrap min-h-screen
+    flex flex-wrap
     `,
   css`
     justify-content: ${props.justify};
     max-width: ${MAX_WIDTH}px;
     min-width: ${MAX_WIDTH}px;
+    min-height: ${props.minHeightScreen && '100vh'};
+    height: ${props.height && props.height};
   `,
 ]);
 

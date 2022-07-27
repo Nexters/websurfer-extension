@@ -10,7 +10,9 @@ export interface ContainerProps {
 }
 
 export interface RowProps {
+  minHeightScreen?: boolean;
   justify?: AlignType;
+  height?: string;
 }
 export interface ColProps {
   unit?: number;
