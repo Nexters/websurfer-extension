@@ -4,7 +4,7 @@ import { SearchBar } from '../../Commons';
 
 import * as S from './MainHistory.styled';
 
-import ZoomIcon from '../../../assets/img/icon-zoom-in-mono.svg';
+import { ZoomIcon } from '../../../assets/img/svg-icon-paths';
 
 type Props = {
   setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;

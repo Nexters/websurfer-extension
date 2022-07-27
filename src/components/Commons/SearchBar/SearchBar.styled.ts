@@ -35,7 +35,7 @@ export const Filter = styled.img(() => {
       border: 1px solid ${theme.color['gray-03']};
       border-left: 0px;
       border-radius: 0px 10px 10px 0;
-      padding: 13px;
+      padding: 14px;
     `,
   ];
 });

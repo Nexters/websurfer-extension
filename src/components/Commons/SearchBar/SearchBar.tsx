@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import * as S from './SearchBar.styled';
 
-import FilterIcon from '../../../assets/img/icon-filter2.svg';
-import SearchIcon from '../../../assets/img/icon-search-mono.svg';
+import { FilterIcon, SearchIcon } from '../../../assets/img/svg-icon-paths';
 
 interface Props {
   placeholder?: string;
   hasFilter?: boolean;
 }
 
-const SearchBar = (props: Props) => {
-  const { placeholder = 'Search', hasFilter = true } = props;
+const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
+  const { isActive, setIsActive } = useState(false);
+
   return (
     <S.Wrapper>
       <S.SearchIcon src={SearchIcon} />
-      <S.Input placeholder={placeholder} hasFilter={hasFilter} />
+      <S.Input
+        onFocus={console.log}
+        placeholder={placeholder}
+        hasFilter={hasFilter}
+      />
       {hasFilter && <S.Filter src={FilterIcon} alt="filter" />}
     </S.Wrapper>
   );

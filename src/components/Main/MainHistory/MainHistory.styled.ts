@@ -13,7 +13,7 @@ export const MainTitle = styled.span(() => {
   return [
     css`
       font-weight: ${theme.fontWeight.bold};
-      font-size: ${theme.fontSize['2xl']};
+      font-size: ${theme.fontSize['xl']};
     `,
   ];
 });
@@ -21,7 +21,10 @@ export const MainTitle = styled.span(() => {
 export const ContentWrapper = styled.div(() => {
   return [
     tw`
-      w-full mt-2
+      w-full
+    `,
+    css`
+      margin-top: 12px;
     `,
   ];
 });
