@@ -12,7 +12,6 @@ type Props = {
 };
 
 const MainHistory = ({ isFocus, setIsFocus }: Props) => {
-  console.log(ZoomIcon);
   return (
     <div>
       <S.TitleWrapper>
