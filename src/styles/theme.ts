@@ -47,11 +47,21 @@ const lineHeight = {
   '5xl': '52px',
 };
 
+const spacing = {
+  1: '8px',
+  2: '12px',
+  3: '16px',
+  4: '24px',
+  5: '32px',
+  6: '48px',
+};
+
 const theme: Theme = {
   color,
   fontSize,
   fontWeight,
   lineHeight,
+  spacing,
 };
 
 export default theme;

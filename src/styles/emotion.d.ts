@@ -45,5 +45,13 @@ declare module '@emotion/react' {
       '4xl': string;
       '5xl': string;
     };
+    spacing: {
+      1: string;
+      2: string;
+      3: string;
+      4: string;
+      5: string;
+      6: string;
+    };
   }
 }

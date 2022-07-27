@@ -7,11 +7,24 @@ export const TitleWrapper = styled.div(() => [
     `,
 ]);
 
-export const WFull = styled.div(() => [
-  tw`
-    w-full
+export const MainTitle = styled.span(() => {
+  const theme = useTheme();
+
+  return [
+    css`
+      font-weight: ${theme.fontWeight.bold};
+      font-size: ${theme.fontSize['2xl']};
     `,
-]);
+  ];
+});
+
+export const ContentWrapper = styled.div(() => {
+  return [
+    tw`
+      w-full mt-2
+    `,
+  ];
+});
 
 export const ItemCard = styled.div((props) => {
   const theme = useTheme();

@@ -1,14 +1,31 @@
 import React from 'react';
 
+import { SearchBar } from '../../Commons';
+
+import * as S from './MainHistory.styled';
+
+import ZoomIcon from '../../../assets/img/icon-zoom-in-mono.svg';
+
 type Props = {
   setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
   isFocus: boolean;
 };
 
-const MainHistory = (props: Props) => {
+const MainHistory = ({ isFocus, setIsFocus }: Props) => {
+  console.log(ZoomIcon);
   return (
     <div>
-      <button onClick={() => props.setIsFocus(!props.isFocus)}>버튼</button>
+      <S.TitleWrapper>
+        <S.MainTitle>방문 기록</S.MainTitle>
+        <img
+          alt="zoom"
+          src={ZoomIcon}
+          onClick={() => setIsFocus(!isFocus)}
+        ></img>
+      </S.TitleWrapper>
+      <S.ContentWrapper>
+        <SearchBar />
+      </S.ContentWrapper>
     </div>
   );
 };
