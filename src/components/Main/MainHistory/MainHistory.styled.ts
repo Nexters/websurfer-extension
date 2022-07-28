@@ -44,3 +44,33 @@ export const ItemCard = styled.div((props) => {
     `,
   ];
 });
+
+export const HistoryListWrapper = styled.div(() => {
+  return [
+    tw`
+      overflow-y-auto
+    `,
+    css`
+      margin-top: 20px;
+      max-height: 83vh;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    `,
+  ];
+});
+
+export const CategoryDate = styled.span(() => {
+  const theme = useTheme();
+  return [
+    tw`
+      block
+    `,
+    css`
+      font-size: ${theme.fontSize.l};
+      color: ${theme.color['gray-05']};
+      font-weight: ${theme.fontWeight.bold};
+      margin-bottom: 18px;
+    `,
+  ];
+});
