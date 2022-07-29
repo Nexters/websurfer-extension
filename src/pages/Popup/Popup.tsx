@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import * as S from './Popup.styled';
+
 import { RootState } from '../../redux/store';
 
 const Popup = () => {
@@ -13,7 +15,7 @@ const Popup = () => {
   const count = useSelector((state: RootState) => state.counter.value);
 
   return (
-    <div className="App">
+    <S.Wrapper>
       <header className="App-header">
         Popup
         <div className="App-link" onClick={goApp}>
@@ -21,7 +23,7 @@ const Popup = () => {
         </div>
         <div>Counter State : {count}</div>
       </header>
-    </div>
+    </S.Wrapper>
   );
 };
 
