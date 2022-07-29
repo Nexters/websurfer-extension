@@ -28,5 +28,5 @@
       "matches": []
     }
   ],
-  "permissions": ["tabs"]
+  "permissions": ["tabs", "history"]
 }

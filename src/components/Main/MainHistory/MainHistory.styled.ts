@@ -7,11 +7,27 @@ export const TitleWrapper = styled.div(() => [
     `,
 ]);
 
-export const WFull = styled.div(() => [
-  tw`
-    w-full
+export const MainTitle = styled.span(() => {
+  const theme = useTheme();
+
+  return [
+    css`
+      font-weight: ${theme.fontWeight.bold};
+      font-size: ${theme.fontSize['xl']};
     `,
-]);
+  ];
+});
+
+export const ContentWrapper = styled.div(() => {
+  return [
+    tw`
+      w-full
+    `,
+    css`
+      margin-top: 12px;
+    `,
+  ];
+});
 
 export const ItemCard = styled.div((props) => {
   const theme = useTheme();
@@ -25,6 +41,36 @@ export const ItemCard = styled.div((props) => {
       line-height: ${theme.lineHeight.s};
       border-radius: 8px;
       margin: 8px 0;
+    `,
+  ];
+});
+
+export const HistoryListWrapper = styled.div(() => {
+  return [
+    tw`
+      overflow-y-auto
+    `,
+    css`
+      margin-top: 20px;
+      max-height: 83vh;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    `,
+  ];
+});
+
+export const CategoryDate = styled.span(() => {
+  const theme = useTheme();
+  return [
+    tw`
+      block
+    `,
+    css`
+      font-size: ${theme.fontSize.l};
+      color: ${theme.color['gray-05']};
+      font-weight: ${theme.fontWeight.bold};
+      margin-bottom: 18px;
     `,
   ];
 });

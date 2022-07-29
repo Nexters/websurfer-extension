@@ -22,6 +22,10 @@ const global = css`
       'Noto Sans KR', 'Malgun Gothic', sans-serif;
     box-sizing: border-box;
   }
+
+  p {
+    margin: 0;
+  }
 `;
 
 export default global;
