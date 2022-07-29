@@ -30,13 +30,10 @@ const initInterval = (tabId) => {
 
   const interval = setInterval(() => {
     const curTab = instance.getTab(tabId);
-    instance.setTab(
-      tabId,
-      R.assoc('duration', (curTab.duration || 0) + 1, curTab)
-    );
 
     console.log(instance.getTab(tabId).duration, tabId);
-  }, 1000);
+    console.log('PING API', curTab, curTab.url);
+  }, 10000);
 
   instance.setInterval(tabId, interval);
 };
