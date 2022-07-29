@@ -15,6 +15,7 @@ import LandingSerferImage from '../../assets/img/img-landing-serfer.svg';
 
 import * as S from './Options.styled';
 import * as Grid from '../../components/Grid/Grid.styled';
+import * as Card from '../../components/Commons/Card.styled';
 
 interface Props {}
 
@@ -33,7 +34,9 @@ const Landing: React.FC<Props> = (props: Props) => {
                 <S.LandingSubTitle>
                   크롬 방문 기록으로 나의 웹 서핑 사용 패턴을 알아봐요.
                 </S.LandingSubTitle>
-                <S.GoogleLoginButton />
+                <S.GoogleLoginButton>
+                  Google 계정으로 로그인
+                </S.GoogleLoginButton>
               </Grid.Col>
               <Grid.Col unit={4} paddingTop="55px">
                 <S.LandingMainImage
@@ -60,7 +63,14 @@ const Landing: React.FC<Props> = (props: Props) => {
             paddingBottom="60px"
             backgroundColor="gray-02"
             unit={4}
-          ></Grid.LayoutCol>
+          >
+            <Card.Wrapper width="400px">
+              <S.CardTitle>방문 기록</S.CardTitle>
+              <S.CardSubtitle>
+                필터링과 검색으로 방문 기록을 더 편하게 볼 수 있습니다.
+              </S.CardSubtitle>
+            </Card.Wrapper>
+          </Grid.LayoutCol>
         </Grid.Row>
       </Grid.Container>
     </>

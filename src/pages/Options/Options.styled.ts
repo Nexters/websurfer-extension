@@ -70,12 +70,40 @@ export const GoogleLoginButton = styled.button(() => {
   const theme = useTheme();
   return [
     css`
+      color: ${theme.color['gray-06']};
       margin-top: 40px;
+      font-weight: ${theme.fontWeight.bold};
+      font-size: 18px;
+      line-height: ${theme.lineHeight['2xl']};
       width: 217px;
       height: 45px;
-      background-color: ${theme.color['gray-04']};
-      border: 1px solid;
+      background-color: ${theme.color.white};
+      border: 1px solid ${theme.color['gray-04']};
       border-radius: 22.5px;
+    `,
+  ];
+});
+
+export const CardTitle = styled.div(() => {
+  const theme = useTheme();
+  return [
+    css`
+      color: ${theme.color['gray-07']};
+      font-size: ${theme.fontSize.l};
+      line-height: ${theme.lineHeight.xl};
+      font-weight: ${theme.fontWeight.bold};
+    `,
+  ];
+});
+
+export const CardSubtitle = styled.div(() => {
+  const theme = useTheme();
+  return [
+    css`
+      color: ${theme.color['gray-05']};
+      font-size: 14px;
+      line-height: ${theme.lineHeight.m};
+      font-weight: ${theme.fontWeight.regular};
     `,
   ];
 });
