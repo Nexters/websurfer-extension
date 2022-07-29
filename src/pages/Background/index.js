@@ -113,16 +113,16 @@ const onFocusChangedCb = (windowId) => {
 chrome.tabs.query({}, (tabs) => {
   console.log(tabs, 'tabs query');
 
-  // const tabsMap = R.indexBy(R.prop('id'), tabs);
+  const tabsMap = R.indexBy(R.prop('id'), tabs);
 
-  // instance.setTabsMap(tabsMap);
+  instance.setTabsMap(tabsMap);
 
   // tabs events
-  // chrome.tabs.onCreated.addListener(onCreatedCb);
-  // chrome.tabs.onActivated.addListener(onActivatedCb);
-  // chrome.tabs.onUpdated.addListener(onUpdatedCb);
-  // chrome.tabs.onRemoved.addListener(onRemovedCb);
+  chrome.tabs.onCreated.addListener(onCreatedCb);
+  chrome.tabs.onActivated.addListener(onActivatedCb);
+  chrome.tabs.onUpdated.addListener(onUpdatedCb);
+  chrome.tabs.onRemoved.addListener(onRemovedCb);
 
   // windows events
-  // chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
 });
