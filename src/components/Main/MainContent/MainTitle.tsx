@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MainSerferImage from '../../../assets/img/img-main-serfer.svg';
+import { MainSerferImage } from '../../../assets/img/svg-icon-paths';
 
 import * as S from './MainTitle.styled';
 
