@@ -12,7 +12,6 @@ export interface ContainerProps {
 export interface RowProps {
   minHeightScreen?: boolean;
   justify?: AlignType;
-  height?: string;
 }
 export interface ColProps {
   unit?: number;
@@ -21,4 +20,7 @@ export interface ColProps {
   margin?: string;
   backgroundColor?: string;
   display?: string;
+  overflowHidden?: boolean;
+  height?: string;
+  padding?: string;
 }

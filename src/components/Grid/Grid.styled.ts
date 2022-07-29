@@ -30,7 +30,6 @@ export const Row = styled.div<RowProps>((props) => [
     max-width: ${MAX_WIDTH}px;
     min-width: ${MAX_WIDTH}px;
     min-height: ${props.minHeightScreen};
-    height: ${props.height && props.height};
   `,
 ]);
 
@@ -62,6 +61,10 @@ export const LayoutCol = styled(Col)<ColProps>((props) => {
   return [
     css`
       display: ${props.display};
+      max-height: 100vh;
+      height: ${props.height && props.height};
+      overflow: ${props.overflowHidden ? 'hidden' : 'auto'};
+      padding: ${props.padding && props.padding + ' !important'};
       :first-child {
         width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT) +
         GUTTER / 2}px;

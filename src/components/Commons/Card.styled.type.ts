@@ -4,4 +4,5 @@ export interface CardProps {
   margin?: string;
   padding?: string;
   borderRadius?: string;
+  overflow?: string;
 }

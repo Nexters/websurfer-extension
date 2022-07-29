@@ -23,9 +23,14 @@ const Landing: React.FC<Props> = (props: Props) => {
   return (
     <>
       <Grid.Container>
-        <Grid.Row minHeightScreen>
-          <Grid.LayoutCol unit={12} backgroundColor="white">
-            <Grid.Row height="394px">
+        <Grid.Row>
+          <Grid.LayoutCol
+            unit={12}
+            backgroundColor="white"
+            height="394px"
+            overflowHidden
+          >
+            <Grid.Row>
               <Grid.Col unit={8} paddingTop="55px">
                 <Logo>Web surfer logo</Logo>
                 <S.LandingTitle>
@@ -51,6 +56,8 @@ const Landing: React.FC<Props> = (props: Props) => {
             paddingTop="55px"
             paddingBottom="60px"
             backgroundColor="gray-02"
+            height="calc(100vh - 394px)"
+            padding="55px 20px 60px 20px"
           >
             <MostVisitWebSite />
             <S.Justify>
@@ -59,12 +66,19 @@ const Landing: React.FC<Props> = (props: Props) => {
             </S.Justify>
           </Grid.LayoutCol>
           <Grid.LayoutCol
+            unit={4}
             paddingTop="60px"
             paddingBottom="60px"
             backgroundColor="gray-02"
-            unit={4}
+            height="calc(100vh - 394px)"
+            padding="55px 20px 60px 0"
           >
-            <Card.Wrapper width="400px">
+            <Card.Wrapper
+              width="400px"
+              borderRadius="8px"
+              height="586px"
+              overflow="scroll"
+            >
               <S.CardTitle>방문 기록</S.CardTitle>
               <S.CardSubtitle>
                 필터링과 검색으로 방문 기록을 더 편하게 볼 수 있습니다.

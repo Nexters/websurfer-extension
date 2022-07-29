@@ -8,11 +8,12 @@ export const Wrapper = styled.div<CardProps>((props) => {
   return [
     css`
       width: ${props.width};
-      height: ${props.height ? props.height : ''};
+      height: ${props.height && props.height};
       margin: ${props.margin};
       padding: ${props.padding ? props.padding : '22px'};
       background-color: ${theme.color.white};
       border-radius: ${props.borderRadius};
+      overflow: ${props.overflow && props.overflow};
       box-shadow: 0px 0px 20px 0px #001c511a;
     `,
   ];

@@ -1,6 +1,13 @@
 import { css, useTheme } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
 
+export const HistoryWrapper = styled.div(() => [
+  css`
+    padding-bottom: 0;
+    height: 100%;
+  `,
+]);
+
 export const TitleWrapper = styled.div(() => [
   tw`
     w-full flex justify-between
@@ -52,7 +59,6 @@ export const HistoryListWrapper = styled.div(() => {
     `,
     css`
       margin-top: 20px;
-      max-height: 83vh;
       &::-webkit-scrollbar {
         width: 4px;
       }

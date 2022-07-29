@@ -45,7 +45,7 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
   };
 
   return (
-    <div>
+    <S.HistoryWrapper>
       <S.TitleWrapper>
         <S.MainTitle>방문 기록</S.MainTitle>
         <img
@@ -58,7 +58,7 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
         <SearchBar />
         <S.HistoryListWrapper>{renderHistory()}</S.HistoryListWrapper>
       </S.ContentWrapper>
-    </div>
+    </S.HistoryWrapper>
   );
 };
 

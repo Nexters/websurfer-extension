@@ -70,16 +70,20 @@ export const GoogleLoginButton = styled.button(() => {
   const theme = useTheme();
   return [
     css`
-      color: ${theme.color['gray-06']};
       margin-top: 40px;
-      font-weight: ${theme.fontWeight.bold};
-      font-size: 18px;
-      line-height: ${theme.lineHeight['2xl']};
       width: 217px;
       height: 45px;
+      color: ${theme.color['gray-06']};
       background-color: ${theme.color.white};
+      font-size: 18px;
+      font-weight: ${theme.fontWeight.bold};
+      line-height: ${theme.lineHeight['2xl']};
       border: 1px solid ${theme.color['gray-04']};
       border-radius: 22.5px;
+      cursor: pointer;
+      &:hover {
+        background-color: ${theme.color['gray-02']};
+      }
     `,
   ];
 });
