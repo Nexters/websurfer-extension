@@ -123,11 +123,11 @@ chrome.tabs.query({}, (tabs) => {
   instance.setTabsMap(tabsMap);
 
   // tabs events
-  chrome.tabs.onCreated.addListener(onCreatedCb);
-  chrome.tabs.onActivated.addListener(onActivatedCb);
-  chrome.tabs.onUpdated.addListener(onUpdatedCb);
-  chrome.tabs.onRemoved.addListener(onRemovedCb);
+  // chrome.tabs.onCreated.addListener(onCreatedCb);
+  // chrome.tabs.onActivated.addListener(onActivatedCb);
+  // chrome.tabs.onUpdated.addListener(onUpdatedCb);
+  // chrome.tabs.onRemoved.addListener(onRemovedCb);
 
   // windows events
-  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+  // chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
 });

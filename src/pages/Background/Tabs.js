@@ -21,10 +21,6 @@ export default class Tabs {
     this.activeTabId = activeTabId;
   }
 
-  getTabs() {
-    return this.tabsMap;
-  }
-
   getTab(tabId) {
     return this.tabsMap?.[tabId] ?? {};
   }
