@@ -1,12 +1,10 @@
-import * as R from 'ramda';
-
 export default class Tabs {
   tabsMap = {};
   activeTabId = 0;
   intervalMap = {};
 
   setTab(tabId, tab) {
-    this.tabsMap = R.assoc(tabId, tab, this.tabsMap);
+    this.tabsMap = { ...this.tabsMap, [tabId]: tab };
   }
 
   setTabsMap(tabsMap) {
@@ -14,7 +12,9 @@ export default class Tabs {
   }
 
   deleteTab(tabId) {
-    this.tabsMap = R.dissoc(tabId, this.tabsMap);
+    const cloned = { ...this.tabsMap };
+    delete cloned[tabId];
+    this.tabsMap = cloned;
   }
 
   setActiveTabId(activeTabId) {
@@ -30,7 +30,10 @@ export default class Tabs {
   }
 
   setInterval(tabId, interval) {
-    this.intervalMap = R.assoc(tabId, interval, this.interval);
+    this.intervalMap = {
+      ...this.intervalMap,
+      [tabId]: interval,
+    };
   }
 
   setIntervalMap(intervalMap) {

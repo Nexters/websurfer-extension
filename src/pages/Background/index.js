@@ -1,5 +1,4 @@
 import { wrapStore } from 'webext-redux';
-import * as R from 'ramda';
 
 import { store } from '../../redux/store';
 
@@ -19,7 +18,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // });
 });
 
-const instance = new Tabs();
+export const instance = new Tabs();
 
 const onCreatedCb = (tab) => {
   console.log(tab, 'onCreated');
@@ -101,7 +100,12 @@ const onFocusChangedCb = (windowId) => {
   console.log(windowId, 'onFocused');
 
   if (windowId < 0) {
-    const allClearedIntervalMap = R.map(clearInterval, instance.intervalMap);
+    const allClearedIntervalMap = Object.entries(instance.intervalMap)
+      .map(([key, value]) => [key, clearInterval(value)])
+      .reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {});
 
     instance.setIntervalMap(allClearedIntervalMap);
   }
@@ -110,7 +114,11 @@ const onFocusChangedCb = (windowId) => {
 chrome.tabs.query({}, (tabs) => {
   console.log(tabs, 'tabs query');
 
-  const tabsMap = R.indexBy(R.prop('id'), tabs);
+  const tabsMap = tabs.reduce((acc, val) => {
+    const { id } = val;
+    acc[id] = val;
+    return acc;
+  }, {});
 
   instance.setTabsMap(tabsMap);
 
