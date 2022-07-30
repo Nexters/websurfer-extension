@@ -51,8 +51,8 @@ export const HistoryListWrapper = styled.div(() => {
       overflow-y-auto
     `,
     css`
-      margin-top: 20px;
-      max-height: 83vh;
+      margin: 20px 0;
+      height: calc(100vh - 190px);
       &::-webkit-scrollbar {
         width: 8px;
       }
