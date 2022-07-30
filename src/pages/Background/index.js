@@ -107,15 +107,16 @@ const onFocusChangedCb = async (windowId) => {
   } else {
     const currentTabs = await chrome.tabs.query({ active: true });
 
-    const withWindowId = currentTabs.filter(
+    const curTabwithWindowId = currentTabs.find(
       (activeTab) => activeTab.windowId === windowId
     );
 
-    if (withWindowId.length) {
-      const tab = currentTabs[0];
-
-      initInterval(tab.id);
-      console.log(tab, 'activate window at window focus changed');
+    if (curTabwithWindowId) {
+      initInterval(curTabwithWindowId.id);
+      console.log(
+        curTabwithWindowId,
+        'activate window at window focus changed'
+      );
     }
 
     console.log('nothing happen at window focus changed');
