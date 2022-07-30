@@ -65,7 +65,7 @@ const onUpdatedCb = (tabId, changeInfo, tab) => {
       clearInterval(interval);
 
       // call API
-      console.log('UPDATE HISTORY');
+      console.log('UPDATE HISTORY', tab);
     }
 
     instance.setTab(tabId, tab);
