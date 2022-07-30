@@ -1,7 +1,6 @@
 import React from 'react';
 import * as S from './MenuButton.styled';
-import MenuIcon from '../../../assets/img/icon-line-three-mono.svg';
-import NoticeIcon from '../../../assets/img/icon-notice.svg';
+import { MenuIcon, NoticeIcon } from '../../../assets/img/svg-icon-paths';
 
 type Props = {};
 
