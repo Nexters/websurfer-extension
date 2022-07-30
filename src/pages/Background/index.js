@@ -30,7 +30,6 @@ const initInterval = (tabId) => {
   const interval = setInterval(() => {
     const curTab = instance.getTab(tabId);
 
-    console.log(instance.getTab(tabId).duration, tabId);
     console.log('PING API', curTab, curTab.url);
   }, 10000);
 
@@ -90,9 +89,6 @@ const onRemovedCb = (tabId, removeInfo) => {
     clearInterval(interval);
   }
 
-  // call API
-  console.log('UPDATE HISTORY');
-
   instance.deleteTab(tabId);
 };
 
@@ -123,11 +119,11 @@ chrome.tabs.query({}, (tabs) => {
   instance.setTabsMap(tabsMap);
 
   // tabs events
-  // chrome.tabs.onCreated.addListener(onCreatedCb);
-  // chrome.tabs.onActivated.addListener(onActivatedCb);
-  // chrome.tabs.onUpdated.addListener(onUpdatedCb);
-  // chrome.tabs.onRemoved.addListener(onRemovedCb);
+  chrome.tabs.onCreated.addListener(onCreatedCb);
+  chrome.tabs.onActivated.addListener(onActivatedCb);
+  chrome.tabs.onUpdated.addListener(onUpdatedCb);
+  chrome.tabs.onRemoved.addListener(onRemovedCb);
 
   // windows events
-  // chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
 });
