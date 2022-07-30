@@ -77,7 +77,7 @@ const Landing: React.FC<Props> = (props: Props) => {
               width="400px"
               borderRadius="8px"
               height="586px"
-              overflow="scroll"
+              overflow="auto"
             >
               <S.CardTitle>방문 기록</S.CardTitle>
               <S.CardSubtitle>
