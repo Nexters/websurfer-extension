@@ -1,5 +1,4 @@
 import { wrapStore } from 'webext-redux';
-import * as R from 'ramda';
 
 import { store } from '../../redux/store';
 
@@ -19,7 +18,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // });
 });
 
-const instance = new Tabs();
+export const instance = new Tabs();
 
 const onCreatedCb = (tab) => {
   console.log(tab, 'onCreated');
@@ -30,13 +29,9 @@ const initInterval = (tabId) => {
 
   const interval = setInterval(() => {
     const curTab = instance.getTab(tabId);
-    instance.setTab(
-      tabId,
-      R.assoc('duration', (curTab.duration || 0) + 1, curTab)
-    );
 
-    console.log(instance.getTab(tabId).duration, tabId);
-  }, 1000);
+    console.log('PING API', curTab, curTab.url);
+  }, 10000);
 
   instance.setInterval(tabId, interval);
 };
@@ -94,35 +89,57 @@ const onRemovedCb = (tabId, removeInfo) => {
     clearInterval(interval);
   }
 
-  // call API
-  console.log('UPDATE HISTORY');
-
   instance.deleteTab(tabId);
 };
 
-const onFocusChangedCb = (windowId) => {
-  console.log(windowId, 'onFocused');
+const onFocusChangedCb = async (windowId) => {
+  console.log(windowId, 'onFocusedWindow');
 
   if (windowId < 0) {
-    const allClearedIntervalMap = R.map(clearInterval, instance.intervalMap);
+    const allClearedIntervalMap = Object.entries(instance.intervalMap)
+      .map(([key, value]) => [key, clearInterval(value)])
+      .reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {});
 
     instance.setIntervalMap(allClearedIntervalMap);
+  } else {
+    const currentTabs = await chrome.tabs.query({ active: true });
+
+    const curTabwithWindowId = currentTabs.find(
+      (activeTab) => activeTab.windowId === windowId
+    );
+
+    if (curTabwithWindowId) {
+      initInterval(curTabwithWindowId.id);
+      console.log(
+        curTabwithWindowId,
+        'activate window at window focus changed'
+      );
+    }
+
+    console.log('nothing happen at window focus changed');
   }
 };
 
 chrome.tabs.query({}, (tabs) => {
   console.log(tabs, 'tabs query');
 
-  // const tabsMap = R.indexBy(R.prop('id'), tabs);
+  const tabsMap = tabs.reduce((acc, val) => {
+    const { id } = val;
+    acc[id] = val;
+    return acc;
+  }, {});
 
-  // instance.setTabsMap(tabsMap);
+  instance.setTabsMap(tabsMap);
 
   // tabs events
-  // chrome.tabs.onCreated.addListener(onCreatedCb);
-  // chrome.tabs.onActivated.addListener(onActivatedCb);
-  // chrome.tabs.onUpdated.addListener(onUpdatedCb);
-  // chrome.tabs.onRemoved.addListener(onRemovedCb);
+  chrome.tabs.onCreated.addListener(onCreatedCb);
+  chrome.tabs.onActivated.addListener(onActivatedCb);
+  chrome.tabs.onUpdated.addListener(onUpdatedCb);
+  chrome.tabs.onRemoved.addListener(onRemovedCb);
 
   // windows events
-  // chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
 });

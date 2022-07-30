@@ -14,23 +14,24 @@ type Props = {
 };
 
 const MainHistory = ({ isFocus, setIsFocus }: Props) => {
-  const historyByVisitDate = chromeHistory.reduce((acc, val: IrefinedItem) => {
-    const { lastVisitDate } = val;
+  const historyByVisitDate = chromeHistory.reduce(
+    (acc: object, val: IrefinedItem) => {
+      const { lastVisitDate } = val;
 
-    if (lastVisitDate) {
-      const values = acc[lastVisitDate] || [];
-      acc[lastVisitDate] = [...values, val];
-    }
+      if (lastVisitDate) {
+        const values = acc[lastVisitDate] || [];
+        acc[lastVisitDate] = [...values, val];
+      }
 
-    return acc;
-  }, {});
+      return acc;
+    },
+    {}
+  );
 
   const renderHistory = () => {
     const Comp = isFocus ? FullItem : CompactItem;
 
     const values = Object.entries(historyByVisitDate);
-
-    console.log({ values });
 
     return values.map(([date, histories]: [string, IrefinedItem[]]) => {
       return (
