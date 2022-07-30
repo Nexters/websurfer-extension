@@ -6,6 +6,8 @@ import ZoomIcon from './icon-zoom-in-mono.svg';
 import MainSerferImage from './img-main-serfer.svg';
 import MenuIcon from './icon-line-three-mono.svg';
 import EyeIcon from './icon-eye-on-mono.svg';
+import HomeIcon from './icon-home.svg';
+import CloseIcon from './icon-close.svg';
 
 export {
   FilterIcon,
@@ -16,4 +18,6 @@ export {
   MenuIcon,
   LogoIcon,
   EyeIcon,
+  HomeIcon,
+  CloseIcon,
 };
