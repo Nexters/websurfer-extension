@@ -92,8 +92,8 @@ const onRemovedCb = (tabId, removeInfo) => {
   instance.deleteTab(tabId);
 };
 
-const onFocusChangedCb = (windowId) => {
-  console.log(windowId, 'onFocused');
+const onFocusChangedCb = async (windowId) => {
+  console.log(windowId, 'onFocusedWindow');
 
   if (windowId < 0) {
     const allClearedIntervalMap = Object.entries(instance.intervalMap)
@@ -104,6 +104,21 @@ const onFocusChangedCb = (windowId) => {
       }, {});
 
     instance.setIntervalMap(allClearedIntervalMap);
+  } else {
+    const currentTabs = await chrome.tabs.query({ active: true });
+
+    const withWindowId = currentTabs.filter(
+      (activeTab) => activeTab.windowId === windowId
+    );
+
+    if (withWindowId.length) {
+      const tab = currentTabs[0];
+
+      initInterval(tab.id);
+      console.log(tab, 'activate window at window focus changed');
+    }
+
+    console.log('nothing happen at window focus changed');
   }
 };
 

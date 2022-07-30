@@ -12,9 +12,14 @@ export default class Tabs {
   }
 
   deleteTab(tabId) {
-    const cloned = { ...this.tabsMap };
-    delete cloned[tabId];
-    this.tabsMap = cloned;
+    const deleted = (() => {
+      const cloned = { ...this.tabsMap };
+      delete cloned[tabId];
+
+      return cloned;
+    })();
+
+    this.tabsMap = deleted;
   }
 
   setActiveTabId(activeTabId) {
