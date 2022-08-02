@@ -7,8 +7,8 @@ type Props = {};
 const MenuButton = (props: Props) => {
   return (
     <S.MenuButtonsWrapper>
-      <S.Icon src={MenuIcon} alt="menu" />
       <S.Icon src={NoticeIcon} alt="noice" />
+      <S.Icon src={MenuIcon} alt="menu" />
     </S.MenuButtonsWrapper>
   );
 };

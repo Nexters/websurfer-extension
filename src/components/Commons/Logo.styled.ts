@@ -9,14 +9,13 @@ export const Logo = styled.div(() => {
     items-center
       `,
     css`
-      width: 220px;
-      height: 44px;
+      width: 100px;
+      height: 42px;
       margin: 0 0;
-      padding-left: 13px;
-      font-size: ${theme.fontSize.xl};
-      color: ${theme.color.white};
+      font-size: ${theme.fontSize.m};
+      color: ${theme.color['gray-08']};
+      font-weight: ${theme.fontWeight.bold};
       line-height: ${theme.lineHeight['3xl']};
-      background-color: ${theme.color['gray-06']};
     `,
   ];
 });

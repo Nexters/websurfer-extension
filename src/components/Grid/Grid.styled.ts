@@ -39,8 +39,8 @@ export const Col = styled.div<ColProps>((props) => {
     switch (props.backgroundColor) {
       case 'white':
         return theme.color.white;
-      case 'gray-02':
-        return theme.color['gray-02'];
+      case 'bgColor':
+        return theme.color.bgColor;
       default:
         return props.backgroundColor ? props.backgroundColor : '';
     }

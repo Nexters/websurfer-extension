@@ -7,7 +7,9 @@ export const Wrapper = styled.div(() => {
       flex justify-between
       `,
     css`
-      margin-bottom: 27px;
+      width: 840px;
+      height: 342px;
+      overflow: hidden;
     `,
   ];
 });
@@ -35,18 +37,54 @@ export const Title = styled.div(() => {
   ];
 });
 
+export const Description = styled.div(() => {
+  const theme = useTheme();
+  return [
+    css`
+      color: ${theme.color['gray-06']};
+      font-size: ${theme.fontSize.m};
+      font-weight: ${theme.fontWeight.regular};
+      line-height: ${theme.lineHeight.l};
+    `,
+  ];
+});
+
 export const MainImage = styled.img(() => {
   return [
     css`
-      width: 425px;
-      height: 334px;
+      width: 408px;
+      height: 263px;
+      margin: 89px 12px 0 0;
     `,
   ];
 });
 
 export const TitleContainer = styled.div(() => [
   css`
-    padding-top: 106px;
+    padding-top: 66px;
     padding-bottom: 37px;
   `,
 ]);
+
+export const Icon = styled.img(() => {
+  const theme = useTheme();
+  return [
+    css`
+      width: 24px;
+      height: 24px;
+      margin-left: 8px;
+    `,
+  ];
+});
+
+export const TitleWrapper = styled.div(() => {
+  const theme = useTheme();
+  return [
+    css`
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      justify-content: start;
+    `,
+  ];
+});

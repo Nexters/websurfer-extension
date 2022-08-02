@@ -30,8 +30,8 @@ export const ItemCard = styled.div<ItemCardProps>((props) => {
       padding: 22px;
       border-radius: 8px;
       background-color: ${primary
-        ? theme.color['gray-05']
-        : theme.color['gray-02']};
+        ? theme.color.primary
+        : theme.color.secondaryB};
       :first-child {
         margin-left: 0;
       }

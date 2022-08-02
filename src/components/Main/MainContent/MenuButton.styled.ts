@@ -1,15 +1,21 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
 
 export const MenuButtonsWrapper = styled.div(() => [
   tw`
       flex justify-between w-full
       `,
-]);
-
-export const Icon = styled.img(() => [
   css`
-    width: 24px;
-    height: 24px;
+    width: 70px;
   `,
 ]);
+
+export const Icon = styled.img(() => {
+  const theme = useTheme();
+  return [
+    css`
+      width: 24px;
+      height: 24px;
+    `,
+  ];
+});
