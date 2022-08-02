@@ -10,6 +10,7 @@ const color = {
   green: '#53D76A',
   black: '#000',
   white: '#FFF',
+  bgColor: '#FAFAFA',
   'gray-08': '#171717',
   'gray-07': '#333333',
   'gray-06': '#555555',
