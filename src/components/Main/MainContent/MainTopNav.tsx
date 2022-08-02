@@ -12,9 +12,9 @@ const MainTopNav = (props: Props) => {
   return (
     <S.Wrapper>
       <Logo />
-      <Grid.Col margin="auto 0" unit={1}>
-        <MenuButton />
-      </Grid.Col>
+      <MenuButton />
+      {/* <S.topButtonWrapper>
+      </S.topButtonWrapper> */}
     </S.Wrapper>
   );
 };

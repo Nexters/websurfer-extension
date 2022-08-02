@@ -19,7 +19,7 @@ const SurffingTime = (props: Props) => {
     },
     xAxis: {
       type: 'category',
-      data: ['0-4', '4-8', '8-12', '12-16', '16-20', '20-24'],
+      data: ['아침', '낮', '저녁', '밤'],
     },
     yAxis: {
       type: 'value',
@@ -27,16 +27,14 @@ const SurffingTime = (props: Props) => {
     series: [
       {
         data: [
-          120,
-          200,
-          150,
-          80,
-          { value: 70, itemStyle: { color: theme.color['gray-05'] } },
-          110,
+          100,
+          100,
+          { value: 100, itemStyle: { color: theme.color.primary } },
+          100,
         ],
         itemStyle: {
-          color: theme.color['gray-02'],
-          barBorderRadius: [4, 4, 0, 0],
+          color: theme.color.secondaryB,
+          barBorderRadius: [5, 5, 0, 0],
         },
         type: 'bar',
         silent: true,

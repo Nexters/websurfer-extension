@@ -35,7 +35,7 @@ const Options: React.FC<Props> = ({ title }: Props) => {
             display={isFocus ? 'none' : 'block'}
             paddingTop="55px"
             paddingBottom="60px"
-            backgroundColor="gray-02"
+            backgroundColor="bgColor"
           >
             <>
               <MainTopNav />

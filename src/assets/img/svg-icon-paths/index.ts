@@ -8,6 +8,8 @@ import MenuIcon from './icon-line-three-mono.svg';
 import EyeIcon from './icon-eye-on-mono.svg';
 import HomeIcon from './icon-home.svg';
 import CloseIcon from './icon-close.svg';
+import QuestionIcon from './icon-question-tag.svg';
+import Oceanographer from './img-main-oceanographer.svg';
 
 export {
   FilterIcon,
@@ -20,4 +22,6 @@ export {
   EyeIcon,
   HomeIcon,
   CloseIcon,
+  QuestionIcon,
+  Oceanographer,
 };

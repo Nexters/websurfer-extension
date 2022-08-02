@@ -1,12 +1,16 @@
 import { Theme } from '@emotion/react';
 
 const color = {
-  primary: '#00C2FF',
+  primary: '#3EA2FF',
+  secondaryG: '#3DE5E5',
+  secondaryY: '#FFDE31',
+  secondaryB: '#EEF4FF',
   red: '#FC3E39',
   yellow: '#FEBF4E',
   green: '#53D76A',
   black: '#000',
   white: '#FFF',
+  bgColor: '#FAFAFA',
   'gray-08': '#171717',
   'gray-07': '#333333',
   'gray-06': '#555555',
