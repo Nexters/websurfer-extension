@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import * as S from './SearchBar.styled';
 
-import { FilterIcon, SearchIcon } from '../../../assets/img/svg-icon-paths';
+import { CalendarIcon, SearchIcon } from '../../../assets/img/svg-icon-paths';
 
 interface Props {
   placeholder?: string;
@@ -10,17 +10,21 @@ interface Props {
 }
 
 const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
-  const { isActive, setIsActive } = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <S.Wrapper>
       <S.SearchIcon src={SearchIcon} />
       <S.Input
-        onFocus={console.log}
+        onFocus={() => setIsActive(true)}
+        onBlur={() => setIsActive(false)}
         placeholder={placeholder}
         hasFilter={hasFilter}
+        isActive={isActive}
       />
-      {hasFilter && <S.Filter src={FilterIcon} alt="filter" />}
+      {hasFilter && (
+        <S.Filter isActive={isActive} src={CalendarIcon} alt="filter" />
+      )}
     </S.Wrapper>
   );
 };

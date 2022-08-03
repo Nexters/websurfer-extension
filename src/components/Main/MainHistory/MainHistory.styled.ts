@@ -54,7 +54,7 @@ export const HistoryListWrapper = styled.div(() => {
       margin: 20px 0;
       height: calc(100vh - 190px);
       &::-webkit-scrollbar {
-        width: 8px;
+        width: 4px;
       }
     `,
   ];
