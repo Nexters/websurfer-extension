@@ -13,9 +13,13 @@ type Props = {
   isFocus: boolean;
 };
 
+interface accObj {
+  [key: string]: IrefinedItem[];
+}
+
 const MainHistory = ({ isFocus, setIsFocus }: Props) => {
   const historyByVisitDate = chromeHistory.reduce(
-    (acc: object, val: IrefinedItem) => {
+    (acc: accObj, val: IrefinedItem) => {
       const { lastVisitDate } = val;
 
       if (lastVisitDate) {
