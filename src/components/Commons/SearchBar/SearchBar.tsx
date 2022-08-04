@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { DateRange } from 'react-date-range';
 
 import * as S from './SearchBar.styled';
 
@@ -25,6 +26,7 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
       {hasFilter && (
         <S.Filter isActive={isActive} src={CalendarIcon} alt="filter" />
       )}
+      <DateRange showDateDisplay={true} />
     </S.Wrapper>
   );
 };
