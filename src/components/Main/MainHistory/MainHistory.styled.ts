@@ -74,3 +74,5 @@ export const CategoryDate = styled.span(() => {
     `,
   ];
 });
+
+export const ZoomIcon = styled.img(() => [tw`cursor-pointer`]);

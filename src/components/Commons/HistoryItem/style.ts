@@ -9,7 +9,7 @@ interface IItemSpan {
 export const CompactItemWrapper = styled.div(() => {
   return [
     tw`
-      flex items-center
+      flex items-center cursor-pointer
     `,
     css`
       padding: 10px 0;

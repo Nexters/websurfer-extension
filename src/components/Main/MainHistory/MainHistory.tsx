@@ -53,11 +53,11 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
     <div>
       <S.TitleWrapper>
         <S.MainTitle>방문 기록</S.MainTitle>
-        <img
+        <S.ZoomIcon
           alt="zoom"
           src={ZoomIcon}
           onClick={() => setIsFocus(!isFocus)}
-        ></img>
+        ></S.ZoomIcon>
       </S.TitleWrapper>
       <S.ContentWrapper>
         <SearchBar />

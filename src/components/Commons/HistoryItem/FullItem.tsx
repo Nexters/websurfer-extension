@@ -8,7 +8,7 @@ import { EyeIcon } from '../../../assets/img/svg-icon-paths';
 
 const FullItem = ({ icon, title, url, visitCount }: IrefinedItem) => {
   return (
-    <S.FullItemWrapper>
+    <S.FullItemWrapper onClick={() => window.open(url, '_blank')}>
       <S.FullLeftWrapper>
         <S.ItemIcon alt="history-icon" src={icon}></S.ItemIcon>
         <S.FullItemSpan>{title}</S.FullItemSpan>
