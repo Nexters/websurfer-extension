@@ -6,6 +6,8 @@ import { Global, ThemeProvider } from '@emotion/react';
 
 import theme from '../../styles/theme';
 import global from '../../styles/global';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 import Popup from './Popup';
 
