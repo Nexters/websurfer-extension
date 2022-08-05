@@ -23,7 +23,7 @@ export const backgroundItem = styled.div(() => {
       :first-child {
         background-color: ${window.innerWidth < MAX_WIDTH
           ? theme.color.white
-          : theme.color['gray-02']};
+          : theme.color.bgColor};
       }
       :last-child {
         background-color: ${theme.color.white};

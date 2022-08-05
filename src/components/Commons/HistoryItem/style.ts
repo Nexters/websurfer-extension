@@ -7,15 +7,13 @@ interface IItemSpan {
 }
 
 export const CompactItemWrapper = styled.div(() => {
-  const theme = useTheme();
   return [
     tw`
-      flex items-center
+      flex items-center cursor-pointer
     `,
     css`
-      padding: 18px 20px;
+      padding: 10px 0;
       margin-bottom: 8px;
-      background-color: ${theme.color['gray-02']};
       border-radius: 10px;
       &:last-child {
         margin-bottom: unset;
@@ -31,8 +29,7 @@ export const ItemSpan = styled.p(() => {
       truncate
     `,
     css`
-      font-size: ${theme.fontSize.l};
-      font-weight: ${theme.fontWeight.bold};
+      font-size: ${theme.fontSize.m};
       color: ${theme.color['gray-06']};
     `,
   ];

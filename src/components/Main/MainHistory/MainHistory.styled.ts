@@ -59,6 +59,8 @@ export const HistoryListWrapper = styled.div(() => {
     `,
     css`
       margin-top: 20px;
+      /* margin: 20px 0;
+      height: calc(100vh - 190px); */
       &::-webkit-scrollbar {
         width: 8px;
       }
@@ -80,3 +82,5 @@ export const CategoryDate = styled.span(() => {
     `,
   ];
 });
+
+export const ZoomIcon = styled.img(() => [tw`cursor-pointer`]);

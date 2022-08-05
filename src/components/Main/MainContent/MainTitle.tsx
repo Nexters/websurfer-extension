@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { MainSerferImage } from '../../../assets/img/svg-icon-paths';
+import {
+  Oceanographer,
+  QuestionIcon,
+} from '../../../assets/img/svg-icon-paths';
 
 import * as S from './MainTitle.styled';
 
@@ -10,11 +13,16 @@ const MainTitle = (props: Props) => {
   return (
     <S.Wrapper>
       <S.TitleContainer>
-        <S.SubTitle>Hi Shaka Shaka,</S.SubTitle>
-        <S.Title>아까 만났던 파도를</S.Title>
-        <S.Title>찾고 있나요?</S.Title>
+        <S.SubTitle>이번 주 김넥터 님은</S.SubTitle>
+        <S.TitleWrapper>
+          <S.Title>열정 뿜뿜 해양학자</S.Title>
+          <S.Icon src={QuestionIcon} />
+        </S.TitleWrapper>
+        <S.Description>
+          학습 / 교육 / 자기계발 사이트 사용량이 많아요.
+        </S.Description>
       </S.TitleContainer>
-      <S.MainImage src={MainSerferImage} alt="Web Surfer" />
+      <S.MainImage src={Oceanographer} alt="해양학자가 서핑하는 모습" />
     </S.Wrapper>
   );
 };

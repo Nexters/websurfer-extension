@@ -21,13 +21,17 @@ const Newtab = () => {
     `,
   ]);
 
-  const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
+  // const count = useSelector((state: RootState) => state.counter.value);
+  // const dispatch = useDispatch();
 
   return (
     <>
-      <Message color="blue" onClick={() => dispatch(increment())}>
-        {'샤카샤카'.repeat(count)}
+      <Message
+        color="blue"
+        //  onClick={() => dispatch(increment())}
+      >
+        {/* {'샤카샤카'.repeat(count)} */}
+        샤카샤카 뉴탭
       </Message>
     </>
   );

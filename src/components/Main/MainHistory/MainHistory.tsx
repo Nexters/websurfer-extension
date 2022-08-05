@@ -13,9 +13,13 @@ type Props = {
   isFocus: boolean;
 };
 
+interface accObj {
+  [key: string]: IrefinedItem[];
+}
+
 const MainHistory = ({ isFocus, setIsFocus }: Props) => {
   const historyByVisitDate = chromeHistory.reduce(
-    (acc: object, val: IrefinedItem) => {
+    (acc: accObj, val: IrefinedItem) => {
       const { lastVisitDate } = val;
 
       if (lastVisitDate) {
@@ -49,11 +53,11 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
     <S.HistoryWrapper>
       <S.TitleWrapper>
         <S.MainTitle>방문 기록</S.MainTitle>
-        <img
+        <S.ZoomIcon
           alt="zoom"
           src={ZoomIcon}
           onClick={() => setIsFocus(!isFocus)}
-        ></img>
+        ></S.ZoomIcon>
       </S.TitleWrapper>
       <S.ContentWrapper>
         <SearchBar />
