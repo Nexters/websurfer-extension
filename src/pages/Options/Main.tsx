@@ -33,19 +33,21 @@ const Main: React.FC<Props> = (props: Props) => {
             display={isFocus ? 'none' : 'block'}
             paddingTop="55px"
             paddingBottom="60px"
-            backgroundColor="gray-02"
+            backgroundColor="bgColor"
           >
-            <MainTopNav />
-            <MainTitle />
-            <MostVisitWebSite />
-            <S.Justify>
-              <TotalTime />
-              <SurffingTime />
-            </S.Justify>
+            <>
+              <MainTopNav />
+              <MainTitle />
+              <MostVisitWebSite />
+              <S.Justify>
+                <TotalTime />
+                <SurffingTime />
+              </S.Justify>
+            </>
           </Grid.LayoutCol>
           <Grid.LayoutCol
             paddingTop="60px"
-            paddingBottom="0"
+            paddingBottom="60px"
             unit={isFocus ? 12 : 4}
           >
             <MainHistory setIsFocus={setIsFocus} isFocus={isFocus} />
