@@ -1,4 +1,6 @@
 import { wrapStore } from 'webext-redux';
+import 'regenerator-runtime/runtime.js';
+import debounce from 'lodash.debounce';
 
 import { store } from '../../redux/store';
 import { BANNED_URLS_PREFIX } from '../../utils/consts';
@@ -20,11 +22,24 @@ chrome.runtime.onInstalled.addListener(() => {
 const apiClient = new ApiClient({ token: process.env.TEMPORARY_TOKEN });
 export const instance = new Tabs();
 
+const createHistory = async (tab) => {
+  const identifier = `${tab.id}::${tab.url}`;
+
+  console.log('create history', `${tab.id}::${tab.url}`);
+
+  const entity = await apiClient.createHistory({
+    href: tab.url,
+    title: tab.title,
+  });
+
+  instance.setUrlId(identifier, entity);
+};
+
 const onCreatedCb = (tab) => {
   console.log(tab, 'onCreated');
 };
 
-const initInterval = (tabId) => {
+const initInterval = debounce(async (tabId) => {
   if (instance.intervalMap[tabId]) {
     console.log('duplicated interval');
     return;
@@ -32,16 +47,32 @@ const initInterval = (tabId) => {
 
   console.log('init interval', tabId);
 
-  const interval = setInterval(() => {
-    const curTab = instance.getTab(tabId);
+  const curTab = instance.getTab(tabId);
 
+  const identifier = `${curTab.id}::${curTab.url}`;
+
+  if (!instance.urlIdMap[identifier]) {
+    await createHistory(curTab);
+  }
+
+  const interval = setInterval(() => {
     console.log('PING API', curTab, curTab.url);
+
+    const entity = instance.urlIdMap[`${curTab.id}::${curTab.url}`];
+    if (entity) {
+      apiClient.increaseDuration({
+        id: entity.id,
+        seconds: 10,
+      });
+    }
   }, 10000);
 
-  instance.setInterval(tabId, interval);
-};
+  if (curTab) {
+    instance.setInterval(tabId, interval);
+  }
+}, 500);
 
-const onActivatedCb = ({ tabId }) => {
+const onActivatedCb = async ({ tabId }) => {
   console.log(tabId, 'onActivated');
 
   const interval = instance.getInterval(instance.activeTabId);
@@ -59,7 +90,7 @@ const onActivatedCb = ({ tabId }) => {
   }
 };
 
-const onUpdatedCb = (tabId, changeInfo, tab) => {
+const onUpdatedCb = async (tabId, changeInfo, tab) => {
   console.log(tabId, changeInfo, tab, 'onUpdated');
   const { status = '' } = changeInfo;
 
@@ -68,9 +99,6 @@ const onUpdatedCb = (tabId, changeInfo, tab) => {
     if (interval) {
       console.log('clearInterval', interval, instance.activeTabId);
       clearInterval(interval);
-
-      // call API
-      console.log('UPDATE HISTORY');
     }
 
     instance.setTab(tabId, tab);

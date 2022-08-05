@@ -1,4 +1,5 @@
 import axios from 'axios';
+import adapter from '@vespaiach/axios-fetch-adapter';
 
 const getData = ({ data }) => data;
 
@@ -8,6 +9,7 @@ export default class ApiClient {
       baseURL: 'https://api.websurfer.ga',
       withCredentials: true,
       headers: { Authorization: `Bearer ${token}` },
+      adapter,
     });
   }
 
