@@ -3,11 +3,11 @@ import { wrapStore } from 'webext-redux';
 import { store } from '../../redux/store';
 
 import Tabs from './Tabs';
+import ApiClient from './ApiClient';
 
 wrapStore(store);
 
-console.log('This is the background page.');
-console.log('Put the background scripts here.');
+const apiClient = new ApiClient({ token: process.env.TEMPORARY_TOKEN });
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log('onInstalled');
@@ -26,7 +26,7 @@ const onCreatedCb = (tab) => {
 
 const initInterval = (tabId) => {
   if (instance.intervalMap[tabId]) {
-    console.log('duplicated');
+    console.log('duplicated interval');
     return;
   }
 
@@ -110,20 +110,18 @@ const onFocusChangedCb = async (windowId) => {
     );
 
     instance.setIntervalMap(allClearedIntervalMap);
-  } else {
-    const currentTabs = await chrome.tabs.query({ active: true });
+    return;
+  }
 
-    const curTabwithWindowId = currentTabs.find(
-      (activeTab) => activeTab.windowId === windowId
-    );
+  const currentTabs = await chrome.tabs.query({ active: true });
 
-    if (curTabwithWindowId) {
-      initInterval(curTabwithWindowId.id);
-      console.log(
-        curTabwithWindowId,
-        'activate window at window focus changed'
-      );
-    }
+  const curTabwithWindowId = currentTabs.find(
+    (activeTab) => activeTab.windowId === windowId
+  );
+
+  if (curTabwithWindowId) {
+    initInterval(curTabwithWindowId.id);
+    console.log(curTabwithWindowId, 'activate window at window focus changed');
   }
 };
 
