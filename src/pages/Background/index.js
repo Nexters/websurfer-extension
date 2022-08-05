@@ -1,13 +1,12 @@
 import { wrapStore } from 'webext-redux';
 
 import { store } from '../../redux/store';
+import { BANNED_URLS_PREFIX } from '../../utils/consts';
 
 import Tabs from './Tabs';
 import ApiClient from './ApiClient';
 
 wrapStore(store);
-
-const apiClient = new ApiClient({ token: process.env.TEMPORARY_TOKEN });
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log('onInstalled');
@@ -18,6 +17,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // });
 });
 
+const apiClient = new ApiClient({ token: process.env.TEMPORARY_TOKEN });
 export const instance = new Tabs();
 
 const onCreatedCb = (tab) => {
@@ -54,7 +54,7 @@ const onActivatedCb = ({ tabId }) => {
 
   const tab = instance.getTab(tabId);
 
-  if (tab.url && !tab?.url?.startsWith('chrome://')) {
+  if (tab.url && !BANNED_URLS_PREFIX.some((v) => tab.url.startsWith(v))) {
     initInterval(tabId);
   }
 };
@@ -78,7 +78,7 @@ const onUpdatedCb = (tabId, changeInfo, tab) => {
     if (
       instance.activeTabId === tabId &&
       tab?.url &&
-      !tab?.url?.startsWith('chrome://')
+      !BANNED_URLS_PREFIX.some((v) => tab.url.startsWith(v))
     ) {
       initInterval(tabId);
     }
@@ -125,9 +125,7 @@ const onFocusChangedCb = async (windowId) => {
   }
 };
 
-chrome.tabs.query({}, (tabs) => {
-  console.log(tabs, 'tabs query');
-
+const initExistingTabs = (tabs) => {
   const tabsMap = tabs.reduce((acc, val) => {
     const { id } = val;
     acc[id] = val;
@@ -135,6 +133,14 @@ chrome.tabs.query({}, (tabs) => {
   }, {});
 
   instance.setTabsMap(tabsMap);
+};
+
+chrome.tabs.query({}, (tabs) => {
+  console.log(tabs, 'tabs query');
+
+  if (tabs.length) {
+    initExistingTabs(tabs);
+  }
 
   // tabs events
   chrome.tabs.onCreated.addListener(onCreatedCb);
