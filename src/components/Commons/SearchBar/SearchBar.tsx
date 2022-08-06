@@ -45,7 +45,7 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
             <S.RefreshButton alt="refresh" src={RefreshIcon}></S.RefreshButton>
           </S.FilterTopWrapper>
           <DateRange
-            showDateDisplay={isFilterActive}
+            showDateDisplay={false}
             ranges={[{ startDate, endDate, key: 'selection' }]}
             maxDate={new Date()}
             onChange={({ selection: { startDate, endDate } }) => {
