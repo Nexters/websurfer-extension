@@ -25,6 +25,11 @@ const onCreatedCb = (tab) => {
 };
 
 const initInterval = (tabId) => {
+  if (instance.intervalMap[tabId]) {
+    console.log('duplicated');
+    return;
+  }
+
   console.log('init interval', tabId);
 
   const interval = setInterval(() => {
@@ -96,12 +101,13 @@ const onFocusChangedCb = async (windowId) => {
   console.log(windowId, 'onFocusedWindow');
 
   if (windowId < 0) {
-    const allClearedIntervalMap = Object.entries(instance.intervalMap)
-      .map(([key, value]) => [key, clearInterval(value)])
-      .reduce((acc, [key, value]) => {
-        acc[key] = value;
+    const allClearedIntervalMap = Object.entries(instance.intervalMap).reduce(
+      (acc, [key, value]) => {
+        acc[key] = clearInterval(value);
         return acc;
-      }, {});
+      },
+      {}
+    );
 
     instance.setIntervalMap(allClearedIntervalMap);
   } else {
@@ -118,8 +124,6 @@ const onFocusChangedCb = async (windowId) => {
         'activate window at window focus changed'
       );
     }
-
-    console.log('nothing happen at window focus changed');
   }
 };
 
