@@ -41,7 +41,7 @@ const createHistory = async (tab) => {
 
 const initInterval = debounce(async (tabId) => {
   if (instance.intervalMap[tabId]) {
-    console.log('duplicated interval');
+    console.log('duplicated interval', tabId, instance.intervalMap[tabId]);
     return;
   }
 
@@ -51,20 +51,20 @@ const initInterval = debounce(async (tabId) => {
     return;
   }
 
-  const entity = await createHistory(curTab);
-  const interval = setInterval(() => {
-    if (entity) {
-      apiClient.increaseDuration({
-        id: entity.id,
-        seconds: 10,
-      });
-
-      console.log('UPDATE API', curTab, curTab.url);
-    }
-  }, 10000);
-
   if (curTab) {
     console.log('init interval', tabId);
+    const entity = await createHistory(curTab);
+    const interval = setInterval(() => {
+      if (entity) {
+        apiClient.increaseDuration({
+          id: entity.id,
+          seconds: 10,
+        });
+
+        console.log('UPDATE API', curTab, curTab.url);
+      }
+    }, 10000);
+
     instance.setInterval(tabId, interval);
   }
 }, 500);
