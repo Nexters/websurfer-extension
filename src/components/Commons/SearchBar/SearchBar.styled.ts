@@ -64,20 +64,46 @@ export const SearchIcon = styled.img(() => {
   ];
 });
 
+export const FilterTitle = styled.span(() => {
+  const theme = useTheme();
+  return [
+    css`
+      font-size: ${theme.fontSize.l};
+      font-weight: ${theme.fontWeight.bold};
+    `,
+  ];
+});
+
 export const FilterWrapper = styled.div(() => {
   const theme = useTheme();
   return [
     tw`
-      absolute
+      absolute flex-col
     `,
     css`
-      top: 50px;
+      top: 60px;
       right: 0;
       padding: 20px;
       border: 1px solid ${theme.color.primary};
       border-radius: 10px;
       filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.1));
       background: #fff;
+    `,
+  ];
+});
+
+export const RefreshButton = styled.img(() => {
+  return [
+    tw`
+      cursor-pointer
+    `,
+  ];
+});
+
+export const FilterTopWrapper = styled.div(() => {
+  return [
+    tw`
+      flex items-center justify-between w-full 
     `,
   ];
 });

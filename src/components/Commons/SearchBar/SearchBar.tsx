@@ -3,7 +3,11 @@ import { DateRange } from 'react-date-range';
 
 import * as S from './SearchBar.styled';
 
-import { CalendarIcon, SearchIcon } from '../../../assets/img/svg-icon-paths';
+import {
+  CalendarIcon,
+  SearchIcon,
+  RefreshIcon,
+} from '../../../assets/img/svg-icon-paths';
 
 interface Props {
   placeholder?: string;
@@ -12,7 +16,9 @@ interface Props {
 
 const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
   const [isInputActive, setIsInputActive] = useState(false);
-  const [isFilterActive, setIsFilterActive] = useState(false);
+  const [isFilterActive, setIsFilterActive] = useState(true);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   return (
     <S.Wrapper>
@@ -34,7 +40,15 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
       )}
       {isFilterActive && (
         <S.FilterWrapper>
-          <DateRange showDateDisplay={isFilterActive} />
+          <S.FilterTopWrapper>
+            <S.FilterTitle>기간 선택</S.FilterTitle>
+            <S.RefreshButton alt="refresh" src={RefreshIcon}></S.RefreshButton>
+          </S.FilterTopWrapper>
+          <DateRange
+            showDateDisplay={isFilterActive}
+            maxDate={new Date()}
+            onChange={console.log}
+          />
         </S.FilterWrapper>
       )}
     </S.Wrapper>
