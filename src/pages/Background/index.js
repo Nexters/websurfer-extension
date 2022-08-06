@@ -25,13 +25,12 @@ export const instance = new Tabs();
 const createHistory = async (tab) => {
   const identifier = `${tab.id}::${tab.url}`;
 
-  console.log('create history', `${tab.id}::${tab.url}`);
-
   const entity = await apiClient.createHistory({
     href: tab.url,
     title: tab.title,
   });
 
+  console.log('create history', `${tab.id}::${tab.url}`);
   instance.setUrlId(identifier, entity);
 };
 
@@ -46,22 +45,20 @@ const initInterval = debounce(async (tabId) => {
   }
 
   const curTab = instance.getTab(tabId);
-
   if (BANNED_URLS_PREFIX.some((v) => curTab.url.startsWith(v))) {
     console.log('Banned URL', curTab.url);
     return;
   }
 
   const identifier = `${curTab.id}::${curTab.url}`;
-
+  let entity;
   if (!instance.urlIdMap[identifier]) {
-    await createHistory(curTab);
+    entity = await createHistory(curTab);
   }
 
   const interval = setInterval(() => {
     console.log('PING API', curTab, curTab.url);
 
-    const entity = instance.urlIdMap[identifier];
     if (entity) {
       apiClient.increaseDuration({
         id: entity.id,
