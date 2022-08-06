@@ -16,7 +16,7 @@ interface Props {
 
 const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
   const [isInputActive, setIsInputActive] = useState(false);
-  const [isFilterActive, setIsFilterActive] = useState(true);
+  const [isFilterActive, setIsFilterActive] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -46,8 +46,12 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
           </S.FilterTopWrapper>
           <DateRange
             showDateDisplay={isFilterActive}
+            ranges={[{ startDate, endDate, key: 'selection' }]}
             maxDate={new Date()}
-            onChange={console.log}
+            onChange={({ selection: { startDate, endDate } }) => {
+              setStartDate(startDate);
+              setEndDate(endDate);
+            }}
           />
         </S.FilterWrapper>
       )}
