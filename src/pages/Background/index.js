@@ -45,9 +45,12 @@ const initInterval = debounce(async (tabId) => {
     return;
   }
 
-  console.log('init interval', tabId);
-
   const curTab = instance.getTab(tabId);
+
+  if (BANNED_URLS_PREFIX.some((v) => curTab.url.startsWith(v))) {
+    console.log('Banned URL', curTab.url);
+    return;
+  }
 
   const identifier = `${curTab.id}::${curTab.url}`;
 
@@ -58,7 +61,7 @@ const initInterval = debounce(async (tabId) => {
   const interval = setInterval(() => {
     console.log('PING API', curTab, curTab.url);
 
-    const entity = instance.urlIdMap[`${curTab.id}::${curTab.url}`];
+    const entity = instance.urlIdMap[identifier];
     if (entity) {
       apiClient.increaseDuration({
         id: entity.id,
@@ -68,6 +71,7 @@ const initInterval = debounce(async (tabId) => {
   }, 10000);
 
   if (curTab) {
+    console.log('init interval', tabId);
     instance.setInterval(tabId, interval);
   }
 }, 500);
@@ -85,7 +89,7 @@ const onActivatedCb = async ({ tabId }) => {
 
   const tab = instance.getTab(tabId);
 
-  if (tab.url && !BANNED_URLS_PREFIX.some((v) => tab.url.startsWith(v))) {
+  if (tab.url) {
     initInterval(tabId);
   }
 };
@@ -103,11 +107,7 @@ const onUpdatedCb = async (tabId, changeInfo, tab) => {
 
     instance.setTab(tabId, tab);
 
-    if (
-      instance.activeTabId === tabId &&
-      tab?.url &&
-      !BANNED_URLS_PREFIX.some((v) => tab.url.startsWith(v))
-    ) {
+    if (instance.activeTabId === tabId && tab?.url) {
       initInterval(tabId);
     }
   }
