@@ -17,8 +17,8 @@ interface Props {
 const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
   const [isInputActive, setIsInputActive] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
+  const [endDate, setEndDate] = useState<Date | undefined>(new Date());
 
   return (
     <S.Wrapper>
@@ -49,6 +49,7 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
             ranges={[{ startDate, endDate, key: 'selection' }]}
             maxDate={new Date()}
             onChange={({ selection: { startDate, endDate } }) => {
+              console.log({ startDate, endDate });
               setStartDate(startDate);
               setEndDate(endDate);
             }}
