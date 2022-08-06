@@ -3,11 +3,11 @@ import tw, { styled } from 'twin.macro';
 
 interface InputProps {
   hasFilter: boolean;
-  isActive?: boolean;
+  isInputActive?: boolean;
 }
 
 interface IFilterProps {
-  isActive?: boolean;
+  isInputActive?: boolean;
 }
 
 export const Wrapper = styled.div(() => {
@@ -35,14 +35,14 @@ export const Input = styled.input<InputProps>(({ hasFilter, isActive }) => {
   ];
 });
 
-export const Filter = styled.img<IFilterProps>(({ isActive }) => {
+export const Filter = styled.img<IFilterProps>(({ isInputActive }) => {
   const theme = useTheme();
   return [
     tw`
       cursor-pointer
     `,
     css`
-      border: 1px solid ${isActive ? 'blue' : theme.color['gray-03']};
+      border: 1px solid ${isInputActive ? 'blue' : theme.color['gray-03']};
       border-left: 0px;
       border-radius: 0px 10px 10px 0;
       padding: 14px;
@@ -58,6 +58,18 @@ export const SearchIcon = styled.img(() => {
     tw`absolute`,
     css`
       left: 20px;
+    `,
+  ];
+});
+
+export const FilterWrapper = styled.div(() => {
+  return [
+    tw`
+      absolute
+    `,
+    css`
+      top: 50px;
+      right: 0;
     `,
   ];
 });

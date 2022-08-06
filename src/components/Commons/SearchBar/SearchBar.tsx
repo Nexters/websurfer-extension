@@ -11,22 +11,32 @@ interface Props {
 }
 
 const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
-  const [isActive, setIsActive] = useState(false);
+  const [isInputActive, setIsInputActive] = useState(false);
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
   return (
     <S.Wrapper>
       <S.SearchIcon src={SearchIcon} />
       <S.Input
-        onFocus={() => setIsActive(true)}
-        onBlur={() => setIsActive(false)}
+        onFocus={() => setIsInputActive(true)}
+        onBlur={() => setIsInputActive(false)}
         placeholder={placeholder}
         hasFilter={hasFilter}
-        isActive={isActive}
+        isInputActive={isInputActive}
       />
       {hasFilter && (
-        <S.Filter isActive={isActive} src={CalendarIcon} alt="filter" />
+        <S.Filter
+          isInputActive={isInputActive}
+          onClick={() => setIsFilterActive(!isFilterActive)}
+          src={CalendarIcon}
+          alt="filter"
+        />
       )}
-      <DateRange showDateDisplay={true} />
+      {isFilterActive && (
+        <S.FilterWrapper>
+          <DateRange showDateDisplay={true} />
+        </S.FilterWrapper>
+      )}
     </S.Wrapper>
   );
 };
