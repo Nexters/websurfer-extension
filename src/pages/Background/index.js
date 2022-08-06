@@ -32,6 +32,8 @@ const createHistory = async (tab) => {
 
   console.log('create history', `${tab.id}::${tab.url}`);
   instance.setUrlId(identifier, entity);
+
+  return entity;
 };
 
 const onCreatedCb = (tab) => {
@@ -51,19 +53,20 @@ const initInterval = debounce(async (tabId) => {
   }
 
   const identifier = `${curTab.id}::${curTab.url}`;
-  let entity;
-  if (!instance.urlIdMap[identifier]) {
-    entity = await createHistory(curTab);
+  if (instance.urlIdMap[identifier]) {
+    console.log(`already existing url id`, identifier);
+    return;
   }
 
+  const entity = await createHistory(curTab);
   const interval = setInterval(() => {
-    console.log('PING API', curTab, curTab.url);
-
     if (entity) {
       apiClient.increaseDuration({
         id: entity.id,
         seconds: 10,
       });
+
+      console.log('UPDATE API', curTab, curTab.url);
     }
   }, 10000);
 
@@ -139,7 +142,6 @@ const onFocusChangedCb = async (windowId) => {
   }
 
   const currentTabs = await chrome.tabs.query({ active: true });
-
   const curTabwithWindowId = currentTabs.find(
     (activeTab) => activeTab.windowId === windowId
   );
