@@ -18,22 +18,24 @@ export const Wrapper = styled.div(() => {
   ];
 });
 
-export const Input = styled.input<InputProps>(({ hasFilter, isActive }) => {
-  const theme = useTheme();
-  return [
-    tw`
+export const Input = styled.input<InputProps>(
+  ({ hasFilter, isInputActive }) => {
+    const theme = useTheme();
+    return [
+      tw`
       w-full
     `,
-    css`
-      font-size: ${theme.fontSize.m};
-      border-radius: ${hasFilter ? '10px 0 0 10px' : '10px'};
-      border: 1px solid ${isActive ? 'blue' : theme.color['gray-03']};
-      padding: 17px 17px 17px 55px;
-      outline: none;
-      height: 50px;
-    `,
-  ];
-});
+      css`
+        font-size: ${theme.fontSize.m};
+        border-radius: ${hasFilter ? '10px 0 0 10px' : '10px'};
+        border: 1px solid ${isInputActive ? 'blue' : theme.color['gray-03']};
+        padding: 17px 17px 17px 55px;
+        outline: none;
+        height: 50px;
+      `,
+    ];
+  }
+);
 
 export const Filter = styled.img<IFilterProps>(({ isInputActive }) => {
   const theme = useTheme();
@@ -63,6 +65,7 @@ export const SearchIcon = styled.img(() => {
 });
 
 export const FilterWrapper = styled.div(() => {
+  const theme = useTheme();
   return [
     tw`
       absolute
@@ -70,6 +73,11 @@ export const FilterWrapper = styled.div(() => {
     css`
       top: 50px;
       right: 0;
+      padding: 20px;
+      border: 1px solid ${theme.color.primary};
+      border-radius: 10px;
+      filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.1));
+      background: #fff;
     `,
   ];
 });

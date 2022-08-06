@@ -34,7 +34,7 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
       )}
       {isFilterActive && (
         <S.FilterWrapper>
-          <DateRange showDateDisplay={true} />
+          <DateRange showDateDisplay={isFilterActive} />
         </S.FilterWrapper>
       )}
     </S.Wrapper>
