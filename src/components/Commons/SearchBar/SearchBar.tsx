@@ -49,7 +49,6 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
             ranges={[{ startDate, endDate, key: 'selection' }]}
             maxDate={new Date()}
             onChange={({ selection: { startDate, endDate } }) => {
-              console.log({ startDate, endDate });
               setStartDate(startDate);
               setEndDate(endDate);
             }}
