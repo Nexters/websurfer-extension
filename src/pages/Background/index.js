@@ -24,20 +24,19 @@ export const instance = new Tabs();
 
 const createHistory = async (tab) => {
   const identifier = `${tab.id}::${tab.url}`;
+  const existingEntity = instance.urlIdMap[identifier];
+
+  if (existingEntity) return existingEntity;
 
   const entity = await apiClient.createHistory({
     href: tab.url,
     title: tab.title,
   });
 
-  console.log('create history', `${tab.id}::${tab.url}`);
+  console.log('CREATE API', `${tab.id}::${tab.url}`);
   instance.setUrlId(identifier, entity);
 
   return entity;
-};
-
-const onCreatedCb = (tab) => {
-  console.log(tab, 'onCreated');
 };
 
 const initInterval = debounce(async (tabId) => {
@@ -49,12 +48,6 @@ const initInterval = debounce(async (tabId) => {
   const curTab = instance.getTab(tabId);
   if (BANNED_URLS_PREFIX.some((v) => curTab.url.startsWith(v))) {
     console.log('Banned URL', curTab.url);
-    return;
-  }
-
-  const identifier = `${curTab.id}::${curTab.url}`;
-  if (instance.urlIdMap[identifier]) {
-    console.log(`already existing url id`, identifier);
     return;
   }
 
@@ -88,7 +81,6 @@ const onActivatedCb = async ({ tabId }) => {
   instance.setActiveTabId(tabId);
 
   const tab = instance.getTab(tabId);
-
   if (tab.url) {
     initInterval(tabId);
   }
@@ -170,7 +162,6 @@ chrome.tabs.query({}, (tabs) => {
   }
 
   // tabs events
-  chrome.tabs.onCreated.addListener(onCreatedCb);
   chrome.tabs.onActivated.addListener(onActivatedCb);
   chrome.tabs.onUpdated.addListener(onUpdatedCb);
   chrome.tabs.onRemoved.addListener(onRemovedCb);
