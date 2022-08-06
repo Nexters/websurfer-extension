@@ -13,6 +13,7 @@ import Oceanographer from './img-main-oceanographer.svg';
 import CalendarIcon from './icon-calendar-check-mono.svg';
 import RefreshIcon from './icon-refresh-mono.svg';
 import ZoomoutIcon from './icon-zoom-out.svg';
+import DotsIcon from './icon-dots-mono.svg';
 
 export {
   FilterIcon,
@@ -30,4 +31,5 @@ export {
   CalendarIcon,
   RefreshIcon,
   ZoomoutIcon,
+  DotsIcon,
 };
