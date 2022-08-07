@@ -10,6 +10,7 @@ import HomeIcon from './icon-home.svg';
 import CloseIcon from './icon-close.svg';
 import QuestionIcon from './icon-question-tag.svg';
 import Oceanographer from './img-main-oceanographer.svg';
+import SettingIcon from './icon-setting-mono.svg';
 
 export {
   FilterIcon,
@@ -24,4 +25,5 @@ export {
   CloseIcon,
   QuestionIcon,
   Oceanographer,
+  SettingIcon,
 };
