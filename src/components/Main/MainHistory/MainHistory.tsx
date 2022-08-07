@@ -4,7 +4,7 @@ import { SearchBar, CompactItem, FullItem } from '../../Commons';
 
 import * as S from './MainHistory.styled';
 
-import { ZoomIcon } from '../../../assets/img/svg-icon-paths';
+import { ZoomIcon, ZoomoutIcon } from '../../../assets/img/svg-icon-paths';
 
 import { chromeHistory, IrefinedItem } from '../../../utils/mock';
 
@@ -53,9 +53,10 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
     <div>
       <S.TitleWrapper>
         <S.MainTitle>방문 기록</S.MainTitle>
+
         <S.ZoomIcon
           alt="zoom"
-          src={ZoomIcon}
+          src={isFocus ? ZoomoutIcon : ZoomIcon}
           onClick={() => setIsFocus(!isFocus)}
         ></S.ZoomIcon>
       </S.TitleWrapper>
