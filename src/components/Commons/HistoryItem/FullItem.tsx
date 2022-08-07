@@ -2,9 +2,9 @@ import React from 'react';
 
 import * as S from './style';
 
-import { IrefinedItem } from '../../../utils/mock';
+import { IrefinedItem } from '@utils/mock';
 
-import { DotsIcon } from '../../../assets/img/svg-icon-paths';
+import { DotsIcon } from '@assets/img/svg-icon-paths';
 
 const FullItem = ({ icon, title, url, visitCount }: IrefinedItem) => {
   return (
