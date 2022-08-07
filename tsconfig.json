@@ -15,7 +15,15 @@
     "resolveJsonModule": true,
     "noEmit": false,
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@redux/*": ["redux/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"]
+    }
   },
   "include": ["src", "**/*.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["build", "node_modules"]

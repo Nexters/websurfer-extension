@@ -11,6 +11,10 @@ import CloseIcon from './icon-close.svg';
 import QuestionIcon from './icon-question-tag.svg';
 import Oceanographer from './img-main-oceanographer.svg';
 import SettingIcon from './icon-setting-mono.svg';
+import CalendarIcon from './icon-calendar-check-mono.svg';
+import RefreshIcon from './icon-refresh-mono.svg';
+import ZoomoutIcon from './icon-zoom-out.svg';
+import DotsIcon from './icon-dots-mono.svg';
 
 export {
   FilterIcon,
@@ -25,5 +29,9 @@ export {
   CloseIcon,
   QuestionIcon,
   Oceanographer,
+  CalendarIcon,
+  RefreshIcon,
+  ZoomoutIcon,
+  DotsIcon,
   SettingIcon,
 };

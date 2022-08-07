@@ -4,6 +4,8 @@ import { normalize } from 'polished';
 const global = css`
   ${normalize()}
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  @import 'react-date-range/dist/styles.css';
+  @import 'react-date-range/dist/theme/default.css';
 
   html,
   body {

@@ -2,9 +2,9 @@ import React from 'react';
 
 import * as S from './style';
 
-import { IrefinedItem } from '../../../utils/mock';
+import { IrefinedItem } from '@utils/mock';
 
-import { EyeIcon } from '../../../assets/img/svg-icon-paths';
+import { DotsIcon } from '@assets/img/svg-icon-paths';
 
 const FullItem = ({ icon, title, url, visitCount }: IrefinedItem) => {
   return (
@@ -16,9 +16,12 @@ const FullItem = ({ icon, title, url, visitCount }: IrefinedItem) => {
       <S.FullItemSpan flex={1} maxWidth={'40%'}>
         {url}
       </S.FullItemSpan>
-      <S.VisitCountSpan>
-        <img alt="count-icon" src={EyeIcon} />
-        {visitCount}
+      <S.VisitCountSpan
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <img alt="count-icon" src={DotsIcon} />
       </S.VisitCountSpan>
     </S.FullItemWrapper>
   );
