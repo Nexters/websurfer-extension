@@ -29,7 +29,7 @@ export const Title = styled.div(() => {
       font-size: ${theme.fontSize.l};
       line-height: ${theme.lineHeight.xl};
       font-weight: ${theme.fontWeight.bold};
-      margin-bottom: 24px;
+      margin-bottom: 4px;
     `,
   ];
 });

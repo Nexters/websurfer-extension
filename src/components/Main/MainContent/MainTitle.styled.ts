@@ -54,7 +54,7 @@ export const MainImage = styled.img(() => {
     css`
       width: 408px;
       height: 263px;
-      margin: 89px 12px 0 0;
+      margin: 89px 12px -10px 0;
     `,
   ];
 });
