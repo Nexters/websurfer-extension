@@ -10,8 +10,18 @@ var NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
+
 var alias = {
   'react-dom': '@hot-loader/react-dom',
+  '@assets': resolve('src/assets'),
+  '@components': resolve('src/components'),
+  '@pages': resolve('src/pages'),
+  '@redux': resolve('src/redux'),
+  '@styles': resolve('src/styles'),
+  '@utils': resolve('src/utils'),
 };
 
 // load the secrets
