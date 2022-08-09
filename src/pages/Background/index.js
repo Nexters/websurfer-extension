@@ -26,7 +26,10 @@ const createHistory = async (tab) => {
   const identifier = `${tab.id}::${tab.url}`;
   const existingEntity = instance.urlIdMap[identifier];
 
-  if (existingEntity) return existingEntity;
+  if (existingEntity) {
+    console.log('has existing entity', existingEntity);
+    return existingEntity;
+  }
 
   const entity = await apiClient.createHistory({
     href: tab.url,
@@ -69,13 +72,19 @@ const initInterval = debounce(async (tabId) => {
   }
 }, 500);
 
+const clearIntervalWithTab = ({ tabId, interval }) => {
+  const cleared = clearInterval(interval);
+
+  instance.setInterval(tabId, cleared);
+};
+
 const onActivatedCb = async ({ tabId }) => {
   console.log(tabId, 'onActivated');
 
   const interval = instance.getInterval(instance.activeTabId);
   if (interval) {
     console.log('clearInterval', interval, instance.activeTabId);
-    clearInterval(interval);
+    clearIntervalWithTab({ tabId, interval });
   }
 
   instance.setActiveTabId(tabId);
@@ -93,8 +102,8 @@ const onUpdatedCb = async (tabId, changeInfo, tab) => {
   if (status === 'complete') {
     const interval = instance.getInterval(tabId);
     if (interval) {
-      console.log('clearInterval', interval, instance.activeTabId);
-      clearInterval(interval);
+      console.log('clearInterval', interval, tabId);
+      clearIntervalWithTab({ tabId, interval });
     }
 
     instance.setTab(tabId, tab);
@@ -111,7 +120,7 @@ const onRemovedCb = (tabId, removeInfo) => {
   const interval = instance.getInterval(tabId);
   if (interval) {
     console.log('clearInterval', interval, tabId);
-    clearInterval(interval);
+    clearIntervalWithTab({ tabId, interval });
   }
 
   instance.deleteTab(tabId);
