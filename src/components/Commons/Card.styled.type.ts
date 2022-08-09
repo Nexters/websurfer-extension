@@ -5,3 +5,7 @@ export interface CardProps {
   padding?: string;
   borderRadius?: string;
 }
+
+export interface CardTitleProps {
+  margin?: string;
+}
