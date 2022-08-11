@@ -1,6 +1,6 @@
 import { css, useTheme } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
-import { CardProps } from './Card.styled.type';
+import { CardProps, CardTitleProps } from './Card.styled.type';
 
 export const Wrapper = styled.div<CardProps>((props) => {
   const theme = useTheme();
@@ -18,7 +18,7 @@ export const Wrapper = styled.div<CardProps>((props) => {
   ];
 });
 
-export const Title = styled.div(() => {
+export const Title = styled.div<CardTitleProps>((prop) => {
   const theme = useTheme();
   return [
     tw`
@@ -29,7 +29,7 @@ export const Title = styled.div(() => {
       font-size: ${theme.fontSize.l};
       line-height: ${theme.lineHeight.xl};
       font-weight: ${theme.fontWeight.bold};
-      margin-bottom: 24px;
+      margin: ${prop.margin ? prop.margin : `0px 0px 4px 0px`};
     `,
   ];
 });
