@@ -1,1 +1,1 @@
-export const BANNED_URLS_PREFIX = ['chrome://'];
+export const BANNED_URLS_PREFIX = ['chrome://', 'chrome-extension://'];
