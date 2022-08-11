@@ -1,14 +1,12 @@
-import { wrapStore } from '@eduardoac-skimlinks/webext-redux';
 import 'regenerator-runtime/runtime.js';
 import debounce from 'lodash.debounce';
 
-import { store } from '../../redux/store';
-import { BANNED_URLS_PREFIX } from '../../utils/consts';
+import apiClient from '@redux/history/service';
+
+import { BANNED_URLS_PREFIX } from '@utils/consts';
+import Axios from '@utils/axios';
 
 import Tabs from './Tabs';
-import ApiClient from './ApiClient';
-
-wrapStore(store);
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log('onInstalled');
@@ -19,8 +17,9 @@ chrome.runtime.onInstalled.addListener(() => {
   // });
 });
 
-const apiClient = new ApiClient({ token: process.env.TEMPORARY_TOKEN });
-export const instance = new Tabs();
+Axios.defaults.headers.Authorization = 'Bearer ' + process.env.TEMPORARY_TOKEN;
+
+const instance = new Tabs();
 
 const createHistory = async (tab) => {
   const identifier = `${tab.id}::${tab.url}`;
@@ -171,10 +170,10 @@ chrome.tabs.query({}, (tabs) => {
   }
 
   // tabs events
-  // chrome.tabs.onActivated.addListener(onActivatedCb);
-  // chrome.tabs.onUpdated.addListener(onUpdatedCb);
-  // chrome.tabs.onRemoved.addListener(onRemovedCb);
+  chrome.tabs.onActivated.addListener(onActivatedCb);
+  chrome.tabs.onUpdated.addListener(onUpdatedCb);
+  chrome.tabs.onRemoved.addListener(onRemovedCb);
 
   // windows events
-  // chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
 });

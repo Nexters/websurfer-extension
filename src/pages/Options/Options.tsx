@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import { RootState } from '../../redux/store';
-
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import MainTitle from '../../components/Main/MainContent/MainTitle';
-import TotalTime from '../../components/Main/MainContent/TotalTime';
-import MainTopNav from '../../components/Main/MainContent/MainTopNav';
-import MainHistory from '../../components/Main/MainHistory/MainHistory';
-import SurffingTime from '../../components/Main/MainContent/SurffingTime';
-import MostVisitWebSite from '../../components/Main/MainContent/MostVisitWebSite';
+import { getHistoryList, setHistory } from '@redux/history';
+import apiClient from '@redux/history/service';
+
+import Axios from '@utils/axios';
+
+import MainTitle from '@components/Main/MainContent/MainTitle';
+import TotalTime from '@components/Main/MainContent/TotalTime';
+import MainTopNav from '@components/Main/MainContent/MainTopNav';
+import MainHistory from '@components/Main/MainHistory/MainHistory';
+import SurffingTime from '@components/Main/MainContent/SurffingTime';
+import MostVisitWebSite from '@components/Main/MainContent/MostVisitWebSite';
 
 import * as S from './Options.styled';
-import * as Grid from '../../components/Grid/Grid.styled';
+import * as Grid from '@components/Grid/Grid.styled';
 
 interface Props {
   title: string;
@@ -19,6 +22,15 @@ interface Props {
 
 const Options: React.FC<Props> = ({ title }: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
+  const histories = useSelector((state) => state.history.histories);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    Axios.defaults.headers.Authorization =
+      'Bearer ' + process.env.TEMPORARY_TOKEN;
+
+    dispatch(getHistoryList());
+  }, []);
 
   return (
     <>

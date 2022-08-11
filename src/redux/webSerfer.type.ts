@@ -19,7 +19,7 @@ export type EntityFilter =
   | 'isNull'; //nullish 비교 연산
 // Entity filter 문서 참고 (https://www.notion.so/Entity-filter-1449297f64ed45ec83db48b150694328)
 
-interface HistoryEntity {
+export interface HistoryEntity {
   id: number;
   createdAt: Date;
   updatedAt: Date;

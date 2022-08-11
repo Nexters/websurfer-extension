@@ -1,20 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
+import thunk from 'redux-thunk';
 
-import counterReducer from './counterSlice';
-import { webSerferApi } from './services/webSerfer';
+import hisoryReducer from './history';
 
 export const store = configureStore({
   reducer: {
-    [webSerferApi.reducerPath]: webSerferApi.reducer,
-    counter: counterReducer,
+    history: hisoryReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(webSerferApi.middleware),
+  middleware: [thunk],
 });
-
-setupListeners(store.dispatch);
-
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
