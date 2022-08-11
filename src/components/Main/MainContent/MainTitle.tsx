@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-  Oceanographer,
-  QuestionIcon,
-} from '../../../assets/img/svg-icon-paths';
+import { Oceanographer, QuestionIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './MainTitle.styled';
 

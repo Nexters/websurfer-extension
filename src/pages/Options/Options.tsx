@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { RootState } from '../../redux/store';
+import { RootState } from '@redux/store';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import MainTitle from '../../components/Main/MainContent/MainTitle';
-import TotalTime from '../../components/Main/MainContent/TotalTime';
-import MainTopNav from '../../components/Main/MainContent/MainTopNav';
-import MainHistory from '../../components/Main/MainHistory/MainHistory';
-import SurffingTime from '../../components/Main/MainContent/SurffingTime';
-import MostVisitWebSite from '../../components/Main/MainContent/MostVisitWebSite';
+import MainTitle from '@components/Main/MainContent/MainTitle';
+import TotalTime from '@components/Main/MainContent/TotalTime';
+import MainTopNav from '@components/Main/MainContent/MainTopNav';
+import MainHistory from '@components/Main/MainHistory/MainHistory';
+import SurffingTime from '@components/Main/MainContent/SurffingTime';
+import MostVisitWebSite from '@components/Main/MainContent/MostVisitWebSite';
+
+import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './Options.styled';
-import * as Grid from '../../components/Grid/Grid.styled';
+import * as Grid from '@components/Grid/Grid.styled';
 
 interface Props {
   title: string;
@@ -23,10 +25,10 @@ const Options: React.FC<Props> = ({ title }: Props) => {
   return (
     <>
       {!isFocus && (
-        <S.backgroundContainer>
-          <S.backgroundItem />
-          <S.backgroundItem />
-        </S.backgroundContainer>
+        <S.BackgroundContainer>
+          <S.BackgroundItem />
+          <S.BackgroundItem />
+        </S.BackgroundContainer>
       )}
       <Grid.Container>
         <Grid.Row>
@@ -45,6 +47,10 @@ const Options: React.FC<Props> = ({ title }: Props) => {
                 <TotalTime />
                 <SurffingTime />
               </S.Justify>
+              <S.UpdateWrapper>
+                <S.UpdateMessage>마지막 업데이트 : 15분 전</S.UpdateMessage>
+                <S.UpdateIcon src={RefreshUpdateIcon} alt="Refresh" />
+              </S.UpdateWrapper>
             </>
           </Grid.LayoutCol>
           <Grid.LayoutCol
