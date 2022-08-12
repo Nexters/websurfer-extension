@@ -10,6 +10,10 @@ interface IFilterProps {
   isInputActive?: boolean;
 }
 
+interface IButtonProps {
+  disabled: boolean;
+}
+
 export const Wrapper = styled.div(() => {
   return [
     tw`
@@ -104,6 +108,42 @@ export const FilterTopWrapper = styled.div(() => {
   return [
     tw`
       flex items-center justify-between w-full 
+    `,
+  ];
+});
+
+export const FilterApplyButton = styled.button(({ disabled }: IButtonProps) => {
+  const theme = useTheme();
+  return [
+    tw`
+      w-full
+    `,
+    css`
+      padding: 12px 57px;
+      margin-top: 12px;
+      color: #fff;
+      font-weight: ${theme.fontWeight.bold};
+      font-size: ${theme.fontSize.m};
+      background: ${disabled ? theme.color['gray-04'] : theme.color.primary};
+      border-radius: 10px;
+      border: unset;
+    `,
+  ];
+});
+
+export const DateRangeWrapper = styled.div(() => {
+  const theme = useTheme();
+  return [
+    css`
+      margin-top: 16px;
+      & .rdrMonthAndYearWrapper {
+        padding-top: unset;
+      }
+
+      & .rdrDateRangeWrapper {
+        border-radius: 10px;
+        border: 1px solid ${theme.color['gray-03']};
+      }
     `,
   ];
 });
