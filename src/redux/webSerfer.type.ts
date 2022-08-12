@@ -39,8 +39,12 @@ export interface HistoryListRequest extends UserEntity {
 }
 export type HistoryListReponse = HistoryEntity[];
 
-export interface testGetPokemonResponse {
-  abilties?: any[];
-  forms?: any[];
-  id?: number;
-}
+export type CreateHistoryParamType = {
+  href: string;
+  title: string;
+};
+
+export type IncreaseDurationParamType = {
+  id: number;
+  seconds: number;
+};

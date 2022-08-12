@@ -2,25 +2,31 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { getHistoryList } from './thunk';
-import { HistoryListReponse } from '../webSerfer.type';
+import { HistoryListReponse, HistoryListRequest } from '../webSerfer.type';
 
 interface HistoryState {
   histories: HistoryListReponse;
+  filter: HistoryListRequest;
 }
 
 const initialState: HistoryState = {
   histories: [],
+  filter: {},
 };
 
 export const historySlice = createSlice({
   name: 'history',
   initialState,
-  reducers: {},
+  reducers: {
+    setFilter(state, { payload }) {
+      state.filter = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getHistoryList.fulfilled,
-      (state, action: PayloadAction<HistoryListReponse>) => {
-        state.histories = action.payload;
+      (state, { payload }: PayloadAction<HistoryListReponse>) => {
+        state.histories = payload;
       }
     );
   },
