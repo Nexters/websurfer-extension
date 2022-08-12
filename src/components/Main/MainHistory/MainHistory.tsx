@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
 
 import { SearchBar, CompactItem, FullItem } from '../../Commons';
@@ -8,6 +7,7 @@ import * as S from './MainHistory.styled';
 
 import { ZoomIcon, ZoomoutIcon } from '@assets/img/svg-icon-paths';
 
+import { useAppSelector } from '@redux/store';
 import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector } from '@redux/history';
 
@@ -21,7 +21,7 @@ interface accObj {
 }
 
 const MainHistory = ({ isFocus, setIsFocus }: Props) => {
-  const historyList = useSelector(historyListSelector);
+  const historyList = useAppSelector(historyListSelector);
 
   const historyByVisitDate = historyList.reduce(
     (acc: accObj, val: HistoryEntity) => {

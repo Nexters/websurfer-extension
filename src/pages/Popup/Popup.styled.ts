@@ -128,3 +128,26 @@ export const BottomWrapper = styled.div(() => {
     `,
   ];
 });
+
+export const Divider = styled.div(() => {
+  const theme = useTheme();
+  return [
+    tw`w-full`,
+    css`
+      height: 1px;
+      background: ${theme.color['gray-03']};
+      margin-top: 28px;
+    `,
+  ];
+});
+
+export const DateCategroyWrapper = styled.div(() => {
+  return [
+    css`
+      margin-top: 12px;
+      &:first-child {
+        margin-top: unset;
+      }
+    `,
+  ];
+});
