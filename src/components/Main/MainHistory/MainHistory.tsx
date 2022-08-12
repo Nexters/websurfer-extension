@@ -43,16 +43,21 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
 
     const values = Object.entries(historyByVisitDate);
 
-    return values.map(([date, histories]: [string, HistoryListReponse]) => {
-      return (
-        <div key={date}>
-          <S.CategoryDate>{date}</S.CategoryDate>
-          {histories.map((value) => {
-            return <Comp key={value.id} {...value} />;
-          })}
-        </div>
-      );
-    });
+    return values.map(
+      ([date, histories]: [string, HistoryListReponse], index: number) => {
+        return (
+          <>
+            {index !== 0 && <S.Divider />}
+            <S.DateCategroyWrapper key={date}>
+              <S.CategoryDate>{date}</S.CategoryDate>
+              {histories.map((value) => {
+                return <Comp key={value.id} {...value} />;
+              })}
+            </S.DateCategroyWrapper>
+          </>
+        );
+      }
+    );
   };
 
   return (
