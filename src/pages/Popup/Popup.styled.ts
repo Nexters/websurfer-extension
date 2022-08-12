@@ -17,13 +17,14 @@ export const Wrapper = styled.div(() => {
 });
 
 export const TopWrapper = styled.div(() => {
+  const theme = useTheme();
   return [
     tw`
       flex w-full justify-between
     `,
     css`
       margin-bottom: 16px;
-      background: #fff;
+      background: ${theme.color.bgColor};
     `,
   ];
 });
@@ -89,7 +90,7 @@ export const SubTitle = styled.span(() => {
   return [
     css`
       font-size: ${theme.fontSize.m};
-      color: ${theme.color['gray-06']};
+      color: ${theme.color['gray-08']};
       margin-bottom: 2px;
     `,
   ];
@@ -101,6 +102,7 @@ export const MainTitle = styled.span(() => {
     css`
       font-size: ${theme.fontSize['2xl']};
       font-weight: ${theme.fontWeight.bold};
+      color: ${theme.color.primary};
     `,
   ];
 });
@@ -111,6 +113,7 @@ export const CategoryDate = styled.span(() => {
     css`
       font-size: ${theme.fontSize.m};
       color: ${theme.color['gray-05']};
+      font-weight: ${theme.fontWeight.bold};
     `,
   ];
 });
