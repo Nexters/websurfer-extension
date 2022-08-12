@@ -1,6 +1,10 @@
 import { css, useTheme } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
 
+interface IDateCategoryWrapper {
+  key?: string;
+}
+
 export const TitleWrapper = styled.div(() => [
   tw`
     w-full flex justify-between
@@ -76,3 +80,26 @@ export const CategoryDate = styled.span(() => {
 });
 
 export const ZoomIcon = styled.img(() => [tw`cursor-pointer`]);
+
+export const Divider = styled.div(() => {
+  const theme = useTheme();
+  return [
+    tw`w-full`,
+    css`
+      height: 1px;
+      background: ${theme.color['gray-03']};
+      margin-top: 28px;
+    `,
+  ];
+});
+
+export const DateCategroyWrapper = styled.div((props: IDateCategoryWrapper) => {
+  return [
+    css`
+      margin-top: 12px;
+      &:first-child {
+        margin-top: unset;
+      }
+    `,
+  ];
+});

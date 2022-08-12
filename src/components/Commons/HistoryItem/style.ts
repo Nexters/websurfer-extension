@@ -82,7 +82,7 @@ export const VisitCountSpan = styled.div(() => {
   const theme = useTheme();
   return [
     tw`
-      flex items-center justify-end
+      flex items-center justify-end relative
     `,
     css`
       & > img {
@@ -92,6 +92,25 @@ export const VisitCountSpan = styled.div(() => {
       font-size: ${theme.fontSize.xs};
       font-weight: ${theme.fontWeight.regular};
       color: ${theme.color['gray-06']};
+    `,
+  ];
+});
+
+export const Tooltip = styled.div(() => {
+  const theme = useTheme();
+  return [
+    tw`
+      absolute
+    `,
+    css`
+      padding: 12px 20px;
+      border: 1px solid ${theme.color['gray-04']};
+      background: #fff;
+      font-weight: ${theme.fontWeight.bold};
+      font-size: ${theme.fontSize.s};
+      border-radius: 10px;
+      top: 20px;
+      z-index: 1;
     `,
   ];
 });

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { getHistoryList, setHistory } from '@redux/history';
-import apiClient from '@redux/history/service';
+import { getHistoryList } from '@redux/history';
+import { useAppDispatch } from '@redux/store';
 
 import Axios from '@utils/axios';
 
@@ -22,15 +21,14 @@ interface Props {
 
 const Options: React.FC<Props> = ({ title }: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const histories = useSelector((state) => state.history.histories);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    Axios.defaults.headers.Authorization =
+    Axios.defaults.headers.common.Authorization =
       'Bearer ' + process.env.TEMPORARY_TOKEN;
 
-    dispatch(getHistoryList());
-  }, []);
+    dispatch(getHistoryList({}));
+  }, [dispatch]);
 
   return (
     <>
