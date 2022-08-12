@@ -17,7 +17,8 @@ chrome.runtime.onInstalled.addListener(() => {
   // });
 });
 
-Axios.defaults.headers.Authorization = 'Bearer ' + process.env.TEMPORARY_TOKEN;
+Axios.defaults.headers.common.Authorization =
+  'Bearer ' + process.env.TEMPORARY_TOKEN;
 
 const instance = new Tabs();
 

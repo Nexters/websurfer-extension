@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { LogoIcon, DotsIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './style';
 
 import { HistoryEntity } from '@redux/webSerfer.type';
+import { useAppDispatch } from '@redux/store';
 import { deleteHistoryItem } from '@redux/history';
 
 const FullItem = ({ title, href, id }: HistoryEntity) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   return (
     <S.FullItemWrapper onClick={() => window.open(href, '_blank')}>
       <S.FullLeftWrapper>
