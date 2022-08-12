@@ -2,12 +2,13 @@ import React from 'react';
 
 import * as S from './style';
 
-import { IrefinedItem } from '../../../utils/mock';
+import { LogoIcon } from '@assets/img/svg-icon-paths';
+import { HistoryEntity } from '@redux/webSerfer.type';
 
-const CompactItem = ({ icon, title, url }: IrefinedItem) => {
+const CompactItem = ({ title, href }: HistoryEntity) => {
   return (
-    <S.CompactItemWrapper onClick={() => window.open(url, '_blank')}>
-      {icon && <S.ItemIcon alt="history-icon" src={icon} />}
+    <S.CompactItemWrapper onClick={() => window.open(href, '_blank')}>
+      {<S.ItemIcon alt="history-icon" src={LogoIcon} />}
       <S.ItemSpan>{title}</S.ItemSpan>
     </S.CompactItemWrapper>
   );

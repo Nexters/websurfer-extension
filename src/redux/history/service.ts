@@ -1,29 +1,24 @@
 import { AxiosResponse } from 'axios';
 
 import Axios from '@utils/axios';
+import {
+  HistoryListRequest,
+  CreateHistoryParamType,
+  IncreaseDurationParamType,
+} from '../webSerfer.type';
 
 const getData = ({ data }: AxiosResponse) => data;
 
-type CreateHistoryParamType = {
-  href: string;
-  title: string;
-};
-
-type IncreaseDurationParamType = {
-  id: number;
-  seconds: number;
-};
-
 const apis = {
-  getList() {
-    return Axios.get('/histories').then(getData);
+  getList(params: HistoryListRequest) {
+    return Axios.get('/histories', { params }).then(getData);
   },
 
   createHistory(param: CreateHistoryParamType) {
     return Axios.post('/histories', param).then(getData);
   },
 
-  deleteHistory(id: string) {
+  delteHistory(id: number) {
     return Axios.delete(`/histories/${id}`).then(getData);
   },
 

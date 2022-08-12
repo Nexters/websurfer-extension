@@ -17,7 +17,8 @@ chrome.runtime.onInstalled.addListener(() => {
   // });
 });
 
-Axios.defaults.headers.Authorization = 'Bearer ' + process.env.TEMPORARY_TOKEN;
+Axios.defaults.headers.common.Authorization =
+  'Bearer ' + process.env.TEMPORARY_TOKEN;
 
 const instance = new Tabs();
 
@@ -170,10 +171,10 @@ chrome.tabs.query({}, (tabs) => {
   }
 
   // tabs events
-  chrome.tabs.onActivated.addListener(onActivatedCb);
-  chrome.tabs.onUpdated.addListener(onUpdatedCb);
-  chrome.tabs.onRemoved.addListener(onRemovedCb);
+  // chrome.tabs.onActivated.addListener(onActivatedCb);
+  // chrome.tabs.onUpdated.addListener(onUpdatedCb);
+  // chrome.tabs.onRemoved.addListener(onRemovedCb);
 
   // windows events
-  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+  // chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
 });
