@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { getHistoryList } from './thunk';
+import { getHistoryList, deleteHistoryItem } from './thunk';
 import { RootState } from '../store';
 import { HistoryListReponse, HistoryListRequest } from '../webSerfer.type';
 
@@ -33,6 +33,13 @@ export const historySlice = createSlice({
         state.histories = payload;
       }
     );
+
+    builder.addCase(deleteHistoryItem.fulfilled, (state, { payload: id }) => {
+      const deletedList = state.histories?.filter(
+        ({ id: itemId }) => itemId !== id
+      );
+      state.histories = deletedList;
+    });
   },
 });
 

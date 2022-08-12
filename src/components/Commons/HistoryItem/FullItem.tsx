@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { LogoIcon, DotsIcon } from '@assets/img/svg-icon-paths';
@@ -8,7 +8,8 @@ import * as S from './style';
 import { HistoryEntity } from '@redux/webSerfer.type';
 import { deleteHistoryItem } from '@redux/history';
 
-const FullItem = ({ title, href }: HistoryEntity) => {
+const FullItem = ({ title, href, id }: HistoryEntity) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
   return (
     <S.FullItemWrapper onClick={() => window.open(href, '_blank')}>
@@ -22,9 +23,20 @@ const FullItem = ({ title, href }: HistoryEntity) => {
       <S.VisitCountSpan
         onClick={(e) => {
           e.stopPropagation();
+          setIsDropdownOpen(!isDropdownOpen);
         }}
       >
         <img alt="count-icon" src={DotsIcon} />
+        {isDropdownOpen && (
+          <S.Tooltip
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(deleteHistoryItem(id));
+            }}
+          >
+            삭제하기
+          </S.Tooltip>
+        )}
       </S.VisitCountSpan>
     </S.FullItemWrapper>
   );

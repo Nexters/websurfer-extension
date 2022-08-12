@@ -20,13 +20,7 @@ export const deleteHistoryItem = createAsyncThunk(
   async (id: number, { rejectWithValue, getState, dispatch }) => {
     try {
       await apiClient.delteHistory(id);
-
-      const { history }: RootState = getState();
-
-      const deletedList = history.histories?.filter(
-        ({ id: itemId }) => itemId !== id
-      );
-      dispatch(setHistories(deletedList));
+      return id;
     } catch (e) {
       rejectWithValue(e);
     }
