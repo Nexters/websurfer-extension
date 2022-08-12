@@ -23,7 +23,7 @@ const apis = {
     return Axios.post('/histories', param).then(getData);
   },
 
-  delteHistory(id: string) {
+  deleteHistory(id: string) {
     return Axios.delete(`/histories/${id}`).then(getData);
   },
 
