@@ -1,12 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { format } from 'date-fns';
 
 import { SearchBar, CompactItem, FullItem } from '../../Commons';
 
 import * as S from './MainHistory.styled';
 
-import { ZoomIcon, ZoomoutIcon } from '../../../assets/img/svg-icon-paths';
+import { ZoomIcon, ZoomoutIcon } from '@assets/img/svg-icon-paths';
 
-import { chromeHistory, IrefinedItem } from '../../../utils/mock';
+import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
+import { historyListSelector } from '@redux/history';
 
 type Props = {
   setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,17 +17,20 @@ type Props = {
 };
 
 interface accObj {
-  [key: string]: IrefinedItem[];
+  [key: string]: HistoryListReponse;
 }
 
 const MainHistory = ({ isFocus, setIsFocus }: Props) => {
-  const historyByVisitDate = chromeHistory.reduce(
-    (acc: accObj, val: IrefinedItem) => {
-      const { lastVisitDate } = val;
+  const historyList = useSelector(historyListSelector);
 
-      if (lastVisitDate) {
-        const values = acc[lastVisitDate] || [];
-        acc[lastVisitDate] = [...values, val];
+  const historyByVisitDate = historyList.reduce(
+    (acc: accObj, val: HistoryEntity) => {
+      const { updatedAt } = val;
+
+      if (updatedAt) {
+        const date = format(new Date(updatedAt), 'yyyy.MM.dd');
+        const values = acc[date] || [];
+        acc[date] = [...values, val];
       }
 
       return acc;
@@ -37,7 +43,7 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
 
     const values = Object.entries(historyByVisitDate);
 
-    return values.map(([date, histories]: [string, IrefinedItem[]]) => {
+    return values.map(([date, histories]: [string, HistoryListReponse]) => {
       return (
         <div key={date}>
           <S.CategoryDate>{date}</S.CategoryDate>

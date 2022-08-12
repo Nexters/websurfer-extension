@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { getHistoryList } from './thunk';
+import { RootState } from '../store';
 import { HistoryListReponse, HistoryListRequest } from '../webSerfer.type';
 
 interface HistoryState {
@@ -31,6 +32,9 @@ export const historySlice = createSlice({
     );
   },
 });
+
+export const historyListSelector = (state: RootState) =>
+  state.history.histories;
 
 export default historySlice.reducer;
 export * from './thunk';

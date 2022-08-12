@@ -1,20 +1,19 @@
 import React from 'react';
+import { LogoIcon, DotsIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './style';
 
-import { IrefinedItem } from '@utils/mock';
+import { HistoryEntity } from '@redux/webSerfer.type';
 
-import { DotsIcon } from '@assets/img/svg-icon-paths';
-
-const FullItem = ({ icon, title, url, visitCount }: IrefinedItem) => {
+const FullItem = ({ title, href }: HistoryEntity) => {
   return (
-    <S.FullItemWrapper onClick={() => window.open(url, '_blank')}>
+    <S.FullItemWrapper onClick={() => window.open(href, '_blank')}>
       <S.FullLeftWrapper>
-        <S.ItemIcon alt="history-icon" src={icon}></S.ItemIcon>
+        <S.ItemIcon alt="history-icon" src={LogoIcon}></S.ItemIcon>
         <S.FullItemSpan>{title}</S.FullItemSpan>
       </S.FullLeftWrapper>
       <S.FullItemSpan flex={1} maxWidth={'40%'}>
-        {url}
+        {href}
       </S.FullItemSpan>
       <S.VisitCountSpan
         onClick={(e) => {
