@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
-import Axios, { CommonHeaderProperties } from '@utils/axios';
-import apiClient from '@redux/history/service';
+import Axios from '@utils/axios';
+import { useAppDispatch } from '@redux/store';
 import { getHistoryList } from '@redux/history';
 
 import MainTitle from '@components/Main/MainContent/MainTitle';
@@ -16,9 +15,6 @@ import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './Main.styled';
 import * as Grid from '@components/Grid/Grid.styled';
-import { AsyncThunkAction } from '@reduxjs/toolkit';
-import { HistoryListReponse } from '@redux/webSerfer.type';
-import { useAppDispatch } from '@redux/store';
 
 interface Props {}
 
@@ -29,12 +25,11 @@ const Main: React.FC<Props> = (props: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    Axios.defaults.headers = {
-      Authorization: 'Bearer ' + process.env.TEMPORARY_TOKEN,
-    } as CommonHeaderProperties;
+    Axios.defaults.headers.common.Authorization =
+      'Bearer ' + process.env.TEMPORARY_TOKEN;
 
-    dispatch(getHistoryList());
-  }, []);
+    dispatch(getHistoryList({}));
+  }, [dispatch]);
 
   return (
     <>
