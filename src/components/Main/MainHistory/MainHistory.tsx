@@ -46,15 +46,15 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
     return values.map(
       ([date, histories]: [string, HistoryListReponse], index: number) => {
         return (
-          <>
+          <div key={date}>
             {index !== 0 && <S.Divider />}
-            <S.DateCategroyWrapper key={date}>
+            <S.DateCategroyWrapper>
               <S.CategoryDate>{date}</S.CategoryDate>
               {histories.map((value) => {
                 return <Comp key={value.id} {...value} />;
               })}
             </S.DateCategroyWrapper>
-          </>
+          </div>
         );
       }
     );

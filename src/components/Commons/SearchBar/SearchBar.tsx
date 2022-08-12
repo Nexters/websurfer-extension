@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
+import format from 'date-fns/format';
 
 import * as S from './SearchBar.styled';
 
@@ -7,18 +8,23 @@ import {
   CalendarIcon,
   SearchIcon,
   RefreshIcon,
-} from '../../../assets/img/svg-icon-paths';
+} from '@assets/img/svg-icon-paths';
 
 interface Props {
   placeholder?: string;
   hasFilter?: boolean;
 }
 
+type TstateDate = Date | undefined;
+type TdisplayDate = number | Date;
+
 const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
   const [isInputActive, setIsInputActive] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
-  const [endDate, setEndDate] = useState<Date | undefined>(new Date());
+  const [startDate, setStartDate] = useState<TstateDate>(new Date());
+  const [endDate, setEndDate] = useState<TstateDate>(new Date());
+
+  const filterConfirmDisabled = !startDate || !endDate;
 
   return (
     <S.Wrapper>
@@ -44,15 +50,28 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
             <S.FilterTitle>기간 선택</S.FilterTitle>
             <S.RefreshButton alt="refresh" src={RefreshIcon}></S.RefreshButton>
           </S.FilterTopWrapper>
-          <DateRange
-            showDateDisplay={false}
-            ranges={[{ startDate, endDate, key: 'selection' }]}
-            maxDate={new Date()}
-            onChange={({ selection: { startDate, endDate } }) => {
-              setStartDate(startDate);
-              setEndDate(endDate);
+          <S.DateRangeWrapper>
+            <DateRange
+              showDateDisplay={false}
+              ranges={[{ startDate, endDate, key: 'selection' }]}
+              maxDate={new Date()}
+              onChange={({ selection: { startDate, endDate } }) => {
+                setStartDate(startDate);
+                setEndDate(endDate);
+              }}
+            />
+          </S.DateRangeWrapper>
+          <S.FilterApplyButton
+            onClick={() => {
+              setIsFilterActive(!isFilterActive);
             }}
-          />
+            disabled={filterConfirmDisabled}
+          >
+            {filterConfirmDisabled
+              ? '적용하기'
+              : `${format(startDate as TdisplayDate, 'yyyy-MM-dd')} ~
+            ${format(endDate as TdisplayDate, 'yyyy-MM-dd')} 적용하기`}
+          </S.FilterApplyButton>
         </S.FilterWrapper>
       )}
     </S.Wrapper>
