@@ -1,11 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
 import { LogoIcon, DotsIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './style';
 
 import { HistoryEntity } from '@redux/webSerfer.type';
+import { deleteHistoryItem } from '@redux/history';
 
 const FullItem = ({ title, href }: HistoryEntity) => {
+  const dispatch = useDispatch();
   return (
     <S.FullItemWrapper onClick={() => window.open(href, '_blank')}>
       <S.FullLeftWrapper>

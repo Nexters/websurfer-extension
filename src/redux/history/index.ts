@@ -19,6 +19,9 @@ export const historySlice = createSlice({
   name: 'history',
   initialState,
   reducers: {
+    setHistories(state, { payload }) {
+      state.histories = payload;
+    },
     setFilter(state, { payload }) {
       state.filter = payload;
     },
@@ -36,5 +39,6 @@ export const historySlice = createSlice({
 export const historyListSelector = (state: RootState) =>
   state.history.histories;
 
+export const { setHistories, setFilter } = historySlice.actions;
 export default historySlice.reducer;
 export * from './thunk';
