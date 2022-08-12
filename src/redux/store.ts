@@ -8,7 +8,7 @@ export const store = configureStore({
   reducer: {
     history: hisoryReducer,
   },
-  middleware: [thunk],
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([thunk]),
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
