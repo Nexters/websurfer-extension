@@ -15,6 +15,7 @@ import CalendarIcon from './icon-calendar-check-mono.svg';
 import RefreshIcon from './icon-refresh-mono.svg';
 import ZoomoutIcon from './icon-zoom-out.svg';
 import DotsIcon from './icon-dots-mono.svg';
+import RefreshUpdateIcon from './icon-refresh-update.svg';
 
 export {
   FilterIcon,
@@ -34,4 +35,5 @@ export {
   ZoomoutIcon,
   DotsIcon,
   SettingIcon,
+  RefreshUpdateIcon,
 };

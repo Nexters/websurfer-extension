@@ -1,5 +1,5 @@
 import { css, useTheme } from '@emotion/react';
-import { MAX_WIDTH } from '../../components/Grid/Grid.styled';
+import { MAX_WIDTH } from '../Grid/Grid.styled';
 import tw, { styled } from 'twin.macro';
 
 export const Justify = styled.div(() => {

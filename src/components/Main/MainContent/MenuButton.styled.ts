@@ -13,7 +13,7 @@ export const MenuButtonsWrapper = styled.div(() => [
 export const Icon = styled.img(() => {
   const theme = useTheme();
   return [
-    tw`cursor-pointer`,
+    tw`cursor-pointer relative`,
     css`
       width: 24px;
       height: 24px;

@@ -1,21 +1,26 @@
 import React from 'react';
 
-import Logo from '../../../components/Commons/Logo';
+import Logo from '@components/Commons/Logo';
 import MenuButton from './MenuButton';
 
 import * as S from './MainTopNav.styled';
-import * as Grid from '../../../components/Grid/Grid.styled';
 
-type Props = {};
+type Props = {
+  setIsSetting: React.Dispatch<React.SetStateAction<boolean>>;
+  isSetting: boolean;
+};
 
 const MainTopNav = (props: Props) => {
   return (
-    <S.Wrapper>
-      <Logo />
-      <MenuButton />
-      {/* <S.topButtonWrapper>
-      </S.topButtonWrapper> */}
-    </S.Wrapper>
+    <>
+      <S.Wrapper>
+        <Logo />
+        <MenuButton
+          setIsSetting={props.setIsSetting}
+          isSetting={props.isSetting}
+        />
+      </S.Wrapper>
+    </>
   );
 };
 

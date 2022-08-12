@@ -7,8 +7,8 @@ type Props = {};
 
 const MostVisitWebSite = (props: Props) => {
   return (
-    <Card.Wrapper margin="0 0 40px 0" borderRadius="8px">
-      <Card.Title>많이 방문한 웹사이트</Card.Title>
+    <Card.Wrapper margin="0 0 40px 0" height="238px" borderRadius="8px">
+      <Card.Title margin="0 0 24px 0">많이 방문한 웹사이트</Card.Title>
       <S.ItemCardWrapper>
         <S.ItemCard primary>
           <S.ItemCardTitle primary>Pinterest</S.ItemCardTitle>

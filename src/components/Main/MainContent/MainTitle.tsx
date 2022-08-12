@@ -1,13 +1,14 @@
 import React from 'react';
 
-import {
-  Oceanographer,
-  QuestionIcon,
-} from '../../../assets/img/svg-icon-paths';
+import SettingDropdown from './SettingDropdown';
+
+import { Oceanographer, QuestionIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './MainTitle.styled';
 
-type Props = {};
+type Props = {
+  isSetting: boolean;
+};
 
 const MainTitle = (props: Props) => {
   return (
@@ -23,6 +24,7 @@ const MainTitle = (props: Props) => {
         </S.Description>
       </S.TitleContainer>
       <S.MainImage src={Oceanographer} alt="해양학자가 서핑하는 모습" />
+      <SettingDropdown isSetting={props.isSetting} />
     </S.Wrapper>
   );
 };
