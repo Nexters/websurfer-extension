@@ -5,7 +5,6 @@ export const ModalContainer = styled.div(() => [
   tw`fixed w-screen h-screen z-20`,
   css`
     background-color: rgba(0, 0, 0, 0.7);
-    /* min-height: 1000px; */
   `,
 ]);
 
@@ -13,11 +12,12 @@ export const ModalWrapper = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`absolute left-1/2 top-1/2 z-20`,
+    tw`absolute left-1/2 z-20`,
     css`
+      top: 115px;
       width: 820px;
-      height: 854px;
-      transform: translate(-50%, -50%);
+      min-width: 820px;
+      transform: translate(-50%);
     `,
   ];
 });
@@ -37,11 +37,11 @@ export const ModalContentWrapper = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`w-full bg-white`,
+    tw`w-full bg-white overflow-y-scroll`,
     css`
-      height: 800px;
       border-radius: 18px;
       padding: 30px 40px;
+      max-height: 800px;
     `,
   ];
 });

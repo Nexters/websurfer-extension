@@ -2,16 +2,23 @@ import React from 'react';
 
 import * as Card from '@components/Commons/Card.styled';
 import * as S from './TotalTime.styled';
+import { useAppDispatch } from '@redux/store';
+import { openModal } from '@redux/common';
 
 type Props = {};
 
 const TotalTime = (props: Props) => {
+  const dispatch = useAppDispatch();
+
   return (
     <Card.Wrapper
       height="250px"
       width="510px"
       padding="22px 22px 12px 22px"
       borderRadius="8px"
+      onClick={() => {
+        dispatch(openModal('totalTime'));
+      }}
     >
       <S.TopContainer>
         <S.TitleContainer>

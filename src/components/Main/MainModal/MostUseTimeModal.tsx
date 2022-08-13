@@ -3,20 +3,17 @@ import React, { useState } from 'react';
 import Tab from '@components/Commons/Tab';
 import Modal from '@components/Commons/Modal';
 
-import * as S from './MostVisitWebSIteModal.Styled';
-import * as Card from '@components/Main/MainContent/MostVisitWebSite.styled';
-import MostVisitWebSiteModalThis from './MostVisitWebSiteModalThis';
-import MostVisitWebSiteModalPeriod from './MostVisitWebSiteModalPeriod';
+import MostUseTimeDetailModal from './MostUseTimeDetailModal';
 
 type TabNameType = 'last' | 'this' | 'period';
 
 type Props = {};
 
-const MostVisitWebSIteModal = (props: Props) => {
+const MostUseTimeModal = (props: Props) => {
   const [currentTab, setCurrentTab] = useState<TabNameType>('this');
 
   return (
-    <Modal type="mostVisit" title="자주 방문한 웹사이트">
+    <Modal type="frequency" title="자주 사용한 시간대">
       <Tab
         items={[
           {
@@ -43,11 +40,11 @@ const MostVisitWebSIteModal = (props: Props) => {
         ]}
       />
 
-      {currentTab === 'this' && <MostVisitWebSiteModalThis />}
-      {currentTab === 'last' && <MostVisitWebSiteModalThis />}
-      {currentTab === 'period' && <MostVisitWebSiteModalPeriod />}
+      {currentTab === 'this' && <MostUseTimeDetailModal period="this" />}
+      {currentTab === 'last' && <MostUseTimeDetailModal period="last" />}
+      {currentTab === 'period' && <MostUseTimeDetailModal period="select" />}
     </Modal>
   );
 };
 
-export default MostVisitWebSIteModal;
+export default MostUseTimeModal;
