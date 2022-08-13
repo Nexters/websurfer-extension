@@ -35,7 +35,15 @@ const MostUseTimeDetailModal = (props: Props) => {
       formatter: function (params: any) {
         var tar = params[0];
         console.log(params);
-        return '날짜 : ' + tar.name + '<br/>' + '사용량(분) : ' + tar.value;
+        return (
+          '시간 : ' +
+          tar.name +
+          '시' +
+          '<br/>' +
+          '사용 횟수 : ' +
+          tar.value +
+          '회'
+        );
       },
     },
     xAxis: {
