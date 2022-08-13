@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Main from '@components/Main/Main';
+import Axios from '@utils/axios';
 
 interface Props {
   title: string;
@@ -9,6 +10,11 @@ interface Props {
 const Options = (props: Props) => {
   const [hasData, setHasData] = useState<boolean>(true);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+
+  useEffect(() => {
+    Axios.defaults.headers.common.Authorization =
+      'Bearer ' + process.env.TEMPORARY_TOKEN;
+  }, []);
 
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {

@@ -11,7 +11,14 @@ const getData = ({ data }: AxiosResponse) => data;
 
 const apis = {
   getList(params: HistoryListRequest) {
-    return Axios.get('/histories', { params }).then(getData);
+    const { startDate, endDate, keyword } = params;
+    return Axios.get('/histories', {
+      params: {
+        createdAtBetween:
+          startDate && endDate ? [startDate, endDate] : undefined,
+        titleInclude: keyword || undefined,
+      },
+    }).then(getData);
   },
 
   createHistory(param: CreateHistoryParamType) {

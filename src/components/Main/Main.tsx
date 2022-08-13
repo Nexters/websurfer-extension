@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-import Axios from '@utils/axios';
-import { useAppDispatch } from '@redux/store';
-import { getHistoryList } from '@redux/history';
+import React, { useState } from 'react';
 
 import Modal from '@components/Commons/Modal';
 import MainTitle from '@components/Main/MainContent/MainTitle';
@@ -22,15 +18,6 @@ interface Props {}
 const Main: React.FC<Props> = (props: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isSetting, setIsSetting] = useState<boolean>(false);
-  // const histories = useAppSelector((state) => state.history.histories);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    Axios.defaults.headers.common.Authorization =
-      'Bearer ' + process.env.TEMPORARY_TOKEN;
-
-    dispatch(getHistoryList({}));
-  }, [dispatch]);
 
   return (
     <>

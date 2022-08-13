@@ -36,6 +36,9 @@ export interface HistoryEntity {
 
 export interface HistoryListRequest extends UserEntity {
   filter?: EntityFilter;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
+  keyword: string;
 }
 export type HistoryListReponse = HistoryEntity[];
 
