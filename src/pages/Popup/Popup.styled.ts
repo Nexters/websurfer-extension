@@ -17,13 +17,14 @@ export const Wrapper = styled.div(() => {
 });
 
 export const TopWrapper = styled.div(() => {
+  const theme = useTheme();
   return [
     tw`
       flex w-full justify-between
     `,
     css`
       margin-bottom: 16px;
-      background: #fff;
+      background: ${theme.color.bgColor};
     `,
   ];
 });
@@ -89,7 +90,7 @@ export const SubTitle = styled.span(() => {
   return [
     css`
       font-size: ${theme.fontSize.m};
-      color: ${theme.color['gray-06']};
+      color: ${theme.color['gray-08']};
       margin-bottom: 2px;
     `,
   ];
@@ -101,6 +102,7 @@ export const MainTitle = styled.span(() => {
     css`
       font-size: ${theme.fontSize['2xl']};
       font-weight: ${theme.fontWeight.bold};
+      color: ${theme.color.primary};
     `,
   ];
 });
@@ -111,6 +113,7 @@ export const CategoryDate = styled.span(() => {
     css`
       font-size: ${theme.fontSize.m};
       color: ${theme.color['gray-05']};
+      font-weight: ${theme.fontWeight.bold};
     `,
   ];
 });
@@ -124,6 +127,29 @@ export const BottomWrapper = styled.div(() => {
       max-height: 292px;
       &::-webkit-scrollbar {
         width: 8px;
+      }
+    `,
+  ];
+});
+
+export const Divider = styled.div(() => {
+  const theme = useTheme();
+  return [
+    tw`w-full`,
+    css`
+      height: 1px;
+      background: ${theme.color['gray-03']};
+      margin-top: 28px;
+    `,
+  ];
+});
+
+export const DateCategroyWrapper = styled.div(() => {
+  return [
+    css`
+      margin-top: 12px;
+      &:first-child {
+        margin-top: unset;
       }
     `,
   ];

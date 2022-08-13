@@ -1,6 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { format } from 'date-fns';
+import { format, isToday } from 'date-fns';
 
 import { SearchBar, CompactItem, FullItem } from '../../Commons';
 
@@ -8,6 +7,7 @@ import * as S from './MainHistory.styled';
 
 import { ZoomIcon, ZoomoutIcon } from '@assets/img/svg-icon-paths';
 
+import { useAppSelector } from '@redux/store';
 import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector } from '@redux/history';
 
@@ -21,7 +21,7 @@ interface accObj {
 }
 
 const MainHistory = ({ isFocus, setIsFocus }: Props) => {
-  const historyList = useSelector(historyListSelector);
+  const historyList = useAppSelector(historyListSelector);
 
   const historyByVisitDate = historyList.reduce(
     (acc: accObj, val: HistoryEntity) => {
@@ -46,15 +46,17 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
     return values.map(
       ([date, histories]: [string, HistoryListReponse], index: number) => {
         return (
-          <>
+          <div key={date}>
             {index !== 0 && <S.Divider />}
-            <S.DateCategroyWrapper key={date}>
-              <S.CategoryDate>{date}</S.CategoryDate>
+            <S.DateCategroyWrapper>
+              <S.CategoryDate>
+                {isToday(new Date(date)) ? 'Today' : date}
+              </S.CategoryDate>
               {histories.map((value) => {
                 return <Comp key={value.id} {...value} />;
               })}
             </S.DateCategroyWrapper>
-          </>
+          </div>
         );
       }
     );
