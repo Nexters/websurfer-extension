@@ -3,8 +3,7 @@ import ReactECharts from 'echarts-for-react';
 
 import { useTheme } from '@emotion/react';
 
-import * as Card from '../../../components/Commons/Card.styled';
-import echarts from 'echarts/types/dist/echarts';
+import * as Card from '@components/Commons/Card.styled';
 
 type Props = {};
 
