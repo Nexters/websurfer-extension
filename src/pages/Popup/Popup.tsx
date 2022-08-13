@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import format from 'date-fns/format';
+import { format, isToday } from 'date-fns';
 
 import * as S from './Popup.styled';
 
@@ -85,7 +85,9 @@ const Popup = () => {
           <div key={date}>
             {index !== 0 && <S.Divider />}
             <S.DateCategroyWrapper>
-              <S.CategoryDate>{date}</S.CategoryDate>
+              <S.CategoryDate>
+                {isToday(new Date(date)) ? 'Today' : date}
+              </S.CategoryDate>
               {histories.map((value) => {
                 return <FullItem key={value.id} {...value} />;
               })}

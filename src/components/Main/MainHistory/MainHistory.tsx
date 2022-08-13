@@ -1,5 +1,5 @@
 import React from 'react';
-import { format } from 'date-fns';
+import { format, isToday } from 'date-fns';
 
 import { SearchBar, CompactItem, FullItem } from '../../Commons';
 
@@ -49,7 +49,9 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
           <div key={date}>
             {index !== 0 && <S.Divider />}
             <S.DateCategroyWrapper>
-              <S.CategoryDate>{date}</S.CategoryDate>
+              <S.CategoryDate>
+                {isToday(new Date(date)) ? 'Today' : date}
+              </S.CategoryDate>
               {histories.map((value) => {
                 return <Comp key={value.id} {...value} />;
               })}
