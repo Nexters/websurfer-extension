@@ -6,3 +6,7 @@ export interface InformationTimeBarProps {
 export interface InformationTimeBarTextProps {
   isActive?: boolean;
 }
+
+export interface SelectPeriodWrapperProps {
+  isActive?: boolean;
+}

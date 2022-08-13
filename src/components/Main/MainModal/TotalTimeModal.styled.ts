@@ -1,3 +1,4 @@
+import { CalendarIcon } from '@assets/img/svg-icon-paths';
 import { css, useTheme } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
 
@@ -154,6 +155,73 @@ export const InformationTimeBarText = styled.div<T.InformationTimeBarTextProps>(
         font-size: ${theme.fontSize.xs};
         font-weight: ${theme.fontWeight.regular};
         line-height: ${theme.lineHeight.xs};
+      `,
+    ];
+  }
+);
+
+export const SelectPeriodContainer = styled.div(() => {
+  const theme = useTheme();
+  return [
+    tw`flex justify-start items-center`,
+    css`
+      margin-bottom: 4px;
+    `,
+  ];
+});
+
+export const SelectPeriodWrapper = styled.div<T.SelectPeriodWrapperProps>(
+  ({ isActive }) => {
+    const theme = useTheme();
+    return [
+      tw`flex justify-between items-center`,
+      css`
+        width: 320px;
+        height: 32px;
+        padding: 4px 12px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: ${isActive
+          ? theme.color.primary
+          : theme.color['gray-03']};
+        border-radius: 6px;
+        &:hover {
+          cursor: pointer;
+        }
+      `,
+    ];
+  }
+);
+
+export const SelectPeriodTime = styled.div<T.SelectPeriodWrapperProps>(
+  ({ isActive }) => {
+    const theme = useTheme();
+    return [
+      // tw``,
+      css`
+        color: ${isActive ? theme.color.primary : theme.color['gray-07']};
+        font-weight: ${theme.fontWeight.regular};
+        font-size: ${theme.fontSize.m};
+        line-height: ${theme.lineHeight.l};
+      `,
+    ];
+  }
+);
+
+export const SelectPeriodIcon = styled.div<T.SelectPeriodWrapperProps>(
+  ({ isActive }) => {
+    const theme = useTheme();
+
+    return [
+      css`
+        margin: 0 4px;
+        width: 20px;
+        height: 20px;
+        background-color: ${isActive
+          ? theme.color.primary
+          : theme.color['gray-07']};
+        -webkit-mask: url(${CalendarIcon}) no-repeat center;
+        mask: url(${CalendarIcon}) no-repeat center;
       `,
     ];
   }

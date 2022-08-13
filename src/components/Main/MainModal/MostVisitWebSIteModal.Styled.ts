@@ -164,20 +164,6 @@ export const SelectPeriodTime = styled.div<T.SelectPeriodWrapperProps>(
   }
 );
 
-// export const SelectPeriodIcon = styled.img<T.SelectPeriodWrapperProps>(
-//   ({ isActive }) => {
-//     const theme = useTheme();
-
-//     return [
-//       css`
-//         margin: 0 4px;
-//         width: 20px;
-//         height: 20px;
-//         ${isActive && `color: ${theme.color.primary};`}
-//       `,
-//     ];
-//   }
-// );
 export const SelectPeriodIcon = styled.div<T.SelectPeriodWrapperProps>(
   ({ isActive }) => {
     const theme = useTheme();
