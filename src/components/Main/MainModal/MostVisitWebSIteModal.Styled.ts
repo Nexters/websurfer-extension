@@ -112,3 +112,53 @@ export const SiteListCount = styled.div(() => {
     `,
   ];
 });
+
+export const SelectPeriodContainer = styled.div(() => {
+  const theme = useTheme();
+  return [
+    tw`flex justify-start items-center`,
+    css`
+      margin-bottom: 4px;
+    `,
+  ];
+});
+
+export const SelectPeriodWrapper = styled.div(() => {
+  const theme = useTheme();
+  return [
+    tw`flex justify-between items-center`,
+    css`
+      width: 320px;
+      height: 32px;
+      padding: 4px 12px;
+      border-style: solid;
+      border-width: 1px;
+      border-color: ${theme.color['gray-03']};
+      border-radius: 6px;
+      &:hover {
+        cursor: pointer;
+      }
+    `,
+  ];
+});
+
+export const SelectPeriodTime = styled.div(() => {
+  const theme = useTheme();
+  return [
+    // tw``,
+    css`
+      color: ${theme.color['gray-07']};
+      font-weight: ${theme.fontWeight.regular};
+      font-size: ${theme.fontSize.m};
+      line-height: ${theme.lineHeight.l};
+    `,
+  ];
+});
+
+export const SelectPeriodIcon = styled.img(() => [
+  css`
+    margin: 0 4px;
+    width: 20px;
+    height: 20px;
+  `,
+]);
