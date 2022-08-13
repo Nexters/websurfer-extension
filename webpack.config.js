@@ -184,7 +184,7 @@ var options = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
-      filename: 'options.html',
+      filename: 'index.html',
       chunks: ['options'],
       cache: false,
     }),
