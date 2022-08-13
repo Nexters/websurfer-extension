@@ -58,7 +58,7 @@ const PeriodSelector = (props: Props) => {
       <DateStyle.FilterApplyButton
         onClick={onClickApply}
         disabled={filterConfirmDisabled}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer', padding: '12px' }}
       >
         {filterConfirmDisabled
           ? '적용하기'
