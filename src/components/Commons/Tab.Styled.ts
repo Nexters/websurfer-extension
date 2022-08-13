@@ -9,6 +9,7 @@ export const TabWrapper = styled.div(() => {
     tw`w-full flex justify-between`,
     css`
       height: 36px;
+      margin-bottom: 40px;
     `,
   ];
 });
