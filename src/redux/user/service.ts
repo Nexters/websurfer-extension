@@ -8,7 +8,7 @@ const getData = ({ data }: AxiosResponse) => data;
 
 const apis = {
   getToken(params: TokenRequestParam) {
-    return Axios.post('/sign-in', params).then(getData);
+    return Axios.post('/auth/sign-in', params).then(getData);
   },
 
   getUser() {

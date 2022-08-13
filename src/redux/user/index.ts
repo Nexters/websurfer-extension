@@ -5,6 +5,7 @@ import { RootState } from '../store';
 import { UserEntity, TokenResponse } from '../webSerfer.type';
 
 import { getToken, getUser } from './thunk';
+import Axios from '@utils/axios';
 
 interface UserState {
   user: UserEntity;
@@ -25,6 +26,8 @@ export const userSlice = createSlice({
       getToken.fulfilled,
       (state, { payload: { access } }: PayloadAction<TokenResponse>) => {
         state.token = access;
+        Axios.defaults.headers.common.Authorization = access;
+        localStorage.setItem('websurfer-token', access);
       }
     );
 

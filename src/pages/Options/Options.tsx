@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Main from '@components/Main/Main';
+import BeforeLogin from '@components/Main/BeforeLogin/BeforeLogin';
 import Axios from '@utils/axios';
 
 interface Props {
@@ -8,12 +9,15 @@ interface Props {
 }
 
 const Options = (props: Props) => {
-  const [hasData, setHasData] = useState<boolean>(true);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [hasData, setHasData] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
-    Axios.defaults.headers.common.Authorization =
-      'Bearer ' + process.env.TEMPORARY_TOKEN;
+    // Axios.defaults.headers.common.Authorization =
+    //   'Bearer ' + process.env.TEMPORARY_TOKEN;
+
+    const token = localStorage.getItem('websurfer-token');
+    setIsLoggedIn(Boolean(token));
   }, []);
 
   const PrintMainComponent = (): React.ReactElement => {
@@ -25,7 +29,7 @@ const Options = (props: Props) => {
           return <>데이터가 없습니다.</>;
         }
       } else {
-        return <>로그인하세요.</>;
+        return <BeforeLogin />;
       }
     }
     return <>인터넷에 연결되어 있지 않습니다.</>;
