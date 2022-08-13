@@ -3,9 +3,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 
 import hisoryReducer from './history';
+import commonReducer from './common';
 
 export const store = configureStore({
   reducer: {
+    common: commonReducer,
     history: hisoryReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([thunk]),
