@@ -15,14 +15,14 @@ const TotalTimeModalDetail = (props: Props) => {
     grid: {
       left: '12px',
       right: '12px',
-      top: 100,
+      top: 50,
       bottom: 0,
-      width: '740px',
-      height: '110px',
+      width: '650px',
+      height: '200px',
     },
     xAxis: {
       type: 'category',
-      data: ['아침', '낮', '저녁', '밤'],
+      data: ['00.00', '00.00', '00.00', '00.00', '00.00', '00.00', '00.00'],
       axisLabel: {
         color: theme.color.black,
       },
@@ -37,20 +37,23 @@ const TotalTimeModalDetail = (props: Props) => {
     yAxis: {
       type: 'value',
       splitLine: {
-        show: false,
+        show: true,
       },
-      axisLabel: false,
+      position: 'right',
     },
     series: [
       {
         data: [
-          100,
-          100,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
           {
-            value: 120,
+            value: 200,
             itemStyle: { color: theme.color.primary },
           },
-          100,
         ],
         itemStyle: {
           color: theme.color.secondaryB,
@@ -58,20 +61,20 @@ const TotalTimeModalDetail = (props: Props) => {
         },
         type: 'bar',
         silent: true,
-        barWidth: '30px',
-        barGap: '34px',
-        markPoint: {
-          data: [
-            {
-              type: 'max',
-              itemStyle: { color: theme.color.secondaryY },
-              label: { show: false },
-            },
-          ],
-          symbol: 'circle',
-          symbolSize: 30,
-          symbolOffset: [0, -20],
-        },
+        barWidth: '52px',
+        barGap: '42px',
+        // markPoint: {
+        //   data: [
+        //     {
+        //       type: 'max',
+        //       itemStyle: { color: theme.color.secondaryY },
+        //       label: { show: false },
+        //     },
+        //   ],
+        //   symbol: 'circle',
+        //   symbolSize: 30,
+        //   symbolOffset: [0, -20],
+        // },
       },
     ],
   };
