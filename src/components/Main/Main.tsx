@@ -63,6 +63,7 @@ const Main: React.FC<Props> = (props: Props) => {
       </Grid.Container>
       <MostVisitWebSIteModal />
       <TotalTimeModal />
+      <MostUseTimeModal />
     </>
   );
 };
