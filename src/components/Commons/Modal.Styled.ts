@@ -37,7 +37,7 @@ export const ModalContentWrapper = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`flex w-full bg-white`,
+    tw`w-full bg-white`,
     css`
       height: 800px;
       border-radius: 18px;

@@ -1,12 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@redux/store';
+
+export type ModalType = 'mostVisit' | 'totalTime' | 'frequency'; //가장 많이 방문, 총 시간, 자주 이용하는 시간
 
 interface CommonState {
   isOpenModal: boolean;
+  isModalType: ModalType;
 }
 
 const initialState: CommonState = {
   isOpenModal: false,
+  isModalType: 'mostVisit',
 };
 
 export const commonSlice = createSlice({
@@ -17,7 +21,8 @@ export const commonSlice = createSlice({
     closeModal: (state) => {
       state.isOpenModal = false;
     },
-    openModal: (state) => {
+    openModal: (state, action: PayloadAction<ModalType>) => {
+      state.isModalType = action.payload;
       state.isOpenModal = true;
     },
   },

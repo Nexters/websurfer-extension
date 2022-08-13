@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { createPortal } from 'react-dom';
-import { closeModal } from '@redux/common';
+import { closeModal, ModalType } from '@redux/common';
 import { RootState, useAppDispatch, useAppSelector } from '@redux/store';
 
 import { ModalCloseIcon } from '@assets/img/svg-icon-paths';
@@ -10,18 +10,16 @@ import * as S from './Modal.Styled';
 
 interface Props {
   children: React.ReactNode;
-  // closePortal: () => void;
   title: string;
+  type: ModalType;
 }
 
-const Modal = ({ children, title }: Props) => {
+const Modal = ({ children, title, type }: Props) => {
   const ref = useRef<Element | null>();
   const [mounted, setMounted] = useState(false);
 
   const dispatch = useAppDispatch();
-  const isOpenModal = useAppSelector(
-    (state: RootState) => state.common.isOpenModal
-  );
+  const modalState = useAppSelector((state: RootState) => state.common);
 
   const closePortal = () => {
     dispatch(closeModal());
@@ -35,7 +33,12 @@ const Modal = ({ children, title }: Props) => {
     }
   }, []);
 
-  if (ref.current && mounted && isOpenModal) {
+  if (
+    ref.current &&
+    mounted &&
+    modalState.isOpenModal &&
+    type === modalState.isModalType
+  ) {
     return createPortal(
       <>
         <S.ModalContainer onClick={closePortal} />
