@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import Axios from '@utils/axios';
 import { useAppDispatch } from '@redux/store';
 import { getHistoryList } from '@redux/history';
 
@@ -24,12 +23,7 @@ const Main: React.FC<Props> = (props: Props) => {
   // const histories = useAppSelector((state) => state.history.histories);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    Axios.defaults.headers.common.Authorization =
-      'Bearer ' + process.env.TEMPORARY_TOKEN;
-
-    dispatch(getHistoryList({}));
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
   return (
     <>

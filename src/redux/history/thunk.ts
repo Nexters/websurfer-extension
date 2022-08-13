@@ -2,8 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import apiClient from './service';
 import { HistoryListReponse, HistoryListRequest } from '../webSerfer.type';
-import { RootState } from '../store';
-import { setHistories } from '../history';
 
 const name = 'history';
 
