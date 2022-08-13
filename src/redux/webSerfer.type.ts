@@ -1,4 +1,14 @@
-interface UserEntity {
+export interface TokenRequestParam {
+  email: string;
+  googleTokenId: string;
+}
+
+export interface TokenResponse {
+  access: string;
+  refresh: string;
+}
+
+export interface UserEntity {
   id?: number;
   name?: string;
   createAt?: string; //Date;
