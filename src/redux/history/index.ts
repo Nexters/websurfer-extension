@@ -45,6 +45,7 @@ export const historySlice = createSlice({
 
 export const historyListSelector = (state: RootState) =>
   state.history.histories;
+export const historyFilterSelector = (state: RootState) => state.history.filter;
 
 export const { setHistories, setFilter } = historySlice.actions;
 export default historySlice.reducer;
