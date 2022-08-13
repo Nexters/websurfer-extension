@@ -30,7 +30,7 @@ const Popup = () => {
 
   const goApp = () => {
     window.chrome.tabs.create({
-      url: window.chrome.runtime.getURL('/options.html'),
+      url: 'https://websurfer-web.vercel.app',
     });
   };
 

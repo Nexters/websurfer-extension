@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Websurfer",
   "description": "Web surfer chrome extension",
-  "options_page": "options.html",
+  "options_page": "index.html",
   "background": { "service_worker": "background.bundle.js" },
   "action": {
     "default_popup": "popup.html",
