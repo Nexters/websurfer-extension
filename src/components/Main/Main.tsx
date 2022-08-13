@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import Modal from '@components/Commons/Modal';
+import MostUseTimeModal from './MainModal/MostUseTimeModal';
 import MainTitle from '@components/Main/MainContent/MainTitle';
 import TotalTime from '@components/Main/MainContent/TotalTime';
 import MainTopNav from '@components/Main/MainContent/MainTopNav';
@@ -13,7 +14,6 @@ import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './Main.styled';
 import * as Grid from '@components/Grid/Grid.styled';
-import { openModal } from '@redux/common';
 
 interface Props {}
 
@@ -62,6 +62,7 @@ const Main: React.FC<Props> = (props: Props) => {
           </Grid.LayoutCol>
         </Grid.Row>
       </Grid.Container>
+      <MostUseTimeModal />
     </>
   );
 };

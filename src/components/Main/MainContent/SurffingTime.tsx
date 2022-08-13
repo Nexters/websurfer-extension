@@ -1,15 +1,19 @@
 import React from 'react';
-import ReactECharts from 'echarts-for-react';
 
 import { useTheme } from '@emotion/react';
+import ReactECharts from 'echarts-for-react';
+import { useAppDispatch } from '@redux/store';
 
-import * as Card from '../../../components/Commons/Card.styled';
-import echarts from 'echarts/types/dist/echarts';
+import { openModal } from '@redux/common';
+
+import * as Card from '@components/Commons/Card.styled';
 
 type Props = {};
 
 const SurffingTime = (props: Props) => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+
   const option = {
     grid: {
       left: '12px',
@@ -75,7 +79,14 @@ const SurffingTime = (props: Props) => {
     ],
   };
   return (
-    <Card.Wrapper height="250px" width="290px" borderRadius="8px">
+    <Card.Wrapper
+      height="250px"
+      width="290px"
+      borderRadius="8px"
+      onClick={() => {
+        dispatch(openModal('frequency'));
+      }}
+    >
       <Card.Title>자주 사용한 시간대</Card.Title>
       <ReactECharts option={option} style={{ height: '168px' }} />
     </Card.Wrapper>
