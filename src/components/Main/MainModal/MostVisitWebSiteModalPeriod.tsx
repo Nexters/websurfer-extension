@@ -1,21 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import * as S from './MostVisitWebSIteModal.Styled';
 import * as Card from '@components/Main/MainContent/MostVisitWebSite.styled';
 
+import * as T from './MostVisitWebSIteModal.type';
 import { CalendarIcon } from '@assets/img/svg-icon-paths';
+import PeriodSelector from './PeriodSelector';
+import dayjs from 'dayjs';
 
 type Props = {};
 
 const dummy = ['', '', '', '', '', '', ''];
 
 const MostVisitWebSiteModalPeriod = (props: Props) => {
+  const DATE_FORMAT = 'YYYY[년] MM[월] DD[일]';
+
+  const [isFilterActive, setIsFilterActive] = useState<boolean>(false);
+  const [filter, setFilter] = useState<T.FilterType>({
+    startDate: undefined,
+    endDate: undefined,
+  });
+
   return (
     <>
-      <S.SelectPeriodContainer>
+      <S.SelectPeriodContainer
+        onClick={() => {
+          setIsFilterActive(!isFilterActive);
+        }}
+      >
         <S.SelectPeriodWrapper>
           <S.SelectPeriodTime>
-            2022년 00월 00일 - 2020년 00월 00일
+            {filter.startDate && filter.endDate
+              ? dayjs(filter.startDate).format(DATE_FORMAT) +
+                ' - ' +
+                dayjs(filter.endDate).format(DATE_FORMAT)
+              : '2022년 00월 00일 - 2020년 00월 00일'}
           </S.SelectPeriodTime>
           <S.SelectPeriodIcon src={CalendarIcon} alt="select period" />
         </S.SelectPeriodWrapper>
@@ -39,7 +58,7 @@ const MostVisitWebSiteModalPeriod = (props: Props) => {
       </Card.ItemCardWrapper>
 
       {dummy.map((value, index) => (
-        <S.SiteListContainer>
+        <S.SiteListContainer key={index}>
           <S.SiteInformationWrapper>
             <S.SiteListNumber>{index + 4}</S.SiteListNumber>
             <S.SiteListIcon />
@@ -51,6 +70,13 @@ const MostVisitWebSiteModalPeriod = (props: Props) => {
           <S.SiteListCount>0000회</S.SiteListCount>
         </S.SiteListContainer>
       ))}
+      {isFilterActive && (
+        <PeriodSelector
+          filter={filter}
+          setFilter={setFilter}
+          setIsFilterActive={setIsFilterActive}
+        />
+      )}
     </>
   );
 };
