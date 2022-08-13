@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import TotalTimeModal from './MainModal/TotalTimeModal';
+import MostUseTimeModal from './MainModal/MostUseTimeModal';
 import MainTitle from '@components/Main/MainContent/MainTitle';
 import TotalTime from '@components/Main/MainContent/TotalTime';
 import MainTopNav from '@components/Main/MainContent/MainTopNav';
@@ -62,6 +63,7 @@ const Main: React.FC<Props> = (props: Props) => {
       </Grid.Container>
       <MostVisitWebSIteModal />
       <TotalTimeModal />
+      <MostUseTimeModal />
     </>
   );
 };
