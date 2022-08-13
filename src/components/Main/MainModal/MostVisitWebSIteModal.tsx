@@ -44,6 +44,7 @@ const MostVisitWebSIteModal = (props: Props) => {
       />
 
       {currentTab === 'this' && <MostVisitWebSiteModalThis />}
+      {currentTab === 'last' && <MostVisitWebSiteModalThis />}
       {currentTab === 'period' && <MostVisitWebSiteModalPeriod />}
     </Modal>
   );
