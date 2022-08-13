@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Modal from '@components/Commons/Modal';
+import TotalTimeModal from './MainModal/TotalTimeModal';
 import MostUseTimeModal from './MainModal/MostUseTimeModal';
 import MainTitle from '@components/Main/MainContent/MainTitle';
 import TotalTime from '@components/Main/MainContent/TotalTime';
@@ -50,7 +50,6 @@ const Main: React.FC<Props> = (props: Props) => {
                 <S.UpdateMessage>마지막 업데이트 : 15분 전</S.UpdateMessage>
                 <S.UpdateIcon src={RefreshUpdateIcon} alt="Refresh" />
               </S.UpdateWrapper>
-              <MostVisitWebSIteModal />
             </>
           </Grid.LayoutCol>
           <Grid.LayoutCol
@@ -62,7 +61,8 @@ const Main: React.FC<Props> = (props: Props) => {
           </Grid.LayoutCol>
         </Grid.Row>
       </Grid.Container>
-      <MostUseTimeModal />
+      <MostVisitWebSIteModal />
+      <TotalTimeModal />
     </>
   );
 };
