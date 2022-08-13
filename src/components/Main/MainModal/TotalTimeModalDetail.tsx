@@ -15,9 +15,9 @@ const TotalTimeModalDetail = (props: Props) => {
     grid: {
       left: '12px',
       right: '12px',
-      top: 40,
+      top: 100,
       bottom: 0,
-      width: '222px',
+      width: '740px',
       height: '110px',
     },
     xAxis: {
@@ -75,14 +75,52 @@ const TotalTimeModalDetail = (props: Props) => {
       },
     ],
   };
+
+  const dummy = ['', '', '', '', '', '', '', ''];
   return (
     <>
       <S.PeriodTitle>2000년 00월 00일 - 2000년 00월 00일 에는</S.PeriodTitle>
       <S.TitleWrapper>
         <S.Title>000시간 00분을 사용하셨네요!</S.Title>
         <S.TimeLabel>지난주보다 20분 ↑</S.TimeLabel>
-        <ReactECharts option={option} style={{ height: '168px' }} />
       </S.TitleWrapper>
+      <ReactECharts
+        option={option}
+        style={{
+          width: 740,
+          border: `1px solid ${theme.color['gray-03']}`,
+          marginBottom: '30px',
+        }}
+      />
+      <S.SubTitle>사이트별 체류시간</S.SubTitle>
+      <S.StayTimeListContainer>
+        <S.StyleTimeListWrapper>
+          <S.StyleTimeListIcon />
+          <S.InformaitonWrapper>
+            <S.InformationTitle>Site name Site name</S.InformationTitle>
+            <S.InformationTimeBarWrapper>
+              <S.InformationTimeBar isActive percent={100} />
+              <S.InformationTimeBarText isActive>
+                000시간 00분
+              </S.InformationTimeBarText>
+            </S.InformationTimeBarWrapper>
+          </S.InformaitonWrapper>
+        </S.StyleTimeListWrapper>
+        {dummy.map((value, index) => (
+          <S.StyleTimeListWrapper key={index}>
+            <S.StyleTimeListIcon />
+            <S.InformaitonWrapper>
+              <S.InformationTitle>Site name Site name</S.InformationTitle>
+              <S.InformationTimeBarWrapper>
+                <S.InformationTimeBar percent={100 - (index + 1) * 10} />
+                <S.InformationTimeBarText>
+                  000시간 00분
+                </S.InformationTimeBarText>
+              </S.InformationTimeBarWrapper>
+            </S.InformaitonWrapper>
+          </S.StyleTimeListWrapper>
+        ))}
+      </S.StayTimeListContainer>
     </>
   );
 };

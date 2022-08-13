@@ -16,7 +16,7 @@ export const ModalWrapper = styled.div(() => {
     css`
       top: 115px;
       width: 820px;
-      height: 854px;
+      min-width: 820px;
       transform: translate(-50%);
     `,
   ];
@@ -37,11 +37,11 @@ export const ModalContentWrapper = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`w-full bg-white`,
+    tw`w-full bg-white overflow-y-scroll`,
     css`
-      height: 800px;
       border-radius: 18px;
       padding: 30px 40px;
+      max-height: 800px;
     `,
   ];
 });
