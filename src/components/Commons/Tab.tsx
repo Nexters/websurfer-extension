@@ -1,14 +1,18 @@
 import React from 'react';
 import * as S from './Tab.Styled';
 
-type Props = {};
+type Props = {
+  items: { title: string; onClick?: () => any; isActive?: boolean }[];
+};
 
-const Tab = (props: Props) => {
+const Tab = ({ items }: Props) => {
   return (
     <S.TabWrapper>
-      <S.TabItemWrapper isActive>이번 주</S.TabItemWrapper>
-      <S.TabItemWrapper>지난주</S.TabItemWrapper>
-      <S.TabItemWrapper>기간 선택</S.TabItemWrapper>
+      {items.map(({ title, onClick, isActive }, number) => (
+        <S.TabItemWrapper isActive={isActive} key={number}>
+          {title}
+        </S.TabItemWrapper>
+      ))}
     </S.TabWrapper>
   );
 };

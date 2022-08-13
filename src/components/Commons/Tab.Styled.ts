@@ -9,9 +9,6 @@ export const TabWrapper = styled.div(() => {
     tw`w-full flex justify-between`,
     css`
       height: 36px;
-      /* border-style: solid;
-      border-width: 0 0 2px 0;
-      border-color: ${theme.color.primary}; */
     `,
   ];
 });
@@ -20,7 +17,7 @@ export const TabItemWrapper = styled.div<T.TabItemWrapperProps>(
   ({ isActive }) => {
     const theme = useTheme();
     return [
-      tw`w-full flex items-center justify-center`,
+      tw`w-full flex justify-center`,
       css`
         height: 36px;
         color: ${isActive ? theme.color.primary : theme.color['gray-06']};
@@ -34,6 +31,11 @@ export const TabItemWrapper = styled.div<T.TabItemWrapperProps>(
         border-color: ${isActive
           ? theme.color.primary
           : theme.color['gray-03']};
+        &:hover {
+          color: ${theme.color.primary};
+          border-color: ${theme.color.primary};
+          cursor: pointer;
+        }
       `,
     ];
   }

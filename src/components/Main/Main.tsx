@@ -63,7 +63,13 @@ const Main: React.FC<Props> = (props: Props) => {
                 <S.UpdateIcon src={RefreshUpdateIcon} alt="Refresh" />
               </S.UpdateWrapper>
               <Modal title="자주 방문한 웹사이트">
-                <Tab />
+                <Tab
+                  items={[
+                    { title: '이번 주', isActive: true },
+                    { title: '지난주' },
+                    { title: '기간 선택' },
+                  ]}
+                />
                 <div>안녕</div>
               </Modal>
             </>
