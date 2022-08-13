@@ -1,13 +1,15 @@
 import React from 'react';
-import ReactECharts from 'echarts-for-react';
 
 import { useTheme } from '@emotion/react';
+import ReactECharts from 'echarts-for-react';
 
-import * as Card from '@components/Commons/Card.styled';
+import * as S from './TotalTimeModal.styled';
 
-type Props = {};
+type Props = {
+  period: 'last' | 'this' | 'select';
+};
 
-const SurffingTime = (props: Props) => {
+const TotalTimeModalDetail = (props: Props) => {
   const theme = useTheme();
   const option = {
     grid: {
@@ -74,11 +76,15 @@ const SurffingTime = (props: Props) => {
     ],
   };
   return (
-    <Card.Wrapper height="250px" width="290px" borderRadius="8px">
-      <Card.Title>자주 사용한 시간대</Card.Title>
-      <ReactECharts option={option} style={{ height: '168px' }} />
-    </Card.Wrapper>
+    <>
+      <S.PeriodTitle>2000년 00월 00일 - 2000년 00월 00일 에는</S.PeriodTitle>
+      <S.TitleWrapper>
+        <S.Title>000시간 00분을 사용하셨네요!</S.Title>
+        <S.TimeLabel>지난주보다 20분 ↑</S.TimeLabel>
+        <ReactECharts option={option} style={{ height: '168px' }} />
+      </S.TitleWrapper>
+    </>
   );
 };
 
-export default SurffingTime;
+export default TotalTimeModalDetail;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Modal from '@components/Commons/Modal';
+import TotalTimeModal from './MainModal/TotalTimeModal';
 import MainTitle from '@components/Main/MainContent/MainTitle';
 import TotalTime from '@components/Main/MainContent/TotalTime';
 import MainTopNav from '@components/Main/MainContent/MainTopNav';
@@ -13,7 +13,6 @@ import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './Main.styled';
 import * as Grid from '@components/Grid/Grid.styled';
-import { openModal } from '@redux/common';
 
 interface Props {}
 
@@ -50,7 +49,6 @@ const Main: React.FC<Props> = (props: Props) => {
                 <S.UpdateMessage>마지막 업데이트 : 15분 전</S.UpdateMessage>
                 <S.UpdateIcon src={RefreshUpdateIcon} alt="Refresh" />
               </S.UpdateWrapper>
-              <MostVisitWebSIteModal />
             </>
           </Grid.LayoutCol>
           <Grid.LayoutCol
@@ -62,6 +60,8 @@ const Main: React.FC<Props> = (props: Props) => {
           </Grid.LayoutCol>
         </Grid.Row>
       </Grid.Container>
+      <MostVisitWebSIteModal />
+      <TotalTimeModal />
     </>
   );
 };
