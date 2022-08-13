@@ -16,6 +16,7 @@ import RefreshIcon from './icon-refresh-mono.svg';
 import ZoomoutIcon from './icon-zoom-out.svg';
 import DotsIcon from './icon-dots-mono.svg';
 import RefreshUpdateIcon from './icon-refresh-update.svg';
+import ModalCloseIcon from './icon-modal-close.svg';
 
 export {
   FilterIcon,
@@ -36,4 +37,5 @@ export {
   DotsIcon,
   SettingIcon,
   RefreshUpdateIcon,
+  ModalCloseIcon,
 };
