@@ -16,6 +16,7 @@ import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './Main.styled';
 import * as Grid from '@components/Grid/Grid.styled';
+import Tab from '@components/Commons/Tab';
 
 interface Props {}
 
@@ -62,6 +63,7 @@ const Main: React.FC<Props> = (props: Props) => {
                 <S.UpdateIcon src={RefreshUpdateIcon} alt="Refresh" />
               </S.UpdateWrapper>
               <Modal title="자주 방문한 웹사이트">
+                <Tab />
                 <div>안녕</div>
               </Modal>
             </>

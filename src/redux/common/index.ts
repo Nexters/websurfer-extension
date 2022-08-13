@@ -6,7 +6,7 @@ interface CommonState {
 }
 
 const initialState: CommonState = {
-  isOpenModal: false,
+  isOpenModal: true,
 };
 
 export const commonSlice = createSlice({
