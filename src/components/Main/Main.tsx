@@ -65,7 +65,13 @@ const Main: React.FC<Props> = (props: Props) => {
               <Modal title="자주 방문한 웹사이트">
                 <Tab
                   items={[
-                    { title: '이번 주', isActive: true },
+                    {
+                      title: '이번 주',
+                      isActive: true,
+                      onClick: () => {
+                        alert('clicked');
+                      },
+                    },
                     { title: '지난주' },
                     { title: '기간 선택' },
                   ]}
