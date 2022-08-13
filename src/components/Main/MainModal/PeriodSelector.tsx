@@ -32,17 +32,6 @@ const PeriodSelector = (props: Props) => {
     props.setIsFilterActive(false);
   };
 
-  useEffect(() => {
-    console.log(
-      'rawStartDate',
-      rawStartDate,
-      'rawEndDate',
-      rawEndDate,
-      'filter',
-      props.filter
-    );
-  }, [rawStartDate, rawEndDate]);
-
   return (
     <S.Container>
       <S.TitleWrapper>

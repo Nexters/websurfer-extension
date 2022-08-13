@@ -187,7 +187,9 @@ export const SelectPeriodIcon = styled.div<T.SelectPeriodWrapperProps>(
         margin: 0 4px;
         width: 20px;
         height: 20px;
-        background-color: ${isActive ? theme.color.primary : theme.color.black};
+        background-color: ${isActive
+          ? theme.color.primary
+          : theme.color['gray-07']};
         -webkit-mask: url(${CalendarIcon}) no-repeat center;
         mask: url(${CalendarIcon}) no-repeat center;
       `,

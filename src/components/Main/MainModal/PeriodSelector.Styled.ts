@@ -46,6 +46,7 @@ export const ResetIcon = styled.img(() => {
     css`
       width: 18px;
       height: 18px;
+      cursor: pointer;
     `,
   ];
 });
