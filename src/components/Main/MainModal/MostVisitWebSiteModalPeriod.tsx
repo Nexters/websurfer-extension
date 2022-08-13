@@ -4,7 +4,10 @@ import * as S from './MostVisitWebSIteModal.Styled';
 import * as Card from '@components/Main/MainContent/MostVisitWebSite.styled';
 
 import * as T from './MostVisitWebSIteModal.type';
-import { CalendarIcon } from '@assets/img/svg-icon-paths';
+import {
+  CalendarIcon,
+  // CalendarIconComponent,
+} from '@assets/img/svg-icon-paths';
 import PeriodSelector from './PeriodSelector';
 import dayjs from 'dayjs';
 
@@ -28,15 +31,21 @@ const MostVisitWebSiteModalPeriod = (props: Props) => {
           setIsFilterActive(!isFilterActive);
         }}
       >
-        <S.SelectPeriodWrapper>
-          <S.SelectPeriodTime>
+        <S.SelectPeriodWrapper
+          isActive={filter.startDate && filter.endDate ? true : false}
+        >
+          <S.SelectPeriodTime
+            isActive={filter.startDate && filter.endDate ? true : false}
+          >
             {filter.startDate && filter.endDate
               ? dayjs(filter.startDate).format(DATE_FORMAT) +
                 ' - ' +
                 dayjs(filter.endDate).format(DATE_FORMAT)
               : '2022년 00월 00일 - 2020년 00월 00일'}
           </S.SelectPeriodTime>
-          <S.SelectPeriodIcon src={CalendarIcon} alt="select period" />
+          <S.SelectPeriodIcon
+            isActive={filter.startDate && filter.endDate ? true : false}
+          />
         </S.SelectPeriodWrapper>
         <S.PeriodTitle style={{ margin: 'auto 8px' }}>에는</S.PeriodTitle>
       </S.SelectPeriodContainer>
