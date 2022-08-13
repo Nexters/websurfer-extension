@@ -8,11 +8,7 @@ import {
 } from './MostVisitWebSite.styled.type';
 
 export const ItemCardWrapper = styled.div(() => {
-  return [
-    tw`
-            flex flex-wrap 
-        `,
-  ];
+  return [tw`flex flex-wrap`];
 });
 
 export const ItemCard = styled.div<ItemCardProps>((props) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as Card from '../../../components/Commons/Card.styled';
+import * as Card from '@components/Commons/Card.styled';
 import * as S from './TotalTime.styled';
 
 type Props = {};

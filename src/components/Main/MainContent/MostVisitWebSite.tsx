@@ -1,13 +1,27 @@
 import React from 'react';
 
+import { useAppDispatch } from '@redux/store';
+
 import * as S from './MostVisitWebSite.styled';
-import * as Card from '../../../components/Commons/Card.styled';
+import * as Card from '@components/Commons/Card.styled';
+import { openModal } from '@redux/common';
 
 type Props = {};
 
 const MostVisitWebSite = (props: Props) => {
+  const dispatch = useAppDispatch();
+
+  const requestOpenModal = () => {
+    dispatch(openModal('mostVisit'));
+  };
+
   return (
-    <Card.Wrapper margin="0 0 40px 0" height="238px" borderRadius="8px">
+    <Card.Wrapper
+      margin="0 0 40px 0"
+      height="238px"
+      borderRadius="8px"
+      onClick={requestOpenModal}
+    >
       <Card.Title margin="0 0 24px 0">많이 방문한 웹사이트</Card.Title>
       <S.ItemCardWrapper>
         <S.ItemCard primary>
