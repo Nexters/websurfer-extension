@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '@redux/store';
 import { getHistoryList } from '@redux/history';
 
+import Modal from '@components/Commons/Modal';
 import MainTitle from '@components/Main/MainContent/MainTitle';
 import TotalTime from '@components/Main/MainContent/TotalTime';
 import MainTopNav from '@components/Main/MainContent/MainTopNav';
@@ -54,6 +55,9 @@ const Main: React.FC<Props> = (props: Props) => {
                 <S.UpdateMessage>마지막 업데이트 : 15분 전</S.UpdateMessage>
                 <S.UpdateIcon src={RefreshUpdateIcon} alt="Refresh" />
               </S.UpdateWrapper>
+              <Modal title="자주 방문한 웹사이트">
+                <div>안녕</div>
+              </Modal>
             </>
           </Grid.LayoutCol>
           <Grid.LayoutCol
