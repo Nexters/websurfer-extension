@@ -14,7 +14,12 @@ export const DummyTitleWrapper = styled.div(() => {
   ];
 });
 
-export const TitleContainer = styled.div(() => [tw`absolute`]);
+export const TitleContainer = styled.div(() => [
+  tw`absolute`,
+  css`
+    top: 0;
+  `,
+]);
 
 export const TitleWrapper = styled.div(() => {
   return [

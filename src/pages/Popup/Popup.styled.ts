@@ -1,19 +1,18 @@
 import { css, useTheme } from '@emotion/react';
-import { MAX_WIDTH } from '../../components/Grid/Grid.styled';
 import tw, { styled } from 'twin.macro';
 
 interface IWrapper {
-  loggedIn?: boolean;
+  showBottom?: boolean;
 }
 
-export const Wrapper = styled.div(({ loggedIn }: IWrapper) => {
+export const Wrapper = styled.div(({ showBottom }: IWrapper) => {
   return [
     tw`
       flex-col overflow-hidden
     `,
     css`
       width: 780px;
-      height: ${loggedIn ? '600px' : 'unset'};
+      height: ${showBottom ? '600px' : 'unset'};
       padding: 20px;
       background: #fff;
     `,
@@ -34,7 +33,7 @@ export const TopWrapper = styled.div(() => {
 export const HomeWrapper = styled.div(() => {
   return [
     tw`
-      items-center cursor-pointer
+      flex items-center cursor-pointer
     `,
   ];
 });
@@ -64,10 +63,10 @@ export const HomeSpan = styled.span(() => {
 });
 
 interface IMiddleWrapper {
-  loggedIn?: boolean;
+  bgWhite?: boolean;
 }
 
-export const MiddleWrapper = styled.div(({ loggedIn }: IMiddleWrapper) => {
+export const MiddleWrapper = styled.div(({ bgWhite }: IMiddleWrapper) => {
   const theme = useTheme();
   return [
     tw`
@@ -76,7 +75,7 @@ export const MiddleWrapper = styled.div(({ loggedIn }: IMiddleWrapper) => {
     css`
       border-radius: 10px;
       height: 222px;
-      background-color: ${loggedIn ? theme.color['gray-02'] : '#fff'};
+      background-color: ${bgWhite ? '#fff' : theme.color['gray-02']};
       padding: 20px;
       margin-bottom: 24px;
     `,

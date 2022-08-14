@@ -25,12 +25,12 @@ const Popup = () => {
   const dispatch = useAppDispatch();
 
   const loggedIn = user.id;
-  const hasData = historyList.length;
+  const hasData = Boolean(historyList.length);
 
   useEffect(() => {
     chrome.storage.sync.get(['websurferToken'], async (result) => {
       const { websurferToken } = result;
-      console.log({ result });
+
       if (websurferToken) {
         dispatch(setToken(websurferToken));
         await dispatch(getUser());
@@ -63,8 +63,8 @@ const Popup = () => {
 
   const renderMiddle = () => {
     return (
-      <S.MiddleWrapper loggedIn={loggedIn}>
-        {loggedIn ? (
+      <S.MiddleWrapper bgWhite={!loggedIn || (loggedIn && !hasData)}>
+        {loggedIn && hasData ? (
           <>
             <S.MiddleTitleWrapper>
               <S.SubTitle>Hi Shaka Shaka,</S.SubTitle>
@@ -73,7 +73,7 @@ const Popup = () => {
             <SearchBar hasFilter={true} />
           </>
         ) : (
-          <LoginTitle goApp={goApp} />
+          <LoginTitle goApp={goApp} hasData={hasData} />
         )}
       </S.MiddleWrapper>
     );
@@ -120,10 +120,10 @@ const Popup = () => {
   };
 
   return (
-    <S.Wrapper loggedIn={loggedIn}>
+    <S.Wrapper showBottom={loggedIn && hasData}>
       {renderTop()}
       {renderMiddle()}
-      {loggedIn && renderBottom()}
+      {loggedIn && hasData && renderBottom()}
     </S.Wrapper>
   );
 };
