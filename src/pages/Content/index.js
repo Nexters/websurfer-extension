@@ -27,6 +27,7 @@ function sendPostMessage(port, data) {
     switch (type) {
       case 'REQUEST_SIGNING':
       case 'REQUEST_TOKEN':
+      case 'DELETE_TOKEN':
         port.postMessage({
           ...data,
           host: window.location.hostname,

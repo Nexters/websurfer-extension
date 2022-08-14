@@ -17,9 +17,6 @@ chrome.runtime.onInstalled.addListener(() => {
   // });
 });
 
-Axios.defaults.headers.common.Authorization =
-  'Bearer ' + process.env.TEMPORARY_TOKEN;
-
 const instance = new Tabs();
 
 const createHistory = async (tab) => {
@@ -164,8 +161,10 @@ const initExistingTabs = (tabs) => {
 };
 
 chrome.storage.sync.get(['websurferToken'], (result) => {
+  console.log({ result }, 'token');
   if (result) {
-    Axios.defaults.headers.common.Authorization = 'Bearer ' + result;
+    Axios.defaults.headers.common.Authorization =
+      'Bearer ' + result.websurferToken;
     chrome.tabs.query({}, (tabs) => {
       console.log(tabs, 'tabs query');
 

@@ -24,9 +24,11 @@ const Options = (props: Props) => {
     switch (type) {
       case 'RESPONSE_TOKEN': {
         const { token } = payload;
-        Axios.defaults.headers.common.Authorization = 'Bearer ' + token;
+        if (token) {
+          Axios.defaults.headers.common.Authorization = 'Bearer ' + token;
 
-        dispatch(getUser());
+          dispatch(getUser());
+        }
       }
     }
   };
@@ -43,6 +45,12 @@ const Options = (props: Props) => {
       );
     }, 500);
   }, []);
+
+  useEffect(() => {
+    if (user.id) {
+      console.log('loggedin');
+    }
+  }, [user]);
 
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {

@@ -11,6 +11,13 @@ const NoData = () => {
     Axios.defaults.headers.common.Authorization = '';
     dispatch(setUser({}));
     dispatch(setToken(''));
+    window.dispatchEvent(
+      new CustomEvent('WEBSURFER_RELAY_REQUEST', {
+        detail: {
+          type: 'DELETE_TOKEN',
+        },
+      })
+    );
   };
 
   return (
