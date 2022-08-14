@@ -46,12 +46,6 @@ const Options = (props: Props) => {
     }, 500);
   }, []);
 
-  useEffect(() => {
-    if (user.id) {
-      console.log('loggedin');
-    }
-  }, [user]);
-
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
       if (user.id) {
