@@ -23,6 +23,7 @@ var alias = {
   '@redux': resolve('src/redux'),
   '@styles': resolve('src/styles'),
   '@utils': resolve('src/utils'),
+  '@hooks': resolve('src/hooks'),
 };
 
 // load the secrets

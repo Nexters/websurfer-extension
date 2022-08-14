@@ -8,9 +8,10 @@ import * as S from './MainTitle.styled';
 
 type Props = {
   isSetting: boolean;
+  setIsSetting: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const MainTitle = (props: Props) => {
+const MainTitle = ({ setIsSetting, isSetting }: Props) => {
   return (
     <S.Wrapper>
       <S.TitleContainer>
@@ -24,7 +25,7 @@ const MainTitle = (props: Props) => {
         </S.Description>
       </S.TitleContainer>
       <S.MainImage src={Oceanographer} alt="해양학자가 서핑하는 모습" />
-      <SettingDropdown isSetting={props.isSetting} />
+      <SettingDropdown setIsSetting={setIsSetting} isSetting={isSetting} />
     </S.Wrapper>
   );
 };

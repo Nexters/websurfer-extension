@@ -47,7 +47,7 @@ const Options = (props: Props) => {
       );
     }, 500);
   }, []);
-
+  console.log({ user });
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
       if (user.id) {
@@ -57,8 +57,8 @@ const Options = (props: Props) => {
           return <NoData />;
         }
       } else {
-        return <NoData />;
-        // return <BeforeLogin />;
+        // return <NoData />;
+        return <BeforeLogin />;
       }
     }
     return <>인터넷에 연결되어 있지 않습니다.</>;

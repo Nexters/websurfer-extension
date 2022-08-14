@@ -27,6 +27,18 @@ export const userSlice = createSlice({
     setToken(state, { payload }) {
       state.token = payload;
     },
+    logout(state) {
+      Axios.defaults.headers.common.Authorization = '';
+      state.user = {};
+      state.token = '';
+      window.dispatchEvent(
+        new CustomEvent('WEBSURFER_RELAY_REQUEST', {
+          detail: {
+            type: 'DELETE_TOKEN',
+          },
+        })
+      );
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -60,6 +72,6 @@ export const userSlice = createSlice({
 export const tokenSelector = (state: RootState) => state.user.token;
 export const userSelector = (state: RootState) => state.user.user;
 
-export const { setUser, setToken } = userSlice.actions;
+export const { setUser, setToken, logout } = userSlice.actions;
 export default userSlice.reducer;
 export * from './thunk';

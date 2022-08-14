@@ -3,38 +3,20 @@ import React, { useState } from 'react';
 import TopNav from '../MainContent/MainTopNav';
 import SettingDropdown from '../MainContent/SettingDropdown';
 
-import { useAppDispatch } from '@redux/store';
-import { setUser, setToken } from '@redux/user';
-
 import * as S from './NoDataPage.styled';
 
 import noDataImg from '@assets/img/nodata.png';
 
-import Axios from '@utils/axios';
-
 const NoData = () => {
   const [isSetting, setIsSetting] = useState(false);
-  const dispatch = useAppDispatch();
   const onClickGoSurf = () => window.open('', '_blank');
-  const onClickLogout = () => {
-    Axios.defaults.headers.common.Authorization = '';
-    dispatch(setUser({}));
-    dispatch(setToken(''));
-    window.dispatchEvent(
-      new CustomEvent('WEBSURFER_RELAY_REQUEST', {
-        detail: {
-          type: 'DELETE_TOKEN',
-        },
-      })
-    );
-  };
 
   return (
     <S.Wrapper>
       <S.TopWrapper>
         <TopNav setIsSetting={setIsSetting} isSetting={isSetting} />
         <S.SettingDropdownWrapper>
-          <SettingDropdown isSetting={isSetting} />
+          <SettingDropdown setIsSetting={setIsSetting} isSetting={isSetting} />
         </S.SettingDropdownWrapper>
       </S.TopWrapper>
       <S.ContetnWrapper>
