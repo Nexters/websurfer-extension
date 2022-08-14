@@ -190,7 +190,9 @@ chrome.runtime.onConnect.addListener((portFrom) => {
       const { type, payload } = message;
       switch (type) {
         case 'REQUEST_SIGNING': {
-          chrome.storage.sync.set({ websurferToken: payload.token });
+          chrome.storage.sync.remove(['websurferToken'], () => {
+            chrome.storage.sync.set({ websurferToken: payload.token });
+          });
           break;
         }
         case 'REQUEST_TOKEN': {

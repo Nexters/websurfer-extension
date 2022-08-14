@@ -30,7 +30,7 @@ const Popup = () => {
   useEffect(() => {
     chrome.storage.sync.get(['websurferToken'], async (result) => {
       const { websurferToken } = result;
-
+      console.log({ result });
       if (websurferToken) {
         dispatch(setToken(websurferToken));
         await dispatch(getUser());
