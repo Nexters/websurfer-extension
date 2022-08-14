@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Main from '@components/Main/Main';
-import BeforeLogin from '@components/Main/BeforeLogin/BeforeLogin';
+import BeforeLogin from '@components/Main/DummyMain/DummyMain';
 import NoData from '@components/Main/NoDataPage/NoDataPage';
 
 import { getUser, userSelector, setToken } from '@redux/user';
@@ -57,7 +57,8 @@ const Options = (props: Props) => {
           return <NoData />;
         }
       } else {
-        return <BeforeLogin />;
+        return <NoData />;
+        // return <BeforeLogin />;
       }
     }
     return <>인터넷에 연결되어 있지 않습니다.</>;

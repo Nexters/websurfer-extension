@@ -3,10 +3,9 @@ import tw, { styled } from 'twin.macro';
 
 export const DummyWrapper = styled.div(() => {
   return [
-    tw`
-    
-  `,
-    css``,
+    css`
+      padding-top: 24px;
+    `,
   ];
 });
 

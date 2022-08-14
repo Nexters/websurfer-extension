@@ -1,11 +1,11 @@
 import React from 'react';
 
-import DummyTitle from '@components/Main/BeforeLogin/DummyTitle';
+import DummyTitle from '@components/Main/DummyMain/DummyTitle';
 import TotalTime from '@components/Main/MainContent/TotalTime';
 import SurffingTime from '@components/Main/MainContent/SurffingTime';
-import DummyMostVisitWebSite from '@components/Main/BeforeLogin/DummyMostVisitWebSite';
-import DummyHistory from '@components/Main/BeforeLogin/DummyHistory';
-import DummyTopNav from '@components/Main/BeforeLogin/DummyTopNav';
+import DummyMostVisitWebSite from '@components/Main/DummyMain/DummyMostVisitWebSite';
+import DummyHistory from '@components/Main/DummyMain/DummyHistory';
+import DummyTopNav from '@components/Main/DummyMain/DummyTopNav';
 
 import * as S from './styled';
 
