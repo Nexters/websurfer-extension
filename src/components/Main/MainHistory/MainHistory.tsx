@@ -2,6 +2,7 @@ import React from 'react';
 import { format, isToday } from 'date-fns';
 
 import { SearchBar, CompactItem, FullItem } from '../../Commons';
+import NoListWithKeyword from '@components/Commons/NoListWithKeyword';
 
 import * as S from './MainHistory.styled';
 
@@ -29,6 +30,7 @@ const MainHistory = ({
   setRawKeyword,
 }: Props) => {
   const historyList = useAppSelector(historyListSelector);
+  const hasData = Boolean(historyList.length);
 
   const historyByVisitDate = historyList.reduce(
     (acc: accObj, val: HistoryEntity) => {
@@ -82,7 +84,13 @@ const MainHistory = ({
       </S.TitleWrapper>
       <S.ContentWrapper>
         <SearchBar rawKeyword={rawKeyword} setRawKeyword={setRawKeyword} />
-        <S.HistoryListWrapper>{renderHistory()}</S.HistoryListWrapper>
+        <S.HistoryListWrapper>
+          {hasData ? (
+            renderHistory()
+          ) : (
+            <NoListWithKeyword keyword={rawKeyword} />
+          )}
+        </S.HistoryListWrapper>
       </S.ContentWrapper>
     </div>
   );

@@ -12,8 +12,7 @@ export const Wrapper = styled.div(({ showBottom }: IWrapper) => {
     `,
     css`
       width: 780px;
-      height: unset;
-      max-height: ${showBottom ? '600px' : 'unset'};
+      height: ${showBottom ? '600px' : 'unset'};
       padding: 20px;
       background: #fff;
     `,
@@ -127,7 +126,7 @@ export const CategoryDate = styled.span(() => {
 export const BottomWrapper = styled.div(() => {
   return [
     tw`
-      overflow-y-auto
+      overflow-y-auto h-full
     `,
     css`
       max-height: 292px;
@@ -157,6 +156,14 @@ export const DateCategroyWrapper = styled.div(() => {
       &:first-child {
         margin-top: unset;
       }
+    `,
+  ];
+});
+
+export const NoListWrapper = styled.div(() => {
+  return [
+    css`
+      height: 270px;
     `,
   ];
 });

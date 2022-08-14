@@ -5,6 +5,7 @@ import * as S from './Popup.styled';
 
 import { SearchBar, FullItem } from '@components/Commons';
 import LoginTitle from '@components/Popup/LoginTitle';
+import NoListWithKeyword from '@components/Commons/NoListWithKeyword';
 
 import { HomeIcon, CloseIcon } from '@assets/img/svg-icon-paths';
 
@@ -44,7 +45,7 @@ const Popup = () => {
         );
       }
     });
-  }, []);
+  }, [dispatch]);
 
   const goApp = () => {
     window.chrome.tabs.create({
@@ -136,7 +137,15 @@ const Popup = () => {
     <S.Wrapper showBottom={loggedIn && hasData}>
       {renderTop()}
       {renderMiddle()}
-      {loggedIn && hasData && renderBottom()}
+      {loggedIn && hasData ? (
+        renderBottom()
+      ) : !hasData && keyword ? (
+        <S.NoListWrapper>
+          <NoListWithKeyword keyword={keyword} />
+        </S.NoListWrapper>
+      ) : (
+        ''
+      )}
     </S.Wrapper>
   );
 };
