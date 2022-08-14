@@ -47,7 +47,6 @@ const Options = (props: Props) => {
       );
     }, 500);
   }, []);
-  console.log({ user });
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
       if (user.id) {

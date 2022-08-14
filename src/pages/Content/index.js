@@ -40,7 +40,6 @@ function sendPostMessage(port, data) {
 }
 
 chrome.runtime.onMessage.addListener((detail) => {
-  console.log({ detail });
   const customEvent = new CustomEvent('WEBSURFER_RELAY_RESPONSE', { detail });
   window.dispatchEvent(customEvent);
 });
