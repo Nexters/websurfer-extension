@@ -44,7 +44,7 @@ const Popup = () => {
         );
       }
     });
-  });
+  }, []);
 
   const goApp = () => {
     window.chrome.tabs.create({

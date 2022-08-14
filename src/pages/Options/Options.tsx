@@ -33,37 +33,35 @@ const Options = (props: Props) => {
     );
   };
 
-  const listener = async (event) => {
-    const { type, payload } = event.detail;
+  // const listener = async (event) => {
+  //   const { type, payload } = event.detail;
 
-    switch (type) {
-      case 'RESPONSE_TOKEN': {
-        const { token } = payload;
+  //   switch (type) {
+  //     case 'RESPONSE_TOKEN': {
+  //       const { token } = payload;
 
-        if (token && !storeToken) {
-          initUser(token);
-        }
-      }
-    }
-  };
+  //       if (token && !storeToken) {
+  //         initUser(token);
+  //       }
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
-    setTimeout(() => {
-      window.addEventListener('WEBSURFER_RELAY_RESPONSE', listener);
-      window.dispatchEvent(
-        new CustomEvent('WEBSURFER_RELAY_REQUEST', {
-          detail: {
-            type: 'REQUEST_TOKEN',
-          },
-        })
-      );
+    // window.addEventListener('WEBSURFER_RELAY_RESPONSE', listener);
+    // window.dispatchEvent(
+    //   new CustomEvent('WEBSURFER_RELAY_REQUEST', {
+    //     detail: {
+    //       type: 'REQUEST_TOKEN',
+    //     },
+    //   })
+    // );
 
-      const token = localStorage.getItem('websurfer-token');
-      if (token) {
-        initUser(token);
-      }
-    }, 1000);
-  });
+    const token = localStorage.getItem('websurfer-token');
+    if (token) {
+      initUser(token);
+    }
+  }, []);
 
   const noDataWithKeyword = !hasData && (keyword || keyword === '');
 
