@@ -40,7 +40,7 @@ const Main: React.FC<Props> = (props: Props) => {
           >
             <>
               <MainTopNav setIsSetting={setIsSetting} isSetting={isSetting} />
-              <MainTitle isSetting={isSetting} />
+              <MainTitle setIsSetting={setIsSetting} isSetting={isSetting} />
               <MostVisitWebSite />
               <S.Justify>
                 <TotalTime />

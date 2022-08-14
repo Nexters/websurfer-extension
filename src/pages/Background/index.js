@@ -17,9 +17,6 @@ chrome.runtime.onInstalled.addListener(() => {
   // });
 });
 
-Axios.defaults.headers.common.Authorization =
-  'Bearer ' + process.env.TEMPORARY_TOKEN;
-
 const instance = new Tabs();
 
 const createHistory = async (tab) => {
@@ -163,18 +160,66 @@ const initExistingTabs = (tabs) => {
   instance.setTabsMap(tabsMap);
 };
 
-chrome.tabs.query({}, (tabs) => {
-  console.log(tabs, 'tabs query');
+chrome.storage.sync.get(['websurferToken'], (result) => {
+  console.log({ result }, 'token');
+  if (result) {
+    Axios.defaults.headers.common.Authorization =
+      'Bearer ' + result.websurferToken;
+    chrome.tabs.query({}, (tabs) => {
+      console.log(tabs, 'tabs query');
 
-  if (tabs.length) {
-    initExistingTabs(tabs);
+      if (tabs.length) {
+        initExistingTabs(tabs);
+      }
+
+      // tabs events
+      chrome.tabs.onActivated.addListener(onActivatedCb);
+      chrome.tabs.onUpdated.addListener(onUpdatedCb);
+      chrome.tabs.onRemoved.addListener(onRemovedCb);
+
+      // windows events
+      chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+    });
   }
+});
 
-  // tabs events
-  chrome.tabs.onActivated.addListener(onActivatedCb);
-  chrome.tabs.onUpdated.addListener(onUpdatedCb);
-  chrome.tabs.onRemoved.addListener(onRemovedCb);
+// chrome.runtime.onMessage.addListener(console.log);
+chrome.runtime.onConnect.addListener((portFrom) => {
+  if (portFrom.name === 'websurfer-background-content') {
+    portFrom.onMessage.addListener((message) => {
+      const { type, payload } = message;
+      switch (type) {
+        case 'REQUEST_SIGNING': {
+          chrome.storage.sync.set({ websurferToken: payload.token });
+          break;
+        }
+        case 'REQUEST_TOKEN': {
+          const tabId = portFrom.sender.tab.id;
+          chrome.storage.sync.get(['websurferToken'], (result) => {
+            chrome.tabs.sendMessage(tabId, {
+              type: 'RESPONSE_TOKEN',
+              payload: { token: result.websurferToken },
+            });
+          });
+          break;
+        }
+        case 'DELETE_TOKEN': {
+          chrome.storage.sync.remove(['websurferToken'], () => {
+            Axios.defaults.headers.common.Authorization = '';
+            // tabs events
+            chrome.tabs.onActivated.removeListener(onActivatedCb);
+            chrome.tabs.onUpdated.removeListener(onUpdatedCb);
+            chrome.tabs.onRemoved.removeListener(onRemovedCb);
 
-  // windows events
-  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+            // windows events
+            chrome.windows.onFocusChanged.removeListener(onFocusChangedCb);
+          });
+          break;
+        }
+        default: {
+          return;
+        }
+      }
+    });
+  }
 });

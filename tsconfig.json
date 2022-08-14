@@ -22,7 +22,8 @@
       "@pages/*": ["pages/*"],
       "@redux/*": ["redux/*"],
       "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["src", "**/*.d.ts", "**/*.ts", "**/*.tsx"],

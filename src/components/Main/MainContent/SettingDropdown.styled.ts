@@ -22,6 +22,9 @@ export const Wrapper = styled.div<SettingDropdownItemProps>((props) => {
 export const Item = styled.div(() => {
   const theme = useTheme();
   return [
+    tw`
+      cursor-pointer
+    `,
     css`
       font-size: ${theme.fontSize.s};
       font-weight: ${theme.fontWeight.bold};

@@ -2,11 +2,13 @@ import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 
+import userReducer from './user';
 import hisoryReducer from './history';
 import commonReducer from './common';
 
 export const store = configureStore({
   reducer: {
+    user: userReducer,
     common: commonReducer,
     history: hisoryReducer,
   },

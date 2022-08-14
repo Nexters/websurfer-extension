@@ -1,15 +1,53 @@
 import React from 'react';
 import * as S from './SettingDropdown.styled';
 
-type Props = { isSetting: boolean };
+import { useAppDispatch } from '@redux/store';
+import { logout } from '@redux/user';
 
-const SettingDropdown = (props: Props) => {
+import useGoogleLogin from '@hooks/useGoogleLogin';
+
+type Props = {
+  isSetting: boolean;
+  setIsSetting: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const SettingDropdown = ({ isSetting, setIsSetting }: Props) => {
+  const dispatch = useAppDispatch();
+  const { clickGoogleLogin } = useGoogleLogin();
+  const options = [
+    {
+      name: '로그아웃',
+      cb: () => dispatch(logout()),
+    },
+    {
+      name: '계정전환',
+      cb: clickGoogleLogin,
+    },
+    {
+      name: '문의하기',
+      cb: () => {},
+    },
+    {
+      name: '팀샤카샤카',
+      cb: () => {},
+    },
+  ];
+
   return (
-    <S.Wrapper isActive={props.isSetting}>
-      <S.Item>로그아웃</S.Item>
-      <S.Item>계정 전환</S.Item>
-      <S.Item>문의하기</S.Item>
-      <S.Item>팀샤카샤카</S.Item>
+    <S.Wrapper isActive={isSetting}>
+      {options.map(({ name, cb }) => {
+        return (
+          <S.Item
+            key={name}
+            onClick={() => {
+              cb();
+              setIsSetting(false);
+            }}
+          >
+            {name}
+          </S.Item>
+        );
+      })}
     </S.Wrapper>
   );
 };

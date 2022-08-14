@@ -27,5 +27,8 @@
       "matches": []
     }
   ],
-  "permissions": ["tabs", "history"]
+  "permissions": ["tabs", "history", "storage"],
+  "externally_connectable": {
+    "ids": ["*"]
+  }
 }
