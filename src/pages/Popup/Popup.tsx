@@ -24,7 +24,7 @@ const Popup = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    chrome.storage.sync.get(['websurferToken'], (result) => {
+    chrome.storage.sync.get(['websurferToken'], async (result) => {
       const { websurferToken } = result;
 
       if (websurferToken) {
@@ -32,7 +32,8 @@ const Popup = () => {
           'Bearer ' + websurferToken;
 
         dispatch(setToken(websurferToken));
-        dispatch(getUser());
+        await dispatch(getUser());
+        await dispatch(getHistoryList({}));
       }
     });
   }, []);

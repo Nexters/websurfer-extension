@@ -5,7 +5,7 @@ import BeforeLogin from '@components/Main/BeforeLogin/BeforeLogin';
 import NoData from '@components/Main/NoData/NoData';
 
 import { getUser, userSelector, setToken } from '@redux/user';
-import { historyListSelector } from '@redux/history';
+import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 
 import Axios from '@utils/axios';
@@ -18,7 +18,7 @@ const Options = (props: Props) => {
   const user = useAppSelector(userSelector);
   const histories = useAppSelector(historyListSelector);
 
-  const listener = (event) => {
+  const listener = async (event) => {
     const { type, payload } = event.detail;
 
     switch (type) {
@@ -28,7 +28,8 @@ const Options = (props: Props) => {
           Axios.defaults.headers.common.Authorization = 'Bearer ' + token;
 
           dispatch(setToken(token));
-          dispatch(getUser());
+          await dispatch(getUser());
+          await dispatch(getHistoryList({}));
         }
       }
     }
