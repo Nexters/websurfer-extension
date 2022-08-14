@@ -11,7 +11,7 @@ interface IFilterProps {
 }
 
 interface IButtonProps {
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export const Wrapper = styled.div(() => {

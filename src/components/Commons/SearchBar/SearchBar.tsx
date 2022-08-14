@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
@@ -9,6 +9,7 @@ import {
   CalendarIcon,
   SearchIcon,
   RefreshIcon,
+  CalendarBlueIcon,
 } from '@assets/img/svg-icon-paths';
 
 import { useAppDispatch, useAppSelector } from '@redux/store';
@@ -43,13 +44,15 @@ const SearchBar = ({
 }: Props) => {
   const [isInputActive, setIsInputActive] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [rawStartDate, setRawStartDate] = useState<TstateDate>(new Date());
-  const [rawEndDate, setRawEndDate] = useState<TstateDate>(new Date());
+  const [rawStartDate, setRawStartDate] = useState<TstateDate>(undefined);
+  const [rawEndDate, setRawEndDate] = useState<TstateDate>(undefined);
   const [filter, setFilter] = useState<IFilter>({
     startDate: undefined,
     endDate: undefined,
     keyword: undefined,
   });
+
+  const notInitialRender = useRef(false);
 
   const dispatch = useAppDispatch();
 
@@ -65,23 +68,28 @@ const SearchBar = ({
 
   useEffect(() => {
     // debounce
-    const timer = setTimeout(() => {
-      setFilter({ ...filter, keyword: rawKeyword });
-    }, 300);
+    if (rawKeyword !== undefined) {
+      const timer = setTimeout(() => {
+        setFilter({ ...filter, keyword: rawKeyword });
+      }, 300);
 
-    return () => {
-      clearTimeout(timer);
-    };
+      return () => {
+        clearTimeout(timer);
+      };
+    }
   }, [rawKeyword]);
 
   useEffect(() => {
-    const filterApplied = Object.values(filter).some((v) => v !== undefined);
-    if (storeToken && filterApplied) {
-      dispatch(getHistoryList(filter));
+    if (notInitialRender.current) {
+      if (storeToken) {
+        dispatch(getHistoryList(filter));
 
-      if (!isFilterOnceApplied) {
-        dispatch(setIsFilterOnceApplied(true));
+        if (!isFilterOnceApplied) {
+          dispatch(setIsFilterOnceApplied(true));
+        }
       }
+    } else {
+      notInitialRender.current = true;
     }
   }, [dispatch, filter]);
 
@@ -103,7 +111,9 @@ const SearchBar = ({
         <S.Filter
           isInputActive={isInputActive}
           onClick={() => setIsFilterActive(!isFilterActive)}
-          src={CalendarIcon}
+          src={
+            filter.startDate || filter.endDate ? CalendarBlueIcon : CalendarIcon
+          }
           alt="filter"
         />
       )}
@@ -115,8 +125,8 @@ const SearchBar = ({
               alt="refresh"
               src={RefreshIcon}
               onClick={() => {
-                setRawStartDate(new Date());
-                setRawEndDate(new Date());
+                setRawStartDate(undefined);
+                setRawEndDate(undefined);
               }}
             ></S.RefreshButton>
           </S.FilterTopWrapper>
@@ -140,7 +150,7 @@ const SearchBar = ({
           </S.DateRangeWrapper>
           <S.FilterApplyButton
             onClick={onClickApply}
-            disabled={filterConfirmDisabled}
+            // disabled={filterConfirmDisabled}
           >
             {filterConfirmDisabled
               ? '적용하기'
