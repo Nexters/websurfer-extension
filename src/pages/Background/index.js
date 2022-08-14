@@ -204,6 +204,19 @@ chrome.runtime.onConnect.addListener((portFrom) => {
           });
           break;
         }
+        case 'DELETE_TOKEN': {
+          chrome.storage.sync.remove(['websurferToken'], () => {
+            Axios.defaults.headers.common.Authorization = '';
+            // tabs events
+            chrome.tabs.onActivated.removeListener(onActivatedCb);
+            chrome.tabs.onUpdated.removeListener(onUpdatedCb);
+            chrome.tabs.onRemoved.removeListener(onRemovedCb);
+
+            // windows events
+            chrome.windows.onFocusChanged.removeListener(onFocusChangedCb);
+          });
+          break;
+        }
         default: {
           return;
         }

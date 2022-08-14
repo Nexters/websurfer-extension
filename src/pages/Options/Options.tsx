@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import Main from '@components/Main/Main';
 import BeforeLogin from '@components/Main/BeforeLogin/BeforeLogin';
+import NoData from '@components/Main/NoData/NoData';
 
-import { getUser } from '@redux/user';
-import { useAppDispatch } from '@redux/store';
+import { getUser, userSelector } from '@redux/user';
+import { useAppDispatch, useAppSelector } from '@redux/store';
 
 import Axios from '@utils/axios';
 interface Props {
@@ -13,8 +14,9 @@ interface Props {
 
 const Options = (props: Props) => {
   const [hasData, setHasData] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
+  const user = useAppSelector(userSelector);
 
   const listener = (event) => {
     const { type, payload } = event.detail;
@@ -24,7 +26,7 @@ const Options = (props: Props) => {
         const { token } = payload;
         Axios.defaults.headers.common.Authorization = 'Bearer ' + token;
 
-        dispatch(getUser()).then(() => setIsLoggedIn(true));
+        dispatch(getUser());
       }
     }
   };
@@ -44,11 +46,11 @@ const Options = (props: Props) => {
 
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
-      if (isLoggedIn) {
+      if (user.id) {
         if (hasData) {
           return <Main />;
         } else {
-          return <>데이터가 없습니다.</>;
+          return <NoData />;
         }
       } else {
         return <BeforeLogin />;

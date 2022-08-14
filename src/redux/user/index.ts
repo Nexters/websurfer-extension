@@ -20,7 +20,14 @@ const initialState: UserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser(state, { payload }) {
+      state.user = payload;
+    },
+    setToken(state, { payload }) {
+      state.token = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getToken.fulfilled,
@@ -53,5 +60,6 @@ export const userSlice = createSlice({
 export const tokenSelector = (state: RootState) => state.user.token;
 export const userSelector = (state: RootState) => state.user.user;
 
+export const { setUser, setToken } = userSlice.actions;
 export default userSlice.reducer;
 export * from './thunk';
