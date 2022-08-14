@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import Main from '@components/Main/Main';
 import BeforeLogin from '@components/Main/BeforeLogin/BeforeLogin';
-import Axios from '@utils/axios';
 
+import { getUser } from '@redux/user';
+import { useAppDispatch } from '@redux/store';
+
+import Axios from '@utils/axios';
 interface Props {
   title: string;
 }
@@ -11,13 +14,32 @@ interface Props {
 const Options = (props: Props) => {
   const [hasData, setHasData] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+
+  const listener = (event) => {
+    const { type, payload } = event.detail;
+
+    switch (type) {
+      case 'RESPONSE_TOKEN': {
+        const { token } = payload;
+        Axios.defaults.headers.common.Authorization = 'Bearer ' + token;
+
+        dispatch(getUser()).then(() => setIsLoggedIn(true));
+      }
+    }
+  };
 
   useEffect(() => {
-    // Axios.defaults.headers.common.Authorization =
-    //   'Bearer ' + process.env.TEMPORARY_TOKEN;
-
-    const token = localStorage.getItem('websurfer-token');
-    setIsLoggedIn(Boolean(token));
+    setTimeout(() => {
+      window.addEventListener('WEBSURFER_RELAY_RESPONSE', listener);
+      window.dispatchEvent(
+        new CustomEvent('WEBSURFER_RELAY_REQUEST', {
+          detail: {
+            type: 'REQUEST_TOKEN',
+          },
+        })
+      );
+    }, 500);
   }, []);
 
   const PrintMainComponent = (): React.ReactElement => {

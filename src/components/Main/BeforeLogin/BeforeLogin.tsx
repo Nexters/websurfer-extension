@@ -23,23 +23,7 @@ const BefoerLogin = () => {
       }, 2000);
     },
   });
-  return (
-    <button onClick={() => onClick()}>
-      구글 로그인
-      {/* <GoogleLogin
-        onSuccess={async (credentialResponse) => {
-          console.log(credentialResponse);
-          const { data } = await Axios.get<{ sub: string; email: string }>(
-            `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${credential}`
-          );
-          console;
-        }}
-        onError={() => {
-          console.log('Login Failed');
-        }}
-      /> */}
-    </button>
-  );
+  return <button onClick={() => onClick()}>구글 로그인</button>;
 };
 
 export default BefoerLogin;

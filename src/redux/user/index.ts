@@ -27,7 +27,17 @@ export const userSlice = createSlice({
       (state, { payload: { access } }: PayloadAction<TokenResponse>) => {
         state.token = access;
         Axios.defaults.headers.common.Authorization = access;
-        localStorage.setItem('websurfer-token', access);
+
+        window.dispatchEvent(
+          new CustomEvent('WEBSURFER_RELAY_REQUEST', {
+            detail: {
+              type: 'REQUEST_SIGNING',
+              payload: {
+                token: access,
+              },
+            },
+          })
+        );
       }
     );
 

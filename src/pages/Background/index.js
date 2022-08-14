@@ -163,18 +163,51 @@ const initExistingTabs = (tabs) => {
   instance.setTabsMap(tabsMap);
 };
 
-chrome.tabs.query({}, (tabs) => {
-  console.log(tabs, 'tabs query');
+chrome.storage.sync.get(['websurferToken'], (result) => {
+  if (result) {
+    Axios.defaults.headers.common.Authorization = 'Bearer ' + result;
+    chrome.tabs.query({}, (tabs) => {
+      console.log(tabs, 'tabs query');
 
-  if (tabs.length) {
-    initExistingTabs(tabs);
+      if (tabs.length) {
+        initExistingTabs(tabs);
+      }
+
+      // tabs events
+      // chrome.tabs.onActivated.addListener(onActivatedCb);
+      // chrome.tabs.onUpdated.addListener(onUpdatedCb);
+      // chrome.tabs.onRemoved.addListener(onRemovedCb);
+
+      // windows events
+      // chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+    });
   }
+});
 
-  // tabs events
-  chrome.tabs.onActivated.addListener(onActivatedCb);
-  chrome.tabs.onUpdated.addListener(onUpdatedCb);
-  chrome.tabs.onRemoved.addListener(onRemovedCb);
-
-  // windows events
-  chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+// chrome.runtime.onMessage.addListener(console.log);
+chrome.runtime.onConnect.addListener((portFrom) => {
+  if (portFrom.name === 'websurfer-background-content') {
+    portFrom.onMessage.addListener((message) => {
+      const { type, payload } = message;
+      switch (type) {
+        case 'REQUEST_SIGNING': {
+          chrome.storage.sync.set({ websurferToken: payload.token });
+          break;
+        }
+        case 'REQUEST_TOKEN': {
+          const tabId = portFrom.sender.tab.id;
+          chrome.storage.sync.get(['websurferToken'], (result) => {
+            chrome.tabs.sendMessage(tabId, {
+              type: 'RESPONSE_TOKEN',
+              payload: { token: result.websurferToken },
+            });
+          });
+          break;
+        }
+        default: {
+          return;
+        }
+      }
+    });
+  }
 });
