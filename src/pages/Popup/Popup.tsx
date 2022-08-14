@@ -13,6 +13,7 @@ import { useAppSelector, useAppDispatch } from '@redux/store';
 import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { getUser, userSelector, setToken } from '@redux/user';
+import { filterOnceAppliedSelector } from '@redux/common';
 
 interface accObj {
   [key: string]: HistoryListReponse;
@@ -23,11 +24,11 @@ const Popup = () => {
 
   const user = useAppSelector(userSelector);
   const historyList = useAppSelector(historyListSelector);
+  const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
   const dispatch = useAppDispatch();
 
   const loggedIn = user.id;
   const hasData = Boolean(historyList.length);
-  const noDataWithKeyword = !hasData && (keyword || keyword === '');
 
   useEffect(() => {
     chrome.storage.sync.get(['websurferToken'], async (result) => {
@@ -40,7 +41,7 @@ const Popup = () => {
           getHistoryList({
             startDate: undefined,
             endDate: undefined,
-            keyword: '',
+            keyword: undefined,
           })
         );
       }
@@ -72,9 +73,9 @@ const Popup = () => {
   const renderMiddle = () => {
     return (
       <S.MiddleWrapper
-        bgWhite={!loggedIn || (loggedIn && !hasData && keyword === undefined)}
+        bgWhite={!loggedIn || (loggedIn && !hasData && !isFilterOnceApplied)}
       >
-        {(loggedIn && hasData) || noDataWithKeyword ? (
+        {(loggedIn && hasData) || isFilterOnceApplied ? (
           <>
             <S.MiddleTitleWrapper>
               <S.SubTitle>Hi Shaka Shaka,</S.SubTitle>

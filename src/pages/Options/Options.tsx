@@ -4,9 +4,10 @@ import Main from '@components/Main/Main';
 import BeforeLogin from '@components/Main/DummyMain/DummyMain';
 import NoData from '@components/Main/NoDataPage/NoDataPage';
 
-import { getUser, userSelector, setToken, tokenSelector } from '@redux/user';
+import { getUser, userSelector, setToken } from '@redux/user';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
+import { filterOnceAppliedSelector } from '@redux/common';
 
 interface Props {
   title: string;
@@ -18,7 +19,7 @@ const Options = (props: Props) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
   const histories = useAppSelector(historyListSelector);
-  const storeToken = useAppSelector(tokenSelector);
+  const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
   const hasData = Boolean(histories.length);
 
   const initUser = async (token: string) => {
@@ -28,7 +29,7 @@ const Options = (props: Props) => {
       getHistoryList({
         startDate: undefined,
         endDate: undefined,
-        keyword: '',
+        keyword: undefined,
       })
     );
   };
@@ -63,12 +64,10 @@ const Options = (props: Props) => {
     }
   }, []);
 
-  const noDataWithKeyword = !hasData && (keyword || keyword === '');
-
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
       if (user.id) {
-        if (hasData || noDataWithKeyword) {
+        if (hasData || isFilterOnceApplied) {
           return <Main rawKeyword={keyword} setRawKeyword={setKeyword} />;
         } else {
           return <NoData />;

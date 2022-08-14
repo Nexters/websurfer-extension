@@ -8,12 +8,12 @@ import { getToken, getUser } from './thunk';
 import Axios from '@utils/axios';
 
 interface UserState {
-  user: UserEntity;
+  userInfo: UserEntity;
   token: string;
 }
 
 const initialState: UserState = {
-  user: {},
+  userInfo: {},
   token: '',
 };
 
@@ -22,7 +22,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, { payload }) {
-      state.user = payload;
+      state.userInfo = payload;
     },
     setToken(state, { payload }) {
       Axios.defaults.headers.common.Authorization = payload
@@ -31,7 +31,7 @@ export const userSlice = createSlice({
       state.token = payload;
     },
     logout(state) {
-      state.user = {};
+      state.userInfo = {};
 
       Axios.defaults.headers.common.Authorization = '';
       state.token = '';
@@ -70,14 +70,14 @@ export const userSlice = createSlice({
     builder.addCase(
       getUser.fulfilled,
       (state, { payload }: PayloadAction<UserEntity>) => {
-        state.user = payload;
+        state.userInfo = payload;
       }
     );
   },
 });
 
 export const tokenSelector = (state: RootState) => state.user.token;
-export const userSelector = (state: RootState) => state.user.user;
+export const userSelector = (state: RootState) => state.user.userInfo;
 
 export const { setUser, setToken, logout } = userSlice.actions;
 export default userSlice.reducer;

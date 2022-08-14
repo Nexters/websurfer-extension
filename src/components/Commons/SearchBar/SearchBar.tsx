@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import debounce from 'lodash.debounce';
 
 import * as S from './SearchBar.styled';
 
@@ -12,10 +11,14 @@ import {
   RefreshIcon,
 } from '@assets/img/svg-icon-paths';
 
-import { useAppDispatch } from '@redux/store';
+import { useAppDispatch, useAppSelector } from '@redux/store';
 import { getHistoryList } from '@redux/history';
+import {
+  setIsFilterOnceApplied,
+  filterOnceAppliedSelector,
+} from '@redux/common';
+import { tokenSelector } from '@redux/user';
 
-import Axios from '@utils/axios';
 interface Props {
   placeholder?: string;
   hasFilter?: boolean;
@@ -45,10 +48,13 @@ const SearchBar = ({
   const [filter, setFilter] = useState<IFilter>({
     startDate: undefined,
     endDate: undefined,
-    keyword: '',
+    keyword: undefined,
   });
 
   const dispatch = useAppDispatch();
+
+  const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
+  const storeToken = useAppSelector(tokenSelector);
 
   const filterConfirmDisabled = !rawStartDate || !rawEndDate;
 
@@ -57,14 +63,10 @@ const SearchBar = ({
     setIsFilterActive(!isFilterActive);
   };
 
-  const callHistoryByKeyword = debounce(function (keyword: string | undefined) {
-    setFilter({ ...filter, keyword });
-  }, 500);
-
   useEffect(() => {
     // debounce
     const timer = setTimeout(() => {
-      callHistoryByKeyword(rawKeyword);
+      setFilter({ ...filter, keyword: rawKeyword });
     }, 300);
 
     return () => {
@@ -73,8 +75,13 @@ const SearchBar = ({
   }, [rawKeyword]);
 
   useEffect(() => {
-    if (Axios.defaults.headers.common.Authorization) {
+    const filterApplied = Object.values(filter).some((v) => v !== undefined);
+    if (storeToken && filterApplied) {
       dispatch(getHistoryList(filter));
+
+      if (!isFilterOnceApplied) {
+        dispatch(setIsFilterOnceApplied(true));
+      }
     }
   }, [dispatch, filter]);
 
