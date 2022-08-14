@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { createPortal } from 'react-dom';
-import { closeModal, ModalType } from '@redux/common';
+import { closeModal, modalSelector, ModalType } from '@redux/common';
 import { RootState, useAppDispatch, useAppSelector } from '@redux/store';
 
 import { ModalCloseIcon } from '@assets/img/svg-icon-paths';
@@ -19,7 +19,7 @@ const Modal = ({ children, title, type }: Props) => {
   const [mounted, setMounted] = useState(false);
 
   const dispatch = useAppDispatch();
-  const modalState = useAppSelector((state: RootState) => state.common);
+  const modalState = useAppSelector(modalSelector);
 
   const closePortal = () => {
     dispatch(closeModal());
