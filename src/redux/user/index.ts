@@ -36,6 +36,7 @@ export const userSlice = createSlice({
       Axios.defaults.headers.common.Authorization = '';
       state.token = '';
 
+      localStorage.removeItem('websurfer-token');
       window.dispatchEvent(
         new CustomEvent('WEBSURFER_RELAY_REQUEST', {
           detail: {
@@ -52,6 +53,7 @@ export const userSlice = createSlice({
         state.token = access;
         Axios.defaults.headers.common.Authorization = access;
 
+        localStorage.setItem('websurfer-token', access);
         window.dispatchEvent(
           new CustomEvent('WEBSURFER_RELAY_REQUEST', {
             detail: {

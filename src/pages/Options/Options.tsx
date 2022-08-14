@@ -4,7 +4,7 @@ import Main from '@components/Main/Main';
 import BeforeLogin from '@components/Main/DummyMain/DummyMain';
 import NoData from '@components/Main/NoDataPage/NoDataPage';
 
-import { getUser, userSelector, setToken } from '@redux/user';
+import { getUser, userSelector, setToken, tokenSelector } from '@redux/user';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 
@@ -18,7 +18,14 @@ const Options = (props: Props) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
   const histories = useAppSelector(historyListSelector);
+  const storeToken = useAppSelector(tokenSelector);
   const hasData = Boolean(histories.length);
+
+  const initUser = async (token: string) => {
+    dispatch(setToken(token));
+    await dispatch(getUser());
+    await dispatch(getHistoryList({}));
+  };
 
   const listener = async (event) => {
     const { type, payload } = event.detail;
@@ -27,10 +34,8 @@ const Options = (props: Props) => {
       case 'RESPONSE_TOKEN': {
         const { token } = payload;
 
-        if (token) {
-          dispatch(setToken(token));
-          await dispatch(getUser());
-          await dispatch(getHistoryList({}));
+        if (token && !storeToken) {
+          initUser(token);
         }
       }
     }
@@ -46,6 +51,11 @@ const Options = (props: Props) => {
           },
         })
       );
+
+      const token = localStorage.getItem('websurfer-token');
+      if (token) {
+        initUser(token);
+      }
     }, 1000);
   }, []);
 

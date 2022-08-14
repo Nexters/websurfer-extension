@@ -57,7 +57,7 @@ const SearchBar = ({
     setIsFilterActive(!isFilterActive);
   };
 
-  const callHistoryByKeyword = debounce(function (keyword: string) {
+  const callHistoryByKeyword = debounce(function (keyword: string | undefined) {
     setFilter({ ...filter, keyword });
   }, 500);
 
