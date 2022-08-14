@@ -24,7 +24,13 @@ const Options = (props: Props) => {
   const initUser = async (token: string) => {
     dispatch(setToken(token));
     await dispatch(getUser());
-    await dispatch(getHistoryList({}));
+    await dispatch(
+      getHistoryList({
+        startDate: undefined,
+        endDate: undefined,
+        keyword: '',
+      })
+    );
   };
 
   const listener = async (event) => {
@@ -57,7 +63,7 @@ const Options = (props: Props) => {
         initUser(token);
       }
     }, 1000);
-  }, []);
+  });
 
   const noDataWithKeyword = !hasData && (keyword || keyword === '');
 

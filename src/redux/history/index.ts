@@ -12,7 +12,11 @@ interface HistoryState {
 
 const initialState: HistoryState = {
   histories: [],
-  filter: {},
+  filter: {
+    startDate: undefined,
+    endDate: undefined,
+    keyword: '',
+  },
 };
 
 export const historySlice = createSlice({

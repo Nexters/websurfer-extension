@@ -54,11 +54,10 @@ export interface HistoryEntity {
   website: IWebSite;
 }
 
-export interface HistoryListRequest extends UserEntity {
-  filter?: EntityFilter;
+export interface HistoryListRequest {
   startDate: Date | undefined;
   endDate: Date | undefined;
-  keyword: string;
+  keyword: string | undefined;
 }
 export type HistoryListReponse = HistoryEntity[];
 

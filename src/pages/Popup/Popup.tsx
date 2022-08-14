@@ -35,10 +35,16 @@ const Popup = () => {
       if (websurferToken) {
         dispatch(setToken(websurferToken));
         await dispatch(getUser());
-        await dispatch(getHistoryList({}));
+        await dispatch(
+          getHistoryList({
+            startDate: undefined,
+            endDate: undefined,
+            keyword: '',
+          })
+        );
       }
     });
-  }, []);
+  });
 
   const goApp = () => {
     window.chrome.tabs.create({
