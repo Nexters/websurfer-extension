@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Main from '@components/Main/Main';
 import BeforeLogin from '@components/Main/BeforeLogin/BeforeLogin';
-import NoData from '@components/Main/NoData/NoData';
+import NoData from '@components/Main/NoDataPage/NoDataPage';
 
 import { getUser, userSelector, setToken } from '@redux/user';
 import { historyListSelector, getHistoryList } from '@redux/history';

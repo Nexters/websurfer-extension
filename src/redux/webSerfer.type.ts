@@ -29,6 +29,15 @@ export type EntityFilter =
   | 'isNull'; //nullish 비교 연산
 // Entity filter 문서 참고 (https://www.notion.so/Entity-filter-1449297f64ed45ec83db48b150694328)
 
+interface IWebSite {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  achievementId: number | null;
+  name: string;
+  hostname: string;
+  faviconUrl: string | null;
+}
 export interface HistoryEntity {
   id: number;
   createdAt: Date;
@@ -42,6 +51,7 @@ export interface HistoryEntity {
   title?: string;
   description?: string;
   duration: number;
+  website: IWebSite;
 }
 
 export interface HistoryListRequest extends UserEntity {
