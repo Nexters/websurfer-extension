@@ -4,9 +4,10 @@ import Main from '@components/Main/Main';
 import BeforeLogin from '@components/Main/DummyMain/DummyMain';
 import NoData from '@components/Main/NoDataPage/NoDataPage';
 
+import { getStat } from '@redux/dashboard';
 import { getUser, userSelector, setToken } from '@redux/user';
-import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
+import { historyListSelector, getHistoryList } from '@redux/history';
 
 import Axios from '@utils/axios';
 interface Props {
@@ -18,7 +19,7 @@ const Options = (props: Props) => {
   const user = useAppSelector(userSelector);
   const histories = useAppSelector(historyListSelector);
 
-  const listener = async (event) => {
+  const listener = async (event: any) => {
     const { type, payload } = event.detail;
 
     switch (type) {
@@ -30,6 +31,7 @@ const Options = (props: Props) => {
           dispatch(setToken(token));
           await dispatch(getUser());
           await dispatch(getHistoryList({}));
+          await dispatch(getStat());
         }
       }
     }
