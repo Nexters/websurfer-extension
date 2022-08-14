@@ -9,6 +9,7 @@ import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 
 import Axios from '@utils/axios';
+
 interface Props {
   title: string;
 }
@@ -24,9 +25,8 @@ const Options = (props: Props) => {
     switch (type) {
       case 'RESPONSE_TOKEN': {
         const { token } = payload;
-        if (token) {
-          Axios.defaults.headers.common.Authorization = 'Bearer ' + token;
 
+        if (token) {
           dispatch(setToken(token));
           await dispatch(getUser());
           await dispatch(getHistoryList({}));

@@ -25,12 +25,17 @@ export const userSlice = createSlice({
       state.user = payload;
     },
     setToken(state, { payload }) {
+      Axios.defaults.headers.common.Authorization = payload
+        ? 'Bearer ' + payload
+        : '';
       state.token = payload;
     },
     logout(state) {
-      Axios.defaults.headers.common.Authorization = '';
       state.user = {};
+
+      Axios.defaults.headers.common.Authorization = '';
       state.token = '';
+
       window.dispatchEvent(
         new CustomEvent('WEBSURFER_RELAY_REQUEST', {
           detail: {
