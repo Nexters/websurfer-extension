@@ -124,7 +124,7 @@ export const FilterApplyButton = styled.button(({ disabled }: IButtonProps) => {
       margin-top: 12px;
       color: #fff;
       font-weight: ${theme.fontWeight.bold};
-      font-size: ${theme.fontSize.m};
+      font-size: ${theme.fontSize.xs};
       background: ${disabled ? theme.color['gray-04'] : theme.color.primary};
       border-radius: 10px;
       border: unset;
