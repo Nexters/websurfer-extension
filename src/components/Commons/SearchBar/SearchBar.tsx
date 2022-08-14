@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DateRange } from 'react-date-range';
-import format from 'date-fns/format';
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
 import debounce from 'lodash.debounce';
 
 import * as S from './SearchBar.styled';
@@ -97,7 +98,14 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
         <S.FilterWrapper>
           <S.FilterTopWrapper>
             <S.FilterTitle>기간 선택</S.FilterTitle>
-            <S.RefreshButton alt="refresh" src={RefreshIcon}></S.RefreshButton>
+            <S.RefreshButton
+              alt="refresh"
+              src={RefreshIcon}
+              onClick={() => {
+                setRawStartDate(new Date());
+                setRawEndDate(new Date());
+              }}
+            ></S.RefreshButton>
           </S.FilterTopWrapper>
           <S.DateRangeWrapper>
             <DateRange
@@ -114,6 +122,7 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
                 setRawStartDate(startDate);
                 setRawEndDate(endDate);
               }}
+              locale={ko}
             />
           </S.DateRangeWrapper>
           <S.FilterApplyButton
