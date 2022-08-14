@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import DummyTopNav from '../DummyMain/DummyTopNav';
+import TopNav from '../MainContent/MainTopNav';
+import SettingDropdown from '../MainContent/SettingDropdown';
 
 import { useAppDispatch } from '@redux/store';
 import { setUser, setToken } from '@redux/user';
@@ -12,6 +13,7 @@ import noDataImg from '@assets/img/nodata.png';
 import Axios from '@utils/axios';
 
 const NoData = () => {
+  const [isSetting, setIsSetting] = useState(false);
   const dispatch = useAppDispatch();
   const onClickGoSurf = () => window.open('', '_blank');
   const onClickLogout = () => {
@@ -29,7 +31,8 @@ const NoData = () => {
 
   return (
     <S.Wrapper>
-      <DummyTopNav />
+      <TopNav setIsSetting={setIsSetting} isSetting={isSetting} />
+      <SettingDropdown isSetting={isSetting} />
       <S.ContetnWrapper>
         <S.ContentItem>
           <S.NoDataImg src={noDataImg} alt="no-data" />

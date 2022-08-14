@@ -6,8 +6,9 @@ export const Wrapper = styled.div(() => {
     css`
       max-width: 1320px;
       min-width: 1320px;
-      height: 100vh;
+      height: calc(100vh - 20px);
       margin: 0 auto;
+      margin-top: 20px;
     `,
   ];
 });
@@ -20,7 +21,7 @@ export const ContetnWrapper = styled.div(() => {
       flex flex-col justify-center items-center w-full
     `,
     css`
-      height: calc(100vh - 42px);
+      height: calc(100vh - 126px);
     `,
   ];
 });
@@ -31,7 +32,7 @@ export const ContentItem = styled.div(() => {
     flex flex-col relative 
   `,
     css`
-      bottom: 100px;
+      bottom: 20px;
     `,
   ];
 });
