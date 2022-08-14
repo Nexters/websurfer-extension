@@ -10,6 +10,7 @@ import { HomeIcon, CloseIcon } from '@assets/img/svg-icon-paths';
 import { useAppSelector, useAppDispatch } from '@redux/store';
 import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector, getHistoryList } from '@redux/history';
+import { getUser, userSelector, setToken } from '@redux/user';
 
 import Axios from '@utils/axios';
 
@@ -18,15 +19,23 @@ interface accObj {
 }
 
 const Popup = () => {
+  const user = useAppSelector(userSelector);
   const historyList = useAppSelector(historyListSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    Axios.defaults.headers.common.Authorization =
-      'Bearer ' + process.env.TEMPORARY_TOKEN;
+    chrome.storage.sync.get(['websurferToken'], (result) => {
+      const { websurferToken } = result;
 
-    dispatch(getHistoryList({}));
-  }, [dispatch]);
+      if (websurferToken) {
+        Axios.defaults.headers.common.Authorization =
+          'Bearer ' + websurferToken;
+
+        dispatch(setToken(websurferToken));
+        dispatch(getUser());
+      }
+    });
+  }, []);
 
   const goApp = () => {
     window.chrome.tabs.create({
@@ -104,9 +113,15 @@ const Popup = () => {
 
   return (
     <S.Wrapper>
-      {renderTop()}
-      {renderMiddle()}
-      {renderBottom()}
+      {user.id ? (
+        <>
+          {renderTop()}
+          {renderMiddle()}
+          {renderBottom()}
+        </>
+      ) : (
+        <div>not logged in</div>
+      )}
     </S.Wrapper>
   );
 };
