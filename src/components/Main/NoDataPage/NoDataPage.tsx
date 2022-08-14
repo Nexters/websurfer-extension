@@ -31,8 +31,12 @@ const NoData = () => {
 
   return (
     <S.Wrapper>
-      <TopNav setIsSetting={setIsSetting} isSetting={isSetting} />
-      <SettingDropdown isSetting={isSetting} />
+      <S.TopWrapper>
+        <TopNav setIsSetting={setIsSetting} isSetting={isSetting} />
+        <S.SettingDropdownWrapper>
+          <SettingDropdown isSetting={isSetting} />
+        </S.SettingDropdownWrapper>
+      </S.TopWrapper>
       <S.ContetnWrapper>
         <S.ContentItem>
           <S.NoDataImg src={noDataImg} alt="no-data" />

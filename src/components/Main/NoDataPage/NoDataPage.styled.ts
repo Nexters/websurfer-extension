@@ -85,3 +85,26 @@ export const GoSurfButton = styled.button(() => {
     `,
   ];
 });
+
+export const SettingDropdownWrapper = styled.div(() => {
+  return [
+    tw`
+      relative
+    `,
+    css`
+      top: 0px;
+    `,
+  ];
+});
+
+export const TopWrapper = styled.div(() => {
+  return [
+    tw`
+      absolute
+    `,
+    css`
+      max-width: 1320px;
+      min-width: 1320px;
+    `,
+  ];
+});
