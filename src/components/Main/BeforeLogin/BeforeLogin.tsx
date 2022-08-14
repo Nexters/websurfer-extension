@@ -1,27 +1,39 @@
 import React from 'react';
 
-import { useGoogleLogin } from '@react-oauth/google';
-import Axios from '@utils/axios';
+import DummyTitle from '@components/Main/BeforeLogin/DummyTitle';
+import TotalTime from '@components/Main/MainContent/TotalTime';
+import SurffingTime from '@components/Main/MainContent/SurffingTime';
+import DummyMostVisitWebSite from '@components/Main/BeforeLogin/DummyMostVisitWebSite';
+import DummyHistory from '@components/Main/BeforeLogin/DummyHistory';
+import DummyTopNav from '@components/Main/BeforeLogin/DummyTopNav';
 
-import { getToken, getUser } from '@redux/user';
-import { useAppDispatch } from '@redux/store';
+import * as S from './styled';
 
-const BefoerLogin = () => {
-  const dispatch = useAppDispatch();
-  const onClick = useGoogleLogin({
-    onSuccess: async ({ access_token }) => {
-      const { data } = await Axios.get<{ sub: string; email: string }>(
-        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`
-      );
-
-      const { email, sub } = data;
-
-      await dispatch(getToken({ email, googleTokenId: sub }));
-
-      dispatch(getUser());
-    },
-  });
-  return <button onClick={() => onClick()}>구글 로그인</button>;
+const BefoerLogin: React.FC = () => {
+  return (
+    <S.DummyWrapper>
+      <S.DummyTopWrapper>
+        <S.DummyContentWrapper>
+          <DummyTopNav />
+          <DummyTitle />
+        </S.DummyContentWrapper>
+      </S.DummyTopWrapper>
+      <S.DummyBottonWrapper>
+        <S.DummyContentWrapper>
+          <S.Flex>
+            <S.DummyDashboardWrapper>
+              <DummyMostVisitWebSite />
+              <S.Justify>
+                <TotalTime />
+                <SurffingTime />
+              </S.Justify>
+            </S.DummyDashboardWrapper>
+            <DummyHistory />
+          </S.Flex>
+        </S.DummyContentWrapper>
+      </S.DummyBottonWrapper>
+    </S.DummyWrapper>
+  );
 };
 
 export default BefoerLogin;
