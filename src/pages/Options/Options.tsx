@@ -5,6 +5,7 @@ import BeforeLogin from '@components/Main/BeforeLogin/BeforeLogin';
 import NoData from '@components/Main/NoData/NoData';
 
 import { getUser, userSelector } from '@redux/user';
+import { historyListSelector } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 
 import Axios from '@utils/axios';
@@ -13,10 +14,9 @@ interface Props {
 }
 
 const Options = (props: Props) => {
-  const [hasData, setHasData] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
+  const histories = useAppSelector(historyListSelector);
 
   const listener = (event) => {
     const { type, payload } = event.detail;
@@ -47,7 +47,7 @@ const Options = (props: Props) => {
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
       if (user.id) {
-        if (hasData) {
+        if (histories.length) {
           return <Main />;
         } else {
           return <NoData />;
