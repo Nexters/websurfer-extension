@@ -78,7 +78,11 @@ export const FilterTitle = styled.span(() => {
   ];
 });
 
-export const FilterWrapper = styled.div(() => {
+interface IFilterWrapper {
+  isPopup: boolean;
+}
+
+export const FilterWrapper = styled.div(({ isPopup }: IFilterWrapper) => {
   const theme = useTheme();
   return [
     tw`
@@ -86,8 +90,8 @@ export const FilterWrapper = styled.div(() => {
     `,
     css`
       z-index: 1;
-      top: 60px;
-      right: 0;
+      top: ${isPopup ? '-60px' : '60px'};
+      right: ${isPopup ? '60px' : '0'};
       padding: 20px;
       border: 1px solid ${theme.color.primary};
       border-radius: 10px;

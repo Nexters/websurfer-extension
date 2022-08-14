@@ -88,6 +88,7 @@ const Popup = () => {
               hasFilter={true}
               rawKeyword={keyword}
               setRawKeyword={setKeyword}
+              isPopup={true}
             />
           </>
         ) : (

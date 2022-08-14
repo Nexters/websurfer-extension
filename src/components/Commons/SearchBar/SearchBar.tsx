@@ -25,6 +25,7 @@ interface Props {
   hasFilter?: boolean;
   rawKeyword: string | undefined;
   setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
+  isPopup?: boolean;
 }
 
 type TstateDate = Date | undefined;
@@ -41,6 +42,7 @@ const SearchBar = ({
   hasFilter = true,
   rawKeyword,
   setRawKeyword,
+  isPopup = false,
 }: Props) => {
   const [isInputActive, setIsInputActive] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
@@ -118,7 +120,7 @@ const SearchBar = ({
         />
       )}
       {isFilterActive && (
-        <S.FilterWrapper>
+        <S.FilterWrapper isPopup={isPopup}>
           <S.FilterTopWrapper>
             <S.FilterTitle>기간 선택</S.FilterTitle>
             <S.RefreshButton
