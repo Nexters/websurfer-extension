@@ -16,11 +16,9 @@ const BefoerLogin = () => {
 
       const { email, sub } = data;
 
-      dispatch(getToken({ email, googleTokenId: sub }));
+      await dispatch(getToken({ email, googleTokenId: sub }));
 
-      setTimeout(() => {
-        dispatch(getUser());
-      }, 2000);
+      dispatch(getUser());
     },
   });
   return <button onClick={() => onClick()}>구글 로그인</button>;
