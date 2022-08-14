@@ -4,6 +4,7 @@ import { format, isToday } from 'date-fns';
 import * as S from './Popup.styled';
 
 import { SearchBar, FullItem } from '@components/Commons';
+import LoginTitle from '@components/Popup/LoginTitle';
 
 import { HomeIcon, CloseIcon } from '@assets/img/svg-icon-paths';
 
@@ -22,6 +23,9 @@ const Popup = () => {
   const user = useAppSelector(userSelector);
   const historyList = useAppSelector(historyListSelector);
   const dispatch = useAppDispatch();
+
+  const loggedIn = user.id;
+  const hasData = Boolean(historyList.length);
 
   useEffect(() => {
     chrome.storage.sync.get(['websurferToken'], async (result) => {
@@ -59,12 +63,18 @@ const Popup = () => {
 
   const renderMiddle = () => {
     return (
-      <S.MiddleWrapper>
-        <S.MiddleTitleWrapper>
-          <S.SubTitle>Hi Shaka Shaka,</S.SubTitle>
-          <S.MainTitle>아까 만났던 파도를 찾고 있나요?</S.MainTitle>
-        </S.MiddleTitleWrapper>
-        <SearchBar hasFilter={true} />
+      <S.MiddleWrapper bgWhite={!loggedIn || (loggedIn && !hasData)}>
+        {loggedIn && hasData ? (
+          <>
+            <S.MiddleTitleWrapper>
+              <S.SubTitle>Hi Shaka Shaka,</S.SubTitle>
+              <S.MainTitle>아까 만났던 파도를 찾고 있나요?</S.MainTitle>
+            </S.MiddleTitleWrapper>
+            <SearchBar hasFilter={true} />
+          </>
+        ) : (
+          <LoginTitle goApp={goApp} hasData={hasData} />
+        )}
       </S.MiddleWrapper>
     );
   };
@@ -110,16 +120,10 @@ const Popup = () => {
   };
 
   return (
-    <S.Wrapper>
-      {user.id ? (
-        <>
-          {renderTop()}
-          {renderMiddle()}
-          {renderBottom()}
-        </>
-      ) : (
-        <div>not logged in</div>
-      )}
+    <S.Wrapper showBottom={loggedIn && hasData}>
+      {renderTop()}
+      {renderMiddle()}
+      {loggedIn && hasData && renderBottom()}
     </S.Wrapper>
   );
 };

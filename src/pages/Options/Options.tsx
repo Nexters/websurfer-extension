@@ -45,7 +45,7 @@ const Options = (props: Props) => {
           },
         })
       );
-    }, 500);
+    }, 1000);
   }, []);
 
   const PrintMainComponent = (): React.ReactElement => {
