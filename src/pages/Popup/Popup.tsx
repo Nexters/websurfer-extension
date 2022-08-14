@@ -28,9 +28,6 @@ const Popup = () => {
       const { websurferToken } = result;
 
       if (websurferToken) {
-        Axios.defaults.headers.common.Authorization =
-          'Bearer ' + websurferToken;
-
         dispatch(setToken(websurferToken));
         await dispatch(getUser());
         await dispatch(getHistoryList({}));
