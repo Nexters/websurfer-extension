@@ -85,6 +85,7 @@ export const FilterWrapper = styled.div(() => {
       absolute flex-col
     `,
     css`
+      z-index: 1;
       top: 60px;
       right: 0;
       padding: 20px;
