@@ -2,6 +2,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 
 import { useAppDispatch } from '@redux/store';
 import { getToken, getUser } from '@redux/user';
+import { getHistoryList } from '@redux/history';
 
 import Axios from '@utils/axios';
 
@@ -16,8 +17,8 @@ const useGoogleLoginCb = () => {
       const { email, sub } = data;
 
       await dispatch(getToken({ email, googleTokenId: sub }));
-
-      dispatch(getUser());
+      await dispatch(getUser());
+      await dispatch(getHistoryList({}));
     },
   });
 

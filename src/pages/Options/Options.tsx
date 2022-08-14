@@ -47,6 +47,7 @@ const Options = (props: Props) => {
       );
     }, 500);
   }, []);
+
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
       if (user.id) {
@@ -56,7 +57,6 @@ const Options = (props: Props) => {
           return <NoData />;
         }
       } else {
-        // return <NoData />;
         return <BeforeLogin />;
       }
     }
