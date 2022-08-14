@@ -19,6 +19,8 @@ import Axios from '@utils/axios';
 interface Props {
   placeholder?: string;
   hasFilter?: boolean;
+  rawKeyword: string | undefined;
+  setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 type TstateDate = Date | undefined;
@@ -27,13 +29,17 @@ type TdisplayDate = number | Date;
 interface IFilter {
   startDate: TstateDate;
   endDate: TstateDate;
-  keyword: string;
+  keyword: string | undefined;
 }
 
-const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
+const SearchBar = ({
+  placeholder = 'Search',
+  hasFilter = true,
+  rawKeyword,
+  setRawKeyword,
+}: Props) => {
   const [isInputActive, setIsInputActive] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [rawKeyword, setRawKeyword] = useState<string>('');
   const [rawStartDate, setRawStartDate] = useState<TstateDate>(new Date());
   const [rawEndDate, setRawEndDate] = useState<TstateDate>(new Date());
   const [filter, setFilter] = useState<IFilter>({

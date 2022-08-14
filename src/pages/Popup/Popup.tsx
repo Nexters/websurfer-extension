@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { format, isToday } from 'date-fns';
 
 import * as S from './Popup.styled';
@@ -13,19 +13,20 @@ import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { getUser, userSelector, setToken } from '@redux/user';
 
-import Axios from '@utils/axios';
-
 interface accObj {
   [key: string]: HistoryListReponse;
 }
 
 const Popup = () => {
+  const [keyword, setKeyword] = useState<string | undefined>(undefined);
+
   const user = useAppSelector(userSelector);
   const historyList = useAppSelector(historyListSelector);
   const dispatch = useAppDispatch();
 
   const loggedIn = user.id;
   const hasData = Boolean(historyList.length);
+  const noDataWithKeyword = !hasData && (keyword || keyword === '');
 
   useEffect(() => {
     chrome.storage.sync.get(['websurferToken'], async (result) => {
@@ -63,14 +64,20 @@ const Popup = () => {
 
   const renderMiddle = () => {
     return (
-      <S.MiddleWrapper bgWhite={!loggedIn || (loggedIn && !hasData)}>
-        {loggedIn && hasData ? (
+      <S.MiddleWrapper
+        bgWhite={!loggedIn || (loggedIn && !hasData && keyword === undefined)}
+      >
+        {(loggedIn && hasData) || noDataWithKeyword ? (
           <>
             <S.MiddleTitleWrapper>
               <S.SubTitle>Hi Shaka Shaka,</S.SubTitle>
               <S.MainTitle>아까 만났던 파도를 찾고 있나요?</S.MainTitle>
             </S.MiddleTitleWrapper>
-            <SearchBar hasFilter={true} />
+            <SearchBar
+              hasFilter={true}
+              rawKeyword={keyword}
+              setRawKeyword={setKeyword}
+            />
           </>
         ) : (
           <LoginTitle goApp={goApp} hasData={hasData} />

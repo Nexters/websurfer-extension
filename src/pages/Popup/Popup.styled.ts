@@ -12,7 +12,8 @@ export const Wrapper = styled.div(({ showBottom }: IWrapper) => {
     `,
     css`
       width: 780px;
-      height: ${showBottom ? '600px' : 'unset'};
+      height: unset;
+      max-height: ${showBottom ? '600px' : 'unset'};
       padding: 20px;
       background: #fff;
     `,

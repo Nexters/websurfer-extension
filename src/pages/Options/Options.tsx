@@ -8,16 +8,17 @@ import { getUser, userSelector, setToken } from '@redux/user';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 
-import Axios from '@utils/axios';
-
 interface Props {
   title: string;
 }
 
 const Options = (props: Props) => {
+  const [keyword, setKeyword] = useState<string | undefined>(undefined);
+
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
   const histories = useAppSelector(historyListSelector);
+  const hasData = Boolean(histories.length);
 
   const listener = async (event) => {
     const { type, payload } = event.detail;
@@ -48,11 +49,13 @@ const Options = (props: Props) => {
     }, 1000);
   }, []);
 
+  const noDataWithKeyword = !hasData && (keyword || keyword === '');
+
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
       if (user.id) {
-        if (histories.length) {
-          return <Main />;
+        if (hasData || noDataWithKeyword) {
+          return <Main rawKeyword={keyword} setRawKeyword={setKeyword} />;
         } else {
           return <NoData />;
         }
