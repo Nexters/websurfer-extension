@@ -85,7 +85,10 @@ export const MiddleWrapper = styled.div(({ bgWhite }: IMiddleWrapper) => {
 export const MiddleTitleWrapper = styled.div(() => {
   return [
     tw`
-      text-left flex flex-col 
+      text-left flex flex-col relative
+    `,
+    css`
+      bottom: 10px;
     `,
   ];
 });
@@ -164,6 +167,20 @@ export const NoListWrapper = styled.div(() => {
   return [
     css`
       height: 270px;
+    `,
+  ];
+});
+
+export const MiddleTopWrapper = styled.div(() => {
+  return [tw`flex justify-between items-center`];
+});
+
+export const MainImage = styled.img(() => {
+  return [
+    css`
+      height: 140px;
+      /* position: absolute;
+      right: 0; */
     `,
   ];
 });
