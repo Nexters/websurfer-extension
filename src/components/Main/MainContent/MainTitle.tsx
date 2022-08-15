@@ -15,9 +15,10 @@ type Props = {
 
 const MainTitle = ({ setIsSetting, isSetting, user }: Props) => {
   const name = (() => {
-    const splitted = user?.email.split('@')[0];
+    const email = user?.email;
+    const splitted = email && email.split('@')[0];
 
-    return splitted || user.email || '김넥터';
+    return splitted || email || '김넥터';
   })();
   return (
     <S.Wrapper>

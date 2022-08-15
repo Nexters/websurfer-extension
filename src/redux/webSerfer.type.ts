@@ -99,7 +99,7 @@ interface IWebSite {
   faviconUrl: string | null;
 }
 
-export interface HistoryListRequest extends UserEntity {
+export interface HistoryListRequest {
   filter?: EntityFilter;
   startDate: Date | undefined;
   endDate: Date | undefined;

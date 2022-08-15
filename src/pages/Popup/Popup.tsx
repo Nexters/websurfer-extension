@@ -87,9 +87,10 @@ const Popup = () => {
                 <S.SubTitle>
                   이번주{' '}
                   {(() => {
-                    const splitted = user?.email.split('@')[0];
+                    const email = user?.email;
+                    const splitted = email && email.split('@')[0];
 
-                    return splitted || user.email || '김넥터';
+                    return splitted || email || '김넥터';
                   })()}
                   님은
                 </S.SubTitle>
