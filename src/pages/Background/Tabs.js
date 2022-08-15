@@ -49,4 +49,11 @@ export default class Tabs {
   setUrlId(comb, entity) {
     this.urlIdMap = { ...this.urlIdMap, [comb]: entity };
   }
+
+  reset() {
+    this.tabsMap = {};
+    this.activeTabId = 0;
+    this.intervalMap = {};
+    this.urlIdMap = {};
+  }
 }

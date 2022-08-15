@@ -134,6 +134,7 @@ const onFocusChangedCb = async (windowId) => {
   console.log(windowId, 'onFocusedWindow');
 
   if (windowId < 0) {
+    //clear all interval
     const allClearedIntervalMap = Object.entries(instance.intervalMap).reduce(
       (acc, [key, value]) => {
         acc[key] = clearInterval(value);
@@ -186,6 +187,30 @@ const initRecording = (token) => {
   });
 };
 
+const stopRecording = () => {
+  // clear all interval
+  const allClearedIntervalMap = Object.entries(instance.intervalMap).reduce(
+    (acc, [key, value]) => {
+      acc[key] = clearInterval(value);
+      return acc;
+    },
+    {}
+  );
+
+  instance.setIntervalMap(allClearedIntervalMap);
+
+  instance.reset();
+
+  Axios.defaults.headers.common.Authorization = '';
+  // tabs events
+  chrome.tabs.onActivated.removeListener(onActivatedCb);
+  chrome.tabs.onUpdated.removeListener(onUpdatedCb);
+  chrome.tabs.onRemoved.removeListener(onRemovedCb);
+
+  // windows events
+  chrome.windows.onFocusChanged.removeListener(onFocusChangedCb);
+};
+
 chrome.storage.local.get(['websurferToken'], (result) => {
   console.log({ result }, 'token');
   if (result?.websurferToken) {
@@ -219,14 +244,7 @@ chrome.runtime.onConnect.addListener((portFrom) => {
         }
         case 'DELETE_TOKEN': {
           chrome.storage.local.remove(['websurferToken'], () => {
-            Axios.defaults.headers.common.Authorization = '';
-            // tabs events
-            chrome.tabs.onActivated.removeListener(onActivatedCb);
-            chrome.tabs.onUpdated.removeListener(onUpdatedCb);
-            chrome.tabs.onRemoved.removeListener(onRemovedCb);
-
-            // windows events
-            chrome.windows.onFocusChanged.removeListener(onFocusChangedCb);
+            stopRecording();
           });
           break;
         }
