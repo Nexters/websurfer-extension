@@ -6,6 +6,7 @@ export const Wrapper = styled.div<CardProps>((props) => {
   const theme = useTheme();
 
   return [
+    tw`cursor-pointer`,
     css`
       width: ${props.width};
       height: ${props.height ? props.height : ''};
