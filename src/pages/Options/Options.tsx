@@ -34,34 +34,17 @@ const Options = (props: Props) => {
     );
   };
 
-  // const listener = async (event) => {
-  //   const { type, payload } = event.detail;
-
-  //   switch (type) {
-  //     case 'RESPONSE_TOKEN': {
-  //       const { token } = payload;
-
-  //       if (token && !storeToken) {
-  //         initUser(token);
-  //       }
-  //     }
-  //   }
-  // };
-
   useEffect(() => {
-    // window.addEventListener('WEBSURFER_RELAY_RESPONSE', listener);
-    // window.dispatchEvent(
-    //   new CustomEvent('WEBSURFER_RELAY_REQUEST', {
-    //     detail: {
-    //       type: 'REQUEST_TOKEN',
-    //     },
-    //   })
-    // );
-
-    const token = localStorage.getItem('websurfer-token');
-    if (token) {
-      initUser(token);
-    }
+    setTimeout(() => {
+      window.addEventListener('WEBSURFER_RELAY_RESPONSE', listener);
+      window.dispatchEvent(
+        new CustomEvent('WEBSURFER_RELAY_REQUEST', {
+          detail: {
+            type: 'REQUEST_TOKEN',
+          },
+        })
+      );
+    }, 500);
   }, []);
 
   const PrintMainComponent = (): React.ReactElement => {

@@ -4,15 +4,19 @@ import { RootState } from '@redux/store';
 export type ModalType = 'mostVisit' | 'totalTime' | 'frequency'; //가장 많이 방문, 총 시간, 자주 이용하는 시간
 
 interface CommonState {
-  isOpenModal: boolean;
-  isModalType: ModalType;
-  isFilterOnceApplied: boolean;
+  modal: {
+    isOpenModal: boolean;
+    isModalType: ModalType;
+    isFilterOnceApplied: boolean;
+  };
 }
 
 const initialState: CommonState = {
-  isOpenModal: false,
-  isModalType: 'mostVisit',
-  isFilterOnceApplied: false,
+  modal: {
+    isOpenModal: false,
+    isModalType: 'mostVisit',
+    isFilterOnceApplied: false,
+  },
 };
 
 export const commonSlice = createSlice({
@@ -21,11 +25,11 @@ export const commonSlice = createSlice({
   initialState,
   reducers: {
     closeModal: (state) => {
-      state.isOpenModal = false;
+      state.modal.isOpenModal = false;
     },
     openModal: (state, action: PayloadAction<ModalType>) => {
-      state.isModalType = action.payload;
-      state.isOpenModal = true;
+      state.modal.isModalType = action.payload;
+      state.modal.isOpenModal = true;
     },
     setIsFilterOnceApplied(state, { payload }) {
       state.isFilterOnceApplied = payload;
@@ -35,6 +39,8 @@ export const commonSlice = createSlice({
 
 export const filterOnceAppliedSelector = (state: RootState) =>
   state.common.isFilterOnceApplied;
+
+export const modalSelector = (state: RootState) => state.common.modal;
 
 export const { closeModal, openModal, setIsFilterOnceApplied } =
   commonSlice.actions;

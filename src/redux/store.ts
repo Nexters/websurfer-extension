@@ -5,11 +5,13 @@ import thunk from 'redux-thunk';
 import userReducer from './user';
 import hisoryReducer from './history';
 import commonReducer from './common';
+import dashboardReducer from './dashboard';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     common: commonReducer,
+    dashboard: dashboardReducer,
     history: hisoryReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([thunk]),

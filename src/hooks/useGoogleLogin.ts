@@ -2,6 +2,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 
 import { useAppDispatch } from '@redux/store';
 import { getToken, getUser } from '@redux/user';
+import { getStat } from '@redux/dashboard';
 import { getHistoryList } from '@redux/history';
 
 import Axios from '@utils/axios';
@@ -25,6 +26,7 @@ const useGoogleLoginCb = () => {
           keyword: undefined,
         })
       );
+      await dispatch(getStat());
     },
   });
 
