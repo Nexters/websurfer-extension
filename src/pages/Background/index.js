@@ -160,7 +160,7 @@ const initExistingTabs = (tabs) => {
   instance.setTabsMap(tabsMap);
 };
 
-chrome.storage.sync.get(['websurferToken'], (result) => {
+chrome.storage.local.get(['websurferToken'], (result) => {
   console.log({ result }, 'token');
   if (result) {
     Axios.defaults.headers.common.Authorization =
@@ -190,14 +190,14 @@ chrome.runtime.onConnect.addListener((portFrom) => {
       const { type, payload } = message;
       switch (type) {
         case 'REQUEST_SIGNING': {
-          chrome.storage.sync.remove(['websurferToken'], () => {
-            chrome.storage.sync.set({ websurferToken: payload.token });
+          chrome.storage.local.remove(['websurferToken'], () => {
+            chrome.storage.local.set({ websurferToken: payload.token });
           });
           break;
         }
         case 'REQUEST_TOKEN': {
           const tabId = portFrom.sender.tab.id;
-          chrome.storage.sync.get(['websurferToken'], (result) => {
+          chrome.storage.local.get(['websurferToken'], (result) => {
             chrome.tabs.sendMessage(tabId, {
               type: 'RESPONSE_TOKEN',
               payload: { token: result.websurferToken },
@@ -206,7 +206,7 @@ chrome.runtime.onConnect.addListener((portFrom) => {
           break;
         }
         case 'DELETE_TOKEN': {
-          chrome.storage.sync.remove(['websurferToken'], () => {
+          chrome.storage.local.remove(['websurferToken'], () => {
             Axios.defaults.headers.common.Authorization = '';
             // tabs events
             chrome.tabs.onActivated.removeListener(onActivatedCb);

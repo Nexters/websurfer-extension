@@ -32,7 +32,7 @@ const Popup = () => {
   const hasData = Boolean(historyList.length);
 
   useEffect(() => {
-    chrome.storage.sync.get(['websurferToken'], async (result) => {
+    chrome.storage.local.get(['websurferToken'], async (result) => {
       const { websurferToken } = result;
 
       if (websurferToken) {
@@ -94,7 +94,7 @@ const Popup = () => {
             />
           </>
         ) : (
-          <LoginTitle goApp={goApp} hasData={hasData} />
+          <LoginTitle goApp={goApp} loggedIn={loggedIn} />
         )}
       </S.MiddleWrapper>
     );
