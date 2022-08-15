@@ -13,10 +13,10 @@ const BefoerLogin: React.FC = () => {
   return (
     <S.DummyWrapper>
       <S.DummyTopWrapper>
-        <S.DummyContentWrapper>
+        <S.DummyTopContetnWrapper>
           <DummyTopNav />
           <DummyTitle />
-        </S.DummyContentWrapper>
+        </S.DummyTopContetnWrapper>
       </S.DummyTopWrapper>
       <S.DummyBottonWrapper>
         <S.DummyContentWrapper>
