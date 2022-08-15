@@ -19,6 +19,10 @@ chrome.runtime.onInstalled.addListener(() => {
 
 const instance = new Tabs();
 
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const createHistory = async (tab) => {
   const identifier = `${tab.id}::${tab.url}`;
   const existingEntity = instance.urlIdMap[identifier];
@@ -58,7 +62,7 @@ const initInterval = debounce(async (tabId) => {
       if (entity) {
         apiClient.increaseDuration({
           id: entity.id,
-          seconds: 10,
+          seconds: rand(7, 12),
         });
 
         console.log('UPDATE API', curTab, curTab.url);
