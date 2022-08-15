@@ -77,7 +77,7 @@ const Popup = () => {
       <S.MiddleWrapper
         bgWhite={!loggedIn || (loggedIn && !hasData && !isFilterOnceApplied)}
       >
-        {(loggedIn && hasData) || isFilterOnceApplied ? (
+        {loggedIn && (hasData || isFilterOnceApplied) ? (
           <>
             <S.MiddleTopWrapper>
               <S.MiddleTitleWrapper>
