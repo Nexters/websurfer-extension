@@ -1,14 +1,16 @@
 import React from 'react';
 
+import { openModal } from '@redux/common';
 import { useAppDispatch } from '@redux/store';
 
 import * as S from './MostVisitWebSite.styled';
 import * as Card from '@components/Commons/Card.styled';
-import { openModal } from '@redux/common';
 
-type Props = {};
+import { StatResponse } from '@redux/webSerfer.type';
 
-const MostVisitWebSite = (props: Props) => {
+type Props = { statData: StatResponse };
+
+const MostVisitWebSite = ({ statData }: Props) => {
   const dispatch = useAppDispatch();
 
   const requestOpenModal = () => {
@@ -24,18 +26,22 @@ const MostVisitWebSite = (props: Props) => {
     >
       <Card.Title margin="0 0 24px 0">많이 방문한 웹사이트</Card.Title>
       <S.ItemCardWrapper>
-        <S.ItemCard primary>
-          <S.ItemCardTitle primary>Pinterest</S.ItemCardTitle>
-          <S.ItemCardCount primary>190회</S.ItemCardCount>
-        </S.ItemCard>
-        <S.ItemCard>
-          <S.ItemCardTitle>해쭈 [HAEJOO] - YouTube</S.ItemCardTitle>
-          <S.ItemCardCount>123회</S.ItemCardCount>
-        </S.ItemCard>
-        <S.ItemCard>
-          <S.ItemCardTitle>UX 북마크 #20. UX 방법론 A-Z</S.ItemCardTitle>
-          <S.ItemCardCount>86회</S.ItemCardCount>
-        </S.ItemCard>
+        {statData.mostVisitedWebsites.map((value, index) => {
+          const primary = index === 0 ? true : false;
+
+          if (index < 3) {
+            return (
+              <S.ItemCard key={index} primary={primary}>
+                <S.ItemCardTitle primary={primary}>
+                  {value.website.name}
+                </S.ItemCardTitle>
+                <S.ItemCardCount primary={primary}>
+                  {value.amount}회
+                </S.ItemCardCount>
+              </S.ItemCard>
+            );
+          }
+        })}
       </S.ItemCardWrapper>
     </Card.Wrapper>
   );

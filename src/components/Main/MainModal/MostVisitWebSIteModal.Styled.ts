@@ -182,3 +182,9 @@ export const SelectPeriodIcon = styled.div<T.SelectPeriodWrapperProps>(
     ];
   }
 );
+
+export const Link = styled.a(() => [
+  css`
+    all: unset;
+  `,
+]);
