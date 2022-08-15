@@ -228,6 +228,7 @@ chrome.runtime.onConnect.addListener((portFrom) => {
         case 'REQUEST_SIGNING': {
           chrome.storage.local.remove(['websurferToken'], () => {
             chrome.storage.local.set({ websurferToken: payload.token });
+            stopRecording();
             initRecording(payload.token);
           });
           break;
