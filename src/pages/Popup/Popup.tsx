@@ -1,27 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { format, isToday } from 'date-fns';
 
 import * as S from './Popup.styled';
 
 import { SearchBar, FullItem } from '@components/Commons';
 import LoginTitle from '@components/Popup/LoginTitle';
+import NoListWithKeyword from '@components/Commons/NoListWithKeyword';
 
-import { HomeIcon, CloseIcon } from '@assets/img/svg-icon-paths';
+import { HomeIcon, CloseIcon, Oceanographer } from '@assets/img/svg-icon-paths';
 
 import { useAppSelector, useAppDispatch } from '@redux/store';
 import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { getUser, userSelector, setToken } from '@redux/user';
-
-import Axios from '@utils/axios';
+import { filterOnceAppliedSelector } from '@redux/common';
 
 interface accObj {
   [key: string]: HistoryListReponse;
 }
 
 const Popup = () => {
+  const [keyword, setKeyword] = useState<string | undefined>(undefined);
+
   const user = useAppSelector(userSelector);
   const historyList = useAppSelector(historyListSelector);
+  const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
   const dispatch = useAppDispatch();
 
   const loggedIn = user.id;
@@ -34,10 +37,16 @@ const Popup = () => {
       if (websurferToken) {
         dispatch(setToken(websurferToken));
         await dispatch(getUser());
-        await dispatch(getHistoryList({}));
+        await dispatch(
+          getHistoryList({
+            startDate: undefined,
+            endDate: undefined,
+            keyword: undefined,
+          })
+        );
       }
     });
-  }, []);
+  }, [dispatch]);
 
   const goApp = () => {
     window.chrome.tabs.create({
@@ -63,14 +72,24 @@ const Popup = () => {
 
   const renderMiddle = () => {
     return (
-      <S.MiddleWrapper bgWhite={!loggedIn || (loggedIn && !hasData)}>
-        {loggedIn && hasData ? (
+      <S.MiddleWrapper
+        bgWhite={!loggedIn || (loggedIn && !hasData && !isFilterOnceApplied)}
+      >
+        {(loggedIn && hasData) || isFilterOnceApplied ? (
           <>
-            <S.MiddleTitleWrapper>
-              <S.SubTitle>Hi Shaka Shaka,</S.SubTitle>
-              <S.MainTitle>아까 만났던 파도를 찾고 있나요?</S.MainTitle>
-            </S.MiddleTitleWrapper>
-            <SearchBar hasFilter={true} />
+            <S.MiddleTopWrapper>
+              <S.MiddleTitleWrapper>
+                <S.SubTitle>이번주 김넥터 님은</S.SubTitle>
+                <S.MainTitle>열정 뿜뿜 해양학자</S.MainTitle>
+              </S.MiddleTitleWrapper>
+              <S.MainImage src={Oceanographer} alt="해양학자가 서핑하는 모습" />
+            </S.MiddleTopWrapper>
+            <SearchBar
+              hasFilter={true}
+              rawKeyword={keyword}
+              setRawKeyword={setKeyword}
+              isPopup={true}
+            />
           </>
         ) : (
           <LoginTitle goApp={goApp} hasData={hasData} />
@@ -123,7 +142,15 @@ const Popup = () => {
     <S.Wrapper showBottom={loggedIn && hasData}>
       {renderTop()}
       {renderMiddle()}
-      {loggedIn && hasData && renderBottom()}
+      {loggedIn && hasData ? (
+        renderBottom()
+      ) : !hasData && keyword ? (
+        <S.NoListWrapper>
+          <NoListWithKeyword keyword={keyword} />
+        </S.NoListWrapper>
+      ) : (
+        ''
+      )}
     </S.Wrapper>
   );
 };

@@ -85,7 +85,10 @@ export const MiddleWrapper = styled.div(({ bgWhite }: IMiddleWrapper) => {
 export const MiddleTitleWrapper = styled.div(() => {
   return [
     tw`
-      text-left flex flex-col 
+      text-left flex flex-col relative
+    `,
+    css`
+      bottom: 10px;
     `,
   ];
 });
@@ -126,7 +129,7 @@ export const CategoryDate = styled.span(() => {
 export const BottomWrapper = styled.div(() => {
   return [
     tw`
-      overflow-y-auto
+      overflow-y-auto h-full
     `,
     css`
       max-height: 292px;
@@ -156,6 +159,28 @@ export const DateCategroyWrapper = styled.div(() => {
       &:first-child {
         margin-top: unset;
       }
+    `,
+  ];
+});
+
+export const NoListWrapper = styled.div(() => {
+  return [
+    css`
+      height: 270px;
+    `,
+  ];
+});
+
+export const MiddleTopWrapper = styled.div(() => {
+  return [tw`flex justify-between items-center`];
+});
+
+export const MainImage = styled.img(() => {
+  return [
+    css`
+      height: 140px;
+      /* position: absolute;
+      right: 0; */
     `,
   ];
 });

@@ -18,7 +18,13 @@ const useGoogleLoginCb = () => {
 
       await dispatch(getToken({ email, googleTokenId: sub }));
       await dispatch(getUser());
-      await dispatch(getHistoryList({}));
+      await dispatch(
+        getHistoryList({
+          startDate: undefined,
+          endDate: undefined,
+          keyword: undefined,
+        })
+      );
     },
   });
 

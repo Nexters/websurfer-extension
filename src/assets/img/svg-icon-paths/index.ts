@@ -18,6 +18,7 @@ import DotsIcon from './icon-dots-mono.svg';
 import RefreshUpdateIcon from './icon-refresh-update.svg';
 import ModalCloseIcon from './icon-modal-close.svg';
 import RepeatIcon from './icon-repeat-mono.svg';
+import CalendarBlueIcon from './icon-calendar-check-blue.svg';
 
 export {
   FilterIcon,
@@ -40,4 +41,5 @@ export {
   RefreshUpdateIcon,
   ModalCloseIcon,
   RepeatIcon,
+  CalendarBlueIcon,
 };

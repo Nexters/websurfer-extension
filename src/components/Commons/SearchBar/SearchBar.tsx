@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DateRange } from 'react-date-range';
-import format from 'date-fns/format';
-import debounce from 'lodash.debounce';
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
 import * as S from './SearchBar.styled';
 
@@ -9,15 +9,23 @@ import {
   CalendarIcon,
   SearchIcon,
   RefreshIcon,
+  CalendarBlueIcon,
 } from '@assets/img/svg-icon-paths';
 
-import { useAppDispatch } from '@redux/store';
+import { useAppDispatch, useAppSelector } from '@redux/store';
 import { getHistoryList } from '@redux/history';
+import {
+  setIsFilterOnceApplied,
+  filterOnceAppliedSelector,
+} from '@redux/common';
+import { tokenSelector } from '@redux/user';
 
-import Axios from '@utils/axios';
 interface Props {
   placeholder?: string;
   hasFilter?: boolean;
+  rawKeyword: string | undefined;
+  setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
+  isPopup?: boolean;
 }
 
 type TstateDate = Date | undefined;
@@ -26,22 +34,32 @@ type TdisplayDate = number | Date;
 interface IFilter {
   startDate: TstateDate;
   endDate: TstateDate;
-  keyword: string;
+  keyword: string | undefined;
 }
 
-const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
+const SearchBar = ({
+  placeholder = 'Search',
+  hasFilter = true,
+  rawKeyword,
+  setRawKeyword,
+  isPopup = false,
+}: Props) => {
   const [isInputActive, setIsInputActive] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [rawKeyword, setRawKeyword] = useState<string>('');
-  const [rawStartDate, setRawStartDate] = useState<TstateDate>(new Date());
-  const [rawEndDate, setRawEndDate] = useState<TstateDate>(new Date());
+  const [rawStartDate, setRawStartDate] = useState<TstateDate>(undefined);
+  const [rawEndDate, setRawEndDate] = useState<TstateDate>(undefined);
   const [filter, setFilter] = useState<IFilter>({
     startDate: undefined,
     endDate: undefined,
-    keyword: '',
+    keyword: undefined,
   });
 
+  const notInitialRender = useRef(false);
+
   const dispatch = useAppDispatch();
+
+  const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
+  const storeToken = useAppSelector(tokenSelector);
 
   const filterConfirmDisabled = !rawStartDate || !rawEndDate;
 
@@ -50,24 +68,30 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
     setIsFilterActive(!isFilterActive);
   };
 
-  const callHistoryByKeyword = debounce(function (keyword: string) {
-    setFilter({ ...filter, keyword });
-  }, 500);
-
   useEffect(() => {
     // debounce
-    const timer = setTimeout(() => {
-      callHistoryByKeyword(rawKeyword);
-    }, 300);
+    if (rawKeyword !== undefined) {
+      const timer = setTimeout(() => {
+        setFilter({ ...filter, keyword: rawKeyword });
+      }, 300);
 
-    return () => {
-      clearTimeout(timer);
-    };
+      return () => {
+        clearTimeout(timer);
+      };
+    }
   }, [rawKeyword]);
 
   useEffect(() => {
-    if (Axios.defaults.headers.common.Authorization) {
-      dispatch(getHistoryList(filter));
+    if (notInitialRender.current) {
+      if (storeToken) {
+        dispatch(getHistoryList(filter));
+
+        if (!isFilterOnceApplied) {
+          dispatch(setIsFilterOnceApplied(true));
+        }
+      }
+    } else {
+      notInitialRender.current = true;
     }
   }, [dispatch, filter]);
 
@@ -89,15 +113,24 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
         <S.Filter
           isInputActive={isInputActive}
           onClick={() => setIsFilterActive(!isFilterActive)}
-          src={CalendarIcon}
+          src={
+            filter.startDate || filter.endDate ? CalendarBlueIcon : CalendarIcon
+          }
           alt="filter"
         />
       )}
       {isFilterActive && (
-        <S.FilterWrapper>
+        <S.FilterWrapper isPopup={isPopup}>
           <S.FilterTopWrapper>
             <S.FilterTitle>기간 선택</S.FilterTitle>
-            <S.RefreshButton alt="refresh" src={RefreshIcon}></S.RefreshButton>
+            <S.RefreshButton
+              alt="refresh"
+              src={RefreshIcon}
+              onClick={() => {
+                setRawStartDate(undefined);
+                setRawEndDate(undefined);
+              }}
+            ></S.RefreshButton>
           </S.FilterTopWrapper>
           <S.DateRangeWrapper>
             <DateRange
@@ -114,16 +147,19 @@ const SearchBar = ({ placeholder = 'Search', hasFilter = true }: Props) => {
                 setRawStartDate(startDate);
                 setRawEndDate(endDate);
               }}
+              locale={ko}
             />
           </S.DateRangeWrapper>
           <S.FilterApplyButton
             onClick={onClickApply}
-            disabled={filterConfirmDisabled}
+            // disabled={filterConfirmDisabled}
           >
             {filterConfirmDisabled
               ? '적용하기'
-              : `${format(rawStartDate as TdisplayDate, 'yyyy-MM-dd')} ~
-            ${format(rawEndDate as TdisplayDate, 'yyyy-MM-dd')} 적용하기`}
+              : `${format(rawStartDate as TdisplayDate, 'yyyy-MM-dd')}~${format(
+                  rawEndDate as TdisplayDate,
+                  'yyyy-MM-dd'
+                )} 적용하기`}
           </S.FilterApplyButton>
         </S.FilterWrapper>
       )}

@@ -2,6 +2,7 @@ import React from 'react';
 import { format, isToday } from 'date-fns';
 
 import { SearchBar, CompactItem, FullItem } from '../../Commons';
+import NoListWithKeyword from '@components/Commons/NoListWithKeyword';
 
 import * as S from './MainHistory.styled';
 
@@ -14,14 +15,22 @@ import { historyListSelector } from '@redux/history';
 type Props = {
   setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
   isFocus: boolean;
+  rawKeyword: string | undefined;
+  setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 interface accObj {
   [key: string]: HistoryListReponse;
 }
 
-const MainHistory = ({ isFocus, setIsFocus }: Props) => {
+const MainHistory = ({
+  isFocus,
+  setIsFocus,
+  rawKeyword,
+  setRawKeyword,
+}: Props) => {
   const historyList = useAppSelector(historyListSelector);
+  const hasData = Boolean(historyList.length);
 
   const historyByVisitDate = historyList.reduce(
     (acc: accObj, val: HistoryEntity) => {
@@ -74,8 +83,14 @@ const MainHistory = ({ isFocus, setIsFocus }: Props) => {
         ></S.ZoomIcon>
       </S.TitleWrapper>
       <S.ContentWrapper>
-        <SearchBar />
-        <S.HistoryListWrapper>{renderHistory()}</S.HistoryListWrapper>
+        <SearchBar rawKeyword={rawKeyword} setRawKeyword={setRawKeyword} />
+        <S.HistoryListWrapper>
+          {hasData ? (
+            renderHistory()
+          ) : (
+            <NoListWithKeyword keyword={rawKeyword} />
+          )}
+        </S.HistoryListWrapper>
       </S.ContentWrapper>
     </div>
   );

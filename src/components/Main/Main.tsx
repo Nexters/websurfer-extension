@@ -15,9 +15,12 @@ import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 import * as S from './Main.styled';
 import * as Grid from '@components/Grid/Grid.styled';
 
-interface Props {}
+interface Props {
+  rawKeyword: string | undefined;
+  setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
 
-const Main: React.FC<Props> = (props: Props) => {
+const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword }: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isSetting, setIsSetting] = useState<boolean>(false);
 
@@ -57,7 +60,12 @@ const Main: React.FC<Props> = (props: Props) => {
             paddingBottom="60px"
             unit={isFocus ? 12 : 4}
           >
-            <MainHistory setIsFocus={setIsFocus} isFocus={isFocus} />
+            <MainHistory
+              rawKeyword={rawKeyword}
+              setRawKeyword={setRawKeyword}
+              setIsFocus={setIsFocus}
+              isFocus={isFocus}
+            />
           </Grid.LayoutCol>
         </Grid.Row>
       </Grid.Container>
