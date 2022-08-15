@@ -23,20 +23,20 @@ const TotalTimeModal = (props: Props) => {
               setCurrentTab('this');
             },
           },
-          {
-            title: '지난주',
-            isActive: currentTab === 'last',
-            onClick: () => {
-              setCurrentTab('last');
-            },
-          },
-          {
-            title: '기간 선택',
-            isActive: currentTab === 'period',
-            onClick: () => {
-              setCurrentTab('period');
-            },
-          },
+          // {
+          //   title: '지난주',
+          //   isActive: currentTab === 'last',
+          //   onClick: () => {
+          //     setCurrentTab('last');
+          //   },
+          // },
+          // {
+          //   title: '기간 선택',
+          //   isActive: currentTab === 'period',
+          //   onClick: () => {
+          //     setCurrentTab('period');
+          //   },
+          // },
         ]}
       />
 
