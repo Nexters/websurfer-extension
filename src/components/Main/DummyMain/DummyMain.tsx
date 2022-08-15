@@ -1,8 +1,8 @@
 import React from 'react';
 
 import DummyTitle from '@components/Main/DummyMain/DummyTitle';
-import TotalTime from '@components/Main/MainContent/TotalTime';
-import SurffingTime from '@components/Main/MainContent/SurffingTime';
+import DummyTotalTime from '@components/Main/DummyMain/DummyTotalTime';
+import DummySuffingTime from '@components/Main/DummyMain/DummySuffingTime';
 import DummyMostVisitWebSite from '@components/Main/DummyMain/DummyMostVisitWebSite';
 import DummyHistory from '@components/Main/DummyMain/DummyHistory';
 import DummyTopNav from '@components/Main/DummyMain/DummyTopNav';
@@ -24,8 +24,8 @@ const BefoerLogin: React.FC = () => {
             <S.DummyDashboardWrapper>
               <DummyMostVisitWebSite />
               <S.Justify>
-                <TotalTime />
-                <SurffingTime />
+                <DummyTotalTime />
+                <DummySuffingTime />
               </S.Justify>
             </S.DummyDashboardWrapper>
             <DummyHistory />

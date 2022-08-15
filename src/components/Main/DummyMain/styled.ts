@@ -1,6 +1,8 @@
 import { css, useTheme } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
 
+import { RankListContainer } from '../MainContent/TotalTime.styled';
+
 export const DummyWrapper = styled.div(() => {
   return [
     css`
@@ -183,3 +185,7 @@ export const GoogleLogin = styled.div(() => {
     `,
   ];
 });
+
+export const DummyRankListContainer = styled(RankListContainer)(() => [
+  tw`w-full`,
+]);
