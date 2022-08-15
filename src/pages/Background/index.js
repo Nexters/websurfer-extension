@@ -187,6 +187,7 @@ chrome.storage.local.get(['websurferToken'], (result) => {
 chrome.runtime.onConnect.addListener((portFrom) => {
   if (portFrom.name === 'websurfer-background-content') {
     portFrom.onMessage.addListener((message) => {
+      console.log('message', message);
       const { type, payload } = message;
       switch (type) {
         case 'REQUEST_SIGNING': {
