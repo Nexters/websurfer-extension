@@ -109,6 +109,7 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
               borderRadius: '5px',
               fontWeight: '700',
               fontSize: '16px',
+              width: '240px',
             }}
           />
         </>

@@ -185,6 +185,7 @@ const Popup = () => {
           borderRadius: '5px',
           fontWeight: '700',
           fontSize: '16px',
+          width: '240px',
         }}
       />
     </>
