@@ -14,6 +14,7 @@ import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { getUser, userSelector, setToken } from '@redux/user';
 import { filterOnceAppliedSelector } from '@redux/common';
+import { getStat } from '@redux/dashboard';
 
 interface accObj {
   [key: string]: HistoryListReponse;
@@ -44,6 +45,7 @@ const Popup = () => {
             keyword: undefined,
           })
         );
+        await dispatch(getStat());
       }
     });
   }, [dispatch]);

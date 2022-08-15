@@ -11,16 +11,15 @@ import { deleteHistoryItem } from '@redux/history';
 const FullItem = ({ title, href, id, website }: HistoryEntity) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const { faviconUrl } = website;
   return (
     <S.FullItemWrapper onClick={() => window.open(href, '_blank')}>
       <S.FullLeftWrapper>
         <S.ItemIcon
           alt="history-icon"
           src={
-            faviconUrl?.startsWith('/images')
+            website?.faviconUrl?.startsWith('/images')
               ? LogoIcon
-              : faviconUrl || LogoIcon
+              : website?.faviconUrl || LogoIcon
           }
         ></S.ItemIcon>
         <S.FullItemSpan>{title}</S.FullItemSpan>
