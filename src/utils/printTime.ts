@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const minuteToHourMinute = (
   totalMinute: number,
   type: 'hour' | 'minute' | 'hourminute'
@@ -15,3 +17,8 @@ export const minuteToHourMinute = (
     return '';
   }
 };
+
+export const printYyyymmddToday = dayjs(new Date()).format('YYYY년 MM월 DD일');
+export const printYyyymmddM7 = dayjs(new Date())
+  .add(-7, 'day')
+  .format('YYYY년 MM월 DD일');

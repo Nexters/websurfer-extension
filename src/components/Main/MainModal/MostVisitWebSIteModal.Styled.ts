@@ -80,7 +80,7 @@ export const SiteListIcon = styled.img(() => {
       height: 24px;
       margin-right: 22px;
       border-radius: 6px;
-      background-color: ${theme.color['gray-06']};
+      /* background-color: ${theme.color['gray-06']}; */
     `,
   ];
 });
