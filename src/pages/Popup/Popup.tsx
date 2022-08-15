@@ -146,7 +146,7 @@ const Popup = () => {
       {renderMiddle()}
       {loggedIn && hasData ? (
         renderBottom()
-      ) : !hasData && keyword ? (
+      ) : !hasData && isFilterOnceApplied ? (
         <S.NoListWrapper>
           <NoListWithKeyword keyword={keyword} />
         </S.NoListWrapper>
