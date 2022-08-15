@@ -18,9 +18,12 @@ import { dashboardStatSelector } from '@redux/dashboard';
 import { RootState, useAppSelector } from '@redux/store';
 import dayjs, { Dayjs } from 'dayjs';
 
-interface Props {}
+interface Props {
+  rawKeyword: string | undefined;
+  setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
 
-const Main: React.FC<Props> = (props: Props) => {
+const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword }: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isSetting, setIsSetting] = useState<boolean>(false);
 
@@ -70,7 +73,12 @@ const Main: React.FC<Props> = (props: Props) => {
                 paddingBottom="60px"
                 unit={isFocus ? 12 : 4}
               >
-                <MainHistory setIsFocus={setIsFocus} isFocus={isFocus} />
+                <MainHistory
+                  setIsFocus={setIsFocus}
+                  isFocus={isFocus}
+                  rawKeyword={rawKeyword}
+                  setRawKeyword={setRawKeyword}
+                />
               </Grid.LayoutCol>
             </Grid.Row>
           </Grid.Container>

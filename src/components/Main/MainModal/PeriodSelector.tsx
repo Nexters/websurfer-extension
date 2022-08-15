@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import format from 'date-fns/format';
 import { DateRange } from 'react-date-range';
+import { ko } from 'date-fns/locale';
 
 import { RepeatIcon } from '@assets/img/svg-icon-paths';
 
@@ -53,6 +54,7 @@ const PeriodSelector = (props: Props) => {
             setRawStartDate(startDate);
             setRawEndDate(endDate);
           }}
+          locale={ko}
         />
       </DateStyle.DateRangeWrapper>
       <DateStyle.FilterApplyButton

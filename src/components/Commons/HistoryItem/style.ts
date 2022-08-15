@@ -111,6 +111,7 @@ export const Tooltip = styled.div(() => {
       border-radius: 10px;
       top: 20px;
       z-index: 1;
+      min-width: 90px;
     `,
   ];
 });

@@ -1,15 +1,18 @@
 import { css, useTheme } from '@emotion/react';
-import { MAX_WIDTH } from '../../components/Grid/Grid.styled';
 import tw, { styled } from 'twin.macro';
 
-export const Wrapper = styled.div(() => {
+interface IWrapper {
+  showBottom?: boolean;
+}
+
+export const Wrapper = styled.div(({ showBottom }: IWrapper) => {
   return [
     tw`
       flex-col overflow-hidden
     `,
     css`
       width: 780px;
-      height: 600px;
+      height: ${showBottom ? '600px' : 'unset'};
       padding: 20px;
       background: #fff;
     `,
@@ -17,14 +20,12 @@ export const Wrapper = styled.div(() => {
 });
 
 export const TopWrapper = styled.div(() => {
-  const theme = useTheme();
   return [
     tw`
       flex w-full justify-between
     `,
     css`
       margin-bottom: 16px;
-      background: ${theme.color.bgColor};
     `,
   ];
 });
@@ -32,7 +33,7 @@ export const TopWrapper = styled.div(() => {
 export const HomeWrapper = styled.div(() => {
   return [
     tw`
-      items-center cursor-pointer
+      flex items-center cursor-pointer
     `,
   ];
 });
@@ -61,7 +62,11 @@ export const HomeSpan = styled.span(() => {
   ];
 });
 
-export const MiddleWrapper = styled.div(() => {
+interface IMiddleWrapper {
+  bgWhite?: boolean;
+}
+
+export const MiddleWrapper = styled.div(({ bgWhite }: IMiddleWrapper) => {
   const theme = useTheme();
   return [
     tw`
@@ -70,7 +75,7 @@ export const MiddleWrapper = styled.div(() => {
     css`
       border-radius: 10px;
       height: 222px;
-      background-color: ${theme.color['gray-02']};
+      background-color: ${bgWhite ? '#fff' : theme.color['gray-02']};
       padding: 20px;
       margin-bottom: 24px;
     `,
@@ -80,7 +85,10 @@ export const MiddleWrapper = styled.div(() => {
 export const MiddleTitleWrapper = styled.div(() => {
   return [
     tw`
-      text-left flex flex-col 
+      text-left flex flex-col relative
+    `,
+    css`
+      bottom: 10px;
     `,
   ];
 });
@@ -121,7 +129,7 @@ export const CategoryDate = styled.span(() => {
 export const BottomWrapper = styled.div(() => {
   return [
     tw`
-      overflow-y-auto
+      overflow-y-auto h-full
     `,
     css`
       max-height: 292px;
@@ -151,6 +159,28 @@ export const DateCategroyWrapper = styled.div(() => {
       &:first-child {
         margin-top: unset;
       }
+    `,
+  ];
+});
+
+export const NoListWrapper = styled.div(() => {
+  return [
+    css`
+      height: 270px;
+    `,
+  ];
+});
+
+export const MiddleTopWrapper = styled.div(() => {
+  return [tw`flex justify-between items-center`];
+});
+
+export const MainImage = styled.img(() => {
+  return [
+    css`
+      height: 140px;
+      /* position: absolute;
+      right: 0; */
     `,
   ];
 });

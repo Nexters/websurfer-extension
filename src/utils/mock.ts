@@ -1,6 +1,3 @@
-import { format } from 'date-fns';
-import { LogoIcon } from '../assets/img/svg-icon-paths';
-
 const mockList = [
   {
     id: 518,

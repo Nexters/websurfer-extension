@@ -100,7 +100,7 @@ export interface HistoryListRequest extends UserEntity {
   filter?: EntityFilter;
   startDate: Date | undefined;
   endDate: Date | undefined;
-  keyword: string;
+  keyword: string | undefined;
 }
 export type HistoryListReponse = HistoryEntity[];
 

@@ -7,6 +7,7 @@ interface CommonState {
   modal: {
     isOpenModal: boolean;
     isModalType: ModalType;
+    isFilterOnceApplied: boolean;
   };
 }
 
@@ -14,6 +15,7 @@ const initialState: CommonState = {
   modal: {
     isOpenModal: false,
     isModalType: 'mostVisit',
+    isFilterOnceApplied: false,
   },
 };
 
@@ -29,11 +31,18 @@ export const commonSlice = createSlice({
       state.modal.isModalType = action.payload;
       state.modal.isOpenModal = true;
     },
+    setIsFilterOnceApplied(state, { payload }) {
+      state.isFilterOnceApplied = payload;
+    },
   },
 });
 
+export const filterOnceAppliedSelector = (state: RootState) =>
+  state.common.isFilterOnceApplied;
+
 export const modalSelector = (state: RootState) => state.common.modal;
 
-export const { closeModal, openModal } = commonSlice.actions;
+export const { closeModal, openModal, setIsFilterOnceApplied } =
+  commonSlice.actions;
 
 export default commonSlice.reducer;
