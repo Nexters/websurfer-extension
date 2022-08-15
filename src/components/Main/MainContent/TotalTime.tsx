@@ -3,11 +3,12 @@ import React from 'react';
 import { useAppDispatch } from '@redux/store';
 import { openModal } from '@redux/common';
 
+import { minuteToHourMinute } from '@utils/printTime';
+
 import * as Card from '@components/Commons/Card.styled';
 import * as S from './TotalTime.styled';
 
 import { StatResponse } from '@redux/webSerfer.type';
-import { minuteToHourMinute } from '@utils/printTime';
 
 type Props = { statData?: StatResponse };
 
@@ -32,9 +33,13 @@ const TotalTime = ({ statData }: Props) => {
               <S.SubTitle>지난 주보다 20분 ↑</S.SubTitle>
             </S.TitleContainer>
             <S.UsageTimeContainer>
-              <S.Time>00</S.Time>
+              <S.Time>
+                {minuteToHourMinute(statData.totalDuration, 'hour')}
+              </S.Time>
               <S.TimeLabel>시간</S.TimeLabel>
-              <S.Time>00</S.Time>
+              <S.Time>
+                {minuteToHourMinute(statData.totalDuration, 'minute')}
+              </S.Time>
               <S.TimeLabel>분</S.TimeLabel>
             </S.UsageTimeContainer>
           </S.TopContainer>
@@ -48,7 +53,7 @@ const TotalTime = ({ statData }: Props) => {
                       <S.Site>{value.website.name}</S.Site>
                     </S.RankListNameWrapper>
                     <S.UsingTime>
-                      {/* {minuteToHourMinute(value.amount)} */}
+                      {minuteToHourMinute(value.amount, 'hourminute')}
                     </S.UsingTime>
                   </S.RankList>
                 )
