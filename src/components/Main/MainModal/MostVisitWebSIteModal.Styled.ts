@@ -32,10 +32,10 @@ export const Title = styled.div(() => {
   ];
 });
 
-export const SiteListContainer = styled.div(() => {
+export const SiteListContainer = styled.a(() => {
   const theme = useTheme();
   return [
-    tw`flex w-full items-center justify-between`,
+    tw`flex w-full items-center justify-between no-underline`,
     css`
       height: 56px;
       border-style: solid;
@@ -80,7 +80,7 @@ export const SiteListIcon = styled.img(() => {
       height: 24px;
       margin-right: 22px;
       border-radius: 6px;
-      background-color: ${theme.color['gray-06']};
+      /* background-color: ${theme.color['gray-06']}; */
     `,
   ];
 });
@@ -98,6 +98,9 @@ export const SiteListTitle = styled.div(() => {
       line-height: ${theme.lineHeight.l};
       text-overflow: ellipsis;
       white-space: nowrap;
+      &:hover {
+        color: ${theme.color.primary};
+      }
     `,
   ];
 });

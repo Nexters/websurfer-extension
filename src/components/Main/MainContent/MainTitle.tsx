@@ -7,13 +7,16 @@ import { UserEntity } from '@redux/webSerfer.type';
 
 import * as S from './MainTitle.styled';
 
+import { StatResponse } from '@redux/webSerfer.type';
+
 type Props = {
   isSetting: boolean;
   setIsSetting: React.Dispatch<React.SetStateAction<boolean>>;
   user: UserEntity;
+  statData: StatResponse;
 };
 
-const MainTitle = ({ setIsSetting, isSetting, user }: Props) => {
+const MainTitle = ({ setIsSetting, isSetting, user, statData }: Props) => {
   const name = (() => {
     const email = user?.email;
     const splitted = email && email.split('@')[0];
@@ -25,14 +28,14 @@ const MainTitle = ({ setIsSetting, isSetting, user }: Props) => {
       <S.TitleContainer>
         <S.SubTitle>이번 주 {name} 님은</S.SubTitle>
         <S.TitleWrapper>
-          <S.Title>열정 뿜뿜 해양학자</S.Title>
+          <S.Title>{statData.achievement.name}</S.Title>
           <S.Icon src={QuestionIcon} />
         </S.TitleWrapper>
         <S.Description>
-          학습 / 교육 / 자기계발 사이트 사용량이 많아요.
+          {statData.achievement.category} 사이트 사용량이 많아요.
         </S.Description>
       </S.TitleContainer>
-      <S.MainImage src={Oceanographer} alt="해양학자가 서핑하는 모습" />
+      <S.MainImage src={Oceanographer} alt={statData.achievement.name} />
       <SettingDropdown setIsSetting={setIsSetting} isSetting={isSetting} />
     </S.Wrapper>
   );

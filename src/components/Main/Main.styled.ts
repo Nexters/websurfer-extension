@@ -62,7 +62,7 @@ export const UpdateMessage = styled.div(() => {
 export const UpdateIcon = styled.img(() => {
   const theme = useTheme();
   return [
-    tw`inline-block`,
+    tw`inline-block cursor-pointer`,
     css`
       font-size: ${theme.fontSize.s};
       color: ${theme.color['gray-04']};

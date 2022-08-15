@@ -100,25 +100,30 @@ export const StyleTimeListIcon = styled.img(() => {
       margin-right: 22px;
       width: 42px;
       height: 42px;
-      background-color: ${theme.color['gray-06']};
+      /* background-color: ${theme.color['gray-06']}; */
     `,
   ];
 });
+
+export const Link = styled.a(() => [tw`no-underline`]);
 
 export const InformaitonWrapper = styled.div(() => {
   const theme = useTheme();
   return [tw`w-full flex flex-col justify-between`];
 });
 
-export const InformationTitle = styled.div(() => {
+export const InformationTitle = styled.a(() => {
   const theme = useTheme();
   return [
-    tw``,
+    tw`no-underline`,
     css`
       color: ${theme.color['gray-07']};
       font-size: ${theme.fontSize.m};
       font-weight: ${theme.fontWeight.regular};
       line-height: ${theme.lineHeight.l};
+      &:hover {
+        color: ${theme.color.primary};
+      }
     `,
   ];
 });

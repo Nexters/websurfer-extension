@@ -5,12 +5,18 @@ import { useTheme } from '@emotion/react';
 import ReactECharts from 'echarts-for-react';
 import PeriodSelector from './PeriodSelector';
 import { useAppSelector } from '@redux/store';
-import { minuteToHourMinute } from '@utils/printTime';
 import { dashboardStatSelector } from '@redux/dashboard';
+import {
+  minuteToHourMinute,
+  printYyyymmddM7,
+  printYyyymmddToday,
+} from '@utils/printTime';
 
+import { StatResponse } from '@redux/webSerfer.type';
 import { FilterType } from './MostVisitWebSIteModal.type';
 
 import * as S from './TotalTimeModal.styled';
+import { ModalCloseIcon } from '@assets/img/svg-icon-paths';
 
 type Props = {
   period: 'last' | 'this' | 'select';
@@ -20,7 +26,9 @@ const TotalTimeModalDetail = (props: Props) => {
   const DATE_FORMAT = 'YYYY[년] MM[월] DD[일]';
 
   const theme = useTheme();
-  const statData = useAppSelector(dashboardStatSelector);
+  const statData: StatResponse | undefined = useAppSelector(
+    dashboardStatSelector
+  );
 
   const option = {
     grid: {
@@ -45,7 +53,7 @@ const TotalTimeModalDetail = (props: Props) => {
     },
     xAxis: {
       type: 'category',
-      data: ['00.00', '00.00', '00.00', '00.00', '00.00', '00.00', '00.00'],
+      data: ['08.09', '08.10', '08.11', '08.12', '08.13', '08.14', '08.15'],
       axisLabel: {
         color: theme.color.black,
       },
@@ -69,14 +77,14 @@ const TotalTimeModalDetail = (props: Props) => {
     series: [
       {
         data: [
-          200,
-          200,
-          200,
-          200,
-          200,
-          200,
+          300,
+          600,
+          1000,
+          50,
+          70,
+          180,
           {
-            value: 200,
+            value: 800,
             itemStyle: {
               normal: { color: theme.color.primary },
               emphasis: { color: theme.color.secondaryB },
@@ -131,7 +139,7 @@ const TotalTimeModalDetail = (props: Props) => {
             </S.SelectPeriodContainer>
           ) : (
             <S.PeriodTitle>
-              2000년 00월 00일 - 2000년 00월 00일 에는
+              {printYyyymmddM7} - {printYyyymmddToday} 에는
             </S.PeriodTitle>
           )}
           <S.TitleWrapper>
@@ -153,9 +161,26 @@ const TotalTimeModalDetail = (props: Props) => {
           <S.StayTimeListContainer>
             {statData.mostDurationWebsites.map((value, index) => (
               <S.StyleTimeListWrapper key={index}>
-                <S.StyleTimeListIcon />
+                <S.Link
+                  href={`https://${value.website.hostname}`}
+                  target="_blank"
+                >
+                  <S.StyleTimeListIcon
+                    src={value.website.faviconUrl}
+                    alt={value.website.name}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = `${ModalCloseIcon}`;
+                    }}
+                  />
+                </S.Link>
                 <S.InformaitonWrapper>
-                  <S.InformationTitle>{value.website.name}</S.InformationTitle>
+                  <S.InformationTitle
+                    href={`https://${value.website.hostname}`}
+                    target="_blank"
+                  >
+                    {value.website.name}
+                  </S.InformationTitle>
                   <S.InformationTimeBarWrapper>
                     <S.InformationTimeBar
                       percent={

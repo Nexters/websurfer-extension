@@ -15,9 +15,9 @@ import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './Main.styled';
 import * as Grid from '@components/Grid/Grid.styled';
-import { dashboardStatSelector } from '@redux/dashboard';
+import { dashboardStatSelector, refreshStat } from '@redux/dashboard';
 import { UserEntity } from '@redux/webSerfer.type';
-import { RootState, useAppSelector } from '@redux/store';
+import { RootState, useAppDispatch, useAppSelector } from '@redux/store';
 import dayjs, { Dayjs } from 'dayjs';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,6 +32,7 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isSetting, setIsSetting] = useState<boolean>(false);
 
+  const dispatch = useAppDispatch();
   const statData = useAppSelector(dashboardStatSelector);
 
   return (
@@ -62,15 +63,27 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
                     setIsSetting={setIsSetting}
                     isSetting={isSetting}
                     user={user}
+                    statData={statData}
                   />
                   <MostVisitWebSite statData={statData} />
                   <S.Justify>
                     <TotalTime statData={statData} />
-                    <SurffingTime />
+                    <SurffingTime statData={statData} />
                   </S.Justify>
                   <S.UpdateWrapper>
-                    <S.UpdateMessage>마지막 업데이트 : 15분 전</S.UpdateMessage>
-                    <S.UpdateIcon src={RefreshUpdateIcon} alt="Refresh" />
+                    <S.UpdateMessage>
+                      마지막 업데이트 :{' '}
+                      {dayjs(statData.lastUpdatedAt).format(
+                        'YYYY/MM/DD hh:mm:ss'
+                      )}
+                    </S.UpdateMessage>
+                    <S.UpdateIcon
+                      src={RefreshUpdateIcon}
+                      alt="Refresh"
+                      onClick={() => {
+                        dispatch(refreshStat());
+                      }}
+                    />
                   </S.UpdateWrapper>
                 </>
               </Grid.LayoutCol>
