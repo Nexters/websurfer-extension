@@ -19,9 +19,12 @@ chrome.runtime.onInstalled.addListener(() => {
 
 const instance = new Tabs();
 
-function rand(min, max) {
+const rand = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
+
+const wait = (timeToDelay) =>
+  new Promise((resolve) => setTimeout(resolve, timeToDelay));
 
 const createHistory = async (tab) => {
   const identifier = `${tab.id}::${tab.url}`;
@@ -30,17 +33,17 @@ const createHistory = async (tab) => {
   if (existingEntity) {
     console.log('has existing entity', existingEntity);
     return existingEntity;
+  } else {
+    await wait(1500);
+    const entity = await apiClient.createHistory({
+      href: tab.url,
+      title: tab.title,
+    });
+
+    console.log('CREATE API', `${tab.id}::${tab.url}`);
+    instance.setUrlId(identifier, entity);
+    return entity;
   }
-
-  const entity = await apiClient.createHistory({
-    href: tab.url,
-    title: tab.title,
-  });
-
-  console.log('CREATE API', `${tab.id}::${tab.url}`);
-  instance.setUrlId(identifier, entity);
-
-  return entity;
 };
 
 const initInterval = debounce(async (tabId) => {

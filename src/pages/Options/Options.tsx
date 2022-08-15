@@ -34,6 +34,16 @@ const Options = (props: Props) => {
       })
     );
     await dispatch(getStat());
+    window.dispatchEvent(
+      new CustomEvent('WEBSURFER_RELAY_REQUEST', {
+        detail: {
+          type: 'REQUEST_SIGNING',
+          payload: {
+            token,
+          },
+        },
+      })
+    );
   };
 
   // const listener = async (event) => {
