@@ -71,7 +71,9 @@ const Options = (props: Props) => {
     if (navigator.onLine) {
       if (user.id) {
         if (hasData || isFilterOnceApplied) {
-          return <Main rawKeyword={keyword} setRawKeyword={setKeyword} />;
+          return (
+            <Main user={user} rawKeyword={keyword} setRawKeyword={setKeyword} />
+          );
         } else {
           return <NoData />;
         }

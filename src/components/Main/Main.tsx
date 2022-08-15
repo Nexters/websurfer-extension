@@ -16,6 +16,7 @@ import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 import * as S from './Main.styled';
 import * as Grid from '@components/Grid/Grid.styled';
 import { dashboardStatSelector } from '@redux/dashboard';
+import { UserEntity } from '@redux/webSerfer.type';
 import { RootState, useAppSelector } from '@redux/store';
 import dayjs, { Dayjs } from 'dayjs';
 
@@ -24,9 +25,10 @@ import 'react-toastify/dist/ReactToastify.css';
 interface Props {
   rawKeyword: string | undefined;
   setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
+  user: UserEntity;
 }
 
-const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword }: Props) => {
+const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isSetting, setIsSetting] = useState<boolean>(false);
 
@@ -59,6 +61,7 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword }: Props) => {
                   <MainTitle
                     setIsSetting={setIsSetting}
                     isSetting={isSetting}
+                    user={user}
                   />
                   <MostVisitWebSite statData={statData} />
                   <S.Justify>

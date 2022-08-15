@@ -84,7 +84,15 @@ const Popup = () => {
           <>
             <S.MiddleTopWrapper>
               <S.MiddleTitleWrapper>
-                <S.SubTitle>이번주 김넥터 님은</S.SubTitle>
+                <S.SubTitle>
+                  이번주{' '}
+                  {(() => {
+                    const splitted = user?.email.split('@')[0];
+
+                    return splitted || user.email || '김넥터';
+                  })()}
+                  님은
+                </S.SubTitle>
                 <S.MainTitle>열정 뿜뿜 해양학자</S.MainTitle>
               </S.MiddleTitleWrapper>
               <S.MainImage src={Oceanographer} alt="해양학자가 서핑하는 모습" />

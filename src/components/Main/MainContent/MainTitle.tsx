@@ -3,19 +3,26 @@ import React from 'react';
 import SettingDropdown from './SettingDropdown';
 
 import { Oceanographer, QuestionIcon } from '@assets/img/svg-icon-paths';
+import { UserEntity } from '@redux/webSerfer.type';
 
 import * as S from './MainTitle.styled';
 
 type Props = {
   isSetting: boolean;
   setIsSetting: React.Dispatch<React.SetStateAction<boolean>>;
+  user: UserEntity;
 };
 
-const MainTitle = ({ setIsSetting, isSetting }: Props) => {
+const MainTitle = ({ setIsSetting, isSetting, user }: Props) => {
+  const name = (() => {
+    const splitted = user?.email.split('@')[0];
+
+    return splitted || user.email || '김넥터';
+  })();
   return (
     <S.Wrapper>
       <S.TitleContainer>
-        <S.SubTitle>이번 주 김넥터 님은</S.SubTitle>
+        <S.SubTitle>이번 주 {name} 님은</S.SubTitle>
         <S.TitleWrapper>
           <S.Title>열정 뿜뿜 해양학자</S.Title>
           <S.Icon src={QuestionIcon} />
