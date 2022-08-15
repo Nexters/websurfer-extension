@@ -22,6 +22,10 @@ const FullItem = ({ title, href, id, website }: HistoryEntity) => {
               ? LogoIcon
               : website?.faviconUrl || LogoIcon
           }
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = LogoIcon;
+          }}
         ></S.ItemIcon>
         <S.FullItemSpan>{title}</S.FullItemSpan>
       </S.FullLeftWrapper>

@@ -16,6 +16,10 @@ const CompactItem = ({ title, href, website }: HistoryEntity) => {
               ? LogoIcon
               : website?.faviconUrl || LogoIcon
           }
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = LogoIcon;
+          }}
         />
       }
       <S.ItemSpan>{title}</S.ItemSpan>
