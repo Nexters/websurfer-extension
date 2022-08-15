@@ -161,14 +161,19 @@ const TotalTimeModalDetail = (props: Props) => {
           <S.StayTimeListContainer>
             {statData.mostDurationWebsites.map((value, index) => (
               <S.StyleTimeListWrapper key={index}>
-                <S.StyleTimeListIcon
-                  src={value.website.faviconUrl}
-                  alt={value.website.name}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null;
-                    currentTarget.src = `${ModalCloseIcon}`;
-                  }}
-                />
+                <S.Link
+                  href={`https://${value.website.hostname}`}
+                  target="_blank"
+                >
+                  <S.StyleTimeListIcon
+                    src={value.website.faviconUrl}
+                    alt={value.website.name}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = `${ModalCloseIcon}`;
+                    }}
+                  />
+                </S.Link>
                 <S.InformaitonWrapper>
                   <S.InformationTitle
                     href={`https://${value.website.hostname}`}

@@ -105,6 +105,8 @@ export const StyleTimeListIcon = styled.img(() => {
   ];
 });
 
+export const Link = styled.a(() => [tw`no-underline`]);
+
 export const InformaitonWrapper = styled.div(() => {
   const theme = useTheme();
   return [tw`w-full flex flex-col justify-between`];
