@@ -98,6 +98,9 @@ export const SiteListTitle = styled.div(() => {
       line-height: ${theme.lineHeight.l};
       text-overflow: ellipsis;
       white-space: nowrap;
+      &:hover {
+        color: ${theme.color.primary};
+      }
     `,
   ];
 });
