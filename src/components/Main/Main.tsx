@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ToastContainer, Slide } from 'react-toastify';
 
 import TotalTimeModal from './MainModal/TotalTimeModal';
 import MostUseTimeModal from './MainModal/MostUseTimeModal';
@@ -17,6 +18,8 @@ import * as Grid from '@components/Grid/Grid.styled';
 import { dashboardStatSelector } from '@redux/dashboard';
 import { RootState, useAppSelector } from '@redux/store';
 import dayjs, { Dayjs } from 'dayjs';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
   rawKeyword: string | undefined;
@@ -85,6 +88,26 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword }: Props) => {
           <MostVisitWebSIteModal />
           <TotalTimeModal />
           <MostUseTimeModal />
+          <ToastContainer
+            position="bottom-center"
+            autoClose={1500}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable={false}
+            pauseOnHover={false}
+            theme="dark"
+            closeButton={false}
+            transition={Slide}
+            style={{
+              textAlign: 'center',
+              borderRadius: '5px',
+              fontWeight: '700',
+              fontSize: '16px',
+            }}
+          />
         </>
       )}
     </>

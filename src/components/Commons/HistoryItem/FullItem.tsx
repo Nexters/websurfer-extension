@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { LogoIcon, DotsIcon } from '@assets/img/svg-icon-paths';
 
@@ -39,6 +40,7 @@ const FullItem = ({ title, href, id, website }: HistoryEntity) => {
             onClick={(e) => {
               e.preventDefault();
               dispatch(deleteHistoryItem(id));
+              toast('1개의 방문기록을 삭제했습니다.');
             }}
           >
             삭제하기

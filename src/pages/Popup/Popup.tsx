@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { format, isToday } from 'date-fns';
+import { ToastContainer, Slide } from 'react-toastify';
 
 import * as S from './Popup.styled';
 
@@ -15,6 +16,8 @@ import { historyListSelector, getHistoryList } from '@redux/history';
 import { getUser, userSelector, setToken } from '@redux/user';
 import { filterOnceAppliedSelector } from '@redux/common';
 import { getStat } from '@redux/dashboard';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 interface accObj {
   [key: string]: HistoryListReponse;
@@ -141,19 +144,41 @@ const Popup = () => {
   };
 
   return (
-    <S.Wrapper showBottom={loggedIn && hasData}>
-      {renderTop()}
-      {renderMiddle()}
-      {loggedIn && hasData ? (
-        renderBottom()
-      ) : !hasData && isFilterOnceApplied ? (
-        <S.NoListWrapper>
-          <NoListWithKeyword keyword={keyword} />
-        </S.NoListWrapper>
-      ) : (
-        ''
-      )}
-    </S.Wrapper>
+    <>
+      <S.Wrapper showBottom={loggedIn && hasData}>
+        {renderTop()}
+        {renderMiddle()}
+        {loggedIn && hasData ? (
+          renderBottom()
+        ) : !hasData && isFilterOnceApplied ? (
+          <S.NoListWrapper>
+            <NoListWithKeyword keyword={keyword} />
+          </S.NoListWrapper>
+        ) : (
+          ''
+        )}
+      </S.Wrapper>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="dark"
+        closeButton={false}
+        transition={Slide}
+        style={{
+          textAlign: 'center',
+          borderRadius: '5px',
+          fontWeight: '700',
+          fontSize: '16px',
+        }}
+      />
+    </>
   );
 };
 
