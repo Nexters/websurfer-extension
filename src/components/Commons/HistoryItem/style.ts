@@ -4,6 +4,7 @@ import tw, { styled } from 'twin.macro';
 interface IItemSpan {
   flex?: number;
   maxWidth?: string;
+  isSub?: boolean;
 }
 
 export const CompactItemWrapper = styled.div(() => {
@@ -36,7 +37,8 @@ export const ItemSpan = styled.p(() => {
 });
 
 export const FullItemSpan = styled(ItemSpan)(
-  ({ flex, maxWidth }: IItemSpan) => {
+  ({ flex, maxWidth, isSub }: IItemSpan) => {
+    const theme = useTheme();
     return [
       css`
         ${flex &&
@@ -47,6 +49,8 @@ export const FullItemSpan = styled(ItemSpan)(
         css`
           max-width: ${maxWidth};
         `}
+        color:${isSub ? theme.color['gray-04'] : theme.color['gray-06']};
+        font-size: ${isSub ? theme.fontSize.s : theme.fontSize.m};
       `,
     ];
   }

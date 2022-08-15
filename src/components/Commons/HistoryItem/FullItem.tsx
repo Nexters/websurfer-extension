@@ -25,7 +25,7 @@ const FullItem = ({ title, href, id, website }: HistoryEntity) => {
         ></S.ItemIcon>
         <S.FullItemSpan>{title}</S.FullItemSpan>
       </S.FullLeftWrapper>
-      <S.FullItemSpan flex={1} maxWidth={'40%'}>
+      <S.FullItemSpan flex={1} maxWidth={'40%'} isSub={true}>
         {href}
       </S.FullItemSpan>
       <S.VisitCountSpan
