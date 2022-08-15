@@ -164,26 +164,29 @@ const initExistingTabs = (tabs) => {
   instance.setTabsMap(tabsMap);
 };
 
+const initRecording = (token) => {
+  Axios.defaults.headers.common.Authorization = 'Bearer ' + token;
+  chrome.tabs.query({}, (tabs) => {
+    console.log(tabs, 'tabs query');
+
+    if (tabs.length) {
+      initExistingTabs(tabs);
+    }
+
+    // tabs events
+    chrome.tabs.onActivated.addListener(onActivatedCb);
+    chrome.tabs.onUpdated.addListener(onUpdatedCb);
+    chrome.tabs.onRemoved.addListener(onRemovedCb);
+
+    // windows events
+    chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
+  });
+};
+
 chrome.storage.local.get(['websurferToken'], (result) => {
   console.log({ result }, 'token');
-  if (result) {
-    Axios.defaults.headers.common.Authorization =
-      'Bearer ' + result.websurferToken;
-    chrome.tabs.query({}, (tabs) => {
-      console.log(tabs, 'tabs query');
-
-      if (tabs.length) {
-        initExistingTabs(tabs);
-      }
-
-      // tabs events
-      chrome.tabs.onActivated.addListener(onActivatedCb);
-      chrome.tabs.onUpdated.addListener(onUpdatedCb);
-      chrome.tabs.onRemoved.addListener(onRemovedCb);
-
-      // windows events
-      chrome.windows.onFocusChanged.addListener(onFocusChangedCb);
-    });
+  if (result?.websurferToken) {
+    initRecording(result.websurferToken);
   }
 });
 
@@ -197,6 +200,7 @@ chrome.runtime.onConnect.addListener((portFrom) => {
         case 'REQUEST_SIGNING': {
           chrome.storage.local.remove(['websurferToken'], () => {
             chrome.storage.local.set({ websurferToken: payload.token });
+            initRecording(payload.token);
           });
           break;
         }
