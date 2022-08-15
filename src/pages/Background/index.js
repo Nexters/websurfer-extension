@@ -19,6 +19,10 @@ chrome.runtime.onInstalled.addListener(() => {
 
 const instance = new Tabs();
 
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const createHistory = async (tab) => {
   const identifier = `${tab.id}::${tab.url}`;
   const existingEntity = instance.urlIdMap[identifier];
@@ -58,7 +62,7 @@ const initInterval = debounce(async (tabId) => {
       if (entity) {
         apiClient.increaseDuration({
           id: entity.id,
-          seconds: 10,
+          seconds: rand(7, 12),
         });
 
         console.log('UPDATE API', curTab, curTab.url);
@@ -160,7 +164,7 @@ const initExistingTabs = (tabs) => {
   instance.setTabsMap(tabsMap);
 };
 
-chrome.storage.sync.get(['websurferToken'], (result) => {
+chrome.storage.local.get(['websurferToken'], (result) => {
   console.log({ result }, 'token');
   if (result) {
     Axios.defaults.headers.common.Authorization =
@@ -187,17 +191,18 @@ chrome.storage.sync.get(['websurferToken'], (result) => {
 chrome.runtime.onConnect.addListener((portFrom) => {
   if (portFrom.name === 'websurfer-background-content') {
     portFrom.onMessage.addListener((message) => {
+      console.log('message', message);
       const { type, payload } = message;
       switch (type) {
         case 'REQUEST_SIGNING': {
-          chrome.storage.sync.remove(['websurferToken'], () => {
-            chrome.storage.sync.set({ websurferToken: payload.token });
+          chrome.storage.local.remove(['websurferToken'], () => {
+            chrome.storage.local.set({ websurferToken: payload.token });
           });
           break;
         }
         case 'REQUEST_TOKEN': {
           const tabId = portFrom.sender.tab.id;
-          chrome.storage.sync.get(['websurferToken'], (result) => {
+          chrome.storage.local.get(['websurferToken'], (result) => {
             chrome.tabs.sendMessage(tabId, {
               type: 'RESPONSE_TOKEN',
               payload: { token: result.websurferToken },
@@ -206,7 +211,7 @@ chrome.runtime.onConnect.addListener((portFrom) => {
           break;
         }
         case 'DELETE_TOKEN': {
-          chrome.storage.sync.remove(['websurferToken'], () => {
+          chrome.storage.local.remove(['websurferToken'], () => {
             Axios.defaults.headers.common.Authorization = '';
             // tabs events
             chrome.tabs.onActivated.removeListener(onActivatedCb);

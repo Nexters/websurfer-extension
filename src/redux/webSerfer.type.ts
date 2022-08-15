@@ -24,9 +24,12 @@ export type EntityFilter =
 // Entity filter 문서 참고 (https://www.notion.so/Entity-filter-1449297f64ed45ec83db48b150694328)
 
 export interface UserEntity {
-  id?: number;
+  id: number;
   name?: string;
-  createAt?: string; //Date;
+  createAt: string; //Date;
+  updatedAt: string;
+  email: string;
+  googleIdToken: string;
 }
 
 export interface HistoryEntity {
@@ -96,7 +99,7 @@ interface IWebSite {
   faviconUrl: string | null;
 }
 
-export interface HistoryListRequest extends UserEntity {
+export interface HistoryListRequest {
   filter?: EntityFilter;
   startDate: Date | undefined;
   endDate: Date | undefined;

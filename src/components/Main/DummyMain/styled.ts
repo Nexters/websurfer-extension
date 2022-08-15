@@ -1,10 +1,13 @@
 import { css, useTheme } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
 
+import { RankListContainer } from '../MainContent/TotalTime.styled';
+
 export const DummyWrapper = styled.div(() => {
   return [
     css`
       padding-top: 24px;
+      height: 100vh;
     `,
   ];
 });
@@ -14,6 +17,7 @@ export const DummyTopWrapper = styled.div(() => {
   return [
     css`
       background: ${theme.color.white};
+      height: 35%;
     `,
   ];
 });
@@ -28,6 +32,10 @@ export const DummyContentWrapper = styled.div(() => {
   ];
 });
 
+export const DummyTopContetnWrapper = styled(DummyContentWrapper)(() => {
+  return [tw`flex flex-col justify-between h-full`];
+});
+
 export const Flex = styled.div(() => [
   tw`flex`,
   css`
@@ -40,6 +48,7 @@ export const DummyBottonWrapper = styled.div(() => {
   return [
     css`
       background: ${theme.color.bgColor};
+      height: 65%;
     `,
   ];
 });
@@ -134,8 +143,7 @@ export const MainImage = styled.img((props) => {
 export const TitleContainer = styled.div(() => [
   css`
     height: 352px;
-    padding-top: 66px;
-    padding-bottom: 37px;
+    padding-top: 110px;
   `,
 ]);
 
@@ -177,3 +185,7 @@ export const GoogleLogin = styled.div(() => {
     `,
   ];
 });
+
+export const DummyRankListContainer = styled(RankListContainer)(() => [
+  tw`w-full`,
+]);

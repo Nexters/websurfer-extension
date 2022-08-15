@@ -8,6 +8,7 @@ import { getUser, userSelector, setToken } from '@redux/user';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 import { filterOnceAppliedSelector } from '@redux/common';
+import { getStat } from '@redux/dashboard';
 
 interface Props {
   title: string;
@@ -32,26 +33,47 @@ const Options = (props: Props) => {
         keyword: undefined,
       })
     );
+    await dispatch(getStat());
   };
 
+  // const listener = async (event) => {
+  //   const { type, payload } = event.detail;
+
+  //   switch (type) {
+  //     case 'RESPONSE_TOKEN': {
+  //       const { token } = payload;
+
+  //       if (token && !storeToken) {
+  //         initUser(token);
+  //       }
+  //     }
+  //   }
+  // };
+
   useEffect(() => {
-    setTimeout(() => {
-      window.addEventListener('WEBSURFER_RELAY_RESPONSE', listener);
-      window.dispatchEvent(
-        new CustomEvent('WEBSURFER_RELAY_REQUEST', {
-          detail: {
-            type: 'REQUEST_TOKEN',
-          },
-        })
-      );
-    }, 500);
+    // setTimeout(() => {
+    //   window.addEventListener('WEBSURFER_RELAY_RESPONSE', listener);
+    //   window.dispatchEvent(
+    //     new CustomEvent('WEBSURFER_RELAY_REQUEST', {
+    //       detail: {
+    //         type: 'REQUEST_TOKEN',
+    //       },
+    //     })
+    //   );
+    // }, 500);
+    const token = localStorage.getItem('websurfer-token');
+    if (token) {
+      initUser(token);
+    }
   }, []);
 
   const PrintMainComponent = (): React.ReactElement => {
     if (navigator.onLine) {
       if (user.id) {
         if (hasData || isFilterOnceApplied) {
-          return <Main rawKeyword={keyword} setRawKeyword={setKeyword} />;
+          return (
+            <Main user={user} rawKeyword={keyword} setRawKeyword={setKeyword} />
+          );
         } else {
           return <NoData />;
         }

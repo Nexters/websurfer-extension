@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { format, isToday } from 'date-fns';
+import { ToastContainer, Slide } from 'react-toastify';
 
 import * as S from './Popup.styled';
 
@@ -14,6 +15,9 @@ import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { getUser, userSelector, setToken } from '@redux/user';
 import { filterOnceAppliedSelector } from '@redux/common';
+import { getStat } from '@redux/dashboard';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 interface accObj {
   [key: string]: HistoryListReponse;
@@ -31,7 +35,7 @@ const Popup = () => {
   const hasData = Boolean(historyList.length);
 
   useEffect(() => {
-    chrome.storage.sync.get(['websurferToken'], async (result) => {
+    chrome.storage.local.get(['websurferToken'], async (result) => {
       const { websurferToken } = result;
 
       if (websurferToken) {
@@ -44,6 +48,7 @@ const Popup = () => {
             keyword: undefined,
           })
         );
+        await dispatch(getStat());
       }
     });
   }, [dispatch]);
@@ -75,11 +80,20 @@ const Popup = () => {
       <S.MiddleWrapper
         bgWhite={!loggedIn || (loggedIn && !hasData && !isFilterOnceApplied)}
       >
-        {(loggedIn && hasData) || isFilterOnceApplied ? (
+        {loggedIn && (hasData || isFilterOnceApplied) ? (
           <>
             <S.MiddleTopWrapper>
               <S.MiddleTitleWrapper>
-                <S.SubTitle>이번주 김넥터 님은</S.SubTitle>
+                <S.SubTitle>
+                  이번주{' '}
+                  {(() => {
+                    const email = user?.email;
+                    const splitted = email && email.split('@')[0];
+
+                    return splitted || email || '김넥터';
+                  })()}
+                  님은
+                </S.SubTitle>
                 <S.MainTitle>열정 뿜뿜 해양학자</S.MainTitle>
               </S.MiddleTitleWrapper>
               <S.MainImage src={Oceanographer} alt="해양학자가 서핑하는 모습" />
@@ -92,7 +106,7 @@ const Popup = () => {
             />
           </>
         ) : (
-          <LoginTitle goApp={goApp} hasData={hasData} />
+          <LoginTitle goApp={goApp} loggedIn={loggedIn} />
         )}
       </S.MiddleWrapper>
     );
@@ -139,19 +153,42 @@ const Popup = () => {
   };
 
   return (
-    <S.Wrapper showBottom={loggedIn && hasData}>
-      {renderTop()}
-      {renderMiddle()}
-      {loggedIn && hasData ? (
-        renderBottom()
-      ) : !hasData && keyword ? (
-        <S.NoListWrapper>
-          <NoListWithKeyword keyword={keyword} />
-        </S.NoListWrapper>
-      ) : (
-        ''
-      )}
-    </S.Wrapper>
+    <>
+      <S.Wrapper showBottom={loggedIn && hasData}>
+        {renderTop()}
+        {renderMiddle()}
+        {loggedIn && hasData ? (
+          renderBottom()
+        ) : !hasData && isFilterOnceApplied ? (
+          <S.NoListWrapper>
+            <NoListWithKeyword keyword={keyword} />
+          </S.NoListWrapper>
+        ) : (
+          ''
+        )}
+      </S.Wrapper>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="dark"
+        closeButton={false}
+        transition={Slide}
+        style={{
+          textAlign: 'center',
+          borderRadius: '5px',
+          fontWeight: '700',
+          fontSize: '16px',
+          width: '240px',
+        }}
+      />
+    </>
   );
 };
 

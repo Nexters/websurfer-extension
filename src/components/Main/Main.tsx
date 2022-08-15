@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ToastContainer, Slide } from 'react-toastify';
 
 import TotalTimeModal from './MainModal/TotalTimeModal';
 import MostUseTimeModal from './MainModal/MostUseTimeModal';
@@ -15,15 +16,19 @@ import { RefreshUpdateIcon } from '@assets/img/svg-icon-paths';
 import * as S from './Main.styled';
 import * as Grid from '@components/Grid/Grid.styled';
 import { dashboardStatSelector } from '@redux/dashboard';
+import { UserEntity } from '@redux/webSerfer.type';
 import { RootState, useAppSelector } from '@redux/store';
 import dayjs, { Dayjs } from 'dayjs';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
   rawKeyword: string | undefined;
   setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
+  user: UserEntity;
 }
 
-const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword }: Props) => {
+const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isSetting, setIsSetting] = useState<boolean>(false);
 
@@ -56,6 +61,7 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword }: Props) => {
                   <MainTitle
                     setIsSetting={setIsSetting}
                     isSetting={isSetting}
+                    user={user}
                   />
                   <MostVisitWebSite statData={statData} />
                   <S.Justify>
@@ -85,6 +91,27 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword }: Props) => {
           <MostVisitWebSIteModal />
           <TotalTimeModal />
           <MostUseTimeModal />
+          <ToastContainer
+            position="bottom-center"
+            autoClose={1500}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable={false}
+            pauseOnHover={false}
+            theme="dark"
+            closeButton={false}
+            transition={Slide}
+            style={{
+              textAlign: 'center',
+              borderRadius: '5px',
+              fontWeight: '700',
+              fontSize: '16px',
+              width: '240px',
+            }}
+          />
         </>
       )}
     </>

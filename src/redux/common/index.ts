@@ -7,16 +7,16 @@ interface CommonState {
   modal: {
     isOpenModal: boolean;
     isModalType: ModalType;
-    isFilterOnceApplied: boolean;
   };
+  isFilterOnceApplied: boolean;
 }
 
 const initialState: CommonState = {
   modal: {
     isOpenModal: false,
     isModalType: 'mostVisit',
-    isFilterOnceApplied: false,
   },
+  isFilterOnceApplied: false,
 };
 
 export const commonSlice = createSlice({
