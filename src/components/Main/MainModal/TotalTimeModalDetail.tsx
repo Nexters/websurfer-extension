@@ -153,9 +153,17 @@ const TotalTimeModalDetail = (props: Props) => {
           <S.StayTimeListContainer>
             {statData.mostDurationWebsites.map((value, index) => (
               <S.StyleTimeListWrapper key={index}>
-                <S.StyleTimeListIcon />
+                <S.StyleTimeListIcon
+                  src={value.website.faviconUrl}
+                  alt={value.website.name}
+                />
                 <S.InformaitonWrapper>
-                  <S.InformationTitle>{value.website.name}</S.InformationTitle>
+                  <S.InformationTitle
+                    href={`https://${value.website.hostname}`}
+                    target="_blank"
+                  >
+                    {value.website.name}
+                  </S.InformationTitle>
                   <S.InformationTimeBarWrapper>
                     <S.InformationTimeBar
                       percent={

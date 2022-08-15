@@ -7,6 +7,8 @@ import * as S from './TotalTimeModal.styled';
 import { FilterType } from './MostVisitWebSIteModal.type';
 import dayjs from 'dayjs';
 import PeriodSelector from './PeriodSelector';
+import { useAppSelector } from '@redux/store';
+import { dashboardStatSelector } from '@redux/dashboard';
 
 type Props = {
   period: 'last' | 'this' | 'select';
@@ -16,6 +18,23 @@ const MostUseTimeDetailModal = (props: Props) => {
   const DATE_FORMAT = 'YYYY[년] MM[월] DD[일]';
 
   const theme = useTheme();
+
+  const statData = useAppSelector(dashboardStatSelector);
+
+  const timeChartData = [
+    statData?.duration0,
+    statData?.duration1,
+    statData?.duration2,
+    statData?.duration3,
+    statData?.duration4,
+    statData?.duration5,
+    statData?.duration6,
+    statData?.duration7,
+    statData?.duration8,
+    statData?.duration9,
+    statData?.duration10,
+    statData?.duration11,
+  ];
 
   const option = {
     grid: {
@@ -84,38 +103,7 @@ const MostUseTimeDetailModal = (props: Props) => {
     },
     series: [
       {
-        data: [
-          180,
-          180,
-          180,
-          180,
-          180,
-          180,
-          {
-            value: 180,
-            itemStyle: {
-              normal: { color: theme.color.primary },
-              emphasis: { color: theme.color.secondaryB },
-            },
-          },
-          {
-            value: 200,
-            itemStyle: {
-              normal: { color: theme.color.primary },
-              emphasis: { color: theme.color.secondaryB },
-            },
-          },
-          {
-            value: 180,
-            itemStyle: {
-              normal: { color: theme.color.primary },
-              emphasis: { color: theme.color.secondaryB },
-            },
-          },
-          180,
-          180,
-          180,
-        ],
+        data: timeChartData,
         itemStyle: {
           color: theme.color.secondaryB,
           barBorderRadius: [5, 5, 0, 0],

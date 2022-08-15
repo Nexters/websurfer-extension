@@ -11,13 +11,13 @@ export const ItemCardWrapper = styled.div(() => {
   return [tw`flex flex-wrap`];
 });
 
-export const ItemCard = styled.div<ItemCardProps>((props) => {
+export const ItemCard = styled.a<ItemCardProps>((props) => {
   const theme = useTheme();
   const { primary } = props;
 
   return [
     tw`
-    flex flex-col justify-between
+    flex flex-col justify-between no-underline
     `,
     css`
       width: calc((100% - 28px) * (1 / 3));

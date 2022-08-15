@@ -24,7 +24,12 @@ const MostVisitWebSiteModalThis = (props: Props) => {
 
           if (index < 3) {
             return (
-              <Card.ItemCard key={index} primary={primary}>
+              <Card.ItemCard
+                href={`https://${value.website.hostname}`}
+                target="_blank"
+                key={index}
+                primary={primary}
+              >
                 <Card.ItemCardTitle primary={primary}>
                   {value.website.name}
                 </Card.ItemCardTitle>
@@ -40,7 +45,11 @@ const MostVisitWebSiteModalThis = (props: Props) => {
       {statData.mostVisitedWebsites.map(
         (value, index) =>
           index > 3 && (
-            <S.SiteListContainer key={index}>
+            <S.SiteListContainer
+              key={index}
+              href={`https://${value.website.hostname}`}
+              target="_blank"
+            >
               <S.SiteInformationWrapper>
                 <S.SiteListNumber>{index + 1}</S.SiteListNumber>
                 <S.SiteListIcon />

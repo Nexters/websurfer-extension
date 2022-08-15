@@ -3,16 +3,30 @@ import React from 'react';
 import { useTheme } from '@emotion/react';
 import ReactECharts from 'echarts-for-react';
 import { useAppDispatch } from '@redux/store';
-
 import { openModal } from '@redux/common';
+
+import { StatResponse } from '@redux/webSerfer.type';
 
 import * as Card from '@components/Commons/Card.styled';
 
-type Props = {};
+type Props = { statData?: StatResponse };
 
-const SurffingTime = (props: Props) => {
+const SurffingTime = ({ statData }: Props) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
+
+  const timeChartData = [
+    statData?.morningDuration,
+    statData?.daytimeDuration,
+    {
+      value: statData?.dinnerDuration,
+      itemStyle: {
+        normal: { color: theme.color.primary },
+        emphasis: { color: theme.color.secondaryB },
+      },
+    },
+    statData?.nightDuration,
+  ];
 
   const option = {
     grid: {
@@ -46,15 +60,7 @@ const SurffingTime = (props: Props) => {
     },
     series: [
       {
-        data: [
-          100,
-          100,
-          {
-            value: 120,
-            itemStyle: { color: theme.color.primary },
-          },
-          100,
-        ],
+        data: timeChartData,
         itemStyle: {
           color: theme.color.secondaryB,
           barBorderRadius: [5, 5, 0, 0],

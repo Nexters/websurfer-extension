@@ -32,10 +32,10 @@ export const Title = styled.div(() => {
   ];
 });
 
-export const SiteListContainer = styled.div(() => {
+export const SiteListContainer = styled.a(() => {
   const theme = useTheme();
   return [
-    tw`flex w-full items-center justify-between`,
+    tw`flex w-full items-center justify-between no-underline`,
     css`
       height: 56px;
       border-style: solid;
