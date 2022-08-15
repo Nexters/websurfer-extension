@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { DateRange } from 'react-date-range';
-import { format } from 'date-fns';
+import { format, startOfDay, endOfDay } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
 import * as S from './SearchBar.styled';
@@ -144,8 +144,8 @@ const SearchBar = ({
               ]}
               maxDate={new Date()}
               onChange={({ selection: { startDate, endDate } }) => {
-                setRawStartDate(startDate);
-                setRawEndDate(endDate);
+                setRawStartDate(startOfDay(startDate));
+                setRawEndDate(endOfDay(endDate));
               }}
               locale={ko}
             />
