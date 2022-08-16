@@ -7,4 +7,5 @@ export const BANNED_URLS_PREFIX = [
   'https://nid.naver.com/',
   'https://kauth.kakao.com/',
   'https://graph.facebook.com/oauth',
+  'https://accounts.kakao.com',
 ];
