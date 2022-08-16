@@ -61,7 +61,7 @@ const MostVisitWebSiteModalThis = (props: Props) => {
                   src={value.website.faviconUrl}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null;
-                    currentTarget.src = `${ModalCloseIcon}`;
+                    currentTarget.src = `./assets/basic_favicon_32.png`;
                   }}
                 />
                 <S.SiteListTitle>{value.website.name}</S.SiteListTitle>

@@ -170,7 +170,7 @@ const TotalTimeModalDetail = (props: Props) => {
                     alt={value.website.name}
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null;
-                      currentTarget.src = `${ModalCloseIcon}`;
+                      currentTarget.src = `${'./assets/basic_favicon_196.png'}`;
                     }}
                   />
                 </S.Link>

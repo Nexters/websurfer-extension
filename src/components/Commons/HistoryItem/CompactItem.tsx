@@ -18,7 +18,7 @@ const CompactItem = ({ title, href, website }: HistoryEntity) => {
           }
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = LogoIcon;
+            currentTarget.src = './assets/basic_favicon_196.png';
           }}
         />
       }
