@@ -19,6 +19,10 @@ export const CompactItemWrapper = styled.div(() => {
       &:last-child {
         margin-bottom: unset;
       }
+      transition: all 0.2s;
+      &: hover {
+        background-color: #f0f0f0;
+      }
     `,
   ];
 });
