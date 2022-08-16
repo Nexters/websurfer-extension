@@ -2,7 +2,7 @@ import React from 'react';
 
 import SettingDropdown from './SettingDropdown';
 
-import { Oceanographer, QuestionIcon } from '@assets/img/svg-icon-paths';
+import { QuestionIcon } from '@assets/img/svg-icon-paths';
 import { UserEntity } from '@redux/webSerfer.type';
 
 import * as S from './MainTitle.styled';
@@ -35,7 +35,10 @@ const MainTitle = ({ setIsSetting, isSetting, user, statData }: Props) => {
           {statData.achievement.category} 사이트 사용량이 많아요.
         </S.Description>
       </S.TitleContainer>
-      <S.MainImage src={Oceanographer} alt={statData.achievement.name} />
+      <S.MainImage
+        src={statData.achievement.imageUrl}
+        alt={statData.achievement.name}
+      />
       <SettingDropdown setIsSetting={setIsSetting} isSetting={isSetting} />
     </S.Wrapper>
   );
