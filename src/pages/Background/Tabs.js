@@ -1,7 +1,7 @@
 export default class Tabs {
   tabsMap = {};
   activeTabId = 0;
-  intervalMap = {};
+  intervalId = 0;
   urlIdMap = {};
 
   setTab(tabId, tab) {
@@ -31,19 +31,9 @@ export default class Tabs {
     return this.tabsMap?.[tabId] ?? {};
   }
 
-  setInterval(tabId, interval) {
-    this.intervalMap = {
-      ...this.intervalMap,
-      [tabId]: interval,
-    };
-  }
-
-  setIntervalMap(intervalMap) {
-    this.intervalMap = intervalMap;
-  }
-
-  getInterval(tabId) {
-    return this.intervalMap[tabId];
+  setInterval(interval) {
+    clearInterval(this.intervalId);
+    this.intervalId = interval;
   }
 
   setUrlId(comb, entity) {
@@ -53,7 +43,7 @@ export default class Tabs {
   reset() {
     this.tabsMap = {};
     this.activeTabId = 0;
-    this.intervalMap = {};
+    this.intervalId = 0;
     this.urlIdMap = {};
   }
 }

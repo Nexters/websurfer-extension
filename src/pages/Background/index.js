@@ -47,10 +47,7 @@ const createHistory = async (tab) => {
 };
 
 const initInterval = debounce(async (tabId) => {
-  if (instance.intervalMap[tabId]) {
-    console.log('duplicated interval', tabId, instance.intervalMap[tabId]);
-    return;
-  }
+  clearInterval(instance.intervalId);
 
   const curTab = instance.getTab(tabId);
   if (BANNED_URLS_PREFIX.some((v) => curTab.url.startsWith(v))) {
@@ -72,24 +69,14 @@ const initInterval = debounce(async (tabId) => {
       }
     }, 10000);
 
-    instance.setInterval(tabId, interval);
+    instance.setInterval(interval);
   }
 }, 500);
-
-const clearIntervalWithTab = ({ tabId, interval }) => {
-  const cleared = clearInterval(interval);
-
-  instance.setInterval(tabId, cleared);
-};
 
 const onActivatedCb = async ({ tabId }) => {
   console.log(tabId, 'onActivated');
 
-  const interval = instance.getInterval(instance.activeTabId);
-  if (interval) {
-    console.log('clearInterval', interval, instance.activeTabId);
-    clearIntervalWithTab({ tabId, interval });
-  }
+  clearInterval(instance.intervalId);
 
   instance.setActiveTabId(tabId);
 
@@ -104,11 +91,7 @@ const onUpdatedCb = async (tabId, changeInfo, tab) => {
   const { status = '' } = changeInfo;
 
   if (status === 'complete') {
-    const interval = instance.getInterval(tabId);
-    if (interval) {
-      console.log('clearInterval', interval, tabId);
-      clearIntervalWithTab({ tabId, interval });
-    }
+    clearInterval(instance.intervalId);
 
     instance.setTab(tabId, tab);
 
@@ -121,11 +104,7 @@ const onUpdatedCb = async (tabId, changeInfo, tab) => {
 const onRemovedCb = (tabId, removeInfo) => {
   console.log(tabId, removeInfo, 'onRemoved');
 
-  const interval = instance.getInterval(tabId);
-  if (interval) {
-    console.log('clearInterval', interval, tabId);
-    clearIntervalWithTab({ tabId, interval });
-  }
+  clearInterval(instance.intervalId);
 
   instance.deleteTab(tabId);
 };
@@ -135,15 +114,7 @@ const onFocusChangedCb = async (windowId) => {
 
   if (windowId < 0) {
     //clear all interval
-    const allClearedIntervalMap = Object.entries(instance.intervalMap).reduce(
-      (acc, [key, value]) => {
-        acc[key] = clearInterval(value);
-        return acc;
-      },
-      {}
-    );
-
-    instance.setIntervalMap(allClearedIntervalMap);
+    clearInterval(instance.intervalId);
     return;
   }
 
@@ -189,15 +160,7 @@ const initRecording = (token) => {
 
 const stopRecording = () => {
   // clear all interval
-  const allClearedIntervalMap = Object.entries(instance.intervalMap).reduce(
-    (acc, [key, value]) => {
-      acc[key] = clearInterval(value);
-      return acc;
-    },
-    {}
-  );
-
-  instance.setIntervalMap(allClearedIntervalMap);
+  clearInterval(instance.intervalId);
 
   instance.reset();
 
