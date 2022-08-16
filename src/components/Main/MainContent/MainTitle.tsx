@@ -24,7 +24,7 @@ const MainTitle = ({ setIsSetting, isSetting, user, statData }: Props) => {
     return splitted || email || '김넥터';
   })();
   return (
-    <S.Wrapper>
+    <S.Wrapper imageUrl={statData.achievement.imageUrl}>
       <S.TitleContainer>
         <S.SubTitle>이번 주 {name} 님은</S.SubTitle>
         <S.TitleWrapper>
@@ -35,10 +35,6 @@ const MainTitle = ({ setIsSetting, isSetting, user, statData }: Props) => {
           {statData.achievement.category} 사이트 사용량이 많아요.
         </S.Description>
       </S.TitleContainer>
-      <S.MainImage
-        src={statData.achievement.imageUrl}
-        alt={statData.achievement.name}
-      />
       <SettingDropdown setIsSetting={setIsSetting} isSetting={isSetting} />
     </S.Wrapper>
   );

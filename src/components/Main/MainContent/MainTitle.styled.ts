@@ -1,7 +1,9 @@
 import { css, useTheme } from '@emotion/react';
 import tw, { styled } from 'twin.macro';
 
-export const Wrapper = styled.div(() => {
+import * as T from './MainTitle.styled.type';
+
+export const Wrapper = styled.div<T.WrapperProps>((props) => {
   return [
     tw`
       flex justify-between items-end relative 
@@ -10,6 +12,8 @@ export const Wrapper = styled.div(() => {
       width: 840px;
       height: 342px;
       overflow: hidden;
+      background-image: url('${props.imageUrl}');
+      background-size: 840px 350px;
     `,
   ];
 });
@@ -45,16 +49,6 @@ export const Description = styled.div(() => {
       font-size: ${theme.fontSize.m};
       font-weight: ${theme.fontWeight.regular};
       line-height: ${theme.lineHeight.l};
-    `,
-  ];
-});
-
-export const MainImage = styled.img(() => {
-  return [
-    css`
-      width: 408px;
-      height: 263px;
-      margin: 89px 12px -10px 0;
     `,
   ];
 });
