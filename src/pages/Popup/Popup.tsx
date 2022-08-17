@@ -15,7 +15,7 @@ import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { getUser, userSelector, setToken } from '@redux/user';
 import { filterOnceAppliedSelector } from '@redux/common';
-import { getStat } from '@redux/dashboard';
+import { getStat, dashboardAchievementSelector } from '@redux/dashboard';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -29,9 +29,10 @@ const Popup = () => {
   const user = useAppSelector(userSelector);
   const historyList = useAppSelector(historyListSelector);
   const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
+  const achievement = useAppSelector(dashboardAchievementSelector);
   const dispatch = useAppDispatch();
 
-  const loggedIn = user.id;
+  const loggedIn = Boolean(user.id);
   const hasData = Boolean(historyList.length);
 
   useEffect(() => {
@@ -94,9 +95,19 @@ const Popup = () => {
                   })()}
                   님은
                 </S.SubTitle>
-                <S.MainTitle>열정 뿜뿜 해양학자</S.MainTitle>
+                <S.MainTitle>
+                  {achievement?.name || '열정 뿜뿜 해양학자'}
+                </S.MainTitle>
+                <S.SubDescription>
+                  {achievement?.category
+                    ? `${achievement.category} 사이트 사용량이 많아요.`
+                    : ''}
+                </S.SubDescription>
               </S.MiddleTitleWrapper>
-              <S.MainImage src={Oceanographer} alt="해양학자가 서핑하는 모습" />
+              <S.MainImage
+                src={achievement?.imageUrl || Oceanographer}
+                alt="해양학자가 서핑하는 모습"
+              />
             </S.MiddleTopWrapper>
             <SearchBar
               hasFilter={true}

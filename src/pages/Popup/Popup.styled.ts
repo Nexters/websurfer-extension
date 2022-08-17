@@ -99,7 +99,7 @@ export const SubTitle = styled.span(() => {
     css`
       font-size: ${theme.fontSize.m};
       color: ${theme.color['gray-08']};
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     `,
   ];
 });
@@ -111,6 +111,7 @@ export const MainTitle = styled.span(() => {
       font-size: ${theme.fontSize['2xl']};
       font-weight: ${theme.fontWeight.bold};
       color: ${theme.color.primary};
+      margin-bottom: 8px;
     `,
   ];
 });
@@ -181,6 +182,16 @@ export const MainImage = styled.img(() => {
       height: 140px;
       /* position: absolute;
       right: 0; */
+    `,
+  ];
+});
+
+export const SubDescription = styled.span(() => {
+  const theme = useTheme();
+  return [
+    css`
+      color: ${theme.color['gray-06']};
+      font-size: ${theme.fontSize.s};
     `,
   ];
 });
