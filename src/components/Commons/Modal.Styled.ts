@@ -1,4 +1,5 @@
 import { css, useTheme } from '@emotion/react';
+import { useState } from 'react';
 import tw, { styled } from 'twin.macro';
 
 export const ModalContainer = styled.div(() => [
@@ -10,14 +11,22 @@ export const ModalContainer = styled.div(() => [
 
 export const ModalWrapper = styled.div(() => {
   const theme = useTheme();
+  const [innerWith, setInnerWidth] = useState<number>(window.innerWidth);
+
+  const printInnerWidth = () => {
+    setInnerWidth(window.innerWidth);
+  };
+
+  window.addEventListener('resize', printInnerWidth);
 
   return [
-    tw`absolute left-1/2 z-20`,
+    tw`absolute z-20`,
     css`
-      top: 115px;
       width: 820px;
+      top: 115px;
+      left: ${innerWidth < 820 ? '10px' : '50%'};
       min-width: 820px;
-      transform: translate(-50%);
+      transform: ${innerWidth < 820 ? '' : 'translate(-50%)'};
     `,
   ];
 });
@@ -33,15 +42,27 @@ export const ModalTitleWrapper = styled.div(() => {
   ];
 });
 
+export const ModalContentContainer = styled.div(() => {
+  const theme = useTheme();
+
+  return [
+    tw`w-full bg-white`,
+    css`
+      border-radius: 18px;
+      padding: 30px 0;
+      max-height: 800px;
+    `,
+  ];
+});
+
 export const ModalContentWrapper = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`w-full bg-white overflow-y-scroll`,
+    tw`w-full bg-white overflow-y-auto overflow-x-hidden`,
     css`
-      border-radius: 18px;
-      padding: 30px 40px;
-      max-height: 800px;
+      max-height: 740px;
+      padding: 0 40px;
     `,
   ];
 });
