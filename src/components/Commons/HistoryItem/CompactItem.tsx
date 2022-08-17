@@ -5,6 +5,8 @@ import * as S from './style';
 import { LogoIcon } from '@assets/img/svg-icon-paths';
 import { HistoryEntity } from '@redux/webSerfer.type';
 
+const NoDataFavicon = './assets/basic_favicon_32.png';
+
 const CompactItem = ({ title, href, website }: HistoryEntity) => {
   return (
     <S.CompactItemWrapper onClick={() => window.open(href, '_blank')}>
@@ -13,12 +15,12 @@ const CompactItem = ({ title, href, website }: HistoryEntity) => {
           alt="history-icon"
           src={
             website?.faviconUrl?.startsWith('/images')
-              ? LogoIcon
+              ? NoDataFavicon
               : website?.faviconUrl || LogoIcon
           }
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = './assets/basic_favicon_196.png';
+            currentTarget.src = NoDataFavicon;
           }}
         />
       }

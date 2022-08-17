@@ -9,6 +9,8 @@ import { HistoryEntity } from '@redux/webSerfer.type';
 import { useAppDispatch } from '@redux/store';
 import { deleteHistoryItem } from '@redux/history';
 
+const NoDataFavicon = './assets/basic_favicon_32.png';
+
 const FullItem = ({ title, href, id, website }: HistoryEntity) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -19,12 +21,12 @@ const FullItem = ({ title, href, id, website }: HistoryEntity) => {
           alt="history-icon"
           src={
             website?.faviconUrl?.startsWith('/images')
-              ? LogoIcon
+              ? NoDataFavicon
               : website?.faviconUrl || LogoIcon
           }
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = './assets/basic_favicon_196.png';
+            currentTarget.src = NoDataFavicon;
           }}
         ></S.ItemIcon>
         <S.FullItemSpan>{title}</S.FullItemSpan>
