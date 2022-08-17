@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
 
+import TagModal from './MainModal/TagModal';
 import TotalTimeModal from './MainModal/TotalTimeModal';
 import MostUseTimeModal from './MainModal/MostUseTimeModal';
 import MainTitle from '@components/Main/MainContent/MainTitle';
@@ -104,6 +105,7 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
           <MostVisitWebSIteModal />
           <TotalTimeModal />
           <MostUseTimeModal />
+          <TagModal />
           <ToastContainer
             position="bottom-center"
             autoClose={1500}
