@@ -25,7 +25,7 @@ const SettingDropdown = ({ isSetting, setIsSetting }: Props) => {
     },
     {
       name: '문의하기',
-      cb: () => {},
+      cb: () => window.open('mailto:teamwebsurfer@gmail.com'),
     },
     {
       name: '팀샤카샤카',
