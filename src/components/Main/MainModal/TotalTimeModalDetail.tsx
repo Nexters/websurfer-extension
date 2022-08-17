@@ -7,16 +7,15 @@ import PeriodSelector from './PeriodSelector';
 import { useAppSelector } from '@redux/store';
 import { dashboardStatSelector } from '@redux/dashboard';
 import {
-  minuteToHourMinute,
   printYyyymmddM7,
   printYyyymmddToday,
+  secondsToHourMinute,
 } from '@utils/printTime';
 
 import { StatResponse } from '@redux/webSerfer.type';
 import { FilterType } from './MostVisitWebSIteModal.type';
 
 import * as S from './TotalTimeModal.styled';
-import { ModalCloseIcon } from '@assets/img/svg-icon-paths';
 
 type Props = {
   period: 'last' | 'this' | 'select';
@@ -144,7 +143,7 @@ const TotalTimeModalDetail = (props: Props) => {
           )}
           <S.TitleWrapper>
             <S.Title>
-              {`${minuteToHourMinute(statData.totalDuration, 'hourminute')}`}을
+              {`${secondsToHourMinute(statData.totalDuration, 'hourminute')}`}을
               사용하셨네요!
             </S.Title>
             <S.TimeLabel>지난주보다 20분 ↑</S.TimeLabel>
@@ -191,7 +190,7 @@ const TotalTimeModalDetail = (props: Props) => {
                     />
 
                     <S.InformationTimeBarText>
-                      {minuteToHourMinute(value.amount, 'hourminute')}
+                      {secondsToHourMinute(value.amount, 'hourminute')}
                     </S.InformationTimeBarText>
                   </S.InformationTimeBarWrapper>
                 </S.InformaitonWrapper>

@@ -1,5 +1,12 @@
 import dayjs from 'dayjs';
 
+export const secondsToHourMinute = (
+  seconds: number,
+  type: 'hour' | 'minute' | 'hourminute'
+): string => {
+  return minuteToHourMinute(Math.ceil(seconds / 60), type);
+};
+
 export const minuteToHourMinute = (
   totalMinute: number,
   type: 'hour' | 'minute' | 'hourminute'
