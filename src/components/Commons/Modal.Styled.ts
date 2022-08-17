@@ -22,9 +22,9 @@ export const ModalWrapper = styled.div(() => {
   return [
     tw`absolute z-20`,
     css`
+      width: 820px;
       top: 115px;
       left: ${innerWidth < 820 ? '10px' : '50%'};
-      width: 820px;
       min-width: 820px;
       transform: ${innerWidth < 820 ? '' : 'translate(-50%)'};
     `,
@@ -42,15 +42,27 @@ export const ModalTitleWrapper = styled.div(() => {
   ];
 });
 
+export const ModalContentContainer = styled.div(() => {
+  const theme = useTheme();
+
+  return [
+    tw`w-full bg-white`,
+    css`
+      border-radius: 18px;
+      padding: 30px 0;
+      max-height: 800px;
+    `,
+  ];
+});
+
 export const ModalContentWrapper = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`w-full bg-white overflow-y-scroll`,
+    tw`w-full bg-white overflow-y-auto overflow-x-hidden`,
     css`
-      border-radius: 18px;
-      padding: 30px 40px;
-      max-height: 800px;
+      max-height: 740px;
+      padding: 0 40px;
     `,
   ];
 });
