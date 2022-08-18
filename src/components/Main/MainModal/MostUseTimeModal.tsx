@@ -5,7 +5,7 @@ import Modal from '@components/Commons/Modal';
 
 import MostUseTimeDetailModal from './MostUseTimeDetailModal';
 
-type TabNameType = 'last' | 'this' | 'period';
+type TabNameType = 'last' | 'this';
 
 type Props = {};
 
@@ -29,20 +29,13 @@ const MostUseTimeModal = (props: Props) => {
             onClick: () => {
               setCurrentTab('last');
             },
-          },
-          {
-            title: '기간 선택',
-            isActive: currentTab === 'period',
-            onClick: () => {
-              setCurrentTab('period');
-            },
+            disabled: true,
           },
         ]}
       />
 
       {currentTab === 'this' && <MostUseTimeDetailModal period="this" />}
       {currentTab === 'last' && <MostUseTimeDetailModal period="last" />}
-      {currentTab === 'period' && <MostUseTimeDetailModal period="select" />}
     </Modal>
   );
 };

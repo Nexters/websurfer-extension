@@ -5,7 +5,7 @@ import Modal from '@components/Commons/Modal';
 
 import TotalTimeModalDetail from './TotalTimeModalDetail';
 
-type TabNameType = 'last' | 'this' | 'period';
+type TabNameType = 'last' | 'this';
 
 type Props = {};
 
@@ -29,20 +29,13 @@ const TotalTimeModal = (props: Props) => {
             onClick: () => {
               setCurrentTab('last');
             },
-          },
-          {
-            title: '기간 선택',
-            isActive: currentTab === 'period',
-            onClick: () => {
-              setCurrentTab('period');
-            },
+            disabled: true,
           },
         ]}
       />
 
       {currentTab === 'this' && <TotalTimeModalDetail period="this" />}
       {currentTab === 'last' && <TotalTimeModalDetail period="last" />}
-      {currentTab === 'period' && <TotalTimeModalDetail period="select" />}
     </Modal>
   );
 };

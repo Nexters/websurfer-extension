@@ -15,7 +15,7 @@ export const TabWrapper = styled.div(() => {
 });
 
 export const TabItemWrapper = styled.div<T.TabItemWrapperProps>(
-  ({ isActive }) => {
+  ({ isActive, disabled }) => {
     const theme = useTheme();
     return [
       tw`w-full flex justify-center`,
@@ -33,9 +33,9 @@ export const TabItemWrapper = styled.div<T.TabItemWrapperProps>(
           ? theme.color.primary
           : theme.color['gray-03']};
         &:hover {
-          color: ${theme.color.primary};
-          border-color: ${theme.color.primary};
-          cursor: pointer;
+          color: ${!disabled ? theme.color.primary : ''};
+          border-color: ${!disabled ? theme.color.primary : ''};
+          cursor: ${!disabled ? 'pointer' : 'not-allowed'};
         }
       `,
     ];

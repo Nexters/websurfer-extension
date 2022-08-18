@@ -3,12 +3,9 @@ import React, { useState } from 'react';
 import Tab from '@components/Commons/Tab';
 import Modal from '@components/Commons/Modal';
 
-import * as S from './MostVisitWebSIteModal.Styled';
-import * as Card from '@components/Main/MainContent/MostVisitWebSite.styled';
 import MostVisitWebSiteModalThis from './MostVisitWebSiteModalThis';
-import MostVisitWebSiteModalPeriod from './MostVisitWebSiteModalPeriod';
 
-type TabNameType = 'last' | 'this' | 'period';
+type TabNameType = 'last' | 'this';
 
 type Props = {};
 
@@ -32,20 +29,13 @@ const MostVisitWebSIteModal = (props: Props) => {
             onClick: () => {
               setCurrentTab('last');
             },
-          },
-          {
-            title: '기간 선택',
-            isActive: currentTab === 'period',
-            onClick: () => {
-              setCurrentTab('period');
-            },
+            disabled: true,
           },
         ]}
       />
 
       {currentTab === 'this' && <MostVisitWebSiteModalThis />}
       {currentTab === 'last' && <MostVisitWebSiteModalThis />}
-      {currentTab === 'period' && <MostVisitWebSiteModalPeriod />}
     </Modal>
   );
 };
