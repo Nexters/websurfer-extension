@@ -62,7 +62,7 @@ export const TitleContainer = styled.div(() => [
 ]);
 
 export const Icon = styled.img(() => {
-  return [
+  return [tw`cursor-pointer`,
     css`
       width: 24px;
       height: 24px;
@@ -70,6 +70,7 @@ export const Icon = styled.img(() => {
     `,
   ];
 });
+
 
 export const TitleWrapper = styled.div(() => {
   return [

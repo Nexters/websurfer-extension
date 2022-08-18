@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@redux/store';
 
-export type ModalType = 'mostVisit' | 'totalTime' | 'frequency'; //가장 많이 방문, 총 시간, 자주 이용하는 시간
+export type ModalType = 'mostVisit' | 'totalTime' | 'frequency' | 'tag'; //가장 많이 방문, 총 시간, 자주 이용하는 시간, 태그
 
 interface CommonState {
   modal: {

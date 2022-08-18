@@ -9,6 +9,7 @@ import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 import { filterOnceAppliedSelector } from '@redux/common';
 import { getStat } from '@redux/dashboard';
+import { getAchievements } from '@redux/tag';
 
 interface Props {
   title: string;
@@ -34,6 +35,7 @@ const Options = (props: Props) => {
       })
     );
     await dispatch(getStat());
+    await dispatch(getAchievements());
     window.dispatchEvent(
       new CustomEvent('WEBSURFER_RELAY_REQUEST', {
         detail: {
