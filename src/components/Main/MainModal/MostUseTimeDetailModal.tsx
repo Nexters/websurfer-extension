@@ -181,36 +181,9 @@ const MostUseTimeDetailModal = (props: Props) => {
 
   return (
     <>
-      {props.period === 'select' ? (
-        <S.SelectPeriodContainer
-          onClick={() => {
-            setIsFilterActive(!isFilterActive);
-          }}
-        >
-          <S.SelectPeriodWrapper
-            isActive={filter.startDate && filter.endDate ? true : false}
-          >
-            <S.SelectPeriodTime
-              isActive={filter.startDate && filter.endDate ? true : false}
-            >
-              {filter.startDate && filter.endDate
-                ? dayjs(filter.startDate).format(DATE_FORMAT) +
-                  ' - ' +
-                  dayjs(filter.endDate).format(DATE_FORMAT)
-                : '2022년 00월 00일 - 2020년 00월 00일'}
-            </S.SelectPeriodTime>
-            <S.SelectPeriodIcon
-              isActive={filter.startDate && filter.endDate ? true : false}
-            />
-          </S.SelectPeriodWrapper>
-          <S.PeriodTitle style={{ margin: 'auto 8px' }}>에는</S.PeriodTitle>
-        </S.SelectPeriodContainer>
-      ) : (
-        <S.PeriodTitle>
-          {' '}
-          {printYyyymmddM7} - {printYyyymmddToday} 에는
-        </S.PeriodTitle>
-      )}
+      <S.PeriodTitle>
+        {printYyyymmddM7} - {printYyyymmddToday} 에는
+      </S.PeriodTitle>
       <S.TitleWrapper>
         <S.Title>{printMostUseTime()}에 웹서핑을 자주 하셨네요!</S.Title>
       </S.TitleWrapper>

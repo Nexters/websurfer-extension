@@ -17,7 +17,7 @@ export const TitleContainer = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`flex flex-col justify-center`,
+    tw`flex flex-col justify-start`,
     css`
       width: 180px;
       height: 52px;
