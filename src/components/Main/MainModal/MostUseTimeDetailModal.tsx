@@ -81,8 +81,7 @@ const MostUseTimeDetailModal = (props: Props) => {
 
   const option = {
     grid: {
-      left: '12px',
-      right: '12px',
+      left: '30px',
       top: 90,
       bottom: 0,
       width: '650px',
