@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Web surfer",
+  "version": "1.0.1",
   "description": "정보의 바다 속, 당신은 어떤 서퍼일까요?",
   "options_page": "index.html",
   "background": { "service_worker": "background.bundle.js" },
