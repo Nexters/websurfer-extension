@@ -4,7 +4,9 @@ import dayjs from 'dayjs';
 import { useTheme } from '@emotion/react';
 import ReactECharts from 'echarts-for-react';
 import PeriodSelector from './PeriodSelector';
+
 import { useAppSelector } from '@redux/store';
+import { hasLastWeekDataSelector } from '@redux/common';
 import { dashboardStatSelector } from '@redux/dashboard';
 import {
   printYyyymmddM7,
@@ -28,11 +30,11 @@ const TotalTimeModalDetail = (props: Props) => {
   const statData: StatResponse | undefined = useAppSelector(
     dashboardStatSelector
   );
+  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
 
   const option = {
     grid: {
-      left: '12px',
-      right: '12px',
+      left: '30px',
       top: 50,
       bottom: 0,
       width: '650px',
@@ -99,41 +101,15 @@ const TotalTimeModalDetail = (props: Props) => {
     <>
       {statData && (
         <>
-          {props.period === 'select' ? (
-            <S.SelectPeriodContainer
-              onClick={() => {
-                setIsFilterActive(!isFilterActive);
-              }}
-            >
-              <S.SelectPeriodWrapper
-                isActive={filter.startDate && filter.endDate ? true : false}
-              >
-                <S.SelectPeriodTime
-                  isActive={filter.startDate && filter.endDate ? true : false}
-                >
-                  {filter.startDate && filter.endDate
-                    ? dayjs(filter.startDate).format(DATE_FORMAT) +
-                      ' - ' +
-                      dayjs(filter.endDate).format(DATE_FORMAT)
-                    : '2022년 00월 00일 - 2020년 00월 00일'}
-                </S.SelectPeriodTime>
-                <S.SelectPeriodIcon
-                  isActive={filter.startDate && filter.endDate ? true : false}
-                />
-              </S.SelectPeriodWrapper>
-              <S.PeriodTitle style={{ margin: 'auto 8px' }}>에는</S.PeriodTitle>
-            </S.SelectPeriodContainer>
-          ) : (
-            <S.PeriodTitle>
-              {printYyyymmddM7} - {printYyyymmddToday} 에는
-            </S.PeriodTitle>
-          )}
+          <S.PeriodTitle>
+            {printYyyymmddM7} - {printYyyymmddToday} 에는
+          </S.PeriodTitle>
           <S.TitleWrapper>
             <S.Title>
               {`${secondsToHourMinute(statData.totalDuration, 'hourminute')}`}을
               사용하셨네요!
             </S.Title>
-            <S.TimeLabel>지난주보다 20분 ↑</S.TimeLabel>
+            <S.TimeLabel>{hasLastWeekData && '지난주보다 20분 ↑'}</S.TimeLabel>
           </S.TitleWrapper>
           <ReactECharts
             option={option}

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useAppDispatch } from '@redux/store';
-import { openModal } from '@redux/common';
+import { useAppDispatch, useAppSelector } from '@redux/store';
+import { hasLastWeekDataSelector, openModal } from '@redux/common';
 
 import { secondsToHourMinute } from '@utils/printTime';
 
@@ -14,6 +14,7 @@ type Props = { statData?: StatResponse };
 
 const TotalTime = ({ statData }: Props) => {
   const dispatch = useAppDispatch();
+  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
 
   return (
     <>
@@ -30,7 +31,7 @@ const TotalTime = ({ statData }: Props) => {
           <S.TopContainer>
             <S.TitleContainer>
               <Card.Title margin="0">총 사용 시간</Card.Title>
-              <S.SubTitle>지난 주보다 20분 ↑</S.SubTitle>
+              <S.SubTitle>{hasLastWeekData && '지난 주보다 20분 ↑'}</S.SubTitle>
             </S.TitleContainer>
             <S.UsageTimeContainer>
               <S.Time>

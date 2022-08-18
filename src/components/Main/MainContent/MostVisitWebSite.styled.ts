@@ -17,7 +17,7 @@ export const ItemCard = styled.a<ItemCardProps>((props) => {
 
   return [
     tw`
-    flex flex-col justify-between no-underline
+    flex flex-col justify-between no-underline relative
     `,
     css`
       width: calc((100% - 28px) * (1 / 3));
@@ -48,6 +48,7 @@ export const ItemCardTitle = styled.div<ItemCardTitleProps>((props) => {
     `,
     css`
       color: ${primary ? theme.color.white : theme.color['gray-07']};
+      ${!props.isMain && 'text-indent: 29px;'}
       font-size: ${theme.fontSize.l};
       line-height: ${theme.lineHeight.xl};
       font-weight: ${theme.fontWeight.bold};

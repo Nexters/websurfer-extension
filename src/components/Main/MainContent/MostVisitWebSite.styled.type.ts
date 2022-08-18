@@ -5,6 +5,7 @@ export interface ItemCardProps {
 
 export interface ItemCardTitleProps {
   primary?: boolean;
+  isMain?: boolean;
 }
 
 export interface ItemCardCountProps {

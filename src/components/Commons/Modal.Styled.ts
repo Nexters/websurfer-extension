@@ -46,10 +46,11 @@ export const ModalContentContainer = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`w-full bg-white`,
+    tw`w-full bg-white overflow-hidden relative`,
     css`
       border-radius: 18px;
       padding: 30px 0;
+      height: 800px;
       max-height: 800px;
     `,
   ];
@@ -59,10 +60,21 @@ export const ModalContentWrapper = styled.div(() => {
   const theme = useTheme();
 
   return [
-    tw`w-full bg-white overflow-y-auto overflow-x-hidden`,
+    tw`w-full bg-white overflow-y-auto overflow-x-hidden absolute`,
     css`
+      left: 0;
       max-height: 740px;
       padding: 0 40px;
+    `,
+  ];
+});
+export const ModalContent = styled.div(() => {
+  const theme = useTheme();
+
+  return [
+    css`
+      width: 740px;
+      height: 740px;
     `,
   ];
 });

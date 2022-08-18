@@ -6,14 +6,20 @@ type Props = {
     title: string;
     onClick?: () => any;
     isActive?: boolean;
+    disabled?: boolean;
   }[];
 };
 
 const Tab = ({ items }: Props) => {
   return (
     <S.TabWrapper>
-      {items.map(({ title, onClick, isActive }, number) => (
-        <S.TabItemWrapper isActive={isActive} key={number} onClick={onClick}>
+      {items.map(({ title, onClick, isActive, disabled }, number) => (
+        <S.TabItemWrapper
+          isActive={isActive}
+          key={number}
+          disabled={disabled}
+          onClick={!disabled ? onClick : undefined}
+        >
           {title}
         </S.TabItemWrapper>
       ))}

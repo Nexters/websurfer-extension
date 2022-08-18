@@ -25,7 +25,7 @@ const MostVisitWebSiteModalThis = (props: Props) => {
 
       <Card.ItemCardWrapper style={{ marginBottom: '20px' }}>
         {statData.mostVisitedWebsites.map((value, index) => {
-          const primary = index === 0 ? true : false;
+          const primary = false;
 
           if (index < 3) {
             return (
@@ -35,6 +35,13 @@ const MostVisitWebSiteModalThis = (props: Props) => {
                 key={index}
                 primary={primary}
               >
+                <S.TopSiteListIcon
+                  src={value.website.faviconUrl}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = `./assets/basic_favicon_32.png`;
+                  }}
+                />
                 <Card.ItemCardTitle primary={primary}>
                   {value.website.name}
                 </Card.ItemCardTitle>

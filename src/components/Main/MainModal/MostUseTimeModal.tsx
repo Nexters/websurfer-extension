@@ -5,12 +5,16 @@ import Modal from '@components/Commons/Modal';
 
 import MostUseTimeDetailModal from './MostUseTimeDetailModal';
 
-type TabNameType = 'last' | 'this' | 'period';
+import { useAppSelector } from '@redux/store';
+import { hasLastWeekDataSelector } from '@redux/common';
+
+type TabNameType = 'last' | 'this';
 
 type Props = {};
 
 const MostUseTimeModal = (props: Props) => {
   const [currentTab, setCurrentTab] = useState<TabNameType>('this');
+  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
 
   return (
     <Modal type="frequency" title="자주 사용한 시간대">
@@ -29,20 +33,13 @@ const MostUseTimeModal = (props: Props) => {
             onClick: () => {
               setCurrentTab('last');
             },
-          },
-          {
-            title: '기간 선택',
-            isActive: currentTab === 'period',
-            onClick: () => {
-              setCurrentTab('period');
-            },
+            disabled: !hasLastWeekData,
           },
         ]}
       />
 
       {currentTab === 'this' && <MostUseTimeDetailModal period="this" />}
       {currentTab === 'last' && <MostUseTimeDetailModal period="last" />}
-      {currentTab === 'period' && <MostUseTimeDetailModal period="select" />}
     </Modal>
   );
 };

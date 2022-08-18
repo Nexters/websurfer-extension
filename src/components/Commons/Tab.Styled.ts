@@ -15,13 +15,17 @@ export const TabWrapper = styled.div(() => {
 });
 
 export const TabItemWrapper = styled.div<T.TabItemWrapperProps>(
-  ({ isActive }) => {
+  ({ isActive, disabled }) => {
     const theme = useTheme();
     return [
       tw`w-full flex justify-center`,
       css`
         height: 36px;
-        color: ${isActive ? theme.color.primary : theme.color['gray-06']};
+        color: ${isActive
+          ? theme.color.primary
+          : disabled
+          ? theme.color['gray-04']
+          : theme.color['gray-06']};
         font-size: ${theme.fontSize.m};
         font-weight: ${isActive
           ? theme.fontWeight.bold
@@ -31,11 +35,13 @@ export const TabItemWrapper = styled.div<T.TabItemWrapperProps>(
         border-width: 0 0 2px 0;
         border-color: ${isActive
           ? theme.color.primary
-          : theme.color['gray-03']};
+          : disabled
+          ? theme.color['gray-04']
+          : theme.color['gray-06']};
         &:hover {
-          color: ${theme.color.primary};
-          border-color: ${theme.color.primary};
-          cursor: pointer;
+          color: ${!disabled ? theme.color.primary : ''};
+          border-color: ${!disabled ? theme.color.primary : ''};
+          cursor: ${!disabled ? 'pointer' : 'not-allowed'};
         }
       `,
     ];
