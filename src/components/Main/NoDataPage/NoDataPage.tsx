@@ -22,10 +22,12 @@ const NoData = () => {
       <S.ContetnWrapper>
         <S.ContentItem>
           <S.NoDataImg src={noDataImg} alt="no-data" />
-          <S.MainTitle>하루동안 웹 서핑을 즐기고 와주세요</S.MainTitle>
-          <S.SubTitle>웹 서퍼 이용이 처음인 당신의 웹 서핑 성향을</S.SubTitle>
+          <S.MainTitle>웹 서핑을 즐기고 돌아와주세요</S.MainTitle>
           <S.SubTitle>
-            분석하기 위해서는 <b>최소 하루</b>의 데이터가 필요해요
+            아직 서퍼님의 성향을 알아볼 수 있는 데이터가 없어요.
+          </S.SubTitle>
+          <S.SubTitle>
+            잡시 웹 서핑을 즐기고 돌아와주시면 분석을 시작할게요.
           </S.SubTitle>
           <S.GoSurfButton onClick={onClickGoSurf}>
             웹 서핑 하러가기
