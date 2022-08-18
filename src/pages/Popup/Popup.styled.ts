@@ -121,7 +121,7 @@ export const CategoryDate = styled.span(() => {
   return [
     css`
       font-size: ${theme.fontSize.m};
-      color: ${theme.color['gray-05']};
+      color: ${theme.color['gray-08']};
       font-weight: ${theme.fontWeight.bold};
     `,
   ];
