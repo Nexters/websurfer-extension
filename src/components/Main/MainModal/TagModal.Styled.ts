@@ -32,7 +32,6 @@ export const Card = styled.div(() => {
     css`
       width: 233px;
       height: 270px;
-      margin-bottom: 20px;
       padding: 20px 20px 0 20px;
       background-color: ${theme.color.white};
       border-radius: 24px;
