@@ -52,7 +52,9 @@ const Modal = ({ children, title, type }: Props) => {
             />
           </S.ModalTitleWrapper>
           <S.ModalContentContainer>
-            <S.ModalContentWrapper>{children}</S.ModalContentWrapper>
+            <S.ModalContentWrapper>
+              <S.ModalContent>{children}</S.ModalContent>
+            </S.ModalContentWrapper>
           </S.ModalContentContainer>
         </S.ModalWrapper>
       </>,
