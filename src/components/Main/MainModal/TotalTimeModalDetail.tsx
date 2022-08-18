@@ -75,23 +75,10 @@ const TotalTimeModalDetail = (props: Props) => {
     },
     series: [
       {
-        data: [
-          300,
-          600,
-          1000,
-          50,
-          70,
-          180,
-          {
-            value: 800,
-            itemStyle: {
-              normal: { color: theme.color.primary },
-              emphasis: { color: theme.color.secondaryB },
-            },
-          },
-        ],
+        data: [300, 600, 1000, 50, 70, 180, 800],
         itemStyle: {
-          color: theme.color.secondaryB,
+          normal: { color: theme.color.secondaryB },
+          emphasis: { color: theme.color.primary },
           barBorderRadius: [5, 5, 0, 0],
         },
         type: 'bar',
