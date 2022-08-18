@@ -6,6 +6,7 @@ export const Description = styled.div(() => {
   return [
     // tw``,
     css`
+      margin-top: 10px;
       margin-bottom: 40px;
       color: ${theme.color['gray-06']};
       font-size: ${theme.fontSize.m};
@@ -20,6 +21,7 @@ export const CardWrapper = styled.div(() => {
   return [
     tw`w-full flex flex-wrap`,
     css`
+      margin-bottom: 30px;
       gap: 20px;
     `,
   ];
