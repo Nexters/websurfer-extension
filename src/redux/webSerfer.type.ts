@@ -147,3 +147,14 @@ export interface StatResponse {
   duration10: number;
   duration11: number;
 }
+
+export interface AchievementsResponse {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  name: string;
+  color: string;
+  imageUrl: string;
+  cardImageUrl: string;
+  category: string;
+}

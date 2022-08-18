@@ -4,6 +4,7 @@ import { useAppDispatch } from '@redux/store';
 import { getToken, getUser } from '@redux/user';
 import { getStat } from '@redux/dashboard';
 import { getHistoryList } from '@redux/history';
+import { getAchievements } from '@redux/tag';
 
 import Axios from '@utils/axios';
 
@@ -27,6 +28,7 @@ const useGoogleLoginCb = () => {
         })
       );
       await dispatch(getStat());
+      await dispatch(getAchievements());
     },
   });
 
