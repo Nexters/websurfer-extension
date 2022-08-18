@@ -89,11 +89,6 @@ const Popup = () => {
                 <S.MainTitle>
                   {achievement?.name || '열정 뿜뿜 해양학자'}
                 </S.MainTitle>
-                <S.SubDescription>
-                  {achievement?.category
-                    ? `${achievement.category} 사이트 사용량이 많아요.`
-                    : ''}
-                </S.SubDescription>
               </S.MiddleTitleWrapper>
               <S.MainImage
                 src={achievement?.imageUrl || Oceanographer}
