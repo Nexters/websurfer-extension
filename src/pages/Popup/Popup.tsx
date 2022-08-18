@@ -85,16 +85,7 @@ const Popup = () => {
           <>
             <S.MiddleTopWrapper>
               <S.MiddleTitleWrapper>
-                <S.SubTitle>
-                  이번주{' '}
-                  {(() => {
-                    const email = user?.email;
-                    const splitted = email && email.split('@')[0];
-
-                    return splitted || email || '김넥터';
-                  })()}
-                  님은
-                </S.SubTitle>
+                <S.SubTitle>이번 주 서퍼님은</S.SubTitle>
                 <S.MainTitle>
                   {achievement?.name || '열정 뿜뿜 해양학자'}
                 </S.MainTitle>

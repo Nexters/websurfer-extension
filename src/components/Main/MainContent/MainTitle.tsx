@@ -37,7 +37,7 @@ const MainTitle = ({ setIsSetting, isSetting, user, statData }: Props) => {
   return (
     <S.Wrapper imageUrl={statData.achievement.imageUrl}>
       <S.TitleContainer>
-        <S.SubTitle>이번 주 {name} 님은</S.SubTitle>
+        <S.SubTitle>이번 주 서퍼님은</S.SubTitle>
         <S.TitleWrapper>
           <S.Title>{statData.achievement.name}</S.Title>
           <S.Icon

@@ -51,7 +51,9 @@ const Modal = ({ children, title, type }: Props) => {
               onClick={closePortal}
             />
           </S.ModalTitleWrapper>
-          <S.ModalContentWrapper>{children}</S.ModalContentWrapper>
+          <S.ModalContentContainer>
+            <S.ModalContentWrapper>{children}</S.ModalContentWrapper>
+          </S.ModalContentContainer>
         </S.ModalWrapper>
       </>,
       ref.current
