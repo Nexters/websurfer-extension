@@ -32,7 +32,7 @@ const MostVisitWebSite = ({ statData }: Props) => {
           if (index < 3) {
             return (
               <S.ItemCard key={index} primary={primary}>
-                <S.ItemCardTitle primary={primary}>
+                <S.ItemCardTitle primary={primary} isMain>
                   {value.website.name}
                 </S.ItemCardTitle>
                 <S.ItemCardCount primary={primary}>

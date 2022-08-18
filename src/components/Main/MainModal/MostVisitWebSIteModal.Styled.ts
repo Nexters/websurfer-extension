@@ -85,10 +85,26 @@ export const SiteListIcon = styled.img(() => {
   ];
 });
 
+export const TopSiteListIcon = styled.img(() => {
+  const theme = useTheme();
+  return [
+    tw`absolute`,
+    css`
+      top: 27px;
+      left: 22px;
+      width: 20px;
+      height: 20px;
+      margin-right: 9px;
+      border-radius: 6px;
+      /* background-color: ${theme.color['gray-06']}; */
+    `,
+  ];
+});
+
 export const SiteListTitle = styled.div(() => {
   const theme = useTheme();
   return [
-    tw`overflow-hidden`,
+    tw`overflow-hidden inline`,
     css`
       width: 553px;
       margin-right: 19px;
