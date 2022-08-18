@@ -24,7 +24,7 @@ export const SubTitle = styled.div(() => {
     css`
       font-size: ${theme.fontSize['2xl']};
       line-height: ${theme.lineHeight['3xl']};
-      color: ${theme.color['gray-06']};
+      color: ${theme.color['gray-08']};
     `,
   ];
 });
@@ -62,7 +62,8 @@ export const TitleContainer = styled.div(() => [
 ]);
 
 export const Icon = styled.img(() => {
-  return [tw`cursor-pointer`,
+  return [
+    tw`cursor-pointer`,
     css`
       width: 24px;
       height: 24px;
@@ -70,7 +71,6 @@ export const Icon = styled.img(() => {
     `,
   ];
 });
-
 
 export const TitleWrapper = styled.div(() => {
   return [

@@ -3,11 +3,6 @@ import tw, { styled } from 'twin.macro';
 
 interface InputProps {
   hasFilter: boolean;
-  isInputActive?: boolean;
-}
-
-interface IFilterProps {
-  isInputActive?: boolean;
 }
 
 interface IButtonProps {
@@ -22,33 +17,34 @@ export const Wrapper = styled.div(() => {
   ];
 });
 
-export const Input = styled.input<InputProps>(
-  ({ hasFilter, isInputActive }) => {
-    const theme = useTheme();
-    return [
-      tw`
+export const Input = styled.input<InputProps>(({ hasFilter }) => {
+  const theme = useTheme();
+  return [
+    tw`
       w-full
     `,
-      css`
-        font-size: ${theme.fontSize.m};
-        border-radius: ${hasFilter ? '10px 0 0 10px' : '10px'};
-        border: 1px solid ${isInputActive ? 'blue' : theme.color['gray-03']};
-        padding: 17px 17px 17px 55px;
+    css`
+      font-size: ${theme.fontSize.m};
+      border-radius: ${hasFilter ? '10px 0 0 10px' : '10px'};
+      border: 1px solid ${theme.color['gray-03']};
+      padding: 17px 17px 17px 55px;
+      outline: none;
+      height: 50px;
+      &:focus {
         outline: none;
-        height: 50px;
-      `,
-    ];
-  }
-);
+      }
+    `,
+  ];
+});
 
-export const Filter = styled.img<IFilterProps>(({ isInputActive }) => {
+export const Filter = styled.img(() => {
   const theme = useTheme();
   return [
     tw`
       cursor-pointer
     `,
     css`
-      border: 1px solid ${isInputActive ? 'blue' : theme.color['gray-03']};
+      border: 1px solid ${theme.color['gray-03']};
       border-left: 0px;
       border-radius: 0px 10px 10px 0;
       padding: 14px;

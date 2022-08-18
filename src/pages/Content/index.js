@@ -18,6 +18,7 @@ window.addEventListener('WEBSURFER_RELAY_REQUEST', (event) => {
 function statWebsurferRelay() {
   contentPort = window.chrome.runtime.connect(
     'mkaefnhphgcdcfijioijiobgbadmabef',
+    // 'aceedphljoofldblhdgjcbebjelgdcog', //local test
     {
       name: 'websurfer-background-content',
     }

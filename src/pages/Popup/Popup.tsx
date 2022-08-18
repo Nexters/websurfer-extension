@@ -65,7 +65,7 @@ const Popup = () => {
       <S.TopWrapper>
         <S.HomeWrapper onClick={goApp}>
           <S.HomeIcon alt="home-icon" src={HomeIcon}></S.HomeIcon>
-          <S.HomeSpan>홈으로 이동</S.HomeSpan>
+          <S.HomeSpan>대시보드로 이동</S.HomeSpan>
         </S.HomeWrapper>
         <S.HomeIcon
           alt="close-icon"

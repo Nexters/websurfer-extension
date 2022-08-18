@@ -28,7 +28,7 @@ export const ContentWrapper = styled.div(() => {
       w-full
     `,
     css`
-      margin-top: 12px;
+      margin-top: 24px;
     `,
   ];
 });
@@ -71,8 +71,8 @@ export const CategoryDate = styled.span(() => {
       block
     `,
     css`
-      font-size: ${theme.fontSize.l};
-      color: ${theme.color['gray-05']};
+      font-size: ${theme.fontSize.m};
+      color: ${theme.color['gray-08']};
       font-weight: ${theme.fontWeight.bold};
       margin-bottom: 18px;
     `,

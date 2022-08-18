@@ -19,6 +19,7 @@ import RefreshUpdateIcon from './icon-refresh-update.svg';
 import ModalCloseIcon from './icon-modal-close.svg';
 import RepeatIcon from './icon-repeat-mono.svg';
 import CalendarBlueIcon from './icon-calendar-check-blue.svg';
+import FullLogo from './full_logo.svg';
 
 export {
   FilterIcon,
@@ -42,4 +43,5 @@ export {
   ModalCloseIcon,
   RepeatIcon,
   CalendarBlueIcon,
+  FullLogo,
 };

@@ -20,18 +20,10 @@ type Props = {
 };
 
 const MainTitle = ({ setIsSetting, isSetting, user, statData }: Props) => {
-  const name = (() => {
-    const email = user?.email;
-    const splitted = email && email.split('@')[0];
-
-    return splitted || email || '김넥터';
-  })();
-
   const dispatch = useAppDispatch();
 
   const requestOpenModal = () => {
     dispatch(openModal('tag'));
-    console.log('click');
   };
 
   return (

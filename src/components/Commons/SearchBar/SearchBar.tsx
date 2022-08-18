@@ -44,7 +44,6 @@ const SearchBar = ({
   setRawKeyword,
   isPopup = false,
 }: Props) => {
-  const [isInputActive, setIsInputActive] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [rawStartDate, setRawStartDate] = useState<TstateDate>(undefined);
   const [rawEndDate, setRawEndDate] = useState<TstateDate>(undefined);
@@ -99,11 +98,8 @@ const SearchBar = ({
     <S.Wrapper>
       <S.SearchIcon src={SearchIcon} />
       <S.Input
-        onFocus={() => setIsInputActive(true)}
-        onBlur={() => setIsInputActive(false)}
         placeholder={placeholder}
         hasFilter={hasFilter}
-        isInputActive={isInputActive}
         value={rawKeyword}
         onChange={({ target }) => {
           setRawKeyword(target.value);
@@ -111,7 +107,6 @@ const SearchBar = ({
       />
       {hasFilter && (
         <S.Filter
-          isInputActive={isInputActive}
           onClick={() => setIsFilterActive(!isFilterActive)}
           src={
             filter.startDate || filter.endDate ? CalendarBlueIcon : CalendarIcon
@@ -144,8 +139,8 @@ const SearchBar = ({
               ]}
               maxDate={new Date()}
               onChange={({ selection: { startDate, endDate } }) => {
-                setRawStartDate(startOfDay(startDate));
-                setRawEndDate(endOfDay(endDate));
+                setRawStartDate(startOfDay(startDate as number | Date));
+                setRawEndDate(endOfDay(endDate as number | Date));
               }}
               locale={ko}
             />
