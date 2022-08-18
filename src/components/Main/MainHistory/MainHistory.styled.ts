@@ -28,7 +28,7 @@ export const ContentWrapper = styled.div(() => {
       w-full
     `,
     css`
-      margin-top: 12px;
+      margin-top: 24px;
     `,
   ];
 });
