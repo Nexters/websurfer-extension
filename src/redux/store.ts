@@ -6,12 +6,14 @@ import userReducer from './user';
 import hisoryReducer from './history';
 import commonReducer from './common';
 import dashboardReducer from './dashboard';
+import tagReducer from './tag';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     common: commonReducer,
     dashboard: dashboardReducer,
+    tag: tagReducer,
     history: hisoryReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([thunk]),
