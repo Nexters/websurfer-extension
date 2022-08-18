@@ -13,7 +13,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*", "<all_urls>"],
+      "matches": ["https://websurfer-web.vercel.app/"],
       "js": ["contentScript.bundle.js"]
     }
   ],
