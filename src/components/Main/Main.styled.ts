@@ -21,9 +21,7 @@ export const BackgroundItem = styled.div(() => {
     tw`w-1/2`,
     css`
       :first-child {
-        background-color: ${window.innerWidth < MAX_WIDTH
-          ? theme.color.white
-          : theme.color.bgColor};
+        background-color: ${theme.color.bgColor};
       }
       :last-child {
         background-color: ${theme.color.white};
@@ -70,7 +68,7 @@ export const UpdateIcon = styled.img(() => {
   ];
 });
 
-export const Relative = styled.div(() => [tw`relative`]);
+export const Relative = styled.div(() => [tw`relative overflow-x-hidden`]);
 
 export const MainContentsWrapper = styled.div(() => {
   return [
