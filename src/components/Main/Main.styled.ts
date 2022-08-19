@@ -69,3 +69,19 @@ export const UpdateIcon = styled.img(() => {
     `,
   ];
 });
+
+export const Relative = styled.div(() => [tw`relative`]);
+
+export const MainContentsWrapper = styled.div(() => {
+  return [
+    css`
+      position: fixed;
+      padding: 55px 30px 60px 30px;
+      height: 100vh;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    `,
+  ];
+});
