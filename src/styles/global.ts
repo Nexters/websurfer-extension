@@ -17,7 +17,6 @@ const global = css`
     line-height: 24px;
     font-weight: 400;
     letter-spacing: -0.2px;
-    overflow-x: hidden;
   }
   * {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,

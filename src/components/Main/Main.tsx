@@ -58,55 +58,61 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
       {statData && (
         <>
           <Grid.Container>
-            <S.Relative>
-              <S.MainContentsWrapper>
-                <MainTopNav setIsSetting={setIsSetting} isSetting={isSetting} />
-                <MainTitle
-                  setIsSetting={setIsSetting}
-                  isSetting={isSetting}
-                  user={user}
-                  statData={statData}
+            {/* <S.Relative> */}
+            <Grid.Row>
+              <Grid.LayoutCol
+                unit={isFocus ? 0 : 8}
+                display={isFocus ? 'none' : 'block'}
+                paddingTop="55px"
+                paddingBottom="60px"
+                backgroundColor="bgColor"
+              >
+                <S.Sticky>
+                  <S.MainContentsWrapper>
+                    <MainTopNav
+                      setIsSetting={setIsSetting}
+                      isSetting={isSetting}
+                    />
+                    <MainTitle
+                      setIsSetting={setIsSetting}
+                      isSetting={isSetting}
+                      user={user}
+                      statData={statData}
+                    />
+                    <MostVisitWebSite statData={statData} />
+                    <S.Justify>
+                      <TotalTime statData={statData} />
+                      <SurffingTime statData={statData} />
+                    </S.Justify>
+                    <S.UpdateWrapper>
+                      <S.UpdateMessage>
+                        마지막 업데이트 : {getFromNow(statData.lastUpdatedAt)}
+                      </S.UpdateMessage>
+                      <S.UpdateIcon
+                        src={RefreshUpdateIcon}
+                        alt="Refresh"
+                        onClick={() => {
+                          dispatch(refreshStat());
+                        }}
+                      />
+                    </S.UpdateWrapper>
+                  </S.MainContentsWrapper>
+                </S.Sticky>
+              </Grid.LayoutCol>
+              <Grid.LayoutCol
+                paddingTop="60px"
+                paddingBottom="60px"
+                unit={isFocus ? 12 : 4}
+              >
+                <MainHistory
+                  setIsFocus={setIsFocus}
+                  isFocus={isFocus}
+                  rawKeyword={rawKeyword}
+                  setRawKeyword={setRawKeyword}
                 />
-                <MostVisitWebSite statData={statData} />
-                <S.Justify>
-                  <TotalTime statData={statData} />
-                  <SurffingTime statData={statData} />
-                </S.Justify>
-                <S.UpdateWrapper>
-                  <S.UpdateMessage>
-                    마지막 업데이트 : {getFromNow(statData.lastUpdatedAt)}
-                  </S.UpdateMessage>
-                  <S.UpdateIcon
-                    src={RefreshUpdateIcon}
-                    alt="Refresh"
-                    onClick={() => {
-                      dispatch(refreshStat());
-                    }}
-                  />
-                </S.UpdateWrapper>
-              </S.MainContentsWrapper>
-              <Grid.Row>
-                <Grid.LayoutCol
-                  unit={isFocus ? 0 : 8}
-                  display={isFocus ? 'none' : 'block'}
-                  paddingTop="55px"
-                  paddingBottom="60px"
-                  backgroundColor="bgColor"
-                ></Grid.LayoutCol>
-                <Grid.LayoutCol
-                  paddingTop="60px"
-                  paddingBottom="60px"
-                  unit={isFocus ? 12 : 4}
-                >
-                  <MainHistory
-                    setIsFocus={setIsFocus}
-                    isFocus={isFocus}
-                    rawKeyword={rawKeyword}
-                    setRawKeyword={setRawKeyword}
-                  />
-                </Grid.LayoutCol>
-              </Grid.Row>
-            </S.Relative>
+              </Grid.LayoutCol>
+            </Grid.Row>
+            {/* </S.Relative> */}
           </Grid.Container>
           <MostVisitWebSIteModal />
           <TotalTimeModal />
