@@ -95,7 +95,6 @@ const MostUseTimeDetailModal = (props: Props) => {
 
       formatter: function (params: any) {
         var tar = params[0];
-        console.log(params);
         return (
           '시간 : ' +
           tar.name +

@@ -47,7 +47,6 @@ const TotalTimeModalDetail = (props: Props) => {
       },
       formatter: function (params: any) {
         var tar = params[0];
-        console.log(params);
         return '날짜 : ' + tar.name + '<br/>' + '사용량(분) : ' + tar.value;
       },
       borderColor: theme.color['gray-04'],

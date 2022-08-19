@@ -14,7 +14,6 @@ export const achievementsSlice = createSlice({
     builder.addCase(
       getAchievements.fulfilled,
       (state, { payload }: PayloadAction<AchievementsResponse[]>) => {
-        console.log(payload);
         state.data = payload;
       }
     );
