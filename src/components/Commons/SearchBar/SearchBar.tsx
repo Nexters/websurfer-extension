@@ -117,7 +117,7 @@ const SearchBar = ({
       {isFilterActive && (
         <S.FilterWrapper isPopup={isPopup}>
           <S.FilterTopWrapper>
-            <S.FilterTitle>기간 선택</S.FilterTitle>
+            <S.FilterTitle>기간 선택을 선택하세요</S.FilterTitle>
             <S.RefreshButton
               alt="refresh"
               src={RefreshIcon}
