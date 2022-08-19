@@ -124,7 +124,7 @@ export const FilterApplyButton = styled.button(({ disabled }: IButtonProps) => {
       margin-top: 12px;
       color: #fff;
       font-weight: ${theme.fontWeight.bold};
-      font-size: ${theme.fontSize.xs};
+      font-size: ${theme.fontSize.m};
       background: ${disabled ? theme.color['gray-04'] : theme.color.primary};
       border-radius: 10px;
       border: unset;
@@ -144,6 +144,11 @@ export const DateRangeWrapper = styled.div(() => {
       & .rdrDateRangeWrapper {
         border-radius: 10px;
         border: 1px solid ${theme.color['gray-03']};
+        width: 318px;
+
+        & .rdrMonth {
+          width: 318px;
+        }
       }
     `,
   ];

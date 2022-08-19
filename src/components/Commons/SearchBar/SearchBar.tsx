@@ -8,7 +8,7 @@ import * as S from './SearchBar.styled';
 import {
   CalendarIcon,
   SearchIcon,
-  RefreshIcon,
+  RepeatIcon,
   CalendarBlueIcon,
 } from '@assets/img/svg-icon-paths';
 
@@ -117,10 +117,10 @@ const SearchBar = ({
       {isFilterActive && (
         <S.FilterWrapper isPopup={isPopup}>
           <S.FilterTopWrapper>
-            <S.FilterTitle>기간 선택</S.FilterTitle>
+            <S.FilterTitle>기간 선택을 선택하세요</S.FilterTitle>
             <S.RefreshButton
               alt="refresh"
-              src={RefreshIcon}
+              src={RepeatIcon}
               onClick={() => {
                 setRawStartDate(undefined);
                 setRawEndDate(undefined);
@@ -151,9 +151,9 @@ const SearchBar = ({
           >
             {filterConfirmDisabled
               ? '적용하기'
-              : `${format(rawStartDate as TdisplayDate, 'yyyy-MM-dd')}~${format(
+              : `${format(rawStartDate as TdisplayDate, 'yyyy.MM.dd')}~${format(
                   rawEndDate as TdisplayDate,
-                  'yyyy-MM-dd'
+                  'MM.dd'
                 )} 적용하기`}
           </S.FilterApplyButton>
         </S.FilterWrapper>
