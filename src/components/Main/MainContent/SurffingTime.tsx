@@ -4,17 +4,23 @@ import { useTheme } from '@emotion/react';
 import ReactECharts from 'echarts-for-react';
 import { useAppDispatch } from '@redux/store';
 import { openModal } from '@redux/common';
+import printChartData from '@utils/printChartData';
 
 import { StatResponse } from '@redux/webSerfer.type';
 
 import * as Card from '@components/Commons/Card.styled';
+
+import morningIcon from '@assets/img/icon-time-morning.png';
+import dayIcon from '@assets/img/icon-time-day.png';
+import dinnerIcon from '@assets/img/icon-time-dinner.png';
+import nightIcon from '@assets/img/icon-time-night.png';
 
 type Props = { statData?: StatResponse };
 
 const SurffingTime = ({ statData }: Props) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
-  const [chartData, setChartData] = useState<any[]>();
+  const [maxIcon, setMaxIcon] = useState<string>(dayIcon);
 
   const timeData = statData
     ? [
@@ -27,20 +33,30 @@ const SurffingTime = ({ statData }: Props) => {
 
   const maxValue = Math.max(...timeData);
 
-  const printChartData = () => {
-    const data = timeData.map((value) => {
-      if (value === maxValue) {
-        return { value, itemStyle: { color: theme.color.primary } };
-      } else {
-        return value;
-      }
-    });
-    setChartData(data);
+  const selectMaxIcon = () => {
+    const fromIndex = timeData.indexOf(maxValue);
+
+    switch (fromIndex) {
+      case 0:
+        setMaxIcon(morningIcon);
+        break;
+      case 1:
+        setMaxIcon(dayIcon);
+        break;
+      case 2:
+        setMaxIcon(dinnerIcon);
+        break;
+      case 3:
+        setMaxIcon(nightIcon);
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
     if (statData) {
-      printChartData();
+      selectMaxIcon();
     }
   }, [statData]);
 
@@ -77,7 +93,7 @@ const SurffingTime = ({ statData }: Props) => {
     },
     series: [
       {
-        data: chartData,
+        data: printChartData(timeData, theme.color.primary),
         itemStyle: {
           normal: {
             color: theme.color.secondaryB,
@@ -89,7 +105,7 @@ const SurffingTime = ({ statData }: Props) => {
           },
         },
         type: 'bar',
-        silent: false,
+        silent: true,
         barWidth: '30px',
         barGap: '34px',
         markPoint: {
@@ -97,10 +113,10 @@ const SurffingTime = ({ statData }: Props) => {
             {
               type: 'max',
               itemStyle: { color: theme.color.secondaryY },
-              label: { show: false },
             },
           ],
-          symbol: 'circle',
+          label: { show: false },
+          symbol: `image://${maxIcon}`,
           symbolSize: 30,
           symbolOffset: [0, -20],
         },
