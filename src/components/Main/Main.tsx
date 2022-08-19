@@ -23,6 +23,17 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+const getFromNow = (input: Date) => {
+  const diff = dayjs().diff(dayjs(input), 'seconds');
+  if (diff >= 60) {
+    return `${Math.floor(diff / 60)}분 전`;
+  } else if (diff <= 1) {
+    return '방금';
+  } else {
+    return `${diff}초 전`;
+  }
+};
+
 interface Props {
   rawKeyword: string | undefined;
   setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
@@ -73,10 +84,7 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
                   </S.Justify>
                   <S.UpdateWrapper>
                     <S.UpdateMessage>
-                      마지막 업데이트 :{' '}
-                      {dayjs(statData.lastUpdatedAt).format(
-                        'YYYY/MM/DD hh:mm:ss'
-                      )}
+                      마지막 업데이트 : {getFromNow(statData.lastUpdatedAt)}
                     </S.UpdateMessage>
                     <S.UpdateIcon
                       src={RefreshUpdateIcon}
