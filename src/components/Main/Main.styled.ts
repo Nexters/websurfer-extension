@@ -75,17 +75,25 @@ export const Sticky = styled.div(() => [
   `,
 ]);
 
-export const MainContentsWrapper = styled.div(() => {
+export const MainContentsContainer = styled.div(() => {
   return [
+    tw`w-full overflow-hidden relative`,
     css`
-      position: sticky;
-      /* padding: 55px 30px 60px 30px; */
       height: 100vh;
       top: 0;
-      overflow-y: auto;
-      &::-webkit-scrollbar {
+    `,
+  ];
+});
+
+export const MainContentsWrapper = styled.div(() => {
+  return [
+    tw`w-full overflow-y-auto overflow-x-hidden absolute`,
+    css`
+      height: 100vh;
+      top: 0;
+      /* &::-webkit-scrollbar {
         width: 4px;
-      }
+      } */
     `,
   ];
 });

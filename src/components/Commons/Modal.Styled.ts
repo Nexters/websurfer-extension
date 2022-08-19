@@ -12,9 +12,11 @@ export const ModalContainer = styled.div(() => [
 export const ModalWrapper = styled.div(() => {
   const theme = useTheme();
   const [innerWith, setInnerWidth] = useState<number>(window.innerWidth);
+  const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight);
 
   const printInnerWidth = () => {
     setInnerWidth(window.innerWidth);
+    setInnerHeight(window.innerHeight);
   };
 
   window.addEventListener('resize', printInnerWidth);
@@ -23,10 +25,10 @@ export const ModalWrapper = styled.div(() => {
     tw`absolute z-20`,
     css`
       width: 820px;
-      top: 115px;
-      left: ${innerWidth < 820 ? '10px' : '50%'};
+      top: ${innerHeight < 870 ? ' 480px' : '50%'};
+      left: ${innerWidth < 820 ? '450px' : '50%'};
       min-width: 820px;
-      transform: ${innerWidth < 820 ? '' : 'translate(-50%)'};
+      transform: translate(-50%, -50%);
     `,
   ];
 });

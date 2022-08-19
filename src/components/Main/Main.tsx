@@ -68,35 +68,37 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
                 backgroundColor="bgColor"
               >
                 <S.Sticky>
-                  <S.MainContentsWrapper>
-                    <MainTopNav
-                      setIsSetting={setIsSetting}
-                      isSetting={isSetting}
-                    />
-                    <MainTitle
-                      setIsSetting={setIsSetting}
-                      isSetting={isSetting}
-                      user={user}
-                      statData={statData}
-                    />
-                    <MostVisitWebSite statData={statData} />
-                    <S.Justify>
-                      <TotalTime statData={statData} />
-                      <SurffingTime statData={statData} />
-                    </S.Justify>
-                    <S.UpdateWrapper>
-                      <S.UpdateMessage>
-                        마지막 업데이트 : {getFromNow(statData.lastUpdatedAt)}
-                      </S.UpdateMessage>
-                      <S.UpdateIcon
-                        src={RefreshUpdateIcon}
-                        alt="Refresh"
-                        onClick={() => {
-                          dispatch(refreshStat());
-                        }}
+                  <S.MainContentsContainer>
+                    <S.MainContentsWrapper>
+                      <MainTopNav
+                        setIsSetting={setIsSetting}
+                        isSetting={isSetting}
                       />
-                    </S.UpdateWrapper>
-                  </S.MainContentsWrapper>
+                      <MainTitle
+                        setIsSetting={setIsSetting}
+                        isSetting={isSetting}
+                        user={user}
+                        statData={statData}
+                      />
+                      <MostVisitWebSite statData={statData} />
+                      <S.Justify>
+                        <TotalTime statData={statData} />
+                        <SurffingTime statData={statData} />
+                      </S.Justify>
+                      <S.UpdateWrapper>
+                        <S.UpdateMessage>
+                          마지막 업데이트 : {getFromNow(statData.lastUpdatedAt)}
+                        </S.UpdateMessage>
+                        <S.UpdateIcon
+                          src={RefreshUpdateIcon}
+                          alt="Refresh"
+                          onClick={() => {
+                            dispatch(refreshStat());
+                          }}
+                        />
+                      </S.UpdateWrapper>
+                    </S.MainContentsWrapper>
+                  </S.MainContentsContainer>
                 </S.Sticky>
               </Grid.LayoutCol>
               <Grid.LayoutCol
