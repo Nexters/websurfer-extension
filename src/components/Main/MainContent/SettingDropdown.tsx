@@ -29,7 +29,11 @@ const SettingDropdown = ({ isSetting, setIsSetting }: Props) => {
     },
     {
       name: '팀샤카샤카',
-      cb: () => {},
+      cb: () =>
+        window.open(
+          'https://pushy-wallet-089.notion.site/Web-surfer-40d0302419fc4a288558ad27e4fdbd51',
+          '_blank'
+        ),
     },
   ];
 
