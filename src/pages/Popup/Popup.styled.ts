@@ -75,7 +75,7 @@ export const MiddleWrapper = styled.div(({ bgWhite }: IMiddleWrapper) => {
     css`
       border-radius: 10px;
       height: 227px;
-      background-color: ${bgWhite ? '#fff' : theme.color['gray-02']};
+      background-color: ${bgWhite ? '#fff' : theme.color.bgColor};
       padding: 20px;
       margin-bottom: 24px;
     `,
