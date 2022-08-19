@@ -45,12 +45,13 @@ const TotalTimeModalDetail = (props: Props) => {
       axisPointer: {
         type: 'none',
       },
-
       formatter: function (params: any) {
         var tar = params[0];
         console.log(params);
         return '날짜 : ' + tar.name + '<br/>' + '사용량(분) : ' + tar.value;
       },
+      borderColor: theme.color['gray-04'],
+      borderWidth: 1,
     },
     xAxis: {
       type: 'category',
@@ -79,9 +80,14 @@ const TotalTimeModalDetail = (props: Props) => {
       {
         data: [300, 600, 1000, 50, 70, 180, 800],
         itemStyle: {
-          normal: { color: theme.color.secondaryB },
-          emphasis: { color: theme.color.primary },
-          barBorderRadius: [5, 5, 0, 0],
+          normal: {
+            color: theme.color.secondaryB,
+            barBorderRadius: [5, 5, 0, 0],
+          },
+          emphasis: {
+            color: theme.color.primary,
+            barBorderRadius: [5, 5, 0, 0],
+          },
         },
         type: 'bar',
         silent: true,

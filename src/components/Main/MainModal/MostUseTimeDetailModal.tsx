@@ -147,9 +147,14 @@ const MostUseTimeDetailModal = (props: Props) => {
       {
         data: timeChartData,
         itemStyle: {
-          normal: { color: theme.color.secondaryB },
-          emphasis: { color: theme.color.primary },
-          barBorderRadius: [5, 5, 0, 0],
+          normal: {
+            color: theme.color.secondaryB,
+            barBorderRadius: [5, 5, 0, 0],
+          },
+          emphasis: {
+            color: theme.color.primary,
+            barBorderRadius: [5, 5, 0, 0],
+          },
         },
         type: 'bar',
         silent: true,
