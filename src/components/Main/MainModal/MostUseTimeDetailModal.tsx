@@ -65,9 +65,6 @@ const MostUseTimeDetailModal = (props: Props) => {
   };
 
   const timeChartData = [
-    statData?.duration0,
-    statData?.duration1,
-    statData?.duration2,
     statData?.duration3,
     statData?.duration4,
     statData?.duration5,
@@ -77,6 +74,9 @@ const MostUseTimeDetailModal = (props: Props) => {
     statData?.duration9,
     statData?.duration10,
     statData?.duration11,
+    statData?.duration0,
+    statData?.duration1,
+    statData?.duration2,
   ];
 
   const option = {
