@@ -23,7 +23,7 @@ export const Container = styled.div<ContainerProps>((props) => [
 
 export const Row = styled.div<RowProps>((props) => [
   tw`
-    flex flex-wrap min-h-screen
+    flex flex-wrap min-h-screen h-full
     `,
   css`
     justify-content: ${props.justify};

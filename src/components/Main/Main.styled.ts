@@ -21,9 +21,7 @@ export const BackgroundItem = styled.div(() => {
     tw`w-1/2`,
     css`
       :first-child {
-        background-color: ${window.innerWidth < MAX_WIDTH
-          ? theme.color.white
-          : theme.color.bgColor};
+        background-color: ${theme.color.bgColor};
       }
       :last-child {
         background-color: ${theme.color.white};
@@ -70,18 +68,32 @@ export const UpdateIcon = styled.img(() => {
   ];
 });
 
-export const Relative = styled.div(() => [tw`relative`]);
+export const Sticky = styled.div(() => [
+  tw`sticky`,
+  css`
+    top: 55px;
+  `,
+]);
+
+export const MainContentsContainer = styled.div(() => {
+  return [
+    tw`w-full overflow-hidden relative`,
+    css`
+      height: 100vh;
+      top: 0;
+    `,
+  ];
+});
 
 export const MainContentsWrapper = styled.div(() => {
   return [
+    tw`w-full overflow-y-auto overflow-x-hidden absolute`,
     css`
-      position: fixed;
-      padding: 55px 30px 60px 30px;
       height: 100vh;
-      overflow-y: auto;
-      &::-webkit-scrollbar {
+      top: 0;
+      /* &::-webkit-scrollbar {
         width: 4px;
-      }
+      } */
     `,
   ];
 });
