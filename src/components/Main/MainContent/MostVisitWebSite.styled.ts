@@ -47,12 +47,15 @@ export const ItemCardTitle = styled.div<ItemCardTitleProps>((props) => {
     overflow-hidden
     `,
     css`
+      display: -webkit-box;
       color: ${primary ? theme.color.white : theme.color['gray-07']};
       ${!props.isMain && 'text-indent: 29px;'}
       font-size: ${theme.fontSize.l};
       line-height: ${theme.lineHeight.xl};
       font-weight: ${theme.fontWeight.bold};
       text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     `,
   ];
 });
