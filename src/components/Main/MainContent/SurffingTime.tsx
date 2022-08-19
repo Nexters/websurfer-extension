@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useTheme } from '@emotion/react';
 import ReactECharts from 'echarts-for-react';
@@ -14,19 +14,35 @@ type Props = { statData?: StatResponse };
 const SurffingTime = ({ statData }: Props) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
+  const [chartData, setChartData] = useState<any[]>();
 
-  const timeChartData = [
-    statData?.morningDuration,
-    statData?.daytimeDuration,
-    {
-      value: statData?.dinnerDuration,
-      itemStyle: {
-        normal: { color: theme.color.primary },
-        emphasis: { color: theme.color.secondaryB },
-      },
-    },
-    statData?.nightDuration,
-  ];
+  const timeData = statData
+    ? [
+        statData.morningDuration,
+        statData.daytimeDuration,
+        statData.dinnerDuration,
+        statData.nightDuration,
+      ]
+    : [];
+
+  const maxValue = Math.max(...timeData);
+
+  const printChartData = () => {
+    const data = timeData.map((value) => {
+      if (value === maxValue) {
+        return { value, itemStyle: { color: theme.color.primary } };
+      } else {
+        return value;
+      }
+    });
+    setChartData(data);
+  };
+
+  useEffect(() => {
+    if (statData) {
+      printChartData();
+    }
+  }, [statData]);
 
   const option = {
     grid: {
@@ -37,6 +53,7 @@ const SurffingTime = ({ statData }: Props) => {
       width: '222px',
       height: '110px',
     },
+
     xAxis: {
       type: 'category',
       data: ['아침', '낮', '저녁', '밤'],
@@ -60,13 +77,19 @@ const SurffingTime = ({ statData }: Props) => {
     },
     series: [
       {
-        data: timeChartData,
+        data: chartData,
         itemStyle: {
-          color: theme.color.secondaryB,
-          barBorderRadius: [5, 5, 0, 0],
+          normal: {
+            color: theme.color.secondaryB,
+            barBorderRadius: [5, 5, 0, 0],
+          },
+          emphasis: {
+            color: theme.color.primary,
+            barBorderRadius: [5, 5, 0, 0],
+          },
         },
         type: 'bar',
-        silent: true,
+        silent: false,
         barWidth: '30px',
         barGap: '34px',
         markPoint: {
