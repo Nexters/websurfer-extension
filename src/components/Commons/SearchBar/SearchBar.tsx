@@ -8,7 +8,7 @@ import * as S from './SearchBar.styled';
 import {
   CalendarIcon,
   SearchIcon,
-  RefreshIcon,
+  RepeatIcon,
   CalendarBlueIcon,
 } from '@assets/img/svg-icon-paths';
 
@@ -120,7 +120,7 @@ const SearchBar = ({
             <S.FilterTitle>기간 선택을 선택하세요</S.FilterTitle>
             <S.RefreshButton
               alt="refresh"
-              src={RefreshIcon}
+              src={RepeatIcon}
               onClick={() => {
                 setRawStartDate(undefined);
                 setRawEndDate(undefined);
