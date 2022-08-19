@@ -151,9 +151,9 @@ const SearchBar = ({
           >
             {filterConfirmDisabled
               ? '적용하기'
-              : `${format(rawStartDate as TdisplayDate, 'yyyy-MM-dd')}~${format(
+              : `${format(rawStartDate as TdisplayDate, 'yyyy.MM.dd')}~${format(
                   rawEndDate as TdisplayDate,
-                  'yyyy-MM-dd'
+                  'MM.dd'
                 )} 적용하기`}
           </S.FilterApplyButton>
         </S.FilterWrapper>
