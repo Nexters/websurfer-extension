@@ -73,17 +73,19 @@ const MainHistory = ({
 
   return (
     <div>
-      <S.TitleWrapper>
-        <S.MainTitle>방문 기록</S.MainTitle>
+      <S.Top>
+        <S.TitleWrapper>
+          <S.MainTitle>방문 기록</S.MainTitle>
 
-        <S.ZoomIcon
-          alt="zoom"
-          src={isFocus ? ZoomoutIcon : ZoomIcon}
-          onClick={() => setIsFocus(!isFocus)}
-        ></S.ZoomIcon>
-      </S.TitleWrapper>
-      <S.ContentWrapper>
+          <S.ZoomIcon
+            alt="zoom"
+            src={isFocus ? ZoomoutIcon : ZoomIcon}
+            onClick={() => setIsFocus(!isFocus)}
+          ></S.ZoomIcon>
+        </S.TitleWrapper>
         <SearchBar rawKeyword={rawKeyword} setRawKeyword={setRawKeyword} />
+      </S.Top>
+      <S.ContentWrapper>
         <S.HistoryListWrapper>
           {hasData ? (
             renderHistory()

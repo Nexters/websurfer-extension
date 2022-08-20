@@ -58,7 +58,6 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
       {statData && (
         <>
           <Grid.Container>
-            {/* <S.Relative> */}
             <Grid.Row>
               <Grid.LayoutCol
                 unit={isFocus ? 0 : 8}
@@ -101,11 +100,7 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
                   </S.MainContentsContainer>
                 </S.Sticky>
               </Grid.LayoutCol>
-              <Grid.LayoutCol
-                paddingTop="60px"
-                paddingBottom="60px"
-                unit={isFocus ? 12 : 4}
-              >
+              <Grid.LayoutCol paddingBottom="60px" unit={isFocus ? 12 : 4}>
                 <MainHistory
                   setIsFocus={setIsFocus}
                   isFocus={isFocus}
@@ -114,7 +109,6 @@ const Main: React.FC<Props> = ({ rawKeyword, setRawKeyword, user }: Props) => {
                 />
               </Grid.LayoutCol>
             </Grid.Row>
-            {/* </S.Relative> */}
           </Grid.Container>
           <MostVisitWebSIteModal />
           <TotalTimeModal />

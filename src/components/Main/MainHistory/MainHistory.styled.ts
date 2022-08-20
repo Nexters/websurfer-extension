@@ -5,9 +5,18 @@ interface IDateCategoryWrapper {
   key?: string;
 }
 
+export const Top = styled.div(() => [
+  tw`sticky bg-white`,
+  css`
+    top: 0px;
+    padding-top: 55px;
+    z-index: 100;
+  `,
+]);
+
 export const TitleWrapper = styled.div(() => [
   tw`
-    w-full flex justify-between
+    w-full flex justify-between 
     `,
 ]);
 

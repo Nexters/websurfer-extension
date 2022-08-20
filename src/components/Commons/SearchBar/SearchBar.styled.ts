@@ -12,7 +12,10 @@ interface IButtonProps {
 export const Wrapper = styled.div(() => {
   return [
     tw`
-      flex items-center relative
+      flex items-center
+    `,
+    css`
+      margin-top: 24px;
     `,
   ];
 });
