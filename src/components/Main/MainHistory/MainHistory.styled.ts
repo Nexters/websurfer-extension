@@ -9,7 +9,6 @@ export const Top = styled.div(() => [
   tw`sticky bg-white`,
   css`
     top: 0px;
-    padding-top: 55px;
     z-index: 100;
   `,
 ]);
@@ -60,8 +59,12 @@ export const ItemCard = styled.div((props) => {
 
 export const HistoryListWrapper = styled.div(() => {
   return [
+    tw`
+      overflow-y-auto
+    `,
     css`
-      margin: 20px 0;
+      margin-top: 20px;
+      height: calc(100vh - 240px);
       &::-webkit-scrollbar {
         width: 4px;
       }

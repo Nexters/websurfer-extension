@@ -77,10 +77,13 @@ export const Sticky = styled.div(() => [
 
 export const MainContentsContainer = styled.div(() => {
   return [
-    tw`w-full overflow-hidden relative`,
+    tw`w-full overflow-y-auto relative`,
     css`
-      height: 100vh;
+      height: calc(100vh - 120px);
       top: 0;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
     `,
   ];
 });
@@ -89,9 +92,7 @@ export const MainContentsWrapper = styled.div(() => {
   return [
     tw`w-full overflow-y-auto overflow-x-hidden absolute`,
     css`
-      height: calc(100vh - 55px);
       top: 0;
-      padding-bottom: 60px;
     `,
   ];
 });
