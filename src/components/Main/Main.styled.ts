@@ -79,8 +79,7 @@ export const MainContentsContainer = styled.div(() => {
   return [
     tw`w-full overflow-y-auto relative`,
     css`
-      height: calc(100vh - 120px);
-      top: 0;
+      height: auto;
       &::-webkit-scrollbar {
         width: 4px;
       }
@@ -89,10 +88,5 @@ export const MainContentsContainer = styled.div(() => {
 });
 
 export const MainContentsWrapper = styled.div(() => {
-  return [
-    tw`w-full overflow-y-auto overflow-x-hidden absolute`,
-    css`
-      top: 0;
-    `,
-  ];
+  return [tw`w-full overflow-y-auto overflow-x-hidden`, css``];
 });

@@ -48,8 +48,7 @@ export const Col = styled.div<ColProps>((props) => {
   return [
     css`
       width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT)}px;
-      padding: ${props.paddingTop} ${GUTTER / 2}px ${props.paddingBottom}
-        ${GUTTER / 2}px;
+      padding: 0 ${GUTTER / 2}px 0 ${GUTTER / 2}px;
       margin: ${props.margin};
       background-color: ${selectBackgroundColor()};
     `,
@@ -59,11 +58,14 @@ export const Col = styled.div<ColProps>((props) => {
 export const LayoutCol = styled(Col)<ColProps>((props) => {
   return [
     css`
-      display: ${props.display};
+      /* display: ${props.display};. */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       :first-child {
         width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT) +
         GUTTER / 2}px;
-        padding-right: ${GUTTER}px;
+        /* padding-right: ${GUTTER}px; */
       }
       & + & {
         padding-left: 0;
@@ -73,7 +75,7 @@ export const LayoutCol = styled(Col)<ColProps>((props) => {
         GUTTER / 2}px;
         padding-left: ${GUTTER}px; */
         width: 420px;
-        padding: 55px 30px 60px;
+        padding: 0 30px 0;
       }
     `,
   ];

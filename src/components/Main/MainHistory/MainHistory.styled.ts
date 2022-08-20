@@ -10,6 +10,7 @@ export const Top = styled.div(() => [
   css`
     top: 0px;
     z-index: 100;
+    margin-top: 20px;
   `,
 ]);
 
@@ -64,7 +65,7 @@ export const HistoryListWrapper = styled.div(() => {
     `,
     css`
       margin-top: 20px;
-      height: calc(100vh - 240px);
+      height: 770px;
       &::-webkit-scrollbar {
         width: 4px;
       }

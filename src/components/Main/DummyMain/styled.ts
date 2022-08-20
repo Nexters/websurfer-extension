@@ -88,7 +88,7 @@ export const DummyTitleWrapper = styled.div(() => {
       flex justify-between items-end relative
       `,
     css`
-      width: '100%';
+      width: 100%;
       height: 342px;
       overflow: hidden;
     `,
