@@ -79,7 +79,7 @@ export const MainContentsContainer = styled.div(() => {
   return [
     tw`w-full overflow-hidden relative`,
     css`
-      height: calc(100vh - 115px);
+      height: calc(100vh - 120px);
       top: 0;
     `,
   ];
@@ -89,9 +89,7 @@ export const MainContentsWrapper = styled.div(() => {
   return [
     tw`w-full overflow-y-auto overflow-x-hidden absolute`,
     css`
-      /* height: calc(100vh - 55px); */
       top: 0;
-      padding-bottom: 60px;
     `,
   ];
 });
