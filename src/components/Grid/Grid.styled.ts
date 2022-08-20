@@ -73,7 +73,7 @@ export const LayoutCol = styled(Col)<ColProps>((props) => {
         GUTTER / 2}px;
         padding-left: ${GUTTER}px; */
         width: 420px;
-        padding: 0 30px;
+        padding: 55px 30px 60px;
       }
     `,
   ];
