@@ -69,9 +69,8 @@ export const LayoutCol = styled(Col)<ColProps>((props) => {
         padding-left: 0;
       }
       :last-child {
-        /* width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT) -
+        width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT) -
         GUTTER / 2}px;
-        /* padding-left: ${GUTTER}px; */
         padding: 20px 30px 20px;
       }
     `,

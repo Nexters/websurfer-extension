@@ -9,13 +9,11 @@ export const Wrapper = styled.div<T.WrapperProps>((props) => {
       flex justify-between items-end relative 
       `,
     css`
-      height: 22vh;
-      width: 100%;
+      width: 840px;
+      height: 342px;
       overflow: hidden;
       background-image: url('${props.imageUrl}');
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: right;
+      background-size: 840px 350px;
     `,
   ];
 });
@@ -57,9 +55,9 @@ export const Description = styled.div(() => {
 
 export const TitleContainer = styled.div(() => [
   css`
-    height: 22vh;
-    padding-top: 2vh;
-    padding-bottom: 1vh;
+    height: 352px;
+    padding-top: 66px;
+    padding-bottom: 37px;
   `,
 ]);
 
