@@ -92,6 +92,9 @@ export const MainContentsWrapper = styled.div(() => {
       height: calc(100vh - 55px);
       top: 0;
       padding-bottom: 60px;
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
     `,
   ];
 });
