@@ -8,7 +8,11 @@ import NoData from '@components/Main/NoDataPage/NoDataPage';
 import { getUser, userSelector, setToken } from '@redux/user';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
-import { filterOnceAppliedSelector } from '@redux/common';
+import {
+  filterOnceAppliedSelector,
+  mainLoadingSelector,
+  setMainLoading,
+} from '@redux/common';
 import { getStat } from '@redux/dashboard';
 import { getAchievements } from '@redux/tag';
 
@@ -18,16 +22,16 @@ interface Props {
 
 const Options = (props: Props) => {
   const [keyword, setKeyword] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   const user = useAppSelector(userSelector);
   const histories = useAppSelector(historyListSelector);
   const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
   const hasData = Boolean(histories?.length);
+  const loading = useAppSelector(mainLoadingSelector);
 
   const initUser = async (token: string) => {
-    setLoading(true);
+    dispatch(setMainLoading(true));
     dispatch(setToken(token));
     await dispatch(getUser());
     await dispatch(
@@ -50,7 +54,7 @@ const Options = (props: Props) => {
       })
     );
 
-    setLoading(false);
+    dispatch(setMainLoading(false));
   };
 
   // const listener = async (event) => {

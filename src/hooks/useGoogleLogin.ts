@@ -4,14 +4,18 @@ import { useAppDispatch } from '@redux/store';
 import { getToken, getUser } from '@redux/user';
 import { getStat } from '@redux/dashboard';
 import { getHistoryList } from '@redux/history';
+import { setMainLoading } from '@redux/common';
 import { getAchievements } from '@redux/tag';
 
 import Axios from '@utils/axios';
 
 const useGoogleLoginCb = () => {
   const dispatch = useAppDispatch();
+
   const clickGoogleLogin = useGoogleLogin({
     onSuccess: async ({ access_token }) => {
+      dispatch(setMainLoading(true));
+
       const { data } = await Axios.get<{ sub: string; email: string }>(
         `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`
       );
@@ -29,6 +33,8 @@ const useGoogleLoginCb = () => {
       );
       await dispatch(getStat());
       await dispatch(getAchievements());
+
+      dispatch(setMainLoading(false));
     },
   });
 
