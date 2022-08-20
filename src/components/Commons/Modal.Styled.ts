@@ -3,7 +3,7 @@ import { useState } from 'react';
 import tw, { styled } from 'twin.macro';
 
 export const ModalContainer = styled.div(() => [
-  tw`fixed w-screen h-screen z-20`,
+  tw`fixed w-screen h-screen z-20 `,
   css`
     background-color: rgba(0, 0, 0, 0.7);
   `,
@@ -22,10 +22,10 @@ export const ModalWrapper = styled.div(() => {
   window.addEventListener('resize', printInnerWidth);
 
   return [
-    tw`absolute z-20`,
+    tw`fixed z-20`,
     css`
       width: 820px;
-      top: ${innerHeight < 870 ? ' 480px' : '50%'};
+      top: 50%;
       left: ${innerWidth < 820 ? '450px' : '50%'};
       min-width: 820px;
       transform: translate(-50%, -50%);
@@ -52,7 +52,9 @@ export const ModalContentContainer = styled.div(() => {
     css`
       border-radius: 18px;
       padding: 30px 0;
-      height: 800px;
+      height: ${innerHeight > 1000
+        ? '800px'
+        : `calc(${innerHeight}px - 300px)`};
       max-height: 800px;
     `,
   ];
@@ -65,7 +67,7 @@ export const ModalContentWrapper = styled.div(() => {
     tw`w-full bg-white overflow-y-auto overflow-x-hidden absolute`,
     css`
       left: 0;
-      max-height: 740px;
+      max-height: calc(${innerHeight}px - 360px);
       padding: 0 40px;
     `,
   ];
@@ -76,7 +78,7 @@ export const ModalContent = styled.div(() => {
   return [
     css`
       width: 740px;
-      height: 740px;
+      height: calc(${innerHeight}px - 360px);
     `,
   ];
 });
