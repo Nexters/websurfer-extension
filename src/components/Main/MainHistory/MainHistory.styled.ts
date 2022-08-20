@@ -60,8 +60,12 @@ export const ItemCard = styled.div((props) => {
 
 export const HistoryListWrapper = styled.div(() => {
   return [
+    tw`
+      overflow-y-auto
+    `,
     css`
       margin: 20px 0;
+      height: calc(100vh - 190px);
       &::-webkit-scrollbar {
         width: 4px;
       }

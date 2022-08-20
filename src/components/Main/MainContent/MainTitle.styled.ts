@@ -9,11 +9,10 @@ export const Wrapper = styled.div<T.WrapperProps>((props) => {
       flex justify-between items-end relative 
       `,
     css`
-      width: 840px;
-      height: 342px;
+      height: 300px;
       overflow: hidden;
       background-image: url('${props.imageUrl}');
-      background-size: 840px 350px;
+      background-size: 840px 300px;
     `,
   ];
 });
