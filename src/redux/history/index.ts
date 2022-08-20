@@ -11,7 +11,7 @@ interface HistoryState {
 }
 
 const initialState: HistoryState = {
-  histories: [],
+  histories: undefined,
   filter: {
     startDate: undefined,
     endDate: undefined,

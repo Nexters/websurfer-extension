@@ -13,6 +13,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "strictNullChecks": false,
     "noEmit": false,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",

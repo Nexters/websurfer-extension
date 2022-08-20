@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ScaleLoader } from 'react-spinners';
 
 import Main from '@components/Main/Main';
 import BeforeLogin from '@components/Main/DummyMain/DummyMain';
@@ -22,7 +23,7 @@ const Options = (props: Props) => {
   const user = useAppSelector(userSelector);
   const histories = useAppSelector(historyListSelector);
   const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
-  const hasData = Boolean(histories.length);
+  const hasData = Boolean(histories?.length);
 
   const initUser = async (token: string) => {
     dispatch(setToken(token));
@@ -95,6 +96,24 @@ const Options = (props: Props) => {
     }
     return <>인터넷에 연결되어 있지 않습니다.</>;
   };
+
+  console.log(user, histories);
+
+  if (user.id === undefined || histories === undefined) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100vw',
+          height: '100vh',
+        }}
+      >
+        <ScaleLoader />
+      </div>
+    );
+  }
 
   return PrintMainComponent();
 };
