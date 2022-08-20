@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ScaleLoader } from 'react-spinners';
 
 import Main from '@components/Main/Main';
 import BeforeLogin from '@components/Main/DummyMain/DummyMain';
@@ -7,7 +8,11 @@ import NoData from '@components/Main/NoDataPage/NoDataPage';
 import { getUser, userSelector, setToken } from '@redux/user';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { useAppDispatch, useAppSelector } from '@redux/store';
-import { filterOnceAppliedSelector } from '@redux/common';
+import {
+  filterOnceAppliedSelector,
+  mainLoadingSelector,
+  setMainLoading,
+} from '@redux/common';
 import { getStat } from '@redux/dashboard';
 import { getAchievements } from '@redux/tag';
 
@@ -22,9 +27,11 @@ const Options = (props: Props) => {
   const user = useAppSelector(userSelector);
   const histories = useAppSelector(historyListSelector);
   const isFilterOnceApplied = useAppSelector(filterOnceAppliedSelector);
-  const hasData = Boolean(histories.length);
+  const hasData = Boolean(histories?.length);
+  const loading = useAppSelector(mainLoadingSelector);
 
   const initUser = async (token: string) => {
+    dispatch(setMainLoading(true));
     dispatch(setToken(token));
     await dispatch(getUser());
     await dispatch(
@@ -46,6 +53,8 @@ const Options = (props: Props) => {
         },
       })
     );
+
+    dispatch(setMainLoading(false));
   };
 
   // const listener = async (event) => {
@@ -95,6 +104,22 @@ const Options = (props: Props) => {
     }
     return <>인터넷에 연결되어 있지 않습니다.</>;
   };
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100vw',
+          height: '100vh',
+        }}
+      >
+        <ScaleLoader />
+      </div>
+    );
+  }
 
   return PrintMainComponent();
 };

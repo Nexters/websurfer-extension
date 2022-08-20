@@ -9,6 +9,7 @@ export const Top = styled.div(() => [
   tw`sticky bg-white`,
   css`
     top: 0px;
+    padding-top: 40px;
     z-index: 100;
   `,
 ]);

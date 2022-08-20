@@ -16,6 +16,7 @@
     "noEmit": false,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
+    "strictNullChecks": false,
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],

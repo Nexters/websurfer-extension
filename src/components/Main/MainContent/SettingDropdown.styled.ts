@@ -5,7 +5,7 @@ import { SettingDropdownItemProps } from './SettingDropdown.styled.type';
 export const Wrapper = styled.div<SettingDropdownItemProps>((props) => {
   const theme = useTheme();
   return [
-    tw`absolute text-center top-0 right-0`,
+    tw`absolute text-center top-0`,
     css`
       visibility: ${props.isActive ? 'visible' : 'hidden'};
       padding: 12px 20px;
@@ -15,6 +15,7 @@ export const Wrapper = styled.div<SettingDropdownItemProps>((props) => {
       border-color: ${theme.color['gray-04']};
       border-radius: 10px;
       filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));
+      right: 8px;
     `,
   ];
 });

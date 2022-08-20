@@ -93,6 +93,10 @@ export const MainContentsWrapper = styled.div(() => {
     tw`w-full overflow-y-auto overflow-x-hidden absolute`,
     css`
       top: 0;
+      padding-bottom: 60px;
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
     `,
   ];
 });

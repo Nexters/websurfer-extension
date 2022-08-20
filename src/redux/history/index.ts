@@ -8,6 +8,7 @@ import { HistoryListReponse, HistoryListRequest } from '../webSerfer.type';
 interface HistoryState {
   histories: HistoryListReponse;
   filter: HistoryListRequest;
+  loading: boolean;
 }
 
 const initialState: HistoryState = {
@@ -17,6 +18,7 @@ const initialState: HistoryState = {
     endDate: undefined,
     keyword: '',
   },
+  loading: false,
 };
 
 export const historySlice = createSlice({
@@ -28,6 +30,9 @@ export const historySlice = createSlice({
     },
     setFilter(state, { payload }) {
       state.filter = payload;
+    },
+    setLoading(state, { payload }) {
+      state.loading = payload;
     },
   },
   extraReducers: (builder) => {
@@ -51,6 +56,6 @@ export const historyListSelector = (state: RootState) =>
   state.history.histories;
 export const historyFilterSelector = (state: RootState) => state.history.filter;
 
-export const { setHistories, setFilter } = historySlice.actions;
+export const { setHistories, setFilter, setLoading } = historySlice.actions;
 export default historySlice.reducer;
 export * from './thunk';
