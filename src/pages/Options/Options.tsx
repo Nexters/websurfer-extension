@@ -12,6 +12,8 @@ import { filterOnceAppliedSelector } from '@redux/common';
 import { getStat } from '@redux/dashboard';
 import { getAchievements } from '@redux/tag';
 
+import theme from '@styles/theme';
+
 interface Props {
   title: string;
 }
@@ -97,8 +99,6 @@ const Options = (props: Props) => {
     return <>인터넷에 연결되어 있지 않습니다.</>;
   };
 
-  console.log(user, histories);
-
   if (user.id === undefined || histories === undefined) {
     return (
       <div
@@ -110,7 +110,7 @@ const Options = (props: Props) => {
           height: '100vh',
         }}
       >
-        <ScaleLoader />
+        <ScaleLoader color={theme.color.primary} />
       </div>
     );
   }
