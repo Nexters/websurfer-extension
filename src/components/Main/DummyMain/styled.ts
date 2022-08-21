@@ -7,6 +7,7 @@ export const DummyWrapper = styled.div(() => {
   return [
     css`
       height: calc(100vh - 24px);
+      margin-top: 24px;
     `,
   ];
 });
