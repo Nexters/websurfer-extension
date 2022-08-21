@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Oceanographer } from '@assets/img/svg-icon-paths';
-import noDataImg from '@assets/img/nodata.png';
+import noDataImg from '@assets/img/no_data_extension.png';
 
 import * as S from './LoginTitle.styled';
 
@@ -13,7 +13,7 @@ interface ILoginTitle {
 const LoginTitle = ({ goApp, loggedIn }: ILoginTitle) => {
   return (
     <S.DummyTitleWrapper>
-      <S.TitleContainer>
+      <S.TitleContainer loggedIn={loggedIn}>
         <S.Title>
           {loggedIn
             ? '웹 서핑을 즐기고 돌아와주세요'
@@ -33,6 +33,7 @@ const LoginTitle = ({ goApp, loggedIn }: ILoginTitle) => {
         )}
       </S.TitleContainer>
       <S.MainImage
+        loggedIn={loggedIn}
         src={loggedIn ? noDataImg : Oceanographer}
         alt="해양학자가 서핑하는 모습"
       />

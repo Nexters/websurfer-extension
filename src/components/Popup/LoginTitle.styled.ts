@@ -14,10 +14,14 @@ export const DummyTitleWrapper = styled.div(() => {
   ];
 });
 
-export const TitleContainer = styled.div(() => [
+interface ILoggedInProps {
+  loggedIn?: boolean;
+}
+
+export const TitleContainer = styled.div(({ loggedIn }: ILoggedInProps) => [
   tw`absolute`,
   css`
-    top: 0;
+    top: ${loggedIn ? '10px' : '0'};
   `,
 ]);
 
@@ -62,10 +66,10 @@ export const GoogleLogin = styled.div(() => {
   ];
 });
 
-export const MainImage = styled.img((props) => {
+export const MainImage = styled.img(({ loggedIn }: ILoggedInProps) => {
   return [
     css`
-      height: 180px;
+      height: ${loggedIn ? '190px' : '180px'};
       position: absolute;
       right: 0;
     `,
