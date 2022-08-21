@@ -16,6 +16,8 @@ import {
 import { getStat } from '@redux/dashboard';
 import { getAchievements } from '@redux/tag';
 
+import theme from '@styles/theme';
+
 interface Props {
   title: string;
 }
@@ -116,7 +118,7 @@ const Options = (props: Props) => {
           height: '100vh',
         }}
       >
-        <ScaleLoader />
+        <ScaleLoader color={theme.color.primary} />
       </div>
     );
   }
