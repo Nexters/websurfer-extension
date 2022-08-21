@@ -95,7 +95,7 @@ const SearchBar = ({
   }, [dispatch, filter]);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper isPopup={isPopup}>
       <S.SearchIcon src={SearchIcon} />
       <S.Input
         placeholder={placeholder}

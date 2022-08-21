@@ -13,7 +13,7 @@ export const CompactItemWrapper = styled.div(() => {
       flex items-center cursor-pointer
     `,
     css`
-      padding: 10px;
+      padding: 10px 4px;
       margin-bottom: 8px;
       border-radius: 10px;
       &:last-child {

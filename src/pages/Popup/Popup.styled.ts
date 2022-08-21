@@ -70,11 +70,10 @@ export const MiddleWrapper = styled.div(({ bgWhite }: IMiddleWrapper) => {
   const theme = useTheme();
   return [
     tw`
-      w-full flex flex-col justify-around
+      w-full flex flex-col
     `,
     css`
       border-radius: 10px;
-      height: 227px;
       background-color: ${bgWhite ? '#fff' : theme.color.bgColor};
       padding: 20px;
       margin-bottom: 24px;
@@ -119,10 +118,12 @@ export const MainTitle = styled.span(() => {
 export const CategoryDate = styled.span(() => {
   const theme = useTheme();
   return [
+    tw`block`,
     css`
       font-size: ${theme.fontSize.m};
       color: ${theme.color['gray-08']};
       font-weight: ${theme.fontWeight.bold};
+      margin-bottom: 20px;
     `,
   ];
 });
@@ -179,9 +180,7 @@ export const MiddleTopWrapper = styled.div(() => {
 export const MainImage = styled.img(() => {
   return [
     css`
-      height: 140px;
-      /* position: absolute;
-      right: 0; */
+      height: 115px;
     `,
   ];
 });

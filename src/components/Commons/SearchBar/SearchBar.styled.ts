@@ -9,13 +9,17 @@ interface IButtonProps {
   disabled?: boolean;
 }
 
-export const Wrapper = styled.div(() => {
+interface IWrapperProps {
+  isPopup?: boolean;
+}
+
+export const Wrapper = styled.div(({ isPopup }: IWrapperProps) => {
   return [
     tw`
       flex items-center relative
     `,
     css`
-      margin-top: 24px;
+      margin-top: ${isPopup ? 'unset' : '18px'};
     `,
   ];
 });
