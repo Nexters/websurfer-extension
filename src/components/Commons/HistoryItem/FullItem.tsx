@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { LogoIcon, DotsIcon } from '@assets/img/svg-icon-paths';
+import { DotsIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './style';
 
 import { HistoryEntity } from '@redux/webSerfer.type';
 import { useAppDispatch } from '@redux/store';
 import { deleteHistoryItem } from '@redux/history';
+
+import { refinedFaviconUrl } from '@utils/index';
 
 const NoDataFavicon = './assets/basic_favicon_32.png';
 
@@ -19,11 +21,7 @@ const FullItem = ({ title, href, id, website }: HistoryEntity) => {
       <S.FullLeftWrapper>
         <S.ItemIcon
           alt="history-icon"
-          src={
-            website?.faviconUrl?.startsWith('/images')
-              ? NoDataFavicon
-              : website?.faviconUrl || LogoIcon
-          }
+          src={refinedFaviconUrl(website)}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.src = NoDataFavicon;

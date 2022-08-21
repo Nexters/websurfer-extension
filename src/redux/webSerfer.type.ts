@@ -89,7 +89,7 @@ export interface AchievementEntity {
   category: string;
 }
 
-interface IWebSite {
+export interface IWebSite {
   id: number;
   createdAt: string;
   updatedAt: string;

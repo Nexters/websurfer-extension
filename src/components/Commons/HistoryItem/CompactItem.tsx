@@ -2,8 +2,8 @@ import React from 'react';
 
 import * as S from './style';
 
-import { LogoIcon } from '@assets/img/svg-icon-paths';
 import { HistoryEntity } from '@redux/webSerfer.type';
+import { refinedFaviconUrl } from '@utils/index';
 
 const NoDataFavicon = './assets/basic_favicon_32.png';
 
@@ -13,11 +13,7 @@ const CompactItem = ({ title, href, website }: HistoryEntity) => {
       {
         <S.ItemIcon
           alt="history-icon"
-          src={
-            website?.faviconUrl?.startsWith('/images')
-              ? NoDataFavicon
-              : website?.faviconUrl || LogoIcon
-          }
+          src={refinedFaviconUrl(website)}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.src = NoDataFavicon;
