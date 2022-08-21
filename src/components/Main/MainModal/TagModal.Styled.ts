@@ -53,7 +53,6 @@ export const CardTitle = styled.div(() => {
       font-weight: ${theme.fontWeight.bold};
       font-size: 18px;
       line-height: ${theme.lineHeight['2xl']};
-      background-color: ${theme.color.pink};
       border-radius: 50px;
     `,
   ];

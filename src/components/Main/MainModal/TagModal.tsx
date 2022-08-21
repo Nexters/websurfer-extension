@@ -20,7 +20,9 @@ const TagModal = (props: Props) => {
       <S.CardWrapper>
         {tagData?.map((value) => (
           <S.Card key={value.id}>
-            <S.CardTitle>{value.name}</S.CardTitle>
+            <S.CardTitle style={{ backgroundColor: value.color }}>
+              {value.name}
+            </S.CardTitle>
             <S.CardDescription>{value.category}</S.CardDescription>
             <S.CardImage src={value.cardImageUrl} alt={value.name} />
           </S.Card>
