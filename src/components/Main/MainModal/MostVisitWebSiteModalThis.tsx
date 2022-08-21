@@ -8,13 +8,14 @@ import { ModalCloseIcon } from '@assets/img/svg-icon-paths';
 
 import * as S from './MostVisitWebSIteModal.Styled';
 import * as Card from '@components/Main/MainContent/MostVisitWebSite.styled';
+import NoDataModal from './NoDataModal';
 
 type Props = {};
 
 const MostVisitWebSiteModalThis = (props: Props) => {
   const statData = useAppSelector(dashboardStatSelector);
 
-  return statData ? (
+  return statData && statData.mostVisitedWebsites[0] ? (
     <>
       <S.PeriodTitle>
         {printYyyymmddM7} - {printYyyymmddToday} 에는
@@ -79,7 +80,7 @@ const MostVisitWebSiteModalThis = (props: Props) => {
       )}
     </>
   ) : (
-    <></>
+    <NoDataModal />
   );
 };
 
