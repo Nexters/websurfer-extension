@@ -6,7 +6,6 @@ import { RankListContainer } from '../MainContent/TotalTime.styled';
 export const DummyWrapper = styled.div(() => {
   return [
     css`
-      padding-top: 24px;
       height: calc(100vh - 24px);
     `,
   ];
