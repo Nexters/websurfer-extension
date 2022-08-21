@@ -124,47 +124,51 @@ const TotalTimeModalDetail = (props: Props) => {
               marginBottom: '30px',
             }}
           />
-          <S.SubTitle>사이트별 체류시간</S.SubTitle>
-          <S.StayTimeListContainer>
-            {statData.mostDurationWebsites.map((value, index) => (
-              <S.StyleTimeListWrapper key={index}>
-                <S.Link
-                  href={`https://${value.website.hostname}`}
-                  target="_blank"
-                >
-                  <S.StyleTimeListIcon
-                    src={value.website.faviconUrl}
-                    alt={value.website.name}
-                    onError={({ currentTarget }) => {
-                      currentTarget.onerror = null;
-                      currentTarget.src = `${'./assets/basic_favicon_196.png'}`;
-                    }}
-                  />
-                </S.Link>
-                <S.InformaitonWrapper>
-                  <S.InformationTitle
-                    href={`https://${value.website.hostname}`}
-                    target="_blank"
-                  >
-                    {value.website.name}
-                  </S.InformationTitle>
-                  <S.InformationTimeBarWrapper>
-                    <S.InformationTimeBar
-                      percent={
-                        (value.amount /
-                          statData.mostDurationWebsites[0].amount) *
-                        100
-                      }
-                    />
+          {statData?.mostDurationWebsites?.[0] && (
+            <>
+              <S.SubTitle>사이트별 체류시간</S.SubTitle>
+              <S.StayTimeListContainer>
+                {statData.mostDurationWebsites.map((value, index) => (
+                  <S.StyleTimeListWrapper key={index}>
+                    <S.Link
+                      href={`https://${value.website.hostname}`}
+                      target="_blank"
+                    >
+                      <S.StyleTimeListIcon
+                        src={value.website.faviconUrl}
+                        alt={value.website.name}
+                        onError={({ currentTarget }) => {
+                          currentTarget.onerror = null;
+                          currentTarget.src = `${'./assets/basic_favicon_196.png'}`;
+                        }}
+                      />
+                    </S.Link>
+                    <S.InformaitonWrapper>
+                      <S.InformationTitle
+                        href={`https://${value.website.hostname}`}
+                        target="_blank"
+                      >
+                        {value.website.name}
+                      </S.InformationTitle>
+                      <S.InformationTimeBarWrapper>
+                        <S.InformationTimeBar
+                          percent={
+                            (value.amount /
+                              statData.mostDurationWebsites[0].amount) *
+                            100
+                          }
+                        />
 
-                    <S.InformationTimeBarText>
-                      {secondsToHourMinute(value.amount, 'hourminute')}
-                    </S.InformationTimeBarText>
-                  </S.InformationTimeBarWrapper>
-                </S.InformaitonWrapper>
-              </S.StyleTimeListWrapper>
-            ))}
-          </S.StayTimeListContainer>
+                        <S.InformationTimeBarText>
+                          {secondsToHourMinute(value.amount, 'hourminute')}
+                        </S.InformationTimeBarText>
+                      </S.InformationTimeBarWrapper>
+                    </S.InformaitonWrapper>
+                  </S.StyleTimeListWrapper>
+                ))}
+              </S.StayTimeListContainer>
+            </>
+          )}
           {isFilterActive && (
             <PeriodSelector
               filter={filter}
