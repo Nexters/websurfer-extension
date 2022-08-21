@@ -27,7 +27,7 @@ const NoData = () => {
             아직 서퍼님의 성향을 알아볼 수 있는 데이터가 없어요.
           </S.SubTitle>
           <S.SubTitle>
-            잡시 웹 서핑을 즐기고 돌아와주시면 분석을 시작할게요.
+            잠시 웹 서핑을 즐기고 돌아와주시면 분석을 시작할게요.
           </S.SubTitle>
           <S.GoSurfButton onClick={onClickGoSurf}>
             웹 서핑 하러가기
