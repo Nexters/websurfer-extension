@@ -23,6 +23,10 @@ type Props = {
   period: 'last' | 'this' | 'select';
 };
 
+interface Iacc {
+  [key: string]: number;
+}
+
 const TotalTimeModalDetail = (props: Props) => {
   const DATE_FORMAT = 'YYYY[년] MM[월] DD[일]';
 
@@ -31,6 +35,24 @@ const TotalTimeModalDetail = (props: Props) => {
     dashboardStatSelector
   );
   const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
+
+  const { mostDurationWebsites = [] } = statData;
+
+  const dataMap = mostDurationWebsites.reduce((acc: Iacc, value) => {
+    const { amount, website } = value;
+
+    const date = dayjs(website.updatedAt).format('MM.DD');
+
+    const existing = acc[date] || 0;
+
+    acc[date] = existing + amount;
+
+    return acc;
+  }, {});
+
+  const entries = Object.entries(dataMap).sort((a, b) => {
+    return dayjs(a[0]).isBefore(b[0]) ? -1 : 1;
+  });
 
   const option = {
     grid: {
@@ -54,7 +76,7 @@ const TotalTimeModalDetail = (props: Props) => {
     },
     xAxis: {
       type: 'category',
-      data: ['08.09', '08.10', '08.11', '08.12', '08.13', '08.14', '08.15'],
+      data: entries.length ? entries.map((v) => v[0]) : [],
       axisLabel: {
         color: theme.color.black,
       },
@@ -77,7 +99,9 @@ const TotalTimeModalDetail = (props: Props) => {
     },
     series: [
       {
-        data: [300, 600, 1000, 50, 70, 180, 800],
+        data: entries.length
+          ? entries.map((v) => Number(secondsToHourMinute(v[1], 'minute')))
+          : [],
         itemStyle: {
           normal: {
             color: theme.color.secondaryB,
