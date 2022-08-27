@@ -65,6 +65,7 @@ export interface DailyReportEntity {
   duration10: number; //20~21시
   duration11: number; //22~23시
   date: string; //날짜 (2022-08-14)
+  createdAt: string;
 }
 
 export interface BaseIdEntity {

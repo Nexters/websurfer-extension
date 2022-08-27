@@ -36,16 +36,16 @@ const TotalTimeModalDetail = (props: Props) => {
   );
   const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
 
-  const { mostDurationWebsites = [] } = statData;
+  const { daiilyReports = [] } = statData;
 
-  const dataMap = mostDurationWebsites.reduce((acc: Iacc, value) => {
-    const { amount, website } = value;
+  const dataMap = daiilyReports.reduce((acc: Iacc, value) => {
+    const { totalDuration, createdAt } = value;
 
-    const date = dayjs(website.updatedAt).format('MM.DD');
+    const date = dayjs(createdAt).format('MM.DD');
 
     const existing = acc[date] || 0;
 
-    acc[date] = existing + amount;
+    acc[date] = existing + totalDuration;
 
     return acc;
   }, {});
