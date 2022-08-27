@@ -36,19 +36,24 @@ const TotalTimeModalDetail = (props: Props) => {
   );
   const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
 
-  const { daiilyReports = [] } = statData;
+  const { daiilyReports = [], todayDuration } = statData;
 
-  const dataMap = daiilyReports.reduce((acc: Iacc, value) => {
-    const { totalDuration, createdAt } = value;
+  const dataMap = daiilyReports.reduce(
+    (acc: Iacc, value) => {
+      const { totalDuration, date: vDate } = value;
 
-    const date = dayjs(createdAt).format('MM.DD');
+      const date = dayjs(vDate).format('MM.DD');
 
-    const existing = acc[date] || 0;
+      const existing = acc[date] || 0;
 
-    acc[date] = existing + totalDuration;
+      acc[date] = existing + totalDuration;
 
-    return acc;
-  }, {});
+      return acc;
+    },
+    {
+      [dayjs().format('MM.DD')]: todayDuration,
+    }
+  );
 
   const entries = Object.entries(dataMap).sort((a, b) => {
     return dayjs(a[0]).isBefore(b[0]) ? -1 : 1;
