@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getStat, refreshStat } from './thunk';
+import { getStat, refreshStat, getStatPrev } from './thunk';
 import { RootState } from '@redux/store';
 import { StatResponse } from '@redux/webSerfer.type';
 
 interface DashboardState {
   status?: 'loading' | 'finished' | 'error';
   stat?: StatResponse;
+  statPrev?: StatResponse;
 }
 
 const initialState: DashboardState = {
   stat: undefined,
+  statPrev: undefined,
   status: undefined,
 };
 
@@ -31,6 +33,20 @@ export const dashboardSlice = createSlice({
       }
     );
     builder.addCase(getStat.rejected, (state, action) => {
+      if (action.payload) {
+        console.error('에러가 발생했습니다.', action.payload.errorMessage);
+      } else {
+        console.error('알 수 없는 에러가 발생했습니다.', action.error);
+      }
+    });
+
+    builder.addCase(
+      getStatPrev.fulfilled,
+      (state, { payload }: PayloadAction<StatResponse>) => {
+        state.statPrev = payload;
+      }
+    );
+    builder.addCase(getStatPrev.rejected, (state, action) => {
       if (action.payload) {
         console.error('에러가 발생했습니다.', action.payload.errorMessage);
       } else {
