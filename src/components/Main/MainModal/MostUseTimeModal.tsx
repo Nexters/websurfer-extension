@@ -6,7 +6,7 @@ import Modal from '@components/Commons/Modal';
 import MostUseTimeDetailModal from './MostUseTimeDetailModal';
 
 import { useAppSelector } from '@redux/store';
-import { hasLastWeekDataSelector } from '@redux/common';
+import { dashboardStatPrevSelector } from '@redux/dashboard';
 
 type TabNameType = 'last' | 'this';
 
@@ -14,7 +14,7 @@ type Props = {};
 
 const MostUseTimeModal = (props: Props) => {
   const [currentTab, setCurrentTab] = useState<TabNameType>('this');
-  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
+  const hasLastWeekData = useAppSelector(dashboardStatPrevSelector);
 
   return (
     <Modal type="frequency" title="자주 사용한 시간대">

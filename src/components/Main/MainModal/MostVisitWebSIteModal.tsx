@@ -6,7 +6,6 @@ import Modal from '@components/Commons/Modal';
 import MostVisitWebSiteModalContent from './MostVisitWebSiteModalContent';
 
 import { useAppSelector } from '@redux/store';
-import { hasLastWeekDataSelector } from '@redux/common';
 import { dashboardStatPrevSelector } from '@redux/dashboard';
 
 type TabNameType = 'last' | 'this';

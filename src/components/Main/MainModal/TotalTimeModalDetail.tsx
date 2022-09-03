@@ -6,7 +6,6 @@ import ReactECharts from 'echarts-for-react';
 import PeriodSelector from './PeriodSelector';
 
 import { useAppSelector } from '@redux/store';
-import { hasLastWeekDataSelector } from '@redux/common';
 import {
   dashboardStatPrevSelector,
   dashboardStatSelector,
@@ -36,7 +35,7 @@ const TotalTimeModalDetail = (props: Props) => {
     dashboardStatSelector
   );
   const statPrevData = useAppSelector(dashboardStatPrevSelector);
-  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
+  const hasLastWeekData = useAppSelector(dashboardStatPrevSelector);
 
   const printData = () => {
     switch (props.period) {

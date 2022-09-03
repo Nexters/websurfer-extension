@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '@redux/store';
-import { hasLastWeekDataSelector, openModal } from '@redux/common';
+import { openModal } from '@redux/common';
+import { dashboardStatPrevSelector } from '@redux/dashboard';
 
 import { secondsToHourMinute } from '@utils/printTime';
 
@@ -14,7 +15,7 @@ type Props = { statData?: StatResponse };
 
 const TotalTime = ({ statData }: Props) => {
   const dispatch = useAppDispatch();
-  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
+  const hasLastWeekData = useAppSelector(dashboardStatPrevSelector);
 
   return (
     <>
