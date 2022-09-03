@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+const YYYYMMDD = 'YYYY년 MM월 DD일';
+
 export const secondsToHourMinute = (
   seconds: number,
   type: 'hour' | 'minute' | 'hourminute'
@@ -25,7 +27,13 @@ export const minuteToHourMinute = (
   }
 };
 
-export const printYyyymmddToday = dayjs(new Date()).format('YYYY년 MM월 DD일');
-export const printYyyymmddM7 = dayjs(new Date())
-  .add(-7, 'day')
-  .format('YYYY년 MM월 DD일');
+export const printYyyymmddToday = dayjs().format(YYYYMMDD);
+export const printYyyymmddM7 = dayjs().add(-7, 'day').format(YYYYMMDD);
+export const printYyyymmddMonday = (week?: number) =>
+  dayjs()
+    .day(1 + (week ? week : 0) * 7)
+    .format(YYYYMMDD); //한 주의 시작일 (월요일)
+export const printYyyymmddSunday = (week?: number) =>
+  dayjs()
+    .day(7 + (week ? week : 0) * 7)
+    .format(YYYYMMDD); //한 주의 마감일 (일요일)
