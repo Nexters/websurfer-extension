@@ -71,7 +71,7 @@ export const LayoutCol = styled(Col)<ColProps>((props) => {
       :last-child {
         width: ${(props.unit ? props.unit : 1) * (GUTTER + UNIT) -
         GUTTER / 2}px;
-        padding: 20px 30px 20px;
+        padding: 20px 30px 0 40px;
       }
     `,
   ];
