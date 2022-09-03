@@ -78,7 +78,7 @@ export const ModalContent = styled.div(() => {
   return [
     css`
       width: 740px;
-      height: calc(${innerHeight}px - 360px);
+      height: 740px;
     `,
   ];
 });
