@@ -7,6 +7,7 @@ import MostVisitWebSiteModalThis from './MostVisitWebSiteModalThis';
 
 import { useAppSelector } from '@redux/store';
 import { hasLastWeekDataSelector } from '@redux/common';
+import { dashboardStatPrevSelector } from '@redux/dashboard';
 
 type TabNameType = 'last' | 'this';
 
@@ -14,7 +15,7 @@ type Props = {};
 
 const MostVisitWebSIteModal = (props: Props) => {
   const [currentTab, setCurrentTab] = useState<TabNameType>('this');
-  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
+  const hasLastWeekData = useAppSelector(dashboardStatPrevSelector);
 
   return (
     <Modal type="mostVisit" title="자주 방문한 웹사이트">
@@ -38,8 +39,8 @@ const MostVisitWebSIteModal = (props: Props) => {
         ]}
       />
 
-      {currentTab === 'this' && <MostVisitWebSiteModalThis />}
-      {currentTab === 'last' && <MostVisitWebSiteModalThis />}
+      {currentTab === 'this' && <MostVisitWebSiteModalThis period="this" />}
+      {currentTab === 'last' && <MostVisitWebSiteModalThis period="last" />}
     </Modal>
   );
 };

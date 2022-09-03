@@ -1,27 +1,52 @@
 import React from 'react';
 
 import { useAppSelector } from '@redux/store';
-import { printYyyymmddM7, printYyyymmddToday } from '@utils/printTime';
-import { dashboardStatSelector } from '@redux/dashboard';
-
-import { ModalCloseIcon } from '@assets/img/svg-icon-paths';
+import { printYyyymmddMonday, printYyyymmddSunday } from '@utils/printTime';
+import {
+  dashboardStatPrevSelector,
+  dashboardStatSelector,
+} from '@redux/dashboard';
 
 import * as S from './MostVisitWebSIteModal.Styled';
 import * as Card from '@components/Main/MainContent/MostVisitWebSite.styled';
 import NoDataModal from './NoDataModal';
 
-type Props = {};
+type Props = { period: string | number };
 
 const MostVisitWebSiteModalThis = (props: Props) => {
   const statData = useAppSelector(dashboardStatSelector);
+  const statPrevData = useAppSelector(dashboardStatPrevSelector);
 
-  return statData && statData.mostVisitedWebsites[0] ? (
+  const printData = () => {
+    switch (props.period) {
+      case 'this':
+        return statData && statData;
+      case 'last':
+        return statPrevData && statPrevData;
+      default:
+        break;
+    }
+  };
+
+  const printDate = () => {
+    switch (props.period) {
+      case 'this':
+        return 0;
+      case 'last':
+        return -1;
+      default:
+        return 0;
+    }
+  };
+
+  return printData() && printData().mostVisitedWebsites[0] ? (
     <>
       <S.PeriodTitle>
-        {printYyyymmddM7} - {printYyyymmddToday} 에는
+        {printYyyymmddMonday(printDate())} - {printYyyymmddSunday(printDate())}{' '}
+        에는
       </S.PeriodTitle>
       <S.Title>
-        {statData.mostVisitedWebsites[0].website.name} 에 자주 방문하셨네요!
+        {printData().mostVisitedWebsites[0].website.name} 에 자주 방문하셨네요!
       </S.Title>
 
       <Card.ItemCardWrapper style={{ marginBottom: '20px' }}>
@@ -55,7 +80,7 @@ const MostVisitWebSiteModalThis = (props: Props) => {
         })}
       </Card.ItemCardWrapper>
 
-      {statData.mostVisitedWebsites.map(
+      {printData().mostVisitedWebsites.map(
         (value, index) =>
           index >= 3 && (
             <S.SiteListContainer
