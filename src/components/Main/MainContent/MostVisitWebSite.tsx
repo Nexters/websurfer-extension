@@ -24,7 +24,7 @@ const MostVisitWebSite = ({ statData }: Props) => {
       borderRadius="8px"
       onClick={requestOpenModal}
     >
-      <Card.Title margin="0 0 24px 0">많이 방문한 웹사이트</Card.Title>
+      <Card.Title margin="0 0 24px 0">자주 방문한 웹사이트</Card.Title>
       <S.ItemCardWrapper>
         {statData?.mostVisitedWebsites.map((value, index) => {
           const primary = false;
