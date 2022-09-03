@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Tab from '@components/Commons/Tab';
 import Modal from '@components/Commons/Modal';
 
-import MostVisitWebSiteModalThis from './MostVisitWebSiteModalThis';
+import MostVisitWebSiteModalContent from './MostVisitWebSiteModalContent';
 
 import { useAppSelector } from '@redux/store';
 import { hasLastWeekDataSelector } from '@redux/common';
@@ -39,8 +39,8 @@ const MostVisitWebSIteModal = (props: Props) => {
         ]}
       />
 
-      {currentTab === 'this' && <MostVisitWebSiteModalThis period="this" />}
-      {currentTab === 'last' && <MostVisitWebSiteModalThis period="last" />}
+      {currentTab === 'this' && <MostVisitWebSiteModalContent period="this" />}
+      {currentTab === 'last' && <MostVisitWebSiteModalContent period="last" />}
     </Modal>
   );
 };

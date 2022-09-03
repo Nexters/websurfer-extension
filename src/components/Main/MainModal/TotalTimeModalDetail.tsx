@@ -7,10 +7,13 @@ import PeriodSelector from './PeriodSelector';
 
 import { useAppSelector } from '@redux/store';
 import { hasLastWeekDataSelector } from '@redux/common';
-import { dashboardStatSelector } from '@redux/dashboard';
 import {
-  printYyyymmddM7,
-  printYyyymmddToday,
+  dashboardStatPrevSelector,
+  dashboardStatSelector,
+} from '@redux/dashboard';
+import {
+  printYyyymmddMonday,
+  printYyyymmddSunday,
   secondsToHourMinute,
 } from '@utils/printTime';
 
@@ -28,15 +31,36 @@ interface Iacc {
 }
 
 const TotalTimeModalDetail = (props: Props) => {
-  const DATE_FORMAT = 'YYYY[년] MM[월] DD[일]';
-
   const theme = useTheme();
   const statData: StatResponse | undefined = useAppSelector(
     dashboardStatSelector
   );
+  const statPrevData = useAppSelector(dashboardStatPrevSelector);
   const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
 
-  const { daiilyReports = [], todayDuration } = statData;
+  const printData = () => {
+    switch (props.period) {
+      case 'this':
+        return statData && statData;
+      case 'last':
+        return statPrevData && statPrevData;
+      default:
+        break;
+    }
+  };
+
+  const printDate = () => {
+    switch (props.period) {
+      case 'this':
+        return 0;
+      case 'last':
+        return -1;
+      default:
+        return 0;
+    }
+  };
+
+  const { daiilyReports = [], todayDuration } = printData();
 
   const dataMap = daiilyReports.reduce(
     (acc: Iacc, value) => {
@@ -133,15 +157,19 @@ const TotalTimeModalDetail = (props: Props) => {
 
   return (
     <>
-      {statData && (
+      {printData() && (
         <>
           <S.PeriodTitle>
-            {printYyyymmddM7} - {printYyyymmddToday} 에는
+            {printYyyymmddMonday(printDate())} -{' '}
+            {printYyyymmddSunday(printDate())} 에는
           </S.PeriodTitle>
           <S.TitleWrapper>
             <S.Title>
-              {`${secondsToHourMinute(statData.totalDuration, 'hourminute')}`}을
-              사용하셨네요!
+              {`${secondsToHourMinute(
+                printData().totalDuration,
+                'hourminute'
+              )}`}
+              을 사용하셨네요!
             </S.Title>
             <S.TimeLabel>{hasLastWeekData && '지난주보다 20분 ↑'}</S.TimeLabel>
           </S.TitleWrapper>
@@ -153,11 +181,11 @@ const TotalTimeModalDetail = (props: Props) => {
               marginBottom: '30px',
             }}
           />
-          {statData?.mostDurationWebsites?.[0] && (
+          {printData()?.mostDurationWebsites?.[0] && (
             <>
               <S.SubTitle>사이트별 체류시간</S.SubTitle>
               <S.StayTimeListContainer>
-                {statData.mostDurationWebsites.map((value, index) => (
+                {printData().mostDurationWebsites.map((value, index) => (
                   <S.StyleTimeListWrapper key={index}>
                     <S.Link
                       href={`https://${value.website.hostname}`}

@@ -13,7 +13,7 @@ import NoDataModal from './NoDataModal';
 
 type Props = { period: string | number };
 
-const MostVisitWebSiteModalThis = (props: Props) => {
+const MostVisitWebSiteModalContent = (props: Props) => {
   const statData = useAppSelector(dashboardStatSelector);
   const statPrevData = useAppSelector(dashboardStatPrevSelector);
 
@@ -109,4 +109,4 @@ const MostVisitWebSiteModalThis = (props: Props) => {
   );
 };
 
-export default MostVisitWebSiteModalThis;
+export default MostVisitWebSiteModalContent;
