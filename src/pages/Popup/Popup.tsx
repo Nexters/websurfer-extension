@@ -15,7 +15,11 @@ import { HistoryListReponse, HistoryEntity } from '@redux/webSerfer.type';
 import { historyListSelector, getHistoryList } from '@redux/history';
 import { getUser, userSelector, setToken } from '@redux/user';
 import { filterOnceAppliedSelector } from '@redux/common';
-import { getStat, dashboardAchievementSelector } from '@redux/dashboard';
+import {
+  getStat,
+  dashboardAchievementSelector,
+  getStatPrev,
+} from '@redux/dashboard';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -50,6 +54,7 @@ const Popup = () => {
           })
         );
         await dispatch(getStat());
+        await dispatch(getStatPrev());
       }
     });
   }, [dispatch]);

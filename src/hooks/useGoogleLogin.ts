@@ -2,7 +2,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 
 import { useAppDispatch } from '@redux/store';
 import { getToken, getUser } from '@redux/user';
-import { getStat } from '@redux/dashboard';
+import { getStat, getStatPrev } from '@redux/dashboard';
 import { getHistoryList } from '@redux/history';
 import { setMainLoading } from '@redux/common';
 import { getAchievements } from '@redux/tag';
@@ -32,6 +32,7 @@ const useGoogleLoginCb = () => {
         })
       );
       await dispatch(getStat());
+      await dispatch(getStatPrev());
       await dispatch(getAchievements());
 
       dispatch(setMainLoading(false));

@@ -71,10 +71,13 @@ export const dashboardSlice = createSlice({
   },
 });
 
-// export const { } = dashboardSlice.actions;
 export const dashboardStatSelector = (state: RootState) => state.dashboard.stat;
+export const dashboardStatPrevSelector = (state: RootState) =>
+  state.dashboard.statPrev;
 export const dashboardAchievementSelector = (state: RootState) =>
   state.dashboard.stat?.achievement;
+export const dashboardAchievementPrevSelector = (state: RootState) =>
+  state.dashboard.statPrev?.achievement;
 
 export default dashboardSlice.reducer;
 export * from './thunk';

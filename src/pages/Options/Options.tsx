@@ -13,7 +13,7 @@ import {
   mainLoadingSelector,
   setMainLoading,
 } from '@redux/common';
-import { getStat } from '@redux/dashboard';
+import { getStat, getStatPrev } from '@redux/dashboard';
 import { getAchievements } from '@redux/tag';
 
 import theme from '@styles/theme';
@@ -44,6 +44,7 @@ const Options = (props: Props) => {
       })
     );
     await dispatch(getStat());
+    await dispatch(getStatPrev());
     await dispatch(getAchievements());
     window.dispatchEvent(
       new CustomEvent('WEBSURFER_RELAY_REQUEST', {
