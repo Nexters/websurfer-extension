@@ -51,7 +51,7 @@ export const ModalContentContainer = styled.div(() => {
     tw`w-full bg-white overflow-hidden relative`,
     css`
       border-radius: 18px;
-      padding: 30px 0;
+      padding: 0;
       height: ${innerHeight > 1000
         ? '800px'
         : `calc(${innerHeight}px - 300px)`};
@@ -67,18 +67,19 @@ export const ModalContentWrapper = styled.div(() => {
     tw`w-full bg-white overflow-y-auto overflow-x-hidden absolute`,
     css`
       left: 0;
-      max-height: calc(${innerHeight}px - 360px);
+      max-height: calc(${innerHeight}px - 300px);
       padding: 0 40px;
     `,
   ];
 });
 export const ModalContent = styled.div(() => {
-  const theme = useTheme();
-
   return [
     css`
       width: 740px;
-      height: 740px;
+      /* height: calc(${innerHeight}px - 360px); */
+      max-height: ${innerHeight > 1000
+        ? '800px'
+        : `calc(${innerHeight}px - 300px)`};
     `,
   ];
 });

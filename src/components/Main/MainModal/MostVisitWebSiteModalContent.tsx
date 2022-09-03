@@ -40,7 +40,7 @@ const MostVisitWebSiteModalContent = (props: Props) => {
   };
 
   return printData() && printData().mostVisitedWebsites[0] ? (
-    <>
+    <S.MostVisitWrapper>
       <S.PeriodTitle>
         {printYyyymmddMonday(printDate())} - {printYyyymmddSunday(printDate())}{' '}
         에는
@@ -103,7 +103,7 @@ const MostVisitWebSiteModalContent = (props: Props) => {
             </S.SiteListContainer>
           )
       )}
-    </>
+    </S.MostVisitWrapper>
   ) : (
     <NoDataModal />
   );

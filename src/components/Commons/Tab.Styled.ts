@@ -8,8 +8,13 @@ export const TabWrapper = styled.div(() => {
   return [
     tw`w-full flex justify-between`,
     css`
-      height: 36px;
       margin-bottom: 40px;
+      padding-top: 30px;
+      height: 36px;
+      position: sticky;
+      top: 0px;
+      background-color: ${theme.color.white};
+      z-index: 6;
     `,
   ];
 });
@@ -38,6 +43,7 @@ export const TabItemWrapper = styled.div<T.TabItemWrapperProps>(
           : disabled
           ? theme.color['gray-04']
           : theme.color['gray-06']};
+        background-color: ${theme.color.white};
         &:hover {
           color: ${!disabled ? theme.color.primary : ''};
           border-color: ${!disabled ? theme.color.primary : ''};
