@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
-import dayjs from 'dayjs';
 import { useTheme } from '@emotion/react';
 import ReactECharts from 'echarts-for-react';
 
 import PeriodSelector from './PeriodSelector';
 import { useAppSelector } from '@redux/store';
-import { dashboardStatSelector } from '@redux/dashboard';
+import {
+  dashboardStatPrevSelector,
+  dashboardStatSelector,
+} from '@redux/dashboard';
 
-import { printYyyymmddM7, printYyyymmddToday } from '@utils/printTime';
+import { printYyyymmddMonday, printYyyymmddSunday } from '@utils/printTime';
 
 import { FilterType } from './MostVisitWebSIteModal.type';
 
@@ -19,7 +21,6 @@ type Props = {
 };
 
 const MostUseTimeDetailModal = (props: Props) => {
-  const DATE_FORMAT = 'YYYY[년] MM[월] DD[일]';
   const MORNING = '아침(07-12시)';
   const DAY = '낯(13-17시)';
   const DINNER = '저녁(18-24시)';
@@ -28,15 +29,38 @@ const MostUseTimeDetailModal = (props: Props) => {
   const theme = useTheme();
 
   const statData = useAppSelector(dashboardStatSelector);
+  const statPrevData = useAppSelector(dashboardStatPrevSelector);
+
+  const printData = () => {
+    switch (props.period) {
+      case 'this':
+        return statData && statData;
+      case 'last':
+        return statPrevData && statPrevData;
+      default:
+        break;
+    }
+  };
+
+  const printDate = () => {
+    switch (props.period) {
+      case 'this':
+        return 0;
+      case 'last':
+        return -1;
+      default:
+        return 0;
+    }
+  };
 
   const printMostUseTime = () => {
-    if (statData) {
+    if (printData()) {
       const {
         morningDuration,
         daytimeDuration,
         dinnerDuration,
         nightDuration,
-      } = statData;
+      } = printData();
       const array = [
         { name: 'morning', value: morningDuration },
         { name: 'day', value: daytimeDuration },
@@ -65,18 +89,18 @@ const MostUseTimeDetailModal = (props: Props) => {
   };
 
   const timeChartData = [
-    statData?.duration3,
-    statData?.duration4,
-    statData?.duration5,
-    statData?.duration6,
-    statData?.duration7,
-    statData?.duration8,
-    statData?.duration9,
-    statData?.duration10,
-    statData?.duration11,
-    statData?.duration0,
-    statData?.duration1,
-    statData?.duration2,
+    printData()?.duration3,
+    printData()?.duration4,
+    printData()?.duration5,
+    printData()?.duration6,
+    printData()?.duration7,
+    printData()?.duration8,
+    printData()?.duration9,
+    printData()?.duration10,
+    printData()?.duration11,
+    printData()?.duration0,
+    printData()?.duration1,
+    printData()?.duration2,
   ];
 
   const option = {
@@ -175,8 +199,6 @@ const MostUseTimeDetailModal = (props: Props) => {
     ],
   };
 
-  const dummy = ['', '', '', '', '', '', '', ''];
-
   const [isFilterActive, setIsFilterActive] = useState<boolean>(false);
   const [filter, setFilter] = useState<FilterType>({
     startDate: undefined,
@@ -186,7 +208,8 @@ const MostUseTimeDetailModal = (props: Props) => {
   return (
     <>
       <S.PeriodTitle>
-        {printYyyymmddM7} - {printYyyymmddToday} 에는
+        {printYyyymmddMonday(printDate())} - {printYyyymmddSunday(printDate())}{' '}
+        에는
       </S.PeriodTitle>
       <S.TitleWrapper>
         <S.Title>{printMostUseTime()}에 웹서핑을 자주 하셨네요!</S.Title>
