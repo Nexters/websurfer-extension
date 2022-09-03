@@ -19,7 +19,7 @@ const MostVisitWebSite = ({ statData }: Props) => {
 
   return (
     <Card.Wrapper
-      margin="0 0 1vh 0"
+      margin="0 0 40px 0"
       height="238px"
       borderRadius="8px"
       onClick={requestOpenModal}
