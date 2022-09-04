@@ -21,11 +21,6 @@ type Props = {
 };
 
 const MostUseTimeDetailModal = (props: Props) => {
-  const MORNING = '아침(07-12시)';
-  const DAY = '낯(13-17시)';
-  const DINNER = '저녁(18-24시)';
-  const NIGHT = '밤(00-06시)';
-
   const theme = useTheme();
 
   const statData = useAppSelector(dashboardStatSelector);
@@ -53,7 +48,7 @@ const MostUseTimeDetailModal = (props: Props) => {
     }
   })();
 
-  const printMostUseTime = () => {
+  const printMostUseTime = (() => {
     if (printData) {
       const {
         morningDuration,
@@ -75,33 +70,34 @@ const MostUseTimeDetailModal = (props: Props) => {
 
       switch (result?.name) {
         case 'morning':
-          return MORNING;
+          return '아침(07-12시)';
         case 'day':
-          return DAY;
+          return '낯(13-17시)';
         case 'dinner':
-          return DINNER;
+          return '저녁(18-24시)';
         case 'night':
-          return NIGHT;
+          return '밤(00-06시)';
         default:
           break;
       }
     }
-  };
+  })();
 
-  const timeChartData = [
-    printData?.duration3,
-    printData?.duration4,
-    printData?.duration5,
-    printData?.duration6,
-    printData?.duration7,
-    printData?.duration8,
-    printData?.duration9,
-    printData?.duration10,
-    printData?.duration11,
-    printData?.duration0,
-    printData?.duration1,
-    printData?.duration2,
-  ];
+  const timeChartData = (() =>
+    printData && [
+      printData.duration3,
+      printData.duration4,
+      printData.duration5,
+      printData.duration6,
+      printData.duration7,
+      printData.duration8,
+      printData.duration9,
+      printData.duration10,
+      printData.duration11,
+      printData.duration0,
+      printData.duration1,
+      printData.duration2,
+    ])();
 
   const option = {
     grid: {
@@ -211,7 +207,7 @@ const MostUseTimeDetailModal = (props: Props) => {
         {printYyyymmddMonday(printDate)} - {printYyyymmddSunday(printDate)} 에는
       </S.PeriodTitle>
       <S.TitleWrapper>
-        <S.Title>{printMostUseTime()}에 웹서핑을 자주 하셨네요!</S.Title>
+        <S.Title>{printMostUseTime}에 웹서핑을 자주 하셨네요!</S.Title>
       </S.TitleWrapper>
       <ReactECharts
         option={option}
