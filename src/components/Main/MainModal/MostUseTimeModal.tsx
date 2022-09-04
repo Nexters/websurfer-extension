@@ -33,7 +33,7 @@ const MostUseTimeModal = (props: Props) => {
             onClick: () => {
               setCurrentTab('last');
             },
-            disabled: !hasLastWeekData,
+            disabled: hasLastWeekData.daiilyReports.length === 0,
           },
         ]}
       />
