@@ -68,7 +68,9 @@ const MostVisitWebSiteModalContent = (props: Props) => {
                   }}
                 />
                 <Card.ItemCardTitle primary={primary}>
-                  {value.website.name}
+                  {value.website.name
+                    ? value.website.name
+                    : value.website.hostname}
                 </Card.ItemCardTitle>
                 <Card.ItemCardCount primary={primary}>
                   {value.amount}회
@@ -96,7 +98,11 @@ const MostVisitWebSiteModalContent = (props: Props) => {
                     currentTarget.src = `./assets/basic_favicon_32.png`;
                   }}
                 />
-                <S.SiteListTitle>{value.website.name}</S.SiteListTitle>
+                <S.SiteListTitle>
+                  {value.website.name
+                    ? value.website.name
+                    : value.website.hostname}
+                </S.SiteListTitle>
               </S.SiteInformationWrapper>
               <S.SiteListCount>{value.amount}회</S.SiteListCount>
             </S.SiteListContainer>

@@ -52,7 +52,11 @@ const TotalTime = ({ statData }: Props) => {
                   <S.RankList key={index + value.website.name}>
                     <S.RankListNameWrapper>
                       <S.Rank>{index + 1}</S.Rank>
-                      <S.Site>{value.website.name}</S.Site>
+                      <S.Site>
+                        {value.website.name
+                          ? value.website.name
+                          : value.website.hostname}
+                      </S.Site>
                     </S.RankListNameWrapper>
                     <S.UsingTime>
                       {secondsToHourMinute(value.amount, 'hourminute')}
