@@ -31,18 +31,18 @@ const MostUseTimeDetailModal = (props: Props) => {
   const statData = useAppSelector(dashboardStatSelector);
   const statPrevData = useAppSelector(dashboardStatPrevSelector);
 
-  const printData = () => {
+  const printData = (() => {
     switch (props.period) {
       case 'this':
         return statData && statData;
       case 'last':
         return statPrevData && statPrevData;
       default:
-        break;
+        return;
     }
-  };
+  })();
 
-  const printDate = () => {
+  const printDate = (() => {
     switch (props.period) {
       case 'this':
         return 0;
@@ -51,16 +51,16 @@ const MostUseTimeDetailModal = (props: Props) => {
       default:
         return 0;
     }
-  };
+  })();
 
   const printMostUseTime = () => {
-    if (printData()) {
+    if (printData) {
       const {
         morningDuration,
         daytimeDuration,
         dinnerDuration,
         nightDuration,
-      } = printData();
+      } = printData;
       const array = [
         { name: 'morning', value: morningDuration },
         { name: 'day', value: daytimeDuration },
@@ -89,18 +89,18 @@ const MostUseTimeDetailModal = (props: Props) => {
   };
 
   const timeChartData = [
-    printData()?.duration3,
-    printData()?.duration4,
-    printData()?.duration5,
-    printData()?.duration6,
-    printData()?.duration7,
-    printData()?.duration8,
-    printData()?.duration9,
-    printData()?.duration10,
-    printData()?.duration11,
-    printData()?.duration0,
-    printData()?.duration1,
-    printData()?.duration2,
+    printData?.duration3,
+    printData?.duration4,
+    printData?.duration5,
+    printData?.duration6,
+    printData?.duration7,
+    printData?.duration8,
+    printData?.duration9,
+    printData?.duration10,
+    printData?.duration11,
+    printData?.duration0,
+    printData?.duration1,
+    printData?.duration2,
   ];
 
   const option = {
@@ -208,8 +208,7 @@ const MostUseTimeDetailModal = (props: Props) => {
   return (
     <>
       <S.PeriodTitle>
-        {printYyyymmddMonday(printDate())} - {printYyyymmddSunday(printDate())}{' '}
-        에는
+        {printYyyymmddMonday(printDate)} - {printYyyymmddSunday(printDate)} 에는
       </S.PeriodTitle>
       <S.TitleWrapper>
         <S.Title>{printMostUseTime()}에 웹서핑을 자주 하셨네요!</S.Title>

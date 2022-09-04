@@ -17,18 +17,18 @@ const MostVisitWebSiteModalContent = (props: Props) => {
   const statData = useAppSelector(dashboardStatSelector);
   const statPrevData = useAppSelector(dashboardStatPrevSelector);
 
-  const printData = () => {
+  const printData = (() => {
     switch (props.period) {
       case 'this':
         return statData && statData;
       case 'last':
         return statPrevData && statPrevData;
       default:
-        break;
+        return;
     }
-  };
+  })();
 
-  const printDate = () => {
+  const printDate = (() => {
     switch (props.period) {
       case 'this':
         return 0;
@@ -37,16 +37,15 @@ const MostVisitWebSiteModalContent = (props: Props) => {
       default:
         return 0;
     }
-  };
+  })();
 
-  return printData() && printData().mostVisitedWebsites[0] ? (
+  return printData.mostVisitedWebsites[0] ? (
     <S.MostVisitWrapper>
       <S.PeriodTitle>
-        {printYyyymmddMonday(printDate())} - {printYyyymmddSunday(printDate())}{' '}
-        에는
+        {printYyyymmddMonday(printDate)} - {printYyyymmddSunday(printDate)} 에는
       </S.PeriodTitle>
       <S.Title>
-        {printData().mostVisitedWebsites[0].website.name} 에 자주 방문하셨네요!
+        {printData.mostVisitedWebsites[0].website.name} 에 자주 방문하셨네요!
       </S.Title>
 
       <Card.ItemCardWrapper style={{ marginBottom: '20px' }}>
@@ -80,7 +79,7 @@ const MostVisitWebSiteModalContent = (props: Props) => {
         })}
       </Card.ItemCardWrapper>
 
-      {printData().mostVisitedWebsites.map(
+      {printData.mostVisitedWebsites.map(
         (value, index) =>
           index >= 3 && (
             <S.SiteListContainer

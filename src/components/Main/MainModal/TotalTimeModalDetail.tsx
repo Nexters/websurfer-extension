@@ -37,18 +37,18 @@ const TotalTimeModalDetail = (props: Props) => {
   const statPrevData = useAppSelector(dashboardStatPrevSelector);
   const hasLastWeekData = useAppSelector(dashboardStatPrevSelector);
 
-  const printData = () => {
+  const printData = (() => {
     switch (props.period) {
       case 'this':
         return statData && statData;
       case 'last':
         return statPrevData && statPrevData;
       default:
-        break;
+        return;
     }
-  };
+  })();
 
-  const printDate = () => {
+  const printDate = (() => {
     switch (props.period) {
       case 'this':
         return 0;
@@ -57,9 +57,9 @@ const TotalTimeModalDetail = (props: Props) => {
       default:
         return 0;
     }
-  };
+  })();
 
-  const { daiilyReports = [], todayDuration } = printData();
+  const { daiilyReports = [], todayDuration } = printData;
 
   const dataMap = daiilyReports.reduce(
     (acc: Iacc, value) => {
@@ -156,18 +156,15 @@ const TotalTimeModalDetail = (props: Props) => {
 
   return (
     <>
-      {printData() && (
+      {printData && (
         <>
           <S.PeriodTitle>
-            {printYyyymmddMonday(printDate())} -{' '}
-            {printYyyymmddSunday(printDate())} 에는
+            {printYyyymmddMonday(printDate)} - {printYyyymmddSunday(printDate)}{' '}
+            에는
           </S.PeriodTitle>
           <S.TitleWrapper>
             <S.Title>
-              {`${secondsToHourMinute(
-                printData().totalDuration,
-                'hourminute'
-              )}`}
+              {`${secondsToHourMinute(printData.totalDuration, 'hourminute')}`}
               을 사용하셨네요!
             </S.Title>
             <S.TimeLabel>{hasLastWeekData && '지난주보다 20분 ↑'}</S.TimeLabel>
@@ -180,11 +177,11 @@ const TotalTimeModalDetail = (props: Props) => {
               marginBottom: '30px',
             }}
           />
-          {printData()?.mostDurationWebsites?.[0] && (
+          {printData?.mostDurationWebsites?.[0] && (
             <>
               <S.SubTitle>사이트별 체류시간</S.SubTitle>
               <S.StayTimeListContainer>
-                {printData().mostDurationWebsites.map((value, index) => (
+                {printData.mostDurationWebsites.map((value, index) => (
                   <S.StyleTimeListWrapper key={index}>
                     <S.Link
                       href={`https://${value.website.hostname}`}
@@ -204,7 +201,9 @@ const TotalTimeModalDetail = (props: Props) => {
                         href={`https://${value.website.hostname}`}
                         target="_blank"
                       >
-                        {value.website.name}
+                        {value.website.name
+                          ? value.website.name
+                          : value.website.hostname}
                       </S.InformationTitle>
                       <S.InformationTimeBarWrapper>
                         <S.InformationTimeBar
