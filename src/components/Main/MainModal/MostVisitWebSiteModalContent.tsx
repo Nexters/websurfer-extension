@@ -1,27 +1,51 @@
 import React from 'react';
 
 import { useAppSelector } from '@redux/store';
-import { printYyyymmddM7, printYyyymmddToday } from '@utils/printTime';
-import { dashboardStatSelector } from '@redux/dashboard';
-
-import { ModalCloseIcon } from '@assets/img/svg-icon-paths';
+import { printYyyymmddMonday, printYyyymmddSunday } from '@utils/printTime';
+import {
+  dashboardStatPrevSelector,
+  dashboardStatSelector,
+} from '@redux/dashboard';
 
 import * as S from './MostVisitWebSIteModal.Styled';
 import * as Card from '@components/Main/MainContent/MostVisitWebSite.styled';
 import NoDataModal from './NoDataModal';
 
-type Props = {};
+type Props = { period: string | number };
 
-const MostVisitWebSiteModalThis = (props: Props) => {
+const MostVisitWebSiteModalContent = (props: Props) => {
   const statData = useAppSelector(dashboardStatSelector);
+  const statPrevData = useAppSelector(dashboardStatPrevSelector);
 
-  return statData && statData.mostVisitedWebsites[0] ? (
-    <>
+  const printData = (() => {
+    switch (props.period) {
+      case 'this':
+        return statData && statData;
+      case 'last':
+        return statPrevData && statPrevData;
+      default:
+        return;
+    }
+  })();
+
+  const printDate = (() => {
+    switch (props.period) {
+      case 'this':
+        return 0;
+      case 'last':
+        return -1;
+      default:
+        return 0;
+    }
+  })();
+
+  return printData.mostVisitedWebsites[0] ? (
+    <S.MostVisitWrapper>
       <S.PeriodTitle>
-        {printYyyymmddM7} - {printYyyymmddToday} 에는
+        {printYyyymmddMonday(printDate)} - {printYyyymmddSunday(printDate)} 에는
       </S.PeriodTitle>
       <S.Title>
-        {statData.mostVisitedWebsites[0].website.name} 에 자주 방문하셨네요!
+        {printData.mostVisitedWebsites[0].website.name} 에 자주 방문하셨네요!
       </S.Title>
 
       <Card.ItemCardWrapper style={{ marginBottom: '20px' }}>
@@ -44,7 +68,9 @@ const MostVisitWebSiteModalThis = (props: Props) => {
                   }}
                 />
                 <Card.ItemCardTitle primary={primary}>
-                  {value.website.name}
+                  {value.website.name
+                    ? value.website.name
+                    : value.website.hostname}
                 </Card.ItemCardTitle>
                 <Card.ItemCardCount primary={primary}>
                   {value.amount}회
@@ -55,7 +81,7 @@ const MostVisitWebSiteModalThis = (props: Props) => {
         })}
       </Card.ItemCardWrapper>
 
-      {statData.mostVisitedWebsites.map(
+      {printData.mostVisitedWebsites.map(
         (value, index) =>
           index >= 3 && (
             <S.SiteListContainer
@@ -72,16 +98,20 @@ const MostVisitWebSiteModalThis = (props: Props) => {
                     currentTarget.src = `./assets/basic_favicon_32.png`;
                   }}
                 />
-                <S.SiteListTitle>{value.website.name}</S.SiteListTitle>
+                <S.SiteListTitle>
+                  {value.website.name
+                    ? value.website.name
+                    : value.website.hostname}
+                </S.SiteListTitle>
               </S.SiteInformationWrapper>
               <S.SiteListCount>{value.amount}회</S.SiteListCount>
             </S.SiteListContainer>
           )
       )}
-    </>
+    </S.MostVisitWrapper>
   ) : (
     <NoDataModal />
   );
 };
 
-export default MostVisitWebSiteModalThis;
+export default MostVisitWebSiteModalContent;

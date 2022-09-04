@@ -6,7 +6,7 @@ import Modal from '@components/Commons/Modal';
 import TotalTimeModalDetail from './TotalTimeModalDetail';
 
 import { useAppSelector } from '@redux/store';
-import { hasLastWeekDataSelector } from '@redux/common';
+import { dashboardStatPrevSelector } from '@redux/dashboard';
 
 type TabNameType = 'last' | 'this';
 
@@ -14,7 +14,7 @@ type Props = {};
 
 const TotalTimeModal = (props: Props) => {
   const [currentTab, setCurrentTab] = useState<TabNameType>('this');
-  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
+  const hasLastWeekData = useAppSelector(dashboardStatPrevSelector);
 
   return (
     <Modal type="totalTime" title="총 사용 시간">
@@ -33,7 +33,7 @@ const TotalTimeModal = (props: Props) => {
             onClick: () => {
               setCurrentTab('last');
             },
-            disabled: !hasLastWeekData,
+            disabled: hasLastWeekData.daiilyReports.length === 0,
           },
         ]}
       />

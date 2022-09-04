@@ -9,6 +9,7 @@ export const PeriodTitle = styled.div(() => {
   return [
     // tw``,
     css`
+      padding-top: 39px;
       margin-bottom: 8px;
       color: ${theme.color['gray-07']};
       font-size: ${theme.fontSize.m};
@@ -75,6 +76,7 @@ export const StayTimeListContainer = styled.ul(() => {
     tw`w-full list-none p-0`,
     css`
       margin-bottom: 30px;
+      padding-bottom: 60px;
     `,
   ];
 });

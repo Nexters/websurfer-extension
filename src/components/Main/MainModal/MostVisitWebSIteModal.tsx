@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import Tab from '@components/Commons/Tab';
 import Modal from '@components/Commons/Modal';
 
-import MostVisitWebSiteModalThis from './MostVisitWebSiteModalThis';
+import MostVisitWebSiteModalContent from './MostVisitWebSiteModalContent';
 
 import { useAppSelector } from '@redux/store';
-import { hasLastWeekDataSelector } from '@redux/common';
+import { dashboardStatPrevSelector } from '@redux/dashboard';
 
 type TabNameType = 'last' | 'this';
 
@@ -14,7 +14,7 @@ type Props = {};
 
 const MostVisitWebSIteModal = (props: Props) => {
   const [currentTab, setCurrentTab] = useState<TabNameType>('this');
-  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
+  const hasLastWeekData = useAppSelector(dashboardStatPrevSelector);
 
   return (
     <Modal type="mostVisit" title="자주 방문한 웹사이트">
@@ -33,13 +33,13 @@ const MostVisitWebSIteModal = (props: Props) => {
             onClick: () => {
               setCurrentTab('last');
             },
-            disabled: !hasLastWeekData,
+            disabled: hasLastWeekData.daiilyReports.length === 0,
           },
         ]}
       />
 
-      {currentTab === 'this' && <MostVisitWebSiteModalThis />}
-      {currentTab === 'last' && <MostVisitWebSiteModalThis />}
+      {currentTab === 'this' && <MostVisitWebSiteModalContent period="this" />}
+      {currentTab === 'last' && <MostVisitWebSiteModalContent period="last" />}
     </Modal>
   );
 };

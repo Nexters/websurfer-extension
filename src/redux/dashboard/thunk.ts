@@ -24,6 +24,21 @@ export const getStat = createAsyncThunk<
   }
 });
 
+export const getStatPrev = createAsyncThunk<
+  StatResponse, // 성공 시 리턴 타입
+  void, // input type
+  { rejectValue: MyKnownError } // thunkApi 정의({dispatch?, state?, extra?, rejectValue?})
+>(`${name}/getStatPrev`, async (undefined, thunkApi) => {
+  try {
+    const data = await apiClient.getStatPrev();
+    return data;
+  } catch (e) {
+    return thunkApi.rejectWithValue({
+      errorMessage: '알 수 없는 에러가 발생했습니다.',
+    });
+  }
+});
+
 export const refreshStat = createAsyncThunk<
   StatResponse, // 성공 시 리턴 타입
   void, // input type

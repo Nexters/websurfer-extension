@@ -4,11 +4,18 @@ import tw, { styled } from 'twin.macro';
 
 import * as T from './MostVisitWebSIteModal.Styled.type';
 
+export const MostVisitWrapper = styled.div(() => {
+  return css`
+    padding-bottom: 60px;
+  `;
+});
+
 export const PeriodTitle = styled.div(() => {
   const theme = useTheme();
   return [
     // tw``,
     css`
+      padding-top: 39px;
       margin-bottom: 8px;
       color: ${theme.color['gray-07']};
       font-size: ${theme.fontSize.m};
@@ -38,6 +45,7 @@ export const SiteListContainer = styled.a(() => {
     tw`flex w-full items-center justify-between no-underline`,
     css`
       height: 56px;
+      /* padding-bottom: 60px; */
       border-style: solid;
       border-width: 1px 0 0 0;
       border-color: ${theme.color['gray-03']};

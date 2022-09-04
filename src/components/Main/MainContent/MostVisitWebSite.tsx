@@ -19,12 +19,12 @@ const MostVisitWebSite = ({ statData }: Props) => {
 
   return (
     <Card.Wrapper
-      margin="0 0 1vh 0"
+      margin="0 0 40px 0"
       height="238px"
       borderRadius="8px"
       onClick={requestOpenModal}
     >
-      <Card.Title margin="0 0 24px 0">많이 방문한 웹사이트</Card.Title>
+      <Card.Title margin="0 0 24px 0">자주 방문한 웹사이트</Card.Title>
       <S.ItemCardWrapper>
         {statData?.mostVisitedWebsites.map((value, index) => {
           const primary = false;
@@ -33,7 +33,9 @@ const MostVisitWebSite = ({ statData }: Props) => {
             return (
               <S.ItemCard key={index} primary={primary}>
                 <S.ItemCardTitle primary={primary} isMain>
-                  {value.website.name}
+                  {value.website.name
+                    ? value.website.name
+                    : value.website.hostname}
                 </S.ItemCardTitle>
                 <S.ItemCardCount primary={primary}>
                   {value.amount}회

@@ -9,6 +9,10 @@ const apis = {
     return Axios.get('/stat').then(getData);
   },
 
+  getStatPrev() {
+    return Axios.get('/stat/prev').then(getData);
+  },
+
   refreshStat() {
     return Axios.post('/stat/refresh').then(getData);
   },

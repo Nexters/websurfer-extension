@@ -65,7 +65,8 @@ export const HistoryListWrapper = styled.div(() => {
     `,
     css`
       margin-top: 20px;
-      height: calc(100vh - 240px);
+      height: ${innerHeight < 1080 ? 'calc(100vh - 240px)' : '100vh'};
+      padding-bottom: 60px;
       &::-webkit-scrollbar {
         width: 4px;
       }

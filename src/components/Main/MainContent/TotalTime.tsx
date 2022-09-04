@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '@redux/store';
-import { hasLastWeekDataSelector, openModal } from '@redux/common';
+import { openModal } from '@redux/common';
+import { dashboardStatPrevSelector } from '@redux/dashboard';
 
 import { secondsToHourMinute } from '@utils/printTime';
 
@@ -14,7 +15,7 @@ type Props = { statData?: StatResponse };
 
 const TotalTime = ({ statData }: Props) => {
   const dispatch = useAppDispatch();
-  const hasLastWeekData = useAppSelector(hasLastWeekDataSelector);
+  const hasLastWeekData = useAppSelector(dashboardStatPrevSelector);
 
   return (
     <>
@@ -51,7 +52,11 @@ const TotalTime = ({ statData }: Props) => {
                   <S.RankList key={index + value.website.name}>
                     <S.RankListNameWrapper>
                       <S.Rank>{index + 1}</S.Rank>
-                      <S.Site>{value.website.name}</S.Site>
+                      <S.Site>
+                        {value.website.name
+                          ? value.website.name
+                          : value.website.hostname}
+                      </S.Site>
                     </S.RankListNameWrapper>
                     <S.UsingTime>
                       {secondsToHourMinute(value.amount, 'hourminute')}
