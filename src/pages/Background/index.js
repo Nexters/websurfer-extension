@@ -71,7 +71,7 @@ const initInterval = debounce(async (tabId) => {
 
     instance.setInterval(interval);
   }
-}, 2000);
+}, 1000);
 
 const onActivatedCb = async ({ tabId }) => {
   console.log(tabId, 'onActivated');
