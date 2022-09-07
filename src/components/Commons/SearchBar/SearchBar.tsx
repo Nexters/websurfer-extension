@@ -26,6 +26,8 @@ interface Props {
   rawKeyword: string | undefined;
   setRawKeyword: React.Dispatch<React.SetStateAction<string | undefined>>;
   isPopup?: boolean;
+  active?: boolean;
+  setActive?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type TstateDate = Date | undefined;
@@ -43,6 +45,7 @@ const SearchBar = ({
   rawKeyword,
   setRawKeyword,
   isPopup = false,
+  setActive,
 }: Props) => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [rawStartDate, setRawStartDate] = useState<TstateDate>(undefined);
@@ -104,6 +107,8 @@ const SearchBar = ({
         onChange={({ target }) => {
           setRawKeyword(target.value);
         }}
+        onBlur={() => setActive(false)}
+        onFocus={() => setActive(true)}
       />
       {hasFilter && (
         <S.Filter

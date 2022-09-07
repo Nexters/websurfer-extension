@@ -29,6 +29,7 @@ interface accObj {
 
 const Popup = () => {
   const [keyword, setKeyword] = useState<string | undefined>(undefined);
+  const [inputActive, setInputActive] = useState<boolean>(false);
 
   const user = useAppSelector(userSelector);
   const historyList = useAppSelector(historyListSelector);
@@ -88,23 +89,28 @@ const Popup = () => {
       >
         {loggedIn && (hasData || isFilterOnceApplied) ? (
           <>
-            <S.MiddleTopWrapper>
-              <S.MiddleTitleWrapper>
-                <S.SubTitle>이번 주 서퍼님은</S.SubTitle>
-                <S.MainTitle>
-                  {achievement?.name || '열정 뿜뿜 해양학자'}
-                </S.MainTitle>
-              </S.MiddleTitleWrapper>
-              <S.MainImage
-                src={achievement?.imageUrl || Oceanographer}
-                alt="해양학자가 서핑하는 모습"
-              />
-            </S.MiddleTopWrapper>
+            {!inputActive && (
+              <S.MiddleTopWrapper>
+                <S.MiddleTitleWrapper>
+                  <S.SubTitle>이번 주 서퍼님은</S.SubTitle>
+                  <S.MainTitle>
+                    {achievement?.name || '열정 뿜뿜 해양학자'}
+                  </S.MainTitle>
+                </S.MiddleTitleWrapper>
+                <S.MainImage
+                  src={achievement?.imageUrl || Oceanographer}
+                  alt="해양학자가 서핑하는 모습"
+                />
+              </S.MiddleTopWrapper>
+            )}
+
             <SearchBar
               hasFilter={true}
               rawKeyword={keyword}
               setRawKeyword={setKeyword}
               isPopup={true}
+              active={inputActive}
+              setActive={setInputActive}
             />
           </>
         ) : (
