@@ -9,7 +9,7 @@ import DummyTopNav from '@components/Main/DummyMain/DummyTopNav';
 
 import * as S from './styled';
 
-const BefoerLogin: React.FC = () => {
+const BeforeLogin: React.FC = () => {
   return (
     <S.DummyWrapper>
       <S.DummyTopWrapper>
@@ -36,4 +36,4 @@ const BefoerLogin: React.FC = () => {
   );
 };
 
-export default BefoerLogin;
+export default BeforeLogin;

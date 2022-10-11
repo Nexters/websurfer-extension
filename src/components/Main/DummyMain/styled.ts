@@ -6,8 +6,9 @@ import { RankListContainer } from '../MainContent/TotalTime.styled';
 export const DummyWrapper = styled.div(() => {
   return [
     css`
+      width: 100%;
       height: calc(100vh - 24px);
-      margin-top: 24px;
+      margin: 24px auto;
     `,
   ];
 });
@@ -18,6 +19,7 @@ export const DummyTopWrapper = styled.div(() => {
     css`
       background: ${theme.color.white};
       height: 35%;
+      padding: 0 20px;
     `,
   ];
 });
@@ -25,8 +27,7 @@ export const DummyTopWrapper = styled.div(() => {
 export const DummyContentWrapper = styled.div(() => {
   return [
     css`
-      max-width: 1320px;
-      min-width: 1320px;
+      width: 1340px;
       margin: 0 auto;
     `,
   ];
@@ -48,7 +49,10 @@ export const DummyBottonWrapper = styled.div(() => {
   return [
     css`
       background: ${theme.color.bgColor};
+      width: 100%;
+      min-width: 1380px;
       height: 65%;
+      padding: 0 20px;
     `,
   ];
 });
